@@ -1,0 +1,248 @@
+=============================================
+[U-01] /etc/passwd 파일 확인
+=============================================
+결과 : 확인필요
+---------------------------------------------
+현황
+
+[파일 정보] /etc/passwd
+-rw-r--r--. 1 root root 1141 Jun  5 01:59 /etc/passwd
+0644 root
+
+[검색 결과] /etc/passwd - test
+test:x:1002:1002::/home/test:/bin/bash
+
+telnet 프로세스가 비실행 중 입니다.
+
+
+---------------------------------------------
+참고
+[참고 - 진단기준, 결과 값 출력]
+ 양호 : 원격 터미널 서비스를 사용하지 않거나, 사용 시 root 직접 접속을 차단한 경우 
+ 취약 : 원격 터미널 서비스 사용 시 root 직접 접속을 허용한 경우 
+ 취약 1. : Telnet 사용 시, /etc/default/login 파일에 CONSOLE=/dev/console이 없거나 주석처리 되어있을 경우 
+ 취약 2. : SSH 사용 시, /etc/ssh/sshd_config 파일에 PermitRootLogin yes로 설정되어 있을 경우 
+******* 참고 사항 *******
+ 1. 'auth [user_unknown=ignore success=ok ignore=ignore default=bad] pam_securetty.so' 해당 설정 양호로 진단 (주석처리 주의)
+
+=============================================
+[U-02] /usr/bin/gpasswd 권한 확인
+=============================================
+결과 : 취약
+---------------------------------------------
+현황
+
+[파일 정보] /usr/bin/gpasswd
+-rwsr-xr-x. 1 root root 78192 Nov  5  2024 /usr/bin/gpasswd
+4755 root
+
+
+---------------------------------------------
+참고
+
+
+=============================================
+[U-03] /etc/test 파일 확인
+=============================================
+결과 : 확인필요
+---------------------------------------------
+현황
+
+파일이 존재하지 않습니다.
+
+파일이 존재하지 않습니다.
+
+
+---------------------------------------------
+참고
+
+
+=============================================
+[*] Kernel Information
+=============================================
+uname -a
+
+Linux ip-10-1-1-221.ap-northeast-2.compute.internal 5.14.0-570.12.1.el9_6.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Apr 4 10:41:31 EDT 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+=============================================
+[*] IP Information
+=============================================
+ifconfig, ip addr show
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc fq_codel state UP group default qlen 1000
+    link/ether 02:7a:88:8b:91:b3 brd ff:ff:ff:ff:ff:ff
+    altname enX0
+    inet 10.1.1.221/24 brd 10.1.1.255 scope global dynamic noprefixroute eth0
+       valid_lft 3317sec preferred_lft 3317sec
+    inet6 fe80::7a:88ff:fe8b:91b3/64 scope link 
+       valid_lft forever preferred_lft forever
+
+=============================================
+[*] Network Status
+=============================================
+netstat -an, ss -tuln
+
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:Port
+udp   UNCONN 0      0          127.0.0.1:323       0.0.0.0:*   
+udp   UNCONN 0      0              [::1]:323          [::]:*   
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*   
+tcp   LISTEN 0      511                *:80              *:*   
+tcp   LISTEN 0      128             [::]:22           [::]:*   
+
+=============================================
+[*] Routing Information
+=============================================
+netstat -rn, ip route
+
+
+
+=============================================
+[*] Process Status
+=============================================
+ps -ef
+
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 01:58 ?        00:00:02 /usr/lib/systemd/systemd --switched-root --system --deserialize 31
+root           2       0  0 01:58 ?        00:00:00 [kthreadd]
+root           3       2  0 01:58 ?        00:00:00 [pool_workqueue_]
+root           4       2  0 01:58 ?        00:00:00 [kworker/R-rcu_g]
+root           5       2  0 01:58 ?        00:00:00 [kworker/R-sync_]
+root           6       2  0 01:58 ?        00:00:00 [kworker/R-slub_]
+root           7       2  0 01:58 ?        00:00:00 [kworker/R-netns]
+root           9       2  0 01:58 ?        00:00:00 [kworker/0:0H-events_highpri]
+root          11       2  0 01:58 ?        00:00:00 [kworker/R-mm_pe]
+root          12       2  0 01:58 ?        00:00:00 [kworker/u60:1-events_unbound]
+root          13       2  0 01:58 ?        00:00:00 [rcu_tasks_kthre]
+root          14       2  0 01:58 ?        00:00:00 [rcu_tasks_rude_]
+root          15       2  0 01:58 ?        00:00:00 [rcu_tasks_trace]
+root          16       2  0 01:58 ?        00:00:00 [ksoftirqd/0]
+root          17       2  0 01:58 ?        00:00:00 [pr/ttyS0]
+root          18       2  0 01:58 ?        00:00:00 [rcu_preempt]
+root          19       2  0 01:58 ?        00:00:00 [rcu_exp_par_gp_]
+root          20       2  0 01:58 ?        00:00:00 [rcu_exp_gp_kthr]
+root          21       2  0 01:58 ?        00:00:00 [migration/0]
+root          22       2  0 01:58 ?        00:00:00 [idle_inject/0]
+root          24       2  0 01:58 ?        00:00:00 [cpuhp/0]
+root          26       2  0 01:58 ?        00:00:00 [kdevtmpfs]
+root          27       2  0 01:58 ?        00:00:00 [kworker/R-inet_]
+root          28       2  0 01:58 ?        00:00:00 [kauditd]
+root          29       2  0 01:58 ?        00:00:00 [khungtaskd]
+root          31       2  0 01:58 ?        00:00:00 [oom_reaper]
+root          32       2  0 01:58 ?        00:00:00 [kworker/R-write]
+root          33       2  0 01:58 ?        00:00:00 [kcompactd0]
+root          34       2  0 01:58 ?        00:00:00 [ksmd]
+root          35       2  0 01:58 ?        00:00:00 [khugepaged]
+root          36       2  0 01:58 ?        00:00:00 [kworker/R-crypt]
+root          37       2  0 01:58 ?        00:00:00 [kworker/R-kinte]
+root          38       2  0 01:58 ?        00:00:00 [kworker/R-kbloc]
+root          39       2  0 01:58 ?        00:00:00 [irq/9-acpi]
+root          40       2  0 01:58 ?        00:00:00 [kworker/R-tpm_d]
+root          41       2  0 01:58 ?        00:00:00 [kworker/R-md]
+root          42       2  0 01:58 ?        00:00:00 [kworker/R-md_bi]
+root          43       2  0 01:58 ?        00:00:00 [kworker/R-edac-]
+root          44       2  0 01:58 ?        00:00:00 [watchdogd]
+root          45       2  0 01:58 ?        00:00:00 [kworker/0:1H-kblockd]
+root          46       2  0 01:58 ?        00:00:00 [kswapd0]
+root          51       2  0 01:58 ?        00:00:00 [kworker/R-kthro]
+root          55       2  0 01:58 ?        00:00:00 [kworker/R-acpi_]
+root          56       2  0 01:58 ?        00:00:00 [xenbus]
+root          57       2  0 01:58 ?        00:00:00 [xenwatch]
+root          58       2  0 01:58 ?        00:00:00 [kworker/R-kmpat]
+root          59       2  0 01:58 ?        00:00:00 [kworker/R-kalua]
+root          61       2  0 01:58 ?        00:00:00 [kworker/R-mld]
+root          62       2  0 01:58 ?        00:00:00 [kworker/R-ipv6_]
+root          72       2  0 01:58 ?        00:00:00 [kworker/R-kstrp]
+root          76       2  0 01:58 ?        00:00:00 [kworker/u61:0]
+root         418       2  0 01:58 ?        00:00:00 [kworker/R-ata_s]
+root         419       2  0 01:58 ?        00:00:00 [scsi_eh_0]
+root         420       2  0 01:58 ?        00:00:00 [kworker/R-scsi_]
+root         421       2  0 01:58 ?        00:00:00 [scsi_eh_1]
+root         423       2  0 01:58 ?        00:00:00 [kworker/R-scsi_]
+root         439       2  0 01:58 ?        00:00:00 [kworker/R-xfsal]
+root         440       2  0 01:58 ?        00:00:00 [kworker/R-xfs_m]
+root         441       2  0 01:58 ?        00:00:00 [kworker/R-xfs-b]
+root         442       2  0 01:58 ?        00:00:00 [kworker/R-xfs-c]
+root         443       2  0 01:58 ?        00:00:00 [kworker/R-xfs-r]
+root         444       2  0 01:58 ?        00:00:00 [kworker/R-xfs-b]
+root         445       2  0 01:58 ?        00:00:00 [kworker/R-xfs-i]
+root         446       2  0 01:58 ?        00:00:00 [kworker/R-xfs-l]
+root         447       2  0 01:58 ?        00:00:00 [kworker/R-xfs-c]
+root         448       2  0 01:58 ?        00:00:00 [xfsaild/xvda4]
+root         534       1  0 01:58 ?        00:00:00 /usr/lib/systemd/systemd-journald
+root         551       1  0 01:58 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root         575       2  0 01:58 ?        00:00:00 [kworker/R-xfs-b]
+root         576       2  0 01:58 ?        00:00:00 [kworker/R-xfs-c]
+root         577       2  0 01:58 ?        00:00:00 [kworker/R-xfs-r]
+root         578       2  0 01:58 ?        00:00:00 [kworker/R-xfs-b]
+root         579       2  0 01:58 ?        00:00:00 [kworker/R-xfs-i]
+root         580       2  0 01:58 ?        00:00:00 [kworker/R-xfs-l]
+root         581       2  0 01:58 ?        00:00:00 [kworker/R-xfs-c]
+root         583       2  0 01:58 ?        00:00:00 [xfsaild/xvda3]
+root         595       1  0 01:58 ?        00:00:00 /sbin/auditd
+dbus         634       1  0 01:58 ?        00:00:00 /usr/bin/dbus-broker-launch --scope system --audit
+dbus         638     634  0 01:58 ?        00:00:00 dbus-broker --log 4 --controller 9 --machine-id eaf5fe31e2e54a93b3c985b520e0135d --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
+root         641       1  0 01:58 ?        00:00:00 /usr/lib/systemd/systemd-logind
+chrony       643       1  0 01:58 ?        00:00:00 /usr/sbin/chronyd -F 2
+root         672       1  0 01:58 ?        00:00:00 /usr/sbin/NetworkManager --no-daemon
+root         681       1  0 01:58 ?        00:00:02 /usr/bin/python3 -Es /usr/sbin/tuned -l -P
+root         682       1  0 01:58 ?        00:00:00 /usr/bin/rhsmcertd
+polkitd      951       1  0 01:58 ?        00:00:00 /usr/lib/polkit-1/polkitd --no-debug
+root        1081       1  0 01:58 ?        00:00:00 /usr/sbin/rsyslogd -n
+root        1082       1  0 01:58 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root        1084       1  0 01:58 ?        00:00:00 /usr/sbin/crond -n
+root        1085       1  0 01:58 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear - linux
+root        1086       1  0 01:58 ttyS0    00:00:00 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 - vt220
+root        2002       2  0 01:58 ?        00:00:00 [kworker/R-tls-s]
+root        6161       1  0 01:59 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache      6306    6161  0 01:59 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache      6308    6161  0 01:59 ?        00:00:02 /usr/sbin/httpd -DFOREGROUND
+apache      6309    6161  0 01:59 ?        00:00:02 /usr/sbin/httpd -DFOREGROUND
+apache      6310    6161  0 01:59 ?        00:00:02 /usr/sbin/httpd -DFOREGROUND
+root       15928       2  0 02:23 ?        00:00:00 [kworker/u60:0-events_unbound]
+apache     16804    6161  0 04:22 ?        00:00:01 /usr/sbin/httpd -DFOREGROUND
+root       17544    1082  0 05:42 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   17548       1  0 05:42 ?        00:00:00 /usr/lib/systemd/systemd --user
+ec2-user   17550   17548  0 05:42 ?        00:00:00 (sd-pam)
+ec2-user   17557   17544  0 05:42 ?        00:00:00 sshd: ec2-user@notty
+ec2-user   17558   17557  0 05:42 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       17716    1082  0 06:48 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   17719   17716  0 06:48 ?        00:00:00 sshd: ec2-user@pts/0
+ec2-user   17720   17719  0 06:48 pts/0    00:00:00 -bash
+root       18924       2  0 07:28 ?        00:00:00 [kworker/u60:3]
+root       20166       2  0 08:38 ?        00:00:00 [kworker/0:0-events_power_efficient]
+root       20287       2  0 08:53 ?        00:00:00 [kworker/0:2-events]
+root       20308       2  0 08:59 ?        00:00:00 [kworker/0:1-events]
+root       20419   17720  0 09:03 pts/0    00:00:00 sudo ./test.sh
+root       20421   20419  0 09:03 pts/0    00:00:00 /bin/bash ./test.sh
+root       20508   20421  0 09:03 pts/0    00:00:00 ps -ef
+
+=============================================
+[*] User Env
+=============================================
+env
+
+SHELL=/bin/bash
+SUDO_GID=1000
+HOSTNAME=ip-10-1-1-221.ap-northeast-2.compute.internal
+HISTSIZE=1000
+SUDO_COMMAND=./test.sh
+SUDO_USER=ec2-user
+PWD=/home/ec2-user
+LOGNAME=root
+HOME=/root
+LANG=C
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+TERM=xterm
+USER=root
+SHLVL=0
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+SUDO_UID=1000
+MAIL=/var/spool/mail/ec2-user
+_=/bin/env
+
