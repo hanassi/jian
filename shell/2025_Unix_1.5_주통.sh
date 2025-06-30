@@ -55,6 +55,17 @@ alias ls=ls
 CREATE_FILE=[Lyn_secure]`hostname`"_"$OS"_"$IP"_"`date +%m%d`.txt
 CHECK_FILE=`ls ./"$CREATE_FILE" 2>/dev/null | wc -l`
 
+
+# 파일 존재여부 체크 함수
+file_check() {
+    local file="$1"
+    if [ -e "$file" ]; then
+        return 0  # 존재하면 0 (성공)
+    else
+        return 1  # 존재하지 않으면 1 (실패)
+    fi
+}
+
 perm_check() {
     unset FUNC_FILE
     unset PERM
@@ -203,18 +214,6 @@ perm_check_dir() {
 
     return
 }
-
-#######################
-# 파일 존재여부 체크 함수
-#######################
-file_check() {
-    if [ -e "$1" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 echo "" >> $CREATE_FILE 2>&1
 echo "###########################################################################"
 echo "#																			#"
@@ -572,7 +571,7 @@ case $OS in
 			if [ -f /etc/pam.d/common-auth ]; then
 				cat /etc/pam.d/common-auth >> $CREATE_FILE 2>&1
 			else
-				echo "/etc/pam.d/common-auth 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+				echo "[-] /etc/pam.d/common-auth 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
 			fi
 			echo "" >> $CREATE_FILE 2>&1
 			echo "[+] 3. 현황 : /etc/pam.d/system-auth" >> $CREATE_FILE 2>&1
@@ -1324,40 +1323,23 @@ echo "[U-06] 파일 및 디렉터리 소유자 설정"
 echo "[U-06] 파일 및 디렉터리 소유자 설정" >> $CREATE_FILE 2>&1
 echo "[U-06_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-
-usercheck=`find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--type f -a -nouser -print 2>/dev/null`
-groupcheck=`find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--type f -a -nogroup -print 2>/dev/null`
-
-
 echo "[+] 소유자가 존재하지 않는 파일 출력" >> $CREATE_FILE 2>&1
-if [ -n "$usercheck" ]; then
-    echo "$usercheck" | while read -r file; do
-    ls -al "$file" >> $CREATE_FILE 2>&1
-	done
-else
-    echo "소유자가 존재하지 않는 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
-fi
-echo "" >> $CREATE_FILE 2>&1
 
-
-echo "[+] 소유자 그룹이 존재하지 않는 파일 출력" >> $CREATE_FILE 2>&1
-if [ -n "$groupcheck" ]; then
-    echo "$groupcheck" | while read -r file; do
-    ls -al "$file" >> $CREATE_FILE 2>&1
-	done
-else
-    echo "소유자가 존재하지 않는 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
-fi
-echo "" >> $CREATE_FILE 2>&1
-
-unset usercheck
-unset groupcheck
+for file in `find / -type f -a -nouser 2>/dev/null | head -5`
+do
+	ls -al ${file} 2>/dev/null >> $CREATE_FILE 2>&1
+	echo "" >> $CREATE_FILE 2>&1
+done
 unset file
 
+echo "[+] 소유자 그룹이 존재하지 않는 파일 출력" >> $CREATE_FILE 2>&1
+for file in `find / -type f -a -nogroup 2>/dev/null | head -5`
+do
+	ls -al ${file} 2>/dev/null >> $CREATE_FILE 2>&1
+	echo "" >> $CREATE_FILE 2>&1
+done
+unset file
+	
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-06_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
@@ -1577,20 +1559,10 @@ echo "[U-13] SUID, SGID, Sticky bit 설정 파일 점검"
 echo "[U-13] SUID, SGID, Sticky bit 설정 파일 점검" >> $CREATE_FILE 2>&1
 echo "[U-13_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-filecheck=`find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--user root -type f \( -perm -04000 -o -perm -02000 \) -print 2>/dev/null | head -5`
-
-echo "[+] SUID, SGID, Sticky bit가 설정된 파일 출력(최대 5개)" >> $CREATE_FILE 2>&1
-if [ -n "$filecheck" ]; then
-    echo "$filecheck" | while read -r file; do
-    ls -al "$file" >> $CREATE_FILE 2>&1
-	done
-else
-    echo "SUID, SGID, Sticky bit가 설정된 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
-fi
-echo "" >> $CREATE_FILE 2>&1
-
+for file in `find / -user root -type f \( -perm -04000 -o -perm -02000 \) 2>/dev/null | head -5`
+do
+	ls -al ${file} 2>/dev/null >> $CREATE_FILE 2>&1
+done
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-13_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
@@ -1602,7 +1574,6 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-unset filecheck
 unset file
 }
 
@@ -1665,25 +1636,11 @@ echo "=============================================" >> $CREATE_FILE 2>&1
 
 
 #2025 루트 디렉토리 검색으로 변경하고
-#echo "[+] 과도한 권한 파일 확인" >> $CREATE_FILE 2>&1
-#find / . ! \( \( -path '/proc' -o -path '/sys' \) -prune \) -type f -perm -2 -exec ls -l {} \;>> $CREATE_FILE 2>&1
+echo "[+] 과도한 권한 파일 확인" >> $CREATE_FILE 2>&1
+find / . ! \( \( -path '/proc' -o -path '/sys' \) -prune \) -type f -perm -2 -exec ls -l {} \;>> $CREATE_FILE 2>&1
 
 # timeout 5는 5초 실행 후 명령어 종료. centos만 검증되어 주석처리함
 # timeout 5 find / . ! \( \( -path '/proc' -o -path '/sys' \) -prune \) -type f -perm -2 -exec ls -l {} \;
-
-filecheck=`find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--type f -perm -2 -print`
-
-echo "[+] world writable 파일 확인" >> $CREATE_FILE 2>&1
-if [ -n "$filecheck" ]; then
-    echo "$filecheck" | while read -r file; do
-    ls -al "$file" >> $CREATE_FILE 2>&1
-	done
-else
-    echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
-fi
-echo "" >> $CREATE_FILE 2>&1
 
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-15_END]" >> $CREATE_FILE 2>&1
@@ -1698,7 +1655,6 @@ echo "" >> $CREATE_FILE 2>&1
 
 unset HOMEDIR
 unset file
-unset filecheck
 }
 
 U-16(){
@@ -1770,6 +1726,8 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
+
+
 unset filelist
 unset filelist_check
 }
@@ -1780,14 +1738,15 @@ echo "[U-18] 접속 IP 및 포트 제한" >> $CREATE_FILE 2>&1
 echo "[U-18_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 hosts_file(){
-	if file_check "$1"; then
+	local file="$1"
+	if file_check "$file"; then
 		echo "[*] 파일 존재여부 체크" >> $CREATE_FILE 2>&1
-		ls -la "$1" >> $CREATE_FILE 2>&1
+		ls -la "$file" >> $CREATE_FILE 2>&1
 		
 		echo "[*] 파일 내 적절한 설정 체크" >> $CREATE_FILE 2>&1
-		cat "$1" >> $CREATE_FILE 2>&1
+		cat "$file" >> $CREATE_FILE 2>&1
 	else
-		echo "$1 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+		echo "$file 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
 	fi
 	echo "" >> $CREATE_FILE 2>&1
 }
@@ -1951,31 +1910,32 @@ echo "[U-59] 숨겨진 파일 및 디렉토리 검색 및 제거"
 echo "[U-59] 숨겨진 파일 및 디렉토리 검색 및 제거" >> $CREATE_FILE 2>&1
 echo "[U-59_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-filecheck=`find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--type f -name ".*" -print 2>/dev/null | head -5`
-dircheck=`find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--type d -name ".*" -print 2>/dev/null | head -5`
+dircheck=`find / -type d -name ".*" | head -5`
+filecheck=`find / -type f -name ".*" | head -5`
 
-echo "[+] 1. 현황 : 불필요한 숨김 파일 확인(최대 5개)" >> $CREATE_FILE 2>&1
-if [ -n "$filecheck" ]; then
-    echo "$filecheck" | while read -r file; do
-    ls -al "$file" >> $CREATE_FILE 2>&1
-	done
-else
-    echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
-fi
+echo "[+] 1. 현황 : 불필요한 숨김 파일 확인" >> $CREATE_FILE 2>&1
+for filelist in $filecheck
+do	
+	if [ -f $filelist ]
+	then 
+		ls -al $filelist >> $CREATE_FILE 2>&1
+	else
+		echo "파일이 발견되지 않았습니다." >> $CREATE_FILE 2>&1
+	fi
+done
 echo "" >> $CREATE_FILE 2>&1
 
-echo "[+] 2. 현황 : 불필요한 숨김 디렉토리 확인(최대 5개)" >> $CREATE_FILE 2>&1
-if [ -n "$dircheck" ]; then
-    echo "$dircheck" >> $CREATE_FILE 2>&1
-else
-    echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
-fi
 
-
+echo "[+] 2. 현황 : 불필요한 숨김 디렉토리 확인" >> $CREATE_FILE 2>&1
+for dirlist in $dircheck
+do	
+	if [ -f $dirlist ]
+	then 
+		$dirlist >> $CREATE_FILE 2>&1
+	else
+		echo "디렉토리가 발견되지 않았습니다." >> $CREATE_FILE 2>&1
+	fi
+done
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-59_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
@@ -1989,7 +1949,6 @@ echo "" >> $CREATE_FILE 2>&1
 
 unset dircheck
 unset filecheck
-unset file
 }
 
 U-19(){
@@ -2953,10 +2912,10 @@ case $OS in
 		
 		if file_check $httpd_daemon ; then
 			# httpd root Directory
-			$httpd_daemon -V | grep -E "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/httpd_root.txt
+			$httpd_daemon -V | egrep "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/httpd_root.txt
 			
 			# httpd conf Directory
-			$httpd_daemon -V | grep -E "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/httpd_conf.txt
+			$httpd_daemon -V | egrep "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/httpd_conf.txt
 			
 			# save httpd Directory path
 			httpd_root=`cat ./Lyn_tmp/httpd_root.txt`
@@ -2972,10 +2931,10 @@ case $OS in
 
 		if file_check $apache2_daemon ; then
 			# httpd root Directory
-			$apache2_daemon -V | grep -E "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/apache2_conf.txt
+			$apache2_daemon -V | egrep "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/apache2_conf.txt
 			
 			# httpd conf Directory
-			$apache2_daemon -V | grep -E "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/apache2_conf.txt
+			$apache2_daemon -V | egrep "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/apache2_conf.txt
 			
 			# save httpd Directory path
 			apache2_root=`cat ./Lyn_tmp/apache2_root.txt`
@@ -2993,18 +2952,15 @@ case $OS in
 	
 		SunOS | AIX | HP-UX)
 		#path_config
-		#web_command_path=`find / -name apachectl | head -1`
-		web_command_path=`find / \
-		\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
-		-name apachectl -print 2>/dev/null | head -1`
+		web_command_path=`find / -name apachectl | head -1`
 		
 		# httpd root Directory
-		$web_command_path -V | grep -E "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/httpd_root.txt
-		apache2 -V | grep -E "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/apache2_root.txt
+		$web_command_path -V | egrep "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/httpd_root.txt
+		apache2 -V | egrep "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/apache2_root.txt
 		
 		# httpd conf Directory
-		$web_command_path -V | grep -E "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p > ./Lyn_tmp/httpd_conf.txt
-		apache2 -V | grep -E "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/apache2_conf.txt
+		$web_command_path -V | egrep "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p > ./Lyn_tmp/httpd_conf.txt
+		apache2 -V | egrep "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/apache2_conf.txt
 		
 		# Create httpd Directory File
 		httpd_root=`cat ./Lyn_tmp/httpd_root.txt`
@@ -3012,6 +2968,7 @@ case $OS in
 		apache2_root=`cat ./Lyn_tmp/apache2_root.txt`
 		apache2_conf=`cat ./Lyn_tmp/apache2_conf.txt`
 	
+		
 		# Path Inforamtion into Parameter
 		cat $httpd_root/conf/httpd.conf >> ./Lyn_tmp/httpd_conf.txt
 		echo "[+] 설정파일 현황" >> $CREATE_FILE 2>&1
@@ -3117,58 +3074,61 @@ echo "[U-38] 웹서비스 불필요한 파일 제거"
 echo "[U-38] 웹서비스 불필요한 파일 제거"  >> $CREATE_FILE 2>&1
 echo "[U-38_START]"  >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-apache_dirs=$(find / \
-\( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
--type d \( -iname manual -o -iname cgi-bin -o -iname sample \) -print 2>/dev/null | grep -iE 'apache|httpd')
+manual=`find / -iname manual | egrep 'apache|httpd'`
+manual_wc=`find / -iname manual | egrep 'apache|httpd' | wc -l`
+cgi_bin=`find / -iname cgi-bin | egrep 'apache|httpd'`
+cgi_bin_wc=`find / -iname cgi-bin | egrep 'apache|httpd' | wc -l`
+sample=`find / -iname sample | egrep 'apache|httpd'`
+sample_wc=`find / -iname sample | egrep 'apache|httpd' | wc -l`
 
-manual_dirs=$(echo "$apache_dirs" | grep -i '/manual$')
-cgi_bin_dirs=$(echo "$apache_dirs" | grep -i '/cgi-bin$')
-sample_dirs=$(echo "$apache_dirs" | grep -i '/sample$')
-
-
-if [ "$web_ps_check" -ne 0 ]; then
-    echo "[+] apache 서비스가 구동중 입니다." >> $CREATE_FILE 2>&1
-    echo "" >> $CREATE_FILE 2>&1
-
-    if [ -n "$manual_dirs" ]; then
-        echo "[+] 1. 현황 : manual 디렉터리 출력" >> $CREATE_FILE 2>&1
-        echo "$manual_dirs" | while read -r file; do
-            echo "$file" >> $CREATE_FILE 2>&1
-            ls -al "$file" >> $CREATE_FILE 2>&1
-            echo "" >> $CREATE_FILE 2>&1
-        done
-    else
-        echo "[+] 1. 현황 : manual 디렉터리 없음" >> $CREATE_FILE 2>&1
-        echo "" >> $CREATE_FILE 2>&1
-    fi
-
-    if [ -n "$cgi_bin_dirs" ]; then
-        echo "[+] 2. 현황 : cgi-bin 디렉터리 출력" >> $CREATE_FILE 2>&1
-        echo "[*] 2-1. 참고 : default apache cgi-bin 경로는 OS 및 버전 마다 다르니 개인이 판단" >> $CREATE_FILE 2>&1
-        echo "$cgi_bin_dirs" | while read -r file; do 
-            echo "$file" >> $CREATE_FILE 2>&1
-            ls -al "$file" >> $CREATE_FILE 2>&1
-            echo "" >> $CREATE_FILE 2>&1
-        done
-    else
-        echo "[+] 2. 현황 : cgi-bin 디렉터리 없음" >> $CREATE_FILE 2>&1
-        echo "" >> $CREATE_FILE 2>&1
-    fi
-
-    if [ -n "$sample_dirs" ]; then
-        echo "[+] 3. 현황 : sample 디렉터리 출력" >> $CREATE_FILE 2>&1
-        echo "$sample_dirs" | while read -r file; do
-            echo "$file" >> $CREATE_FILE 2>&1
-            ls -al "$file" >> $CREATE_FILE 2>&1
-            echo "" >> $CREATE_FILE 2>&1
-        done
-    else
-        echo "[+] 3. 현황 : sample 디렉터리 없음" >> $CREATE_FILE 2>&1
-    fi
+	#iname으로 대소문자 없이 찾아보자
+if [ $web_ps_check -ne 0 ]
+then
+	echo "[+] apache 서비스가 구동중 입니다." >> $CREATE_FILE 2>&1
+	echo "" >> $CREATE_FILE 2>&1
+	if [ $manual_wc -gt 0 ];
+	then
+			echo "[+] 1. 현황 : manual 디렉터리 출력" >> $CREATE_FILE 2>&1
+			for file in $manual
+			do
+				echo $file >> $CREATE_FILE 2>&1
+				ls -al $file >> $CREATE_FILE 2>&1
+				echo "" >> $CREATE_FILE 2>&1
+			done
+	else
+			echo "[+] 1. 현황 : manual 디렉터리 없음" >> $CREATE_FILE 2>&1
+			echo "" >> $CREATE_FILE 2>&1
+	fi
+	echo "" >> $CREATE_FILE 2>&1
+	if [ $cgi_bin_wc -gt 0 ];
+	then
+		echo "[+] 2. 현황 : cgi-bin 디렉터리 출력" >> $CREATE_FILE 2>&1
+		echo "[*] 2-1. 참고 : default apache cgi-bin 경로는 OS 및 버전 마다 다르니 개인이 판단" >> $CREATE_FILE 2>&1
+		for file in $cgi_bin
+		do
+			echo $file >> $CREATE_FILE 2>&1
+			ls -al $file >> $CREATE_FILE 2>&1
+			echo "" >> $CREATE_FILE 2>&1
+		done
+	else
+			echo "[+] 2. 현황 : cgi-bin 디렉터리 없음" >> $CREATE_FILE 2>&1
+			echo "" >> $CREATE_FILE 2>&1
+	fi
+	if [ $sample_wc -gt 0 ];
+	then
+		echo "[+] 3. 현황 : sample 디렉터리 출력" >> $CREATE_FILE 2>&1
+		for file in $sample
+		do
+			echo $sample >> $CREATE_FILE 2>&1
+			ls -al $sample >> $CREATE_FILE 2>&1
+			echo "" >> $CREATE_FILE 2>&1
+		done
+	else
+		echo "[+] 3. 현황 : sample 디렉터리 없음" >> $CREATE_FILE 2>&1
+	fi
 else
-    echo "apache 서비스가 존재하지 않거나 구동중이지 않습니다." >> $CREATE_FILE 2>&1
+	echo "apache 서비스가 존재하지 않거나 구동중이지 않습니다." >> $CREATE_FILE 2>&1
 fi
-
 echo "" >> $CREATE_FILE 2>&1
 echo "[U-38_END]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
@@ -3181,11 +3141,13 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
-
-unset apache_dirs
-unset manual_dirs
-unset cgi_bin_dirs
-unset sample_dirs
+	
+unset manual
+unset manual_wc
+unset cgi_bin
+unset cgi_bin_wc
+unset sample
+unset sample_wc
 unset file
 }
 

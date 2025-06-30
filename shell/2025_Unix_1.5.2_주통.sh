@@ -1484,11 +1484,12 @@ Systemfile_list="/etc/inetd.conf /etc/xinetd.conf"
 
 for Check_SystemFile in $Systemfile_list
 	do
-		if [ -f $Check_SystemFile ]
-		then
-		echo "" >> $CREATE_FILE 2>&1
-		echo "[+]" $Check_SystemFile >> $CREATE_FILE 2>&1
-		ls -laR $Check_SystemFile >> $CREATE_FILE 2>&1
+		if [ -f $Check_SystemFile ]; then
+			echo "" >> $CREATE_FILE 2>&1
+			echo "[+]" $Check_SystemFile >> $CREATE_FILE 2>&1
+			ls -laR $Check_SystemFile >> $CREATE_FILE 2>&1
+		else
+			echo "파일이 존재하지 않습니다. $Check_SystemFile" >> $CREATE_FILE 2>&1
 		fi
 	done
 echo "" >> $CREATE_FILE 2>&1
@@ -1515,11 +1516,12 @@ Systemfile_list="/etc/syslog.conf /etc/rsyslog.conf"
 
 for Check_SystemFile in $Systemfile_list
 	do
-		if [ -f $Check_SystemFile ]
-		then
-		echo "" >> $CREATE_FILE 2>&1
-		echo "[+]" $Check_SystemFile >> $CREATE_FILE 2>&1
-		ls -laR $Check_SystemFile >> $CREATE_FILE 2>&1
+		if [ -f $Check_SystemFile ]; then
+			echo "" >> $CREATE_FILE 2>&1
+			echo "[+]" $Check_SystemFile >> $CREATE_FILE 2>&1
+			ls -laR $Check_SystemFile >> $CREATE_FILE 2>&1
+		else
+			echo "파일이 존재하지 않습니다. $Check_SystemFile" >> $CREATE_FILE 2>&1
 		fi
 	done
 
@@ -1535,8 +1537,6 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-
-
 unset Systemfile_list
 unset Check_SystemFile
 }
@@ -1550,11 +1550,12 @@ Systemfile_list="/etc/services"
 
 for Check_SystemFile in $Systemfile_list
 	do
-		if [ -f $Check_SystemFile ]
-		then
-		echo "" >> $CREATE_FILE 2>&1
-		echo "[+]" $Check_SystemFile >> $CREATE_FILE 2>&1
-		ls -laR $Check_SystemFile >> $CREATE_FILE 2>&1
+		if [ -f $Check_SystemFile ]; then
+			echo "" >> $CREATE_FILE 2>&1
+			echo "[+]" $Check_SystemFile >> $CREATE_FILE 2>&1
+			ls -laR $Check_SystemFile >> $CREATE_FILE 2>&1
+		else
+			echo "파일이 존재하지 않습니다. $Check_SystemFile" >> $CREATE_FILE 2>&1		
 		fi
 	done
 echo "" >> $CREATE_FILE 2>&1

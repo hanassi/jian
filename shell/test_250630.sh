@@ -265,6 +265,11 @@ ls() {
 		fi
 	done
 
+	# 인자로 경로가 없을 경우 현재 디렉터리(.)를 대상으로 설정
+	if [ ${#targets[@]} -eq 0 ]; then
+		targets=(".")
+	fi
+
 	for target in "${targets[@]}"; do
 		if [ -e "$target" ]; then
 			command ls "${args[@]}" "$target"
@@ -273,6 +278,7 @@ ls() {
 		fi
 	done
 }
+
 
 # grep 안전 함수
 grep() {
