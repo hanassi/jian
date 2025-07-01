@@ -1,304 +1,174 @@
-#!/bin/bash
+#!/bin/sh
 
-locale_utf8=`locale -a | grep -i 'ko_KR.utf8' | wc -l`
-locale_utf_8=`locale -a | grep -i 'ko_KR.UTF-8' | wc -l`
-locale_euckr=`locale -a | grep -i 'ko_KR.euckr' | wc -l`
-locale_KR=`locale -a | grep ko_KR | grep -v euckr | grep -v utf8 | wc -l`
+#######################
+# 호환성 체크
+#######################
 
-#if [ $locale_utf8 -ne 0 ]
-#then
-#	export LANG=ko_KR.utf8
-#elif [ $locale_utf_8 -ne 0 ]
-#then
-#	export LANG=ko_KR.UTF-8
-#elif [ $locale_euckr -ne 0 ]
-#then
-#	export LANG=ko_KR.euckr
-#elif [ $locale_KR -ne 0 ]
-#then
-#	export LANG=ko_KR
-#else
-#	export LANG=C
-#fi
-
-LANG=C
-export LANG
-
-OS=`uname -s`
-
-
-if [ $OS = Linux ]
-	then
-		#alias echo='echo -e'
-		IP=`hostname -I | sed 's/ //g'`
+# bash나 ksh가 있으면 전환
+if command -v bash >/dev/null 2>&1 && [ -z "$SHELL_SWITCHED" ]; then
+    export SHELL_SWITCHED=1
+    exec bash "$0" "$@"
+elif command -v ksh >/dev/null 2>&1 && [ -z "$SHELL_SWITCHED" ]; then
+    export SHELL_SWITCHED=1
+    exec ksh "$0" "$@"
 fi
 
-if [ $OS = SunOS ]
-	then
-		IP=`ifconfig -a | grep broadcast | cut -f 2 -d ' '`
-fi
-
-if [ $OS = AIX ]
-	 then
-		IP=`ifconfig en0 | grep 'inet' | awk '{print $2}'`
-fi
-
-if [ $OS = HP-UX ]
-	then
-		IP=`ifconfig lan0 | grep 'inet' | awk '{print $2)'`
-fi
-
-
-alias ls=ls
-
-
-CREATE_FILE=[Lyn_secure]`hostname`"_"$OS"_"$IP"_"`date +%m%d`.txt
-CHECK_FILE=`ls ./"$CREATE_FILE" 2>/dev/null | wc -l`
-
-perm_check() {
-    unset FUNC_FILE
-    unset PERM
-    unset NUM
-    unset PERM_CHECK
-    unset OWNER_FUNC_fRESULT
-    unset PERM_FUNC_RESULT
-    unset VALUE
-
-    FUNC_FILE=$1
-    PERM=`ls -al $FUNC_FILE | awk '{print $1}'`
-    OWNER_FUNC_RESULT=`ls -al $FUNC_FILE | awk '{print $3}'`
-    PERM=`expr "$PERM" : '.\(.*\)' | sed -e "s/-/A/g"`;
-
-    while :
-    do
-        NUM=`echo $PERM | awk '{print length($0)}'`
-
-        if [ $NUM -eq 0 ]
-            then
-                break
-        fi
-
-        PERM_CHECK=`expr "$PERM" : '\(...\).*'`
-        PERM=`expr "$PERM" : '...\(.*\)'`
-
-        if [ "$PERM_CHECK" = "rwx" -o "$PERM_CHECK" = "rws" -o "$PERM_CHECK" = "rwS" ]
-            then
-                VALUE="7"
-        fi
-
-        if [ "$PERM_CHECK" = "rwA" ]
-            then
-                VALUE="6"
-        fi
-
-        if [ "$PERM_CHECK" = "rAx" -o "$PERM_CHECK" = "rAs" -o "$PERM_CHECK" = "rAS" ]
-            then
-                VALUE="5"
-        fi
-
-        if [ "$PERM_CHECK" = "rAA" ]
-            then
-                VALUE="4"
-        fi
-
-        if [ "$PERM_CHECK" = "Awx" -o "$PERM_CHECK" = "Aws" -o "$PERM_CHECK" = "AwS" ]
-            then
-                VALUE="3"
-        fi
-
-        if [ "$PERM_CHECK" = "AwA" ]
-            then
-                VALUE="2"
-        fi
-
-        if [ "$PERM_CHECK" = "AAx" -o "$PERM_CHECK" = "AAs" -o "$PERM_CHECK" = "AAS" ]
-            then
-                VALUE="1"
-        fi
-
-        if [ "$PERM_CHECK" = "AAA" ]
-            then
-                VALUE="0"
-        fi
-
-        PERM_FUNC_RESULT=$PERM_FUNC_RESULT" "$VALUE
-    done
-
-    PERM_FUNC_RESULT=$PERM_FUNC_RESULT" "$OWNER_FUNC_RESULT
-
-    return
-}
-
-perm_check_dir() {
-    unset FUNC_FILE
-    unset PERM
-    unset OWNER_FUNC_RESULT
-    unset NUM
-    unset PERM_CHECK
-    unset PERM_FUNC_RESULT
-    unset VALUE
-
-    FUNC_FILE=$1
-
-    PERM=`ls -alLd $FUNC_FILE | awk '{print $1}'`
-    OWNER_FUNC_RESULT=`ls -alLd $FUNC_FILE | awk '{print $3}'`
-    PERM=`expr "$PERM" : '.\(.*\)' | sed -e "s/-/A/g"` 
-
-    while :
-    do
-        NUM=`echo $PERM | awk '{print length($0)}'`
-
-        if [ $NUM -eq 0 ]
-            then
-                break
-        fi
-
-        PERM_CHECK=`expr "$PERM" : '\(...\).*'`
-        PERM=`expr "$PERM" : '...\(.*\)'` 	
-
-        if [ "$PERM_CHECK" = "rwx" -o "$PERM_CHECK" = "rws" -o "$PERM_CHECK" = "rwS" ]
-            then
-                VALUE="7"
-        fi
-
-        if [ "$PERM_CHECK" = "rwA" ]
-            then
-                VALUE="6"
-        fi
-
-        if [ "$PERM_CHECK" = "rAx" -o "$PERM_CHECK" = "rAs" -o "$PERM_CHECK" = "rAS" ]
-            then
-                VALUE="5"
-        fi
-
-        if [ "$PERM_CHECK" = "rAA" ]
-            then
-                VALUE="4"
-        fi
-
-        if [ "$PERM_CHECK" = "Awx" -o "$PERM_CHECK" = "Aws" -o "$PERM_CHECK" = "AwS" ]
-            then
-                VALUE="3"
-        fi
-
-        if [ "$PERM_CHECK" = "AwA" ]
-            then
-                VALUE="2"
-        fi
-
-        if [ "$PERM_CHECK" = "AAx" -o "$PERM_CHECK" = "AAs" -o "$PERM_CHECK" = "AAS" ]
-            then
-                VALUE="1"
-        fi
-
-        if [ "$PERM_CHECK" = "AAA" ]
-            then
-                VALUE="0"
-        fi
-
-        PERM_FUNC_RESULT=$PERM_FUNC_RESULT" "$VALUE
-    done
-
-    PERM_FUNC_RESULT=$PERM_FUNC_RESULT" "$OWNER_FUNC_RESULT
-
-    return
+#######################
+# 로케일 설정 함수
+#######################
+set_locale() {
+    if locale -a | grep -iq '^ko_KR\.utf8$'; then
+        LANG=ko_KR.utf8
+    elif locale -a | grep -iq '^ko_KR\.UTF-8$'; then
+        LANG=ko_KR.UTF-8
+    elif locale -a | grep -iq '^ko_KR\.euckr$'; then
+        LANG=ko_KR.euckr
+    elif locale -a | grep -iq '^ko_KR$' && ! locale -a | grep -iq 'euckr\|utf8'; then
+        LANG=ko_KR
+    else
+        LANG=C
+    fi
+    export LANG
 }
 
 #######################
 # 파일 존재여부 체크 함수
 #######################
 file_check() {
-    if [ -e "$1" ]; then
-        return 0
-    else
-        return 1
-    fi
+    [ -e "$1" ]
+    return $?
 }
 
-echo "" >> $CREATE_FILE 2>&1
-echo "###########################################################################"
-echo "#																			#"
-echo "#   				Security Inspection of Server(Unix ver.)			    #"
-echo "#			  					Version : 1.3								#"
-echo "#					Copyright 2025, Lyn Secure All right Reserved			#"
-echo "#						ALL RIGHTS RESERVED.								#"
-echo "#																			#"
-echo "###########################################################################"
-echo "------------------------------------------------------------"
-echo "----------------   진단 전 주의사항    -------------------------"
-echo "-----   반드시 Super 유저 권한에서 진단을 시작해야 합니다!   ---------"
-echo "------------------------------------------------------------"
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "==============   UNIX/Linux Security Check   ==============" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "***********************************************************" >> $CREATE_FILE 2>&1
-echo "*****************   INFO_CHKSTART   ***********************" >> $CREATE_FILE 2>&1
-echo "***********************************************************" >> $CREATE_FILE 2>&1
-echo "-----------------   Start Time   --------------------------" >> $CREATE_FILE 2>&1
-date >> $CREATE_FILE 2>&1
-echo "-----------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "===========   System Information Query Start   ============" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "--------------------   Kernel Information   ---------------" >> $CREATE_FILE 2>&1
-KERNEL=`uname -a` >> $CREATE_FILE 2>&1
-echo "$KERNEL" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-------------------   IP Information   --------------------" >> $CREATE_FILE 2>&1
-IFCONFIG=`ifconfig -a` >> $CREATE_FILE 2>&1
-echo "$IFCONFIG" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-----------------   Network Status   ----------------------" >> $CREATE_FILE 2>&1
-NETSTAT=`netstat -an | egrep -i "LISTEN|ESTABLISHED"` >> $CREATE_FILE 2>&1
-echo "$NETSTAT" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "----------------   Routing Information   ------------------" >> $CREATE_FILE 2>&1
-NETSTATR=`netstat -rn` >> $CREATE_FILE 2>&1
-echo "$NETSTATR" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "---------------   Process Status   ------------------------" >> $CREATE_FILE 2>&1
-PS=`ps -ef` >> $CREATE_FILE 2>&1
-echo "$PS" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "------------------   User Env   ---------------------------" >> $CREATE_FILE 2>&1
-UE=`env` >> $CREATE_FILE 2>&1
-echo "$UE" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "============   System Information Query End   =============" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "****************************************************" >> $CREATE_FILE 2>&1
-echo "******************   INFO_CHK END  *****************" >> $CREATE_FILE 2>&1
-echo "****************************************************" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
-echo "================   Security Check START   =================" >> $CREATE_FILE 2>&1
-echo "===========================================================" >> $CREATE_FILE 2>&1
+#######################
+# 텍스트 출력 관련 함수
+#######################
+WIDTH=75
+PRINT_WIDTH=70
+LINE=$(printf '%*s' "$WIDTH" '' | tr ' ' '#')
+LINE1=$(printf '%*s' "$PRINT_WIDTH" '' | tr ' ' '=')
+LINE2=$(printf '%*s' "$PRINT_WIDTH" '' | tr ' ' '-')
+LINE3=$(printf '%*s' "$PRINT_WIDTH" '' | tr ' ' '*')
 
-mkdir Lyn_tmp
+center() {
+    text="$1"
+    text_length=${#text}
+    padding_left=$(( (WIDTH - text_length) / 2 ))
+    padding_right=$(( WIDTH - text_length - padding_left ))
+    printf "#%*s%s%*s#\n" "$padding_left" "" "$text" "$padding_right" ""
+}
 
+center_line() {
+    local text="$1"
+    local len=${#text}
+    local pad=$(( (PRINT_WIDTH - len - 2) / 2 ))
+    printf "%s\n" "$LINE2"
+    printf "%*s[%s]%*s\n" "$pad" "" "$text" "$pad" ""
+    printf "%s\n" "$LINE2"
+}
+
+print_title() {
+    echo "$LINE1" >> $CREATE_FILE
+    printf "%*s\n" $(( (PRINT_WIDTH + ${#1}) / 2 )) "$1" >> $CREATE_FILE
+    echo "$LINE1" >> $CREATE_FILE
+    echo "" >> $CREATE_FILE
+}
+
+#######################
+# 초기 전역 변수 설정
+#######################
+set_locale
+
+OS=`uname -s`
+if [ "$OS" = Linux ]; then
+    IP=`hostname -I | sed 's/ //g'`
+elif [ "$OS" = SunOS ]; then
+    IP=`ifconfig -a | grep broadcast | cut -f 2 -d ' '`
+elif [ "$OS" = AIX ]; then
+    IP=`ifconfig en0 | grep 'inet' | awk '{print $2}'`
+elif [ "$OS" = HP-UX ]; then
+    IP=`ifconfig lan0 | grep 'inet' | awk '{print $2}'`
+fi
+
+HOMEDIRS=`awk -F":" 'length($6) > 0 {print $6}' /etc/passwd | grep -wv "/" | sort -u`
+USERLIST=`egrep -vi "nologin|false|shutdown|halt|sync" /etc/passwd`
+CREATE_FILE="[Lyn_secure]`hostname`_${OS}_${IP}_`date +%m%d`.txt"
+CHECK_FILE=`[ -f $CREATE_FILE ] && echo 1 || echo 0`
+
+#######################
+# (화면출력) 헤더
+#######################
+echo "$LINE"
+center ""
+center "Security Inspection of Server (Unix ver.)"
+center "Version : 1.6"
+center "Copyright 2025, Lyn Secure. All Rights Reserved."
+center "ALL RIGHTS RESERVED."
+center ""
+echo "$LINE"
+
+#######################
+# (화면출력) 진단 전 안내 
+#######################
+center_line "진단 전 주의사항"
+echo "※ 반드시 Super 유저 권한에서 진단을 시작해야 합니다!"
+echo "$LINE2"
+
+#######################
+# 시스템 정보
+#######################
+print_title "UNIX/Linux Security Check"
+print_title "INFO_CHK START"
+echo "[Start Time]" >> $CREATE_FILE
+date >> $CREATE_FILE
+print_title "INFO_CHK END"
+echo "" >> $CREATE_FILE
+
+print_title "System Information Query Start"
+echo "[Kernel Information]" >> $CREATE_FILE
+uname -a >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[IP Information]" >> $CREATE_FILE
+ifconfig -a >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[Network Status]" >> $CREATE_FILE
+netstat -an | egrep -i "LISTEN|ESTABLISHED" >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[Routing Information]" >> $CREATE_FILE
+netstat -rn >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[Process Status]" >> $CREATE_FILE
+ps -ef >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[User Environment]" >> $CREATE_FILE
+env >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+
+print_title "System Information Query End"
+print_title "Security Check START"
+
+#######################
+# 주요 설정 파일 수집
+#######################
+mkdir -p Lyn_tmp
 File_load="/etc/passwd /etc/shadow /etc/hosts /etc/group /etc/services /etc/pam.d/login /etc/pam.d/login.defs /etc/pam.d/system-auth /etc/inetd.conf /etc/xinetd.conf /etc/hosts.equiv /etc/httpd/conf/httpd.conf /etc/vsftpd/vsftpd.conf /etc/vsftpd/user_list /etc/proftpd.conf /etc/at.allow /etc/at.deny /etc/cron.allow /etc/cron.deny /etc/snmp/snmpd.conf /etc/snmpdv3.conf /etc/mail/sendmail.cf /etc/mail/access /etc/ssh/sshd_config /etc/named.conf /etc/issue.net /etc/banners/ftp.msg /etc/securetty /etc/security/pwquality.conf"
 count=0
-for File_load_list in $File_load
-	do
-		if [ -f $File_load_list ]
-		then
-			count=$((count + 1))
-			echo "===========================================" >> ./Lyn_tmp/`hostname`_file_data.txt
-			echo "[File-$count]" $File_load_list >> ./Lyn_tmp/`hostname`_file_data.txt
-			echo "===========================================" >> ./Lyn_tmp/`hostname`_file_data.txt
-			cat $File_load_list >> ./Lyn_tmp/`hostname`_file_data.txt
-			echo "" >> ./Lyn_tmp/`hostname`_file_data.txt
-			echo "" >> ./Lyn_tmp/`hostname`_file_data.txt
-			echo "" >> ./Lyn_tmp/`hostname`_file_data.txt
-			echo "" >> ./Lyn_tmp/`hostname`_file_data.txt
-		fi
+for File_load_list in $File_load; do
+    if [ -f "$File_load_list" ]; then
+        count=$((count + 1))
+        {
+            echo "==========================================="
+            echo "[$File_load_list] - $count"
+            echo "==========================================="
+            cat "$File_load_list"
+            echo "\n\n"
+        } >> ./Lyn_tmp/`hostname`_file_data.txt
+    fi
 done
 unset File_load
 unset File_load_list
 
-U-01(){
+
+U_01(){
 echo "[U-01] root 계정 원격 접속 제한"
 echo "[U-01] root 계정 원격 접속 제한" >> $CREATE_FILE 2>&1
 echo "[U-01_START]" >> $CREATE_FILE 2>&1
@@ -417,7 +287,7 @@ unset ssh_ps
 unset ssh_permit
 }
 
-U-02(){
+U_02(){
 echo "[U-02] 패스워드 복잡성 설정"
 echo "[U-02] 패스워드 복잡성 설정" >> $CREATE_FILE 2>&1
 echo "[U-02_START]" >> $CREATE_FILE 2>&1
@@ -543,7 +413,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-03(){
+U_03(){
 echo "[U-03] 계정 잠금 임계값 설정"
 echo "[U-03] 계정 잠금 임계값 설정" >> $CREATE_FILE 2>&1
 echo "[U-03_START]" >> $CREATE_FILE 2>&1
@@ -566,20 +436,33 @@ case $OS in
 			;;
 		Linux)
 			echo "[+] 1. 현황 : /etc/pam.d/password-auth" >> $CREATE_FILE 2>&1
-			cat /etc/pam.d/password-auth >> $CREATE_FILE 2>&1
+			if [ -f "/etc/pam.d/password-auth" ]; then
+				cat /etc/pam.d/password-auth >> $CREATE_FILE 2>&1
+			else
+				echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+			fi
 			echo "" >> $CREATE_FILE 2>&1
 			echo "[+] 2. 현황 : /etc/pam.d/common-auth" >> $CREATE_FILE 2>&1
 			if [ -f /etc/pam.d/common-auth ]; then
 				cat /etc/pam.d/common-auth >> $CREATE_FILE 2>&1
 			else
-				echo "/etc/pam.d/common-auth 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+				echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
 			fi
 			echo "" >> $CREATE_FILE 2>&1
 			echo "[+] 3. 현황 : /etc/pam.d/system-auth" >> $CREATE_FILE 2>&1
-			cat /etc/pam.d/system-auth >> $CREATE_FILE 2>&1
+			if [ -f "/etc/pam.d/system-auth" ]; then
+				cat /etc/pam.d/system-auth >> $CREATE_FILE 2>&1
+			else
+				echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+			fi
+			echo "" >> $CREATE_FILE 2>&1
 			echo "" >> $CREATE_FILE 2>&1
 			echo "[+] 4. 8/9 버전 인경우 : /etc/security/faillock.conf " >> $CREATE_FILE 2>&1
-			cat /etc/security/faillock.conf >> $CREATE_FILE 2>&1
+			if [ -f "/etc/security/faillock.conf" ]; then
+				cat /etc/security/faillock.conf | grep -i deny >> $CREATE_FILE 2>&1
+			else
+				echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+			fi
 			echo "" >> $CREATE_FILE 2>&1
 			;;
 		SunOS)
@@ -645,7 +528,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-04(){
+U_04(){
 echo "[U-04] 패스워드 파일 보호"
 echo "[U-04] 패스워드 파일 보호" >> $CREATE_FILE 2>&1
 echo "[U-04_START]" >> $CREATE_FILE 2>&1
@@ -718,7 +601,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-44(){
+U_44(){
 echo "[U-44] root 이외의 UID가 ‘0’금지"
 echo "[U-44] root 이외의 UID가 ‘0’금지" >> $CREATE_FILE 2>&1
 echo "[U-44_START]" >> $CREATE_FILE 2>&1
@@ -758,7 +641,7 @@ unset passwdUID
 
 }
 
-U-45(){
+U_45(){
 echo "[U-45] root 계정 su 제한"
 echo "[U-45] root 계정 su 제한" >> $CREATE_FILE 2>&1
 echo "[U-45_START]" >> $CREATE_FILE 2>&1
@@ -868,7 +751,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-46(){
+U_46(){
 echo "[U-46] 패스워드 최소 길이 설정"
 echo "[U-46] 패스워드 최소 길이 설정" >> $CREATE_FILE 2>&1
 echo "[U-46_START]" >> $CREATE_FILE 2>&1
@@ -934,7 +817,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-47(){
+U_47(){
 echo "[U-47] 패스워드 최대 사용기간 설정"
 echo "[U-47] 패스워드 최대 사용기간 설정" >> $CREATE_FILE 2>&1
 echo "[U-47_START]" >> $CREATE_FILE 2>&1
@@ -1004,7 +887,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-48(){
+U_48(){
 echo "[U-48] 패스워드 최소 사용기간 설정"
 echo "[U-48] 패스워드 최소 사용기간 설정" >> $CREATE_FILE 2>&1
 echo "[U-48_START]" >> $CREATE_FILE 2>&1
@@ -1074,26 +957,24 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-49(){
+U_49(){
 echo "[U-49] 불필요한 계정 제거"
 echo "[U-49] 불필요한 계정 제거" >> $CREATE_FILE 2>&1
 echo "[U-49_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-	echo "[+] 1. 현황 : /etc/passwd 내 활성화 계정만 출력함" >> $CREATE_FILE 2>&1
-	cat /etc/passwd | awk -F":" '{print $1 "\t" $7}' | egrep -Evi "nologin|false" >> $CREATE_FILE 2>&1
+echo "[+] 1. 현황 : /etc/passwd 내 활성화 계정만 출력함" >> $CREATE_FILE 2>&1
+echo "$USERLIST" >> $CREATE_FILE 2>&1
+echo "" >> $CREATE_FILE 2>&1
+echo "[+] 2. 현황 : 전체 계정의 접속 기록 중 활성화 계정만 출력함" >> $CREATE_FILE 2>&1
+echo "$USERLIST" | while read -r line; do
+	user=`echo "$line" | awk -F":" '{print $1}'`
+	echo "[+] $user 접속 기록" >> $CREATE_FILE 2>&1
+	last "$user" | head -3 >> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
-	echo "[+] 2. 현황 : 전체 계정의 접속 기록 중 활성화 계정만 출력함" >> $CREATE_FILE 2>&1
-	a=`cat /etc/passwd | egrep -Evi "nologin|false" | awk -F":" '{print $1}'`
-	for file in $a
-	do 
-		echo $file >> $CREATE_FILE 2>&1
-		echo "" >> $CREATE_FILE 2>&1
-		#head -2 하는 이유는 첫줄은 공백이 올수도 있어서 2줄로 잡았음
-		last $file | head -2 >> $CREATE_FILE 2>&1
-		echo "" >> $CREATE_FILE 2>&1
-		chage -l $file >> $CREATE_FILE 2>&1
-		echo "" >> $CREATE_FILE 2>&1
-	done
+	chage -l "$user" >> $CREATE_FILE 2>&1
+	echo "" >> $CREATE_FILE 2>&1
+done
+
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-49_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
@@ -1109,10 +990,11 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-unset =a
+unset line
+unset user
 }
 
-U-50(){
+U_50(){
 echo "[U-50] 관리자 그룹에 최소한의 계정 포함"
 echo "[U-50] 관리자 그룹에 최소한의 계정 포함" >> $CREATE_FILE 2>&1
 echo "[U-50_START]" >> $CREATE_FILE 2>&1
@@ -1135,7 +1017,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-51(){
+U_51(){
 echo "[U-51] 계정이 존재하지 않는 GID 금지"
 echo "[U-51] 계정이 존재하지 않는 GID 금지" >> $CREATE_FILE 2>&1
 echo "[U-51_START]" >> $CREATE_FILE 2>&1
@@ -1164,7 +1046,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-52(){
+U_52(){
 echo "[U-52] 동일한 UID 금지"
 echo "[U-52] 동일한 UID 금지" >> $CREATE_FILE 2>&1
 echo "[U-52_START]" >> $CREATE_FILE 2>&1
@@ -1212,13 +1094,13 @@ unset passwdUID
 unset count2
 }
 
-U-53(){
+U_53(){
 echo "[U-53] 사용자 shell 점검"
 echo "[U-53] 사용자 shell 점검" >> $CREATE_FILE 2>&1
 echo "[U-53_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[+] 활성화 계정 중 불필요한 계정 확인." >> $CREATE_FILE 2>&1
-cat /etc/passwd | awk -F":" '{print $1 "\t" $7}' | egrep -Evi "nologin|false" >> $CREATE_FILE 2>&1
+echo "$USERLIST" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-53_END]" >> $CREATE_FILE 2>&1
@@ -1232,7 +1114,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-54(){
+U_54(){
 echo "[U-54] Session Timeout 설정"
 echo "[U-54] Session Timeout 설정" >> $CREATE_FILE 2>&1
 echo "[U-54_START]" >> $CREATE_FILE 2>&1
@@ -1299,9 +1181,9 @@ unset etc_file_chk
 unset csh_file_chk
 }
 
-U-05(){
-echo "[U-05] root 홈, 패스 디렉터리 권한 및 패스 설정"
-echo "[U-05] root 홈, 패스 디렉터리 권한 및 패스 설정" >> $CREATE_FILE 2>&1
+U_05(){
+echo "[U-05] root 홈, 패스 디렉토리 권한 및 패스 설정"
+echo "[U-05] root 홈, 패스 디렉토리 권한 및 패스 설정" >> $CREATE_FILE 2>&1
 echo "[U-05_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[+] 현황 : PATH 환경변수 확인" >> $CREATE_FILE 2>&1
@@ -1319,9 +1201,9 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-06(){
-echo "[U-06] 파일 및 디렉터리 소유자 설정"
-echo "[U-06] 파일 및 디렉터리 소유자 설정" >> $CREATE_FILE 2>&1
+U_06(){
+echo "[U-06] 파일 및 디렉토리 소유자 설정"
+echo "[U-06] 파일 및 디렉토리 소유자 설정" >> $CREATE_FILE 2>&1
 echo "[U-06_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 
@@ -1361,7 +1243,7 @@ unset file
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-06_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : 존재하지 않는 소유자 및 그룹 권한을 가진 파일 또는 디렉터리 존재" >> $CREATE_FILE 2>&1
+echo " * 양호 조건 : 존재하지 않는 소유자 및 그룹 권한을 가진 파일 또는 디렉토리 존재" >> $CREATE_FILE 2>&1
 echo " * 취약 조건 : 소유자가 존재하지 않는 파일 디렉토리 중 중요한 파일인지 확인" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -1372,7 +1254,7 @@ echo "" >> $CREATE_FILE 2>&1
 unset file
 }
 
-U-07(){
+U_07(){
 echo "[U-07] /etc/passwd 파일 소유자 및 권한 설정"
 echo "[U-07] /etc/passwd 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-07_START]" >> $CREATE_FILE 2>&1
@@ -1396,7 +1278,7 @@ echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
 echo "1. /etc/passwd 권한: 644, 소유자 root" >> $CREATE_FILE 2>&1
 echo "1-2. /etc/security/passwd 권한: 644, 소유자 root" >> $CREATE_FILE 2>&1
-echo "*** 존재하고있는 파일 및 디렉터리만 출력 ***" >> $CREATE_FILE 2>&1
+echo "*** 존재하고있는 파일 및 디렉토리만 출력 ***" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -1407,7 +1289,7 @@ unset Systemfile_list
 unset Check_SystemFile
 }
 
-U-08(){
+U_08(){
 echo "[U-08] /etc/shadow 파일 소유자 및 권한 설정"
 echo "[U-08] /etc/shadow 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-08_START]" >> $CREATE_FILE 2>&1
@@ -1430,7 +1312,7 @@ echo "[U-08_END]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
 echo "1. /etc/shadow 권한: 400, 소유자 root " >> $CREATE_FILE 2>&1
-echo "*** 존재하고있는 파일 및 디렉터리만 출력 ***" >> $CREATE_FILE 2>&1
+echo "*** 존재하고있는 파일 및 디렉토리만 출력 ***" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -1441,7 +1323,7 @@ unset Systemfile_list
 unset Check_SystemFile
 }
 
-U-09(){
+U_09(){
 echo "[U-09] /etc/hosts 파일 소유자 및 권한 설정"
 echo "[U-09] /etc/hosts 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-09_START]" >> $CREATE_FILE 2>&1
@@ -1475,7 +1357,7 @@ unset Systemfile_list
 unset Check_SystemFile
 }
 
-U-10(){
+U_10(){
 echo "[U-10] /etc/(x)inetd.conf 파일 소유자 및 권한 설정"
 echo "[U-10] /etc/(x)inetd.conf 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-10_START]" >> $CREATE_FILE 2>&1
@@ -1507,7 +1389,7 @@ unset Systemfile_list
 unset Check_SystemFile
 }
 
-U-11(){
+U_11(){
 echo "[U-11] /etc/syslog.conf 파일 소유자 및 권한 설정"
 echo "[U-11] /etc/syslog.conf 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-11_START]" >> $CREATE_FILE 2>&1
@@ -1541,7 +1423,7 @@ unset Systemfile_list
 unset Check_SystemFile
 }
 
-U-12(){
+U_12(){
 echo "[U-12] /etc/services 파일 소유자 및 권한 설정"
 echo "[U-12] /etc/services 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-12_START]" >> $CREATE_FILE 2>&1
@@ -1573,7 +1455,7 @@ unset Systemfile_list
 unset Check_SystemFile
 }
 
-U-13(){
+U_13(){
 echo "[U-13] SUID, SGID, Sticky bit 설정 파일 점검"
 echo "[U-13] SUID, SGID, Sticky bit 설정 파일 점검" >> $CREATE_FILE 2>&1
 echo "[U-13_START]" >> $CREATE_FILE 2>&1
@@ -1607,24 +1489,31 @@ unset filecheck
 unset file
 }
 
-U-14(){
+U_14(){
 echo "[U-14] 사용자, 시스템 시작파일 및 환경파일 소유자 및 권한 설정"
 echo "[U-14] 사용자, 시스템 시작파일 및 환경파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-14_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-HOMEDIRS=`cat /etc/passwd | awk -F":" 'length($6) > 0 {print $6}' | grep -wv "\/" | sort -u`
 echo "[+] 1. 현황 : 환경변수 파일 확인" >> $CREATE_FILE 2>&1
-for file in $HOMEDIRS
-do
-	ls -al $file/.profile $file/.cshrc $file/.kshrc $file/.login $file/.bash_profile $file/.bashrc $file/.bash_login $file/.xinitrc $file/.xsession $file/.login $file/.exrc $file/.netrc 2>/dev/null | grep -v "No such file or directory" >> $CREATE_FILE
-	echo "" >> $CREATE_FILE 2>&1
+echo "$HOMEDIRS" | while read -r dir; do
+    if [ -d "$dir" ]; then
+		echo "[*] $dir" >> $CREATE_FILE 2>&1
+        filelist=$(find "$dir" -type f \( -name '.*profile' -o -name '.*shrc' \) -print 2>/dev/null)
+        echo "$filelist" | while read -r file; do
+            if [ -n "$file" ]; then
+				ls -al "$file" >> $CREATE_FILE 2>&1
+			else
+				echo "파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+            fi
+        done
+    fi
 done
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-14_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : 홈 디렉터리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되어 있고, 홈 디렉터리 환경변수 파일에 root와 소유자만 쓰기 권한이 부여
+echo " * 양호 조건 : 홈디렉토리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되어 있고, 홈디렉토리 환경변수 파일에 root와 소유자만 쓰기 권한이 부여
 된 경우" >> $CREATE_FILE 2>&1
-echo " * 취약 조건 : 홈 디렉터리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되지 않고, 홈 디렉터리 환경변수 파일에 root와 소유자 외에 쓰기 권한이 
+echo " * 취약 조건 : 홈디렉토리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되지 않고, 홈디렉토리 환경변수 파일에 root와 소유자 외에 쓰기 권한이 
 부여된 경우" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -1632,39 +1521,16 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
+unset dir
+unset filelist
 unset file
-unset HOMEDIRS
 }
 
-U-15(){
+U_15(){
 echo "[U-15] world writable 파일 점검"
 echo "[U-15] world writable 파일 점검" >> $CREATE_FILE 2>&1
 echo "[U-15_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-#HOMEDIR=`egrep -v 'nologin|false' /etc/passwd | awk -F":" '{print $6}' | grep -wv "/" | uniq`
-#echo "[+] 홈 디렉터리 내 불필요한 파일 확인" >> $CREATE_FILE 2>&1
-#	for dir in $HOMEDIR
-		#do 
-		#	test_wc=`find $dir -perm -2 -type f | wc -l`
-		#	if [ $test_wc -gt 0 ]
-		#	then
-		#		echo $dir >> $CREATE_FILE 2>&1
-	#			echo "<------------" >> $CREATE_FILE 2>&1
-#				find $HOMEDIR -perm -2 -type f -exec ls -alL {} \; 2>/dev/null >> $CREATE_FILE 2>&1
-#				echo "------------>" >> $CREATE_FILE 2>&1
-#				echo "" >> $CREATE_FILE 2>&1
-#			else
-#				echo $dir " 디렉토리가 없습니다."
-#			fi
-#	done
-	#find $HOMEDIR -perm -2 -type f -exec ls -alL {} \; 2>/dev/null >> $CREATE_FILE 2>&1
-	#개선20220118
-#for file in `find $HOMEDIR -perm -2 -type f | head -5`
-#do
-#	ls -al  ${file}
-#done
-
-
 #2025 루트 디렉토리 검색으로 변경하고
 #echo "[+] 과도한 권한 파일 확인" >> $CREATE_FILE 2>&1
 #find / . ! \( \( -path '/proc' -o -path '/sys' \) -prune \) -type f -perm -2 -exec ls -l {} \;>> $CREATE_FILE 2>&1
@@ -1697,12 +1563,11 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-unset HOMEDIR
-unset file
 unset filecheck
+unset file
 }
 
-U-16(){
+U_16(){
 echo "[U-16] /dev에 존재하지 않는 device 파일 점검"
 echo "[U-16] /dev에 존재하지 않는 device 파일 점검" >> $CREATE_FILE 2>&1
 echo "[U-16_START]" >> $CREATE_FILE 2>&1
@@ -1737,7 +1602,7 @@ unset devcheck
 unset file
 }
 
-U-17(){
+U_17(){
 echo "[U-17] $HOME/.rhosts, hosts.equiv 사용 금지"
 echo "[U-17] $HOME/.rhosts, hosts.equiv 사용 금지" >> $CREATE_FILE 2>&1
 echo "[U-17_START]" >> $CREATE_FILE 2>&1
@@ -1760,7 +1625,7 @@ echo "[U-17_END]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
 echo "[*] 미출력 시 파일이 미존재" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : ogin, shell, exec 서비스를 사용하지 않거나, 사용 시 아래와 같은 설정이 적용된 경우" >> $CREATE_FILE 2>&1
+echo " * 양호 조건 : login, shell, exec 서비스를 사용하지 않거나, 사용 시 아래와 같은 설정이 적용된 경우" >> $CREATE_FILE 2>&1
 echo " * 양호 조건 1 : 1. /etc/hosts.equiv 및 $HOME/.rhosts 파일 소유자가 root 또는, 해당 계정인 경우 " >> $CREATE_FILE 2>&1
 echo " * 양호 조건 2 : 2. /etc/hosts.equiv 및 $HOME/.rhosts 파일 권한이 600 이하인 경우 " >> $CREATE_FILE 2>&1
 echo " * 양호 조건 3 : 3. /etc/hosts.equiv 및 $HOME/.rhosts 파일 설정에 ‘+’ 설정이 없는 경우" >> $CREATE_FILE 2>&1
@@ -1775,7 +1640,7 @@ unset filelist
 unset filelist_check
 }
 
-U-18(){
+U_18(){
 echo "[U-18] 접속 IP 및 포트 제한"
 echo "[U-18] 접속 IP 및 포트 제한" >> $CREATE_FILE 2>&1
 echo "[U-18_START]" >> $CREATE_FILE 2>&1
@@ -1811,7 +1676,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-55(){
+U_55(){
 echo "[U-55] hosts.lpd 파일 소유자 및 권한 설정"
 echo "[U-55] hosts.lpd 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-55_START]" >> $CREATE_FILE 2>&1
@@ -1845,7 +1710,7 @@ unset Check_SystemFile
 
 }
 
-U-56(){
+U_56(){
 echo "[U-56] UMASK 설정 관리"
 echo "[U-56] UMASK 설정 관리" >> $CREATE_FILE 2>&1
 echo "[U-56_START]" >> $CREATE_FILE 2>&1
@@ -1862,12 +1727,22 @@ echo "[+] 2. 현황 : /etc/profile" >> $CREATE_FILE 2>&1
 cat /etc/profile | grep -i UMASK | grep -v 'grep' >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-echo "[+] 3. 현황 : 모든 계정의 홈 디렉토리 내 .profile .*shrc 확인" >> $CREATE_FILE 2>&1
-for file in $HOMEDIRS
-do 
-	echo $file >> $CREATE_FILE 2>&1
-	cat $file/.profile | grep -i UMASK | grep -v 'grep' >> $CREATE_FILE 2>&1
-	cat $file/.*shrc | grep -i UMASK | grep -v 'grep' >> $CREATE_FILE 2>&1
+echo "[+] 3. 현황 : 모든 계정의 홈디렉토리 내 .*profile .*shrc 확인" >> $CREATE_FILE 2>&1
+echo "$HOMEDIRS" | while read -r dir; do
+    if [ -d "$dir" ]; then
+        filelist=$(find "$dir" -type f \( -name '.*profile' -o -name '.*shrc' \) -print 2>/dev/null)
+        echo "$filelist" | while read -r file; do
+            if [ -n "$file" ]; then
+                contents=$(grep -i UMASK "$file" 2>/dev/null | grep -v 'grep')
+				echo " [*] $file" >> $CREATE_FILE 2>&1
+                if [ -n "$contents" ]; then
+                    echo " $contents" >> $CREATE_FILE 2>&1
+                else
+                    echo " UMASK 설정 없음" >> $CREATE_FILE 2>&1
+                fi
+            fi
+        done
+    fi
 done
 echo "" >> $CREATE_FILE 2>&1
 
@@ -1885,69 +1760,72 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
+
+unset contents
+unset filelist
+unset dir
+unset file
+
 }
 
-U-57(){
+U_57(){
 echo "[U-57] 홈디렉토리 소유자 및 권한 설정"
 echo "[U-57] 홈디렉토리 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-57_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
-HOMEDIRS=`cat /etc/passwd | awk -F":" 'length($6) > 0 {print $6}' | grep -wv "\/" | sort -u`     
-
-echo "[+] 소유자 별 홈 디렉터리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈 디렉터리와 소유자별 디렉터리 일치하는지 확인)" >> $CREATE_FILE 2>&1
+echo "[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)" >> $CREATE_FILE 2>&1
 cat /etc/passwd | awk -F":" '{print $1 " @ " $6}' | grep -v "\/\>" | sort -u >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-echo "[+] 홈 디렉토리의 권한 확인 (불필요한 others 쓰기권한)" >> $CREATE_FILE 2>&1
-for dir in $HOMEDIRS
-do
-	ls -dal $dir 2>/dev/null | grep '\d.........' >> $CREATE_FILE 2>&1
+echo "[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)" >> $CREATE_FILE 2>&1
+echo "$HOMEDIRS" | while read -r dir; do
+    if [ -d "$dir" ]; then
+		ls -dal "$dir" >> $CREATE_FILE 2>&1
+    fi
 done
 echo "" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-57_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : 홈 디렉터리의 소유자와 실 사용자가 일치하고, 계정간 중복 홈 디렉터리가 존재하지 않고, 불필요한 others 쓰기 권한이 없는 경우" >> $CREATE_FILE 2>&1
-echo " * 취약 조건 : 홈 디렉터리의 소유자와 실 사용자가 일치하지 않거나, 계정간 중복 홈 디렉터리가 존재하거나, 불필요한 others 쓰기 권한이 있는 경우" >> $CREATE_FILE 2>&1
+echo " * 양호 조건 : 홈디렉토리의 소유자와 실 사용자가 일치하고, 계정간 중복 홈디렉토리가 존재하지 않고, 불필요한 others 쓰기 권한이 없는 경우" >> $CREATE_FILE 2>&1
+echo " * 취약 조건 : 홈디렉토리의 소유자와 실 사용자가 일치하지 않거나, 계정간 중복 홈디렉토리가 존재하거나, 불필요한 others 쓰기 권한이 있는 경우" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-unset HOMEDIRS
 }
 
-U-58(){
+U_58(){
 echo "[U-58] 홈디렉토리로 지정한 디렉토리의 존재 관리"
 echo "[U-58] 홈디렉토리로 지정한 디렉토리의 존재 관리" >> $CREATE_FILE 2>&1
 echo "[U-58_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 
-echo "[+] 소유자 별 홈 디렉터리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈 디렉터리와 소유자별 디렉터리 일치하는지 확인)" >> $CREATE_FILE 2>&1
+echo "[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)" >> $CREATE_FILE 2>&1
 cat /etc/passwd | awk -F":" '{print $1 " @ " $6}' | grep -v "\/\>" | sort -u >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
-echo "[+] 홈 디렉토리의 권한 확인 (불필요한 others 쓰기권한)" >> $CREATE_FILE 2>&1
-HOMEDIRS=`cat /etc/passwd | awk -F":" 'length($6) > 0 {print $6}' | grep -wv "\/" | sort -u`     
-for dir in $HOMEDIRS
-do
-	ls -dal $dir 2>/dev/null | grep '\d.........' >> $CREATE_FILE 2>&1
+echo "[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)" >> $CREATE_FILE 2>&1
+echo "$HOMEDIRS" | while read -r dir; do
+    if [ -d "$dir" ]; then
+		ls -dal "$dir" >> $CREATE_FILE 2>&1
+    fi
 done
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[U-58_END]" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : 홈 디렉터리가 존재하지 않는 계정이 발견되지 않는 경우" >> $CREATE_FILE 2>&1
-echo " * 취약 조건 : 홈 디렉터리가 존재하지 않는 계정이 발견된 경우" >> $CREATE_FILE 2>&1
+echo " * 양호 조건 : 홈디렉토리가 존재하지 않는 계정이 발견되지 않는 경우" >> $CREATE_FILE 2>&1
+echo " * 취약 조건 : 홈디렉토리가 존재하지 않는 계정이 발견된 경우" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-unset HOMEDIRS
 }
 
-U-59(){
+U_59(){
 echo "[U-59] 숨겨진 파일 및 디렉토리 검색 및 제거"
 echo "[U-59] 숨겨진 파일 및 디렉토리 검색 및 제거" >> $CREATE_FILE 2>&1
 echo "[U-59_START]" >> $CREATE_FILE 2>&1
@@ -1993,7 +1871,7 @@ unset filecheck
 unset file
 }
 
-U-19(){
+U_19(){
 echo "[U-19] finger 서비스 비활성화"
 echo "[U-19] finger 서비스 비활성화" >> $CREATE_FILE 2>&1
 echo "[U-19_START]" >> $CREATE_FILE 2>&1
@@ -2039,7 +1917,7 @@ then
 		echo "" >> $CREATE_FILE 2>&1
 	fi
 else
-	echo "[+] xinetd 디렉터리가 존재하지 않습니다." >> $CREATE_FILE 2>&1
+	echo "[+] xinetd 디렉토리가 존재하지 않습니다." >> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
 fi
 
@@ -2074,7 +1952,7 @@ FTP_proftpd_Check=`ps -ef | grep proftpd | grep -v 'grep' | wc -l`
 FTPUSERS_FILE_LIST="/etc/ftpusers /etc/ftpd/ftpusers /etc/vsftpd/ftpusers /etc/vsftpd/user_list /etc/vsftpd.ftpusers /etc/vsftpd.user_list"
 
 
-U-20(){
+U_20(){
 echo "[U-20] Anonymous FTP 비활성화"
 echo "[U-20] Anonymous FTP 비활성화" >> $CREATE_FILE 2>&1
 echo "[U-20_START]" >> $CREATE_FILE 2>&1
@@ -2138,13 +2016,11 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
-
-
 unset FTP_CONF_FILES
 unset FTP_CONF_LIST
 }
 
-U-21(){
+U_21(){
 echo "[U-21] r 계열 서비스 비활성화"
 echo "[U-21] r 계열 서비스 비활성화" >> $CREATE_FILE 2>&1
 echo "[U-21_START]" >> $CREATE_FILE 2>&1
@@ -2187,11 +2063,9 @@ then
 		echo "" >> $CREATE_FILE 2>&1
 	fi
 else
-	echo "[+] xinetd 디렉터리가 존재하지 않습니다." >> $CREATE_FILE 2>&1
+	echo "[+] xinetd 디렉토리가 존재하지 않습니다." >> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
 fi
-
-
 
 
 echo "" >> $CREATE_FILE 2>&1
@@ -2217,7 +2091,7 @@ unset xinetd_chk
 unset inetd_chk
 }
 
-U-22(){
+U_22(){
 echo "[U-22] cron 파일 소유자 및 권한설정"
 echo "[U-22] cron 파일 소유자 및 권한설정" >> $CREATE_FILE 2>&1
 echo "[U-22_START]" >> $CREATE_FILE 2>&1
@@ -2256,7 +2130,7 @@ unset Crontab_settingfiles_List
 
 SMTP_Sendmail_Check=`ps -ef | grep sendmail | grep -v 'grep' | wc -l`
 
-U-23(){
+U_23(){
 echo "[U-23] Dos 공격에 취약한 서비스 비활성화"
 echo "[U-23] Dos 공격에 취약한 서비스 비활성화" >> $CREATE_FILE 2>&1
 echo "[U-23_START]" >> $CREATE_FILE 2>&1
@@ -2328,7 +2202,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-24(){
+U_24(){
 echo "[U-24] NFS 서비스 비활성화"
 echo "[U-24] NFS 서비스 비활성화" >> $CREATE_FILE 2>&1
 echo "[U-24_START]" >> $CREATE_FILE 2>&1
@@ -2370,7 +2244,7 @@ echo "" >> $CREATE_FILE 2>&1
 
 NFS_Check_01=`ps -ef | grep nfs | grep -v 'grep' | wc -l`
 
-U-25(){
+U_25(){
 echo "[U-25] NFS 접근 통제"
 echo "[U-25] NFS 접근 통제" >> $CREATE_FILE 2>&1
 echo "[U-25_START]" >> $CREATE_FILE 2>&1
@@ -2478,7 +2352,7 @@ echo "" >> $CREATE_FILE 2>&1
 unset unix_nfs_check
 }
 
-U-26(){
+U_26(){
 echo "[U-26] automountd 제거"
 echo "[U-26] automountd 제거" >> $CREATE_FILE 2>&1
 echo "[U-26_START]" >> $CREATE_FILE 2>&1
@@ -2525,7 +2399,7 @@ unset pscheck
 
 }
 
-U-27(){
+U_27(){
 echo "[U-27] RPC 서비스 확인"
 echo "[U-27] RPC 서비스 확인" >> $CREATE_FILE 2>&1
 echo "[U-27_START]" >> $CREATE_FILE 2>&1
@@ -2538,7 +2412,7 @@ rpc_list="rpc.cmsd rpc.ttdbserverd sadmind rusersd walld sprayd rstatd rpc.nisd 
 	echo "" >> $CREATE_FILE 2>&1
 
 	echo "[+] 2. rpc 서비스 현황" >> $CREATE_FILE 2>&1
-	rpcinfo -p | grep $rpc_list 2>/dev/nul | grep -v 'grep' >> $CREATE_FILE 2>&1
+	rpcinfo -p 2>/dev/nul | grep $rpc_list 2>/dev/nul | grep -v 'grep' >> $CREATE_FILE 2>&1
 	echo "[*] 출력값 존재 시 취약" >> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
 
@@ -2567,7 +2441,7 @@ echo "" >> $CREATE_FILE 2>&1
 unset rpc_list
 }
 
-U-28(){
+U_28(){
 echo "[U-28] NIS, NIS+ 점검"
 echo "[U-28] NIS, NIS+ 점검" >> $CREATE_FILE 2>&1
 echo "[U-28_START]" >> $CREATE_FILE 2>&1
@@ -2602,7 +2476,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-29(){
+U_29(){
 echo "[U-29] tftp, talk 서비스 비활성화"
 echo "[U-29] tftp, talk 서비스 비활성화" >> $CREATE_FILE 2>&1
 echo "[U-29_START]" >> $CREATE_FILE 2>&1
@@ -2645,7 +2519,7 @@ then
 		echo "" >> $CREATE_FILE 2>&1
 	fi
 else
-	echo "[+] xinetd 디렉터리가 존재하지 않습니다." >> $CREATE_FILE 2>&1
+	echo "[+] xinetd 디렉토리가 존재하지 않습니다." >> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
 fi
 
@@ -2679,7 +2553,7 @@ unset inetd_chk
 
 sendmail_conf_list="/etc/mail/sendmail.cf /etc/sendmail.cf"
 
-U-30(){
+U_30(){
 echo "[U-30] Sendmail 버전 점검"
 echo "[U-30] Sendmail 버전 점검" >> $CREATE_FILE 2>&1
 echo "[U-30_START]" >> $CREATE_FILE 2>&1
@@ -2734,7 +2608,7 @@ echo "" >> $CREATE_FILE 2>&1
 
 }
 
-U-31(){
+U_31(){
 echo "[U-31] 스팸 메일 릴레이 제한"
 echo "[U-31] 스팸 메일 릴레이 제한" >> $CREATE_FILE 2>&1
 echo "[U-31_START]" >> $CREATE_FILE 2>&1
@@ -2784,7 +2658,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-32(){
+U_32(){
 echo "[U-32] 일반사용자의 Sendmail 실행 방지"
 echo "[U-32] 일반사용자의 Sendmail 실행 방지" >> $CREATE_FILE 2>&1
 echo "[U-32_START]" >> $CREATE_FILE 2>&1
@@ -2833,7 +2707,7 @@ unset Check_sendmail
 DNS_Check=`ps -ef | grep named | grep -v 'grep' | wc -l`
 DNS_Conf_list="/etc/named.boot /etc/named.conf /etc/bind/named.boot /etc/bind/named.conf /etc/bind/named.conf.options"
 
-U-33(){
+U_33(){
 echo "[U-33] DNS 보안 버전 패치"
 echo "[U-33] DNS 보안 버전 패치" >> $CREATE_FILE 2>&1
 echo "[U-33_START]" >> $CREATE_FILE 2>&1
@@ -2881,7 +2755,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-34(){
+U_34(){
 echo "[U-34] DNS Zone Transfer 설정"
 echo "[U-34] DNS Zone Transfer 설정" >> $CREATE_FILE 2>&1
 echo "[U-34_START]" >> $CREATE_FILE 2>&1
@@ -2938,7 +2812,7 @@ unset check_zone
 
 web_ps_check=`ps -ef | grep httpd | grep -v 'grep' | wc -l`
 
-U-35(){
+U_35(){
 echo "[U-35] 웹서비스 디렉토리 리스팅 제거"
 echo "[U-35] 웹서비스 디렉토리 리스팅 제거" >> $CREATE_FILE 2>&1
 echo "[U-35_START]" >> $CREATE_FILE 2>&1
@@ -3028,7 +2902,7 @@ fi
 echo "[U-35_END]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : 디렉터리 리스팅이 불가능할 경우" >> $CREATE_FILE 2>&1
+echo " * 양호 조건 : 디렉토리 리스팅이 불가능할 경우" >> $CREATE_FILE 2>&1
 echo " * 취약 조건 : httpd.conf 파일 내의 Options에서 Indexes 옵션이 있을 경우" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -3037,7 +2911,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-36(){
+U_36(){
 echo "[U-36] 웹서비스 웹 프로세스 권한 제한"
 echo "[U-36] 웹서비스 웹 프로세스 권한 제한" >> $CREATE_FILE 2>&1
 echo "[U-36_START]" >> $CREATE_FILE 2>&1
@@ -3074,7 +2948,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-37(){
+U_37(){
 echo "[U-37] 웹서비스 상위 디렉토리 접근 금지"
 echo "[U-37] 웹서비스 상위 디렉토리 접근 금지" >> $CREATE_FILE 2>&1
 echo "[U-37_START]" >> $CREATE_FILE 2>&1
@@ -3113,7 +2987,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-38(){
+U_38(){
 echo "[U-38] 웹서비스 불필요한 파일 제거"
 echo "[U-38] 웹서비스 불필요한 파일 제거"  >> $CREATE_FILE 2>&1
 echo "[U-38_START]"  >> $CREATE_FILE 2>&1
@@ -3132,19 +3006,19 @@ if [ "$web_ps_check" -ne 0 ]; then
     echo "" >> $CREATE_FILE 2>&1
 
     if [ -n "$manual_dirs" ]; then
-        echo "[+] 1. 현황 : manual 디렉터리 출력" >> $CREATE_FILE 2>&1
+        echo "[+] 1. 현황 : manual 디렉토리 출력" >> $CREATE_FILE 2>&1
         echo "$manual_dirs" | while read -r file; do
             echo "$file" >> $CREATE_FILE 2>&1
             ls -al "$file" >> $CREATE_FILE 2>&1
             echo "" >> $CREATE_FILE 2>&1
         done
     else
-        echo "[+] 1. 현황 : manual 디렉터리 없음" >> $CREATE_FILE 2>&1
+        echo "[+] 1. 현황 : manual 디렉토리 없음" >> $CREATE_FILE 2>&1
         echo "" >> $CREATE_FILE 2>&1
     fi
 
     if [ -n "$cgi_bin_dirs" ]; then
-        echo "[+] 2. 현황 : cgi-bin 디렉터리 출력" >> $CREATE_FILE 2>&1
+        echo "[+] 2. 현황 : cgi-bin 디렉토리 출력" >> $CREATE_FILE 2>&1
         echo "[*] 2-1. 참고 : default apache cgi-bin 경로는 OS 및 버전 마다 다르니 개인이 판단" >> $CREATE_FILE 2>&1
         echo "$cgi_bin_dirs" | while read -r file; do 
             echo "$file" >> $CREATE_FILE 2>&1
@@ -3152,19 +3026,19 @@ if [ "$web_ps_check" -ne 0 ]; then
             echo "" >> $CREATE_FILE 2>&1
         done
     else
-        echo "[+] 2. 현황 : cgi-bin 디렉터리 없음" >> $CREATE_FILE 2>&1
+        echo "[+] 2. 현황 : cgi-bin 디렉토리 없음" >> $CREATE_FILE 2>&1
         echo "" >> $CREATE_FILE 2>&1
     fi
 
     if [ -n "$sample_dirs" ]; then
-        echo "[+] 3. 현황 : sample 디렉터리 출력" >> $CREATE_FILE 2>&1
+        echo "[+] 3. 현황 : sample 디렉토리 출력" >> $CREATE_FILE 2>&1
         echo "$sample_dirs" | while read -r file; do
             echo "$file" >> $CREATE_FILE 2>&1
             ls -al "$file" >> $CREATE_FILE 2>&1
             echo "" >> $CREATE_FILE 2>&1
         done
     else
-        echo "[+] 3. 현황 : sample 디렉터리 없음" >> $CREATE_FILE 2>&1
+        echo "[+] 3. 현황 : sample 디렉토리 없음" >> $CREATE_FILE 2>&1
     fi
 else
     echo "apache 서비스가 존재하지 않거나 구동중이지 않습니다." >> $CREATE_FILE 2>&1
@@ -3190,7 +3064,7 @@ unset sample_dirs
 unset file
 }
 
-U-39(){
+U_39(){
 echo "[U-39] 웹서비스 링크 사용 금지"
 echo "[U-39] 웹서비스 링크 사용 금지" >> $CREATE_FILE 2>&1
 echo "[U-39_START]" >> $CREATE_FILE 2>&1
@@ -3216,8 +3090,8 @@ echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
 echo " * 양호 조건 : 취약 요건에 해당사항이 없는 경우" >> $CREATE_FILE 2>&1
 echo " * 취약 조건 : 1. Apache Options에 불필요하게 FollowSymLinks 설정이 되어 있는 경우" >> $CREATE_FILE 2>&1
-echo " * 취약 조건 : 2. Apache Options에 FollowSymLinks 설정이 되어 있고 업무적으로 사용하는 경우라도 중요 디렉터리 혹은 파일에 링크가 설정 되어 있는 경우" >> $CREATE_FILE 2>&1
-echo " ** 참고 : FollowSymLinks 존재하지 않을 경우 상위 디렉터리에서 상속 받거나, OS 버전에 따라 FollowSymLinks가 없어도 기본 값으로 활성화되어 있을 수 있어 명확하게 비활성화 할 수 있도록 아래와 같이 설정 필요" >> $CREATE_FILE 2>&1
+echo " * 취약 조건 : 2. Apache Options에 FollowSymLinks 설정이 되어 있고 업무적으로 사용하는 경우라도 중요 디렉토리 혹은 파일에 링크가 설정 되어 있는 경우" >> $CREATE_FILE 2>&1
+echo " ** 참고 : FollowSymLinks 존재하지 않을 경우 상위 디렉토리에서 상속 받거나, OS 버전에 따라 FollowSymLinks가 없어도 기본 값으로 활성화되어 있을 수 있어 명확하게 비활성화 할 수 있도록 아래와 같이 설정 필요" >> $CREATE_FILE 2>&1
 echo " ** -FollowSymLinks (Apache 2도 마찬가지) " >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -3226,7 +3100,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-40(){
+U_40(){
 echo "[U-40] 웹서비스 파일 업로드 및 다운로드 제한"
 echo "[U-40] 웹서비스 파일 업로드 및 다운로드 제한" >> $CREATE_FILE 2>&1
 echo "[U-40_START]" >> $CREATE_FILE 2>&1
@@ -3249,8 +3123,8 @@ fi
 echo "[U-40_END]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[참고 - 진단기준, 결과 값 출력]" >> $CREATE_FILE 2>&1
-echo " * 양호 조건 : httpd.conf 파일 내 디렉터리 설정에 LimitRequestBody 값 설정이 되어 있을 경우" >> $CREATE_FILE 2>&1
-echo " * 취약 조건 : httpd.conf 파일 내 디렉터리 설정에 LimitRequestBody 값 설정이 안되어 있을 경우" >> $CREATE_FILE 2>&1
+echo " * 양호 조건 : httpd.conf 파일 내 디렉토리 설정에 LimitRequestBody 값 설정이 되어 있을 경우" >> $CREATE_FILE 2>&1
+echo " * 취약 조건 : httpd.conf 파일 내 디렉토리 설정에 LimitRequestBody 값 설정이 안되어 있을 경우" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
@@ -3258,7 +3132,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-41(){
+U_41(){
 echo "[U-41] 웹서비스 영역의 분리"
 echo "[U-41] 웹서비스 영역의 분리" >> $CREATE_FILE 2>&1
 echo "[U-41_START]" >> $CREATE_FILE 2>&1
@@ -3289,7 +3163,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-60(){
+U_60(){
 echo "[U-60] ssh 원격접속 허용"
 echo "[U-60] ssh 원격접속 허용" >> $CREATE_FILE 2>&1
 echo "[U-60_START]" >> $CREATE_FILE 2>&1
@@ -3335,7 +3209,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-61(){
+U_61(){
 echo "[U-61] ftp 서비스 확인"
 echo "[U-61] ftp 서비스 확인" >> $CREATE_FILE 2>&1
 echo "[U-61_START]" >> $CREATE_FILE 2>&1
@@ -3384,7 +3258,7 @@ echo "" >> $CREATE_FILE 2>&1
 
 }
 
-U-62(){
+U_62(){
 echo "[U-62] ftp 계정 shell 제한"
 echo "[U-62] ftp 계정 shell 제한" >> $CREATE_FILE 2>&1
 echo "[U-62_START]" >> $CREATE_FILE 2>&1
@@ -3409,7 +3283,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-63(){
+U_63(){
 echo "[U-63] Ftpusers 파일 소유자 및 권한 설정"
 echo "[U-63] Ftpusers 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-63_START]" >> $CREATE_FILE 2>&1
@@ -3468,7 +3342,7 @@ echo "" >> $CREATE_FILE 2>&1
 unset Check_FTP_USERS
 }
 
-U-64(){
+U_64(){
 echo "[U-64] Ftpusers 파일 설정"
 echo "[U-64] Ftpusers 파일 설정" >> $CREATE_FILE 2>&1
 echo "[U-64_START]" >> $CREATE_FILE 2>&1
@@ -3521,7 +3395,7 @@ echo "" >> $CREATE_FILE 2>&1
 
 }
 
-U-65(){
+U_65(){
 echo "[U-65] at 파일 소유자 및 권한 설정"
 echo "[U-65] at 파일 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-65_START]" >> $CREATE_FILE 2>&1
@@ -3560,7 +3434,7 @@ unset Crontab_settingfiles_List
 SNMP_Service_Check=`ps -ef | grep snmp | grep -v 'grep' | wc -l`
 SNMP_TRAP_Service_Check=`ps -ef | grep snmptrapd | grep -v 'grep' | wc -l`
 
-U-66(){
+U_66(){
 echo "[U-66] SNMP 서비스 구동 점검"
 echo "[U-66] SNMP 서비스 구동 점검" >> $CREATE_FILE 2>&1
 echo "[U-66_START]" >> $CREATE_FILE 2>&1
@@ -3590,7 +3464,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-67(){
+U_67(){
 echo "[U-67] SNMP 서비스 커뮤니티스트링의 복잡성 설정"
 echo "[U-67] SNMP 서비스 커뮤니티스트링의 복잡성 설정" >> $CREATE_FILE 2>&1
 echo "[U-67_START]" >> $CREATE_FILE 2>&1
@@ -3654,7 +3528,7 @@ unset SNMP_CONF_LIST
 unset Check_FILES
 }
 
-U-68(){
+U_68(){
 echo "[U-68] 로그온 시 경고 메시지 제공"
 echo "[U-68] 로그온 시 경고 메시지 제공" >> $CREATE_FILE 2>&1
 echo "[U-68_START]" >> $CREATE_FILE 2>&1
@@ -3799,7 +3673,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-69(){
+U_69(){
 echo "[U-69] NFS 설정파일 접근 제한"
 echo "[U-69] NFS 설정파일 접근 제한" >> $CREATE_FILE 2>&1
 echo "[U-69_START]" >> $CREATE_FILE 2>&1
@@ -3881,7 +3755,7 @@ unset unix_nfs_check
 unset check_nfs
 }
 
-U-70(){
+U_70(){
 echo "[U-70] expn, vrfy 명령어 제한"
 echo "[U-70] expn, vrfy 명령어 제한" >> $CREATE_FILE 2>&1
 echo "[U-70_START]" >> $CREATE_FILE 2>&1
@@ -3925,7 +3799,7 @@ unset sendmail_conf_list
 unset Check_sendmail
 }
 
-U-71(){
+U_71(){
 echo "[U-71] Apache 웹 서비스 정보 숨김"
 echo "[U-71] Apache 웹 서비스 정보 숨김" >> $CREATE_FILE 2>&1
 echo "[U-71_START]" >> $CREATE_FILE 2>&1
@@ -3956,7 +3830,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-42(){
+U_42(){
 echo "[U-42] 최신 보안패치 및 벤더 권고사항 적용"
 echo "[U-42] 최신 보안패치 및 벤더 권고사항 적용" >> $CREATE_FILE 2>&1
 echo "[U-42_START]" >> $CREATE_FILE 2>&1
@@ -4009,7 +3883,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-43(){
+U_43(){
 echo "[U-43] 로그의 정기적 검토 및 보고"
 echo "[U-43] 로그의 정기적 검토 및 보고" >> $CREATE_FILE 2>&1
 echo "[U-43_START]" >> $CREATE_FILE 2>&1
@@ -4027,7 +3901,7 @@ echo "" >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 }
 
-U-72(){
+U_72(){
 echo "[U-72] 정책에 따른 시스템 로깅 설정"
 echo "[U-72] 정책에 따른 시스템 로깅 설정" >> $CREATE_FILE 2>&1
 echo "[U-72_START]" >> $CREATE_FILE 2>&1
@@ -4105,172 +3979,139 @@ unset log_check_list
 unset log_check
 }
 
-U-01
-U-02
-U-03
-U-04
-U-44
-U-45
-U-46
-U-47
-U-48
-U-49
-U-50
-U-51
-U-52
-U-53
-U-54
-U-05
-U-06
-U-07
-U-08
-U-09
-U-10
-U-11
-U-12
-U-13
-U-14
-U-15
-U-16
-U-17
-U-18
-U-55
-U-56
-U-57
-U-58
-U-59
-U-19
-U-20
-U-21
-U-22
-U-23
-U-24
-U-25
-U-26
-U-27
-U-28
-U-29
-U-30
-U-31
-U-32
-U-33
-U-34
+U_01
+U_02
+U_03
+U_04
+U_44
+U_45
+U_46
+U_47
+U_48
+U_49
+U_50
+U_51
+U_52
+U_53
+unset USERLIST
+U_54
+U_05
+U_06
+U_07
+U_08
+U_09
+U_10
+U_11
+U_12
+U_13
+U_14
+U_15
+U_16
+U_17
+U_18
+U_55
+U_56
+U_57
+U_58
+unset HOMEDIRS
+U_59
+U_19
+U_20
+U_21
+U_22
+U_23
+U_24
+U_25
+U_26
+U_27
+U_28
+U_29
+U_30
+U_31
+U_32
+U_33
+U_34
 unset DNS_Conf_list
 unset DNS_Check
-U-35
-U-36
-U-37
-U-38
-U-39
-U-40
-U-41
-U-60
-U-61
-U-62
-U-63
-U-64
+U_35
+U_36
+U_37
+U_38
+U_39
+U_40
+U_41
+U_60
+U_61
+U_62
+U_63
+U_64
 unset FTP_ftp_Check
 unset FTP_vsftpd_Check
 unset FTP_proftpd_Check
 unset FTPUSERS_FILE_LIST
-U-65
-U-66
-U-67
+U_65
+U_66
+U_67
 unset SNMP_Service_Check
 unset SNMP_TRAP_Service_Check
-U-68
-U-69
+U_68
+U_69
 unset NFS_Check_01
-U-70
+U_70
 unset sendmail_conf_list
 unset SMTP_Sendmail_Check
-U-71
+U_71
 unset web_ps_check
-U-42
-U-43
-U-72
+U_42
+U_43
+U_72
 
 
 
 
 
 
-
-
+#######################
+# 마무리 출력
+#######################
 echo "UNIX/Linux Security Check END"
-echo "==============================================================="
-echo "☞ UNIX 스크립트 작업이 완료되었습니다."
-echo "" >> $CREATE_FILE 2>&1
-echo "☞ 스크립트 결과 파일을 보안담당자에게 전달 바랍니다."
-echo "" >> $CREATE_FILE 2>&1
-echo "☞ 스크립트 관련 오류 및 문의사항은 린시큐어 직원에게 부탁드립니다."  >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "☞ 감사합니다."  >> $CREATE_FILE 2>&1
-echo "===============================================================" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> $CREATE_FILE 2>&1
-echo "Reference info." >> $CREATE_FILE 2>&1
-echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "****************************************************************" >> $CREATE_FILE 2>&1
-echo "********************   INFO_CHKSTART   *************************" >> $CREATE_FILE 2>&1
-echo "****************************************************************" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "==============================" >> $CREATE_FILE 2>&1
-echo "System Information Query Start" 							  >> $CREATE_FILE 2>&1
-echo "==============================" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "------------------   Kernel Information   ---------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-uname -a >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "---------------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-------------------   IP Information   ------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-ifconfig -a >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "---------------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-------------------   Network Status   ------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-netstat -an | egrep -i "LISTEN|ESTABLISHED" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "---------------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-------------------   Routing Information   -------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-netstat -rn >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "---------------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-------------------   Process Status   ------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-ps -ef >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "--------------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "-------------------   User Env   -----------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-env >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "--------------------------------------------------------------" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "============================" >> $CREATE_FILE 2>&1
-echo "System Information Query End" 							   >> $CREATE_FILE 2>&1
-echo "============================" >> $CREATE_FILE 2>&1
-echo "" >> $CREATE_FILE 2>&1
-echo "*************************************************************" >> $CREATE_FILE 2>&1
-echo "***************************   INFO_CHKEND   *****************" >> $CREATE_FILE 2>&1
-echo "*************************************************************" >> $CREATE_FILE 2>&1
+echo "$LINE1"
+echo "☞ UNIX 스크립트 작업이 완료되었습니다." >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "☞ 스크립트 결과 파일을 보안담당자에게 전달 바랍니다." >> $CREATE_FILE
+echo "☞ 스크립트 관련 오류 및 문의사항은 린시큐어 직원에게 부탁드립니다." >> $CREATE_FILE
+echo "☞ 감사합니다." >> $CREATE_FILE
+echo "$LINE1" >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "$LINE2" >> $CREATE_FILE
+echo "Reference info." >> $CREATE_FILE
+echo "$LINE2" >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+print_title "INFO_CHKSTART"
+print_title "System Information Query Start"
+echo "[Kernel Information]" >> $CREATE_FILE
+uname -a >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[IP Information]" >> $CREATE_FILE
+ifconfig -a >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[Network Status]" >> $CREATE_FILE
+netstat -an | egrep -i "LISTEN|ESTABLISHED" >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[Routing Information]" >> $CREATE_FILE
+netstat -rn >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[Process Status]" >> $CREATE_FILE
+ps -ef >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+echo "[User Environment]" >> $CREATE_FILE
+env >> $CREATE_FILE
+echo "" >> $CREATE_FILE
+print_title "System Information Query End"
+print_title "INFO_CHKEND"
 
 
 tar -cvf $CREATE_FILE.tar $CREATE_FILE ./Lyn_tmp/ 
 rm -rf ./Lyn_tmp/
 rm -rf $CREATE_FILE
 
-#unset locale_utf8
-#unset locale_utf_8
-#unset locale_euckr
-#unset locale_KR
-#unset CREATE_FILE

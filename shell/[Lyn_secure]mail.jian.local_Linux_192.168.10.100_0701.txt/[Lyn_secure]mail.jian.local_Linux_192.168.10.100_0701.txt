@@ -1,41 +1,46 @@
+======================================================================
+                      UNIX/Linux Security Check
+======================================================================
 
-===========================================================
-==============   UNIX/Linux Security Check   ==============
-===========================================================
+======================================================================
+                            INFO_CHK START
+======================================================================
 
-***********************************************************
-*****************   INFO_CHKSTART   ***********************
-***********************************************************
------------------   Start Time   --------------------------
-Mon Jun 30 16:57:58 KST 2025
------------------------------------------------------------
+[Start Time]
+Tue Jul  1 15:56:26 KST 2025
+======================================================================
+                             INFO_CHK END
+======================================================================
 
-===========================================================
-===========   System Information Query Start   ============
-===========================================================
---------------------   Kernel Information   ---------------
+
+======================================================================
+                    System Information Query Start
+======================================================================
+
+[Kernel Information]
 Linux mail.jian.local 5.14.0-590.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Fri May 30 21:16:05 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 
--------------------   IP Information   --------------------
+[IP Information]
 ens160: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.10.100  netmask 255.255.255.0  broadcast 192.168.10.255
         inet6 fe80::20c:29ff:febe:3422  prefixlen 64  scopeid 0x20<link>
         ether 00:0c:29:be:34:22  txqueuelen 1000  (Ethernet)
-        RX packets 33767  bytes 8541551 (8.1 MiB)
+        RX packets 24084  bytes 7973421 (7.6 MiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 57145  bytes 23737329 (22.6 MiB)
+        TX packets 44006  bytes 28833170 (27.4 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 808  bytes 57988 (56.6 KiB)
+        RX packets 1410  bytes 100844 (98.4 KiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 808  bytes 57988 (56.6 KiB)
+        TX packets 1410  bytes 100844 (98.4 KiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
------------------   Network Status   ----------------------
+
+[Network Status]
 Active Internet connections (servers and established)
 tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN     
@@ -47,8 +52,8 @@ tcp        0      0 192.168.10.100:53       0.0.0.0:*               LISTEN
 tcp        0      0 0.0.0.0:39767           0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:44869           0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:20048           0.0.0.0:*               LISTEN     
-tcp        0      0 192.168.10.100:22       192.168.10.1:53997      ESTABLISHED
-tcp        0      0 192.168.10.100:22       192.168.10.1:55485      ESTABLISHED
+tcp        0      0 192.168.10.100:22       192.168.10.1:56757      ESTABLISHED
+tcp        0      0 192.168.10.100:22       192.168.10.1:56803      ESTABLISHED
 tcp6       0      0 ::1:53                  :::*                    LISTEN     
 tcp6       0      0 :::80                   :::*                    LISTEN     
 tcp6       0      0 :::111                  :::*                    LISTEN     
@@ -62,8 +67,8 @@ tcp6       0      0 :::33293                :::*                    LISTEN
 udp        0      0 192.168.10.100:68       192.168.10.254:67       ESTABLISHED
 Active UNIX domain sockets (servers and established)
 unix  2      [ ACC ]     STREAM     LISTENING     28283    /run/gssproxy.sock
-unix  2      [ ACC ]     STREAM     LISTENING     6145288  /run/user/1000/systemd/private
-unix  2      [ ACC ]     STREAM     LISTENING     6145298  /run/user/1000/bus
+unix  2      [ ACC ]     STREAM     LISTENING     7121144  /run/user/1000/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     7121156  /run/user/1000/bus
 unix  2      [ ACC ]     STREAM     LISTENING     23671    /run/systemd/private
 unix  2      [ ACC ]     STREAM     LISTENING     23684    /run/lvm/lvmpolld.socket
 unix  2      [ ACC ]     STREAM     LISTENING     23686    /run/rpcbind.sock
@@ -85,232 +90,233 @@ unix  2      [ ACC ]     STREAM     LISTENING     27674    @ISCSIADM_ABSTRACT_NA
 unix  2      [ ACC ]     STREAM     LISTENING     28702    /var/run/vmware/guestServicePipe
 Active Bluetooth connections (servers and established)
 
-----------------   Routing Information   ------------------
+[Routing Information]
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 0.0.0.0         192.168.10.2    0.0.0.0         UG        0 0          0 ens160
 192.168.10.0    0.0.0.0         255.255.255.0   U         0 0          0 ens160
 
----------------   Process Status   ------------------------
+[Process Status]
 UID          PID    PPID  C STIME TTY          TIME CMD
-root           1       0  0 01:49 ?        00:00:42 /usr/lib/systemd/systemd rhgb --switched-root --system --deserialize 31
-root           2       0  0 01:49 ?        00:00:00 [kthreadd]
-root           3       2  0 01:49 ?        00:00:00 [pool_workqueue_]
-root           4       2  0 01:49 ?        00:00:00 [kworker/R-rcu_g]
-root           5       2  0 01:49 ?        00:00:00 [kworker/R-sync_]
-root           6       2  0 01:49 ?        00:00:00 [kworker/R-slub_]
-root           7       2  0 01:49 ?        00:00:00 [kworker/R-netns]
-root           9       2  0 01:49 ?        00:00:00 [kworker/0:0H-events_highpri]
-root          10       2  0 01:49 ?        00:00:00 [kworker/u512:0-events_unbound]
-root          11       2  0 01:49 ?        00:00:00 [kworker/R-mm_pe]
-root          12       2  0 01:49 ?        00:00:00 [kworker/u512:1-netns]
-root          13       2  0 01:49 ?        00:00:00 [rcu_tasks_kthre]
-root          14       2  0 01:49 ?        00:00:00 [rcu_tasks_rude_]
-root          15       2  0 01:49 ?        00:00:00 [rcu_tasks_trace]
-root          16       2  0 01:49 ?        00:00:04 [ksoftirqd/0]
-root          17       2  0 01:49 ?        00:00:02 [rcu_preempt]
-root          18       2  0 01:49 ?        00:00:00 [rcu_exp_par_gp_]
-root          19       2  0 01:49 ?        00:00:00 [rcu_exp_gp_kthr]
-root          20       2  0 01:49 ?        00:00:00 [migration/0]
-root          21       2  0 01:49 ?        00:00:00 [idle_inject/0]
-root          23       2  0 01:49 ?        00:00:00 [cpuhp/0]
-root          24       2  0 01:49 ?        00:00:00 [cpuhp/1]
-root          25       2  0 01:49 ?        00:00:00 [idle_inject/1]
-root          26       2  0 01:49 ?        00:00:00 [migration/1]
-root          27       2  0 01:49 ?        00:00:03 [ksoftirqd/1]
-root          34       2  0 01:49 ?        00:00:00 [kdevtmpfs]
-root          35       2  0 01:49 ?        00:00:00 [kworker/R-inet_]
-root          36       2  0 01:49 ?        00:00:00 [kauditd]
-root          37       2  0 01:49 ?        00:00:00 [khungtaskd]
-root          39       2  0 01:49 ?        00:00:00 [oom_reaper]
-root          40       2  0 01:49 ?        00:00:00 [kworker/R-write]
-root          41       2  0 01:49 ?        00:00:01 [kcompactd0]
-root          42       2  0 01:49 ?        00:00:00 [ksmd]
-root          43       2  0 01:49 ?        00:00:01 [khugepaged]
-root          44       2  0 01:49 ?        00:00:00 [kworker/R-crypt]
-root          45       2  0 01:49 ?        00:00:00 [kworker/R-kinte]
-root          46       2  0 01:49 ?        00:00:00 [kworker/R-kbloc]
-root          47       2  0 01:49 ?        00:00:00 [irq/9-acpi]
-root          49       2  0 01:49 ?        00:00:00 [kworker/R-tpm_d]
-root          50       2  0 01:49 ?        00:00:00 [kworker/R-md]
-root          51       2  0 01:49 ?        00:00:00 [kworker/R-md_bi]
-root          52       2  0 01:49 ?        00:00:00 [kworker/R-edac-]
-root          53       2  0 01:49 ?        00:00:00 [watchdogd]
-root          54       2  0 01:49 ?        00:00:00 [kworker/1:1H-kblockd]
-root          55       2  0 01:49 ?        00:00:00 [kswapd0]
-root          72       2  0 01:49 ?        00:00:00 [kworker/R-kthro]
-root          76       2  0 01:49 ?        00:00:00 [irq/24-pciehp]
-root          77       2  0 01:49 ?        00:00:00 [irq/25-pciehp]
-root          78       2  0 01:49 ?        00:00:00 [irq/26-pciehp]
-root          79       2  0 01:49 ?        00:00:00 [irq/27-pciehp]
-root          80       2  0 01:49 ?        00:00:00 [irq/28-pciehp]
-root          81       2  0 01:49 ?        00:00:00 [irq/29-pciehp]
-root          82       2  0 01:49 ?        00:00:00 [irq/30-pciehp]
-root          83       2  0 01:49 ?        00:00:00 [irq/31-pciehp]
-root          84       2  0 01:49 ?        00:00:00 [irq/32-pciehp]
-root          85       2  0 01:49 ?        00:00:00 [irq/33-pciehp]
-root          86       2  0 01:49 ?        00:00:00 [irq/34-pciehp]
-root          87       2  0 01:49 ?        00:00:00 [irq/35-pciehp]
-root          88       2  0 01:49 ?        00:00:00 [irq/36-pciehp]
-root          89       2  0 01:49 ?        00:00:00 [irq/37-pciehp]
-root          90       2  0 01:49 ?        00:00:00 [irq/38-pciehp]
-root          91       2  0 01:49 ?        00:00:00 [irq/39-pciehp]
-root          92       2  0 01:49 ?        00:00:00 [irq/40-pciehp]
-root          93       2  0 01:49 ?        00:00:00 [irq/41-pciehp]
-root          94       2  0 01:49 ?        00:00:00 [irq/42-pciehp]
-root          95       2  0 01:49 ?        00:00:00 [irq/43-pciehp]
-root          96       2  0 01:49 ?        00:00:00 [irq/44-pciehp]
-root          97       2  0 01:49 ?        00:00:00 [irq/45-pciehp]
-root          98       2  0 01:49 ?        00:00:00 [irq/46-pciehp]
-root          99       2  0 01:49 ?        00:00:00 [irq/47-pciehp]
-root         100       2  0 01:49 ?        00:00:00 [irq/48-pciehp]
-root         101       2  0 01:49 ?        00:00:00 [irq/49-pciehp]
-root         102       2  0 01:49 ?        00:00:00 [irq/50-pciehp]
-root         103       2  0 01:49 ?        00:00:00 [irq/51-pciehp]
-root         104       2  0 01:49 ?        00:00:00 [irq/52-pciehp]
-root         105       2  0 01:49 ?        00:00:00 [irq/53-pciehp]
-root         106       2  0 01:49 ?        00:00:00 [irq/54-pciehp]
-root         107       2  0 01:49 ?        00:00:00 [irq/55-pciehp]
-root         108       2  0 01:49 ?        00:00:00 [kworker/R-acpi_]
-root         109       2  0 01:49 ?        00:00:00 [kworker/R-kmpat]
-root         110       2  0 01:49 ?        00:00:00 [kworker/R-kalua]
-root         112       2  0 01:49 ?        00:00:00 [kworker/R-mld]
-root         113       2  0 01:49 ?        00:00:00 [kworker/R-ipv6_]
-root         118       2  0 01:49 ?        00:00:00 [kworker/R-kstrp]
-root         124       2  0 01:49 ?        00:00:00 [kworker/u515:0]
-root         125       2  0 01:49 ?        00:00:00 [kworker/u516:0]
-root         126       2  0 01:49 ?        00:00:00 [kworker/u517:0]
-root         271       2  0 01:49 ?        00:00:00 [kworker/0:1H-kblockd]
-root         413       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         415       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         417       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         418       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         420       2  0 01:49 ?        00:00:00 [kworker/R-ata_s]
-root         421       2  0 01:49 ?        00:00:00 [scsi_eh_0]
-root         422       2  0 01:49 ?        00:00:00 [kworker/R-scsi_]
-root         423       2  0 01:49 ?        00:00:00 [scsi_eh_1]
-root         424       2  0 01:49 ?        00:00:00 [kworker/R-scsi_]
-root         427       2  0 01:49 ?        00:00:00 [irq/16-vmwgfx]
-root         428       2  0 01:49 ?        00:00:00 [kworker/R-ttm]
-root         443       2  0 01:49 ?        00:00:00 [kworker/1:2H-kblockd]
-root         455       2  0 01:49 ?        00:00:00 [kworker/R-xfsal]
-root         456       2  0 01:49 ?        00:00:00 [kworker/R-xfs_m]
-root         457       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         458       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         459       2  0 01:49 ?        00:00:00 [kworker/R-xfs-r]
-root         460       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         461       2  0 01:49 ?        00:00:00 [kworker/R-xfs-i]
-root         462       2  0 01:49 ?        00:00:00 [kworker/R-xfs-l]
-root         463       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         464       2  0 01:49 ?        00:00:11 [xfsaild/nvme0n1]
-root         556       1  0 01:49 ?        00:00:05 /usr/lib/systemd/systemd-journald
-root         564       2  0 01:49 ?        00:00:00 [kworker/R-rpcio]
-root         565       2  0 01:49 ?        00:00:00 [kworker/R-xprti]
-root         572       1  0 01:49 ?        00:00:00 /usr/lib/systemd/systemd-udevd
-root         599       2  0 01:49 ?        00:00:00 [irq/75-vmw_vmci]
-root         600       2  0 01:49 ?        00:00:00 [irq/76-vmw_vmci]
-root         601       2  0 01:49 ?        00:00:00 [irq/77-vmw_vmci]
-root         623       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         624       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         625       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         626       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         627       2  0 01:49 ?        00:00:00 [kworker/R-xfs-r]
-root         628       2  0 01:49 ?        00:00:00 [kworker/R-xfs-r]
-root         629       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         630       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         631       2  0 01:49 ?        00:00:00 [kworker/R-xfs-i]
-root         632       2  0 01:49 ?        00:00:00 [kworker/R-xfs-i]
-root         633       2  0 01:49 ?        00:00:00 [kworker/R-xfs-l]
-root         634       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         635       2  0 01:49 ?        00:00:00 [xfsaild/nvme0n1]
-root         636       2  0 01:49 ?        00:00:00 [kworker/R-xfs-l]
-root         637       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         638       2  0 01:49 ?        00:00:08 [xfsaild/nvme0n1]
-rpc          644       1  0 01:49 ?        00:00:00 /usr/bin/rpcbind -w -f
-root         647       1  0 01:49 ?        00:00:00 /usr/sbin/nfsdcld
-root         648       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.idmapd
-root         649       1  0 01:49 ?        00:00:01 /sbin/auditd
-root         651     649  0 01:49 ?        00:00:00 /usr/sbin/sedispatch
-dbus         677       1  0 01:49 ?        00:00:00 /usr/bin/dbus-broker-launch --scope system --audit
-dbus         678     677  0 01:49 ?        00:00:09 dbus-broker --log 4 --controller 9 --machine-id c41ad224b687452ba82cf3d1fb24d946 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
-root         681       1  0 01:49 ?        00:00:00 /usr/bin/python3 -s /usr/sbin/firewalld --nofork --nopid
-root         682       1  0 01:49 ?        00:00:03 /usr/sbin/irqbalance
-libstor+     683       1  0 01:49 ?        00:00:00 /usr/bin/lsmd -d
-root         684       1  0 01:49 ?        00:00:00 /usr/sbin/mcelog --daemon --foreground
-root         686       1  0 01:49 ?        00:00:08 /usr/lib/systemd/systemd-logind
-root         688       1  0 01:49 ?        00:00:00 /usr/bin/VGAuthService -s
-root         689       1  0 01:49 ?        00:02:19 /usr/bin/vmtoolsd
-chrony       698       1  0 01:49 ?        00:00:00 /usr/sbin/chronyd -F 2
-root         753       1  0 01:49 ?        00:00:05 /usr/sbin/NetworkManager --no-daemon
-root         788       1  0 01:49 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
-root         789       1  0 01:49 ?        00:00:00 /usr/sbin/gssproxy -D
-named        816       1  0 01:49 ?        00:00:01 /usr/sbin/named -u named -c /etc/named.conf
-polkitd      876       1  0 01:49 ?        00:00:02 /usr/lib/polkit-1/polkitd --no-debug
-root         893       1  0 01:49 ?        00:00:10 /usr/sbin/rsyslogd -n
-rpcuser      895       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.statd
-root         896       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.mountd
-root         902       1  0 01:49 ?        00:00:04 /usr/sbin/httpd -DFOREGROUND
-root         903       1  0 01:49 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
-root         918       1  0 01:49 ?        00:00:00 /usr/sbin/atd -f
-root         921       1  0 01:49 ?        00:00:01 /usr/sbin/crond -n
-root         939       1  0 01:49 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear - linux
-root         954       2  0 01:49 ?        00:00:00 [kworker/R-ib-co]
-root         957       2  0 01:49 ?        00:00:00 [kworker/R-ib-co]
-root         959       2  0 01:49 ?        00:00:00 [kworker/R-ib_mc]
-root         960       2  0 01:49 ?        00:00:00 [kworker/R-ib_nl]
-root         971       2  0 01:49 ?        00:00:00 [kworker/R-iw_cm]
-root         976       2  0 01:49 ?        00:00:00 [kworker/R-rdma_]
-root         993       2  0 01:49 ?        00:00:00 [lockd]
-root        1059       2  0 01:49 ?        00:00:00 [nfsd]
-root        1060       2  0 01:49 ?        00:00:00 [nfsd]
-root        1061       2  0 01:49 ?        00:00:00 [nfsd]
-root        1062       2  0 01:49 ?        00:00:00 [nfsd]
-root        1063       2  0 01:49 ?        00:00:00 [nfsd]
-root        1064       2  0 01:49 ?        00:00:00 [nfsd]
-root        1065       2  0 01:49 ?        00:00:00 [nfsd]
-root        1066       2  0 01:49 ?        00:00:00 [nfsd]
-apache      1168     902  0 01:49 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
-apache      1169     902  0 01:49 ?        00:00:18 /usr/sbin/httpd -DFOREGROUND
-apache      1170     902  0 01:49 ?        00:00:16 /usr/sbin/httpd -DFOREGROUND
-apache      1190     902  0 01:49 ?        00:00:16 /usr/sbin/httpd -DFOREGROUND
-root        2207       2  0 02:02 ?        00:00:00 [kworker/R-tls-s]
-root       41780       1  0 11:59 ?        00:00:00 sendmail: accepting connections
-smmsp      41787       1  0 11:59 ?        00:00:00 sendmail: Queue runner@01:00:00 for /var/spool/clientmqueue
-root       41790     788  0 11:59 ?        00:00:00 sshd: jian [priv]
-jian       41796       1  0 11:59 ?        00:00:00 /usr/lib/systemd/systemd --user
-jian       41798   41796  0 11:59 ?        00:00:00 (sd-pam)
-jian       41810   41790  0 11:59 ?        00:00:00 sshd: jian@notty
-jian       41811   41810  0 11:59 ?        00:00:00 /usr/libexec/openssh/sftp-server
-root       49080       2  0 14:31 ?        00:00:00 [kworker/u513:4-events_unbound]
-root       51831       2  0 16:09 ?        00:00:00 [kworker/u514:3-events_unbound]
-root       52186       2  0 16:24 ?        00:00:00 [kworker/u513:0-events_unbound]
-root       52188       2  0 16:24 ?        00:00:00 [kworker/0:1-cgroup_destroy]
-root       52358       2  0 16:30 ?        00:00:00 [kworker/0:0-ata_sff]
-root       52477       2  0 16:35 ?        00:00:00 [kworker/u514:2-events_unbound]
-root       52533       2  0 16:38 ?        00:00:00 [kworker/0:3-events]
-root       52604     788  0 16:40 ?        00:00:00 sshd: jian [priv]
-jian       52609   52604  0 16:40 ?        00:00:00 sshd: jian@pts/0
-jian       52610   52609  0 16:40 pts/0    00:00:00 -bash
-root       52639   52610  0 16:40 pts/0    00:00:00 sudo su
-root       52643   52639  0 16:40 pts/0    00:00:00 su
-root       52644   52643  0 16:40 pts/0    00:00:00 bash
-root       52679       2  0 16:41 ?        00:00:03 [kworker/1:4-cgroup_destroy]
-root       52836       2  0 16:47 ?        00:00:00 [kworker/1:1-events]
-root       52882       2  0 16:48 ?        00:00:00 [kworker/0:4-cgroup_destroy]
-root       52889       2  0 16:49 ?        00:00:00 [kworker/u513:1-events_unbound]
-root       52916       2  0 16:50 ?        00:00:00 [kworker/u514:1-events_unbound]
-root       52979       2  0 16:52 ?        00:00:01 [kworker/1:2-events]
-root       53010       2  0 16:54 ?        00:00:00 [kworker/0:2-events]
-root       53027       2  0 16:54 ?        00:00:00 [kworker/u513:2-events_unbound]
-root       53051       2  0 16:55 ?        00:00:00 [kworker/u514:0-events_unbound]
-root       53298   52644  0 16:57 pts/0    00:00:00 /bin/bash ./2025_Unix_1.5.1_??????.sh
-root       53333   53298  0 16:57 pts/0    00:00:00 ps -ef
+root           1       0  0 Jun30 ?        00:00:56 /usr/lib/systemd/systemd rhgb --switched-root --system --deserialize 31
+root           2       0  0 Jun30 ?        00:00:00 [kthreadd]
+root           3       2  0 Jun30 ?        00:00:00 [pool_workqueue_]
+root           4       2  0 Jun30 ?        00:00:00 [kworker/R-rcu_g]
+root           5       2  0 Jun30 ?        00:00:00 [kworker/R-sync_]
+root           6       2  0 Jun30 ?        00:00:00 [kworker/R-slub_]
+root           7       2  0 Jun30 ?        00:00:00 [kworker/R-netns]
+root           9       2  0 Jun30 ?        00:00:00 [kworker/0:0H-events_highpri]
+root          11       2  0 Jun30 ?        00:00:00 [kworker/R-mm_pe]
+root          12       2  0 Jun30 ?        00:00:00 [kworker/u512:1-netns]
+root          13       2  0 Jun30 ?        00:00:00 [rcu_tasks_kthre]
+root          14       2  0 Jun30 ?        00:00:00 [rcu_tasks_rude_]
+root          15       2  0 Jun30 ?        00:00:00 [rcu_tasks_trace]
+root          16       2  0 Jun30 ?        00:00:05 [ksoftirqd/0]
+root          17       2  0 Jun30 ?        00:00:03 [rcu_preempt]
+root          18       2  0 Jun30 ?        00:00:00 [rcu_exp_par_gp_]
+root          19       2  0 Jun30 ?        00:00:00 [rcu_exp_gp_kthr]
+root          20       2  0 Jun30 ?        00:00:00 [migration/0]
+root          21       2  0 Jun30 ?        00:00:00 [idle_inject/0]
+root          23       2  0 Jun30 ?        00:00:00 [cpuhp/0]
+root          24       2  0 Jun30 ?        00:00:00 [cpuhp/1]
+root          25       2  0 Jun30 ?        00:00:00 [idle_inject/1]
+root          26       2  0 Jun30 ?        00:00:00 [migration/1]
+root          27       2  0 Jun30 ?        00:00:03 [ksoftirqd/1]
+root          34       2  0 Jun30 ?        00:00:00 [kdevtmpfs]
+root          35       2  0 Jun30 ?        00:00:00 [kworker/R-inet_]
+root          36       2  0 Jun30 ?        00:00:00 [kauditd]
+root          37       2  0 Jun30 ?        00:00:00 [khungtaskd]
+root          39       2  0 Jun30 ?        00:00:00 [oom_reaper]
+root          40       2  0 Jun30 ?        00:00:00 [kworker/R-write]
+root          41       2  0 Jun30 ?        00:00:01 [kcompactd0]
+root          42       2  0 Jun30 ?        00:00:00 [ksmd]
+root          43       2  0 Jun30 ?        00:00:02 [khugepaged]
+root          44       2  0 Jun30 ?        00:00:00 [kworker/R-crypt]
+root          45       2  0 Jun30 ?        00:00:00 [kworker/R-kinte]
+root          46       2  0 Jun30 ?        00:00:00 [kworker/R-kbloc]
+root          47       2  0 Jun30 ?        00:00:00 [irq/9-acpi]
+root          49       2  0 Jun30 ?        00:00:00 [kworker/R-tpm_d]
+root          50       2  0 Jun30 ?        00:00:00 [kworker/R-md]
+root          51       2  0 Jun30 ?        00:00:00 [kworker/R-md_bi]
+root          52       2  0 Jun30 ?        00:00:00 [kworker/R-edac-]
+root          53       2  0 Jun30 ?        00:00:00 [watchdogd]
+root          54       2  0 Jun30 ?        00:00:00 [kworker/1:1H-kblockd]
+root          55       2  0 Jun30 ?        00:00:00 [kswapd0]
+root          72       2  0 Jun30 ?        00:00:00 [kworker/R-kthro]
+root          76       2  0 Jun30 ?        00:00:00 [irq/24-pciehp]
+root          77       2  0 Jun30 ?        00:00:00 [irq/25-pciehp]
+root          78       2  0 Jun30 ?        00:00:00 [irq/26-pciehp]
+root          79       2  0 Jun30 ?        00:00:00 [irq/27-pciehp]
+root          80       2  0 Jun30 ?        00:00:00 [irq/28-pciehp]
+root          81       2  0 Jun30 ?        00:00:00 [irq/29-pciehp]
+root          82       2  0 Jun30 ?        00:00:00 [irq/30-pciehp]
+root          83       2  0 Jun30 ?        00:00:00 [irq/31-pciehp]
+root          84       2  0 Jun30 ?        00:00:00 [irq/32-pciehp]
+root          85       2  0 Jun30 ?        00:00:00 [irq/33-pciehp]
+root          86       2  0 Jun30 ?        00:00:00 [irq/34-pciehp]
+root          87       2  0 Jun30 ?        00:00:00 [irq/35-pciehp]
+root          88       2  0 Jun30 ?        00:00:00 [irq/36-pciehp]
+root          89       2  0 Jun30 ?        00:00:00 [irq/37-pciehp]
+root          90       2  0 Jun30 ?        00:00:00 [irq/38-pciehp]
+root          91       2  0 Jun30 ?        00:00:00 [irq/39-pciehp]
+root          92       2  0 Jun30 ?        00:00:00 [irq/40-pciehp]
+root          93       2  0 Jun30 ?        00:00:00 [irq/41-pciehp]
+root          94       2  0 Jun30 ?        00:00:00 [irq/42-pciehp]
+root          95       2  0 Jun30 ?        00:00:00 [irq/43-pciehp]
+root          96       2  0 Jun30 ?        00:00:00 [irq/44-pciehp]
+root          97       2  0 Jun30 ?        00:00:00 [irq/45-pciehp]
+root          98       2  0 Jun30 ?        00:00:00 [irq/46-pciehp]
+root          99       2  0 Jun30 ?        00:00:00 [irq/47-pciehp]
+root         100       2  0 Jun30 ?        00:00:00 [irq/48-pciehp]
+root         101       2  0 Jun30 ?        00:00:00 [irq/49-pciehp]
+root         102       2  0 Jun30 ?        00:00:00 [irq/50-pciehp]
+root         103       2  0 Jun30 ?        00:00:00 [irq/51-pciehp]
+root         104       2  0 Jun30 ?        00:00:00 [irq/52-pciehp]
+root         105       2  0 Jun30 ?        00:00:00 [irq/53-pciehp]
+root         106       2  0 Jun30 ?        00:00:00 [irq/54-pciehp]
+root         107       2  0 Jun30 ?        00:00:00 [irq/55-pciehp]
+root         108       2  0 Jun30 ?        00:00:00 [kworker/R-acpi_]
+root         109       2  0 Jun30 ?        00:00:00 [kworker/R-kmpat]
+root         110       2  0 Jun30 ?        00:00:00 [kworker/R-kalua]
+root         112       2  0 Jun30 ?        00:00:00 [kworker/R-mld]
+root         113       2  0 Jun30 ?        00:00:00 [kworker/R-ipv6_]
+root         118       2  0 Jun30 ?        00:00:00 [kworker/R-kstrp]
+root         124       2  0 Jun30 ?        00:00:00 [kworker/u515:0]
+root         125       2  0 Jun30 ?        00:00:00 [kworker/u516:0]
+root         126       2  0 Jun30 ?        00:00:00 [kworker/u517:0]
+root         271       2  0 Jun30 ?        00:00:00 [kworker/0:1H-kblockd]
+root         413       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         415       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         417       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         418       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         420       2  0 Jun30 ?        00:00:00 [kworker/R-ata_s]
+root         421       2  0 Jun30 ?        00:00:00 [scsi_eh_0]
+root         422       2  0 Jun30 ?        00:00:00 [kworker/R-scsi_]
+root         423       2  0 Jun30 ?        00:00:00 [scsi_eh_1]
+root         424       2  0 Jun30 ?        00:00:00 [kworker/R-scsi_]
+root         427       2  0 Jun30 ?        00:00:00 [irq/16-vmwgfx]
+root         428       2  0 Jun30 ?        00:00:00 [kworker/R-ttm]
+root         443       2  0 Jun30 ?        00:00:00 [kworker/1:2H-kblockd]
+root         455       2  0 Jun30 ?        00:00:00 [kworker/R-xfsal]
+root         456       2  0 Jun30 ?        00:00:00 [kworker/R-xfs_m]
+root         457       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         458       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         459       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-r]
+root         460       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         461       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-i]
+root         462       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-l]
+root         463       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         464       2  0 Jun30 ?        00:00:16 [xfsaild/nvme0n1]
+root         556       1  0 Jun30 ?        00:00:07 /usr/lib/systemd/systemd-journald
+root         564       2  0 Jun30 ?        00:00:00 [kworker/R-rpcio]
+root         565       2  0 Jun30 ?        00:00:00 [kworker/R-xprti]
+root         572       1  0 Jun30 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root         599       2  0 Jun30 ?        00:00:01 [irq/75-vmw_vmci]
+root         600       2  0 Jun30 ?        00:00:00 [irq/76-vmw_vmci]
+root         601       2  0 Jun30 ?        00:00:00 [irq/77-vmw_vmci]
+root         623       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         624       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         625       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         626       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         627       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-r]
+root         628       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-r]
+root         629       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         630       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         631       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-i]
+root         632       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-i]
+root         633       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-l]
+root         634       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         635       2  0 Jun30 ?        00:00:00 [xfsaild/nvme0n1]
+root         636       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-l]
+root         637       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         638       2  0 Jun30 ?        00:00:15 [xfsaild/nvme0n1]
+rpc          644       1  0 Jun30 ?        00:00:00 /usr/bin/rpcbind -w -f
+root         647       1  0 Jun30 ?        00:00:00 /usr/sbin/nfsdcld
+root         648       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.idmapd
+root         649       1  0 Jun30 ?        00:00:02 /sbin/auditd
+root         651     649  0 Jun30 ?        00:00:00 /usr/sbin/sedispatch
+dbus         677       1  0 Jun30 ?        00:00:00 /usr/bin/dbus-broker-launch --scope system --audit
+dbus         678     677  0 Jun30 ?        00:00:13 dbus-broker --log 4 --controller 9 --machine-id c41ad224b687452ba82cf3d1fb24d946 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
+root         681       1  0 Jun30 ?        00:00:00 /usr/bin/python3 -s /usr/sbin/firewalld --nofork --nopid
+root         682       1  0 Jun30 ?        00:00:05 /usr/sbin/irqbalance
+libstor+     683       1  0 Jun30 ?        00:00:00 /usr/bin/lsmd -d
+root         684       1  0 Jun30 ?        00:00:00 /usr/sbin/mcelog --daemon --foreground
+root         686       1  0 Jun30 ?        00:00:12 /usr/lib/systemd/systemd-logind
+root         688       1  0 Jun30 ?        00:00:00 /usr/bin/VGAuthService -s
+root         689       1  0 Jun30 ?        00:03:27 /usr/bin/vmtoolsd
+chrony       698       1  0 Jun30 ?        00:00:00 /usr/sbin/chronyd -F 2
+root         753       1  0 Jun30 ?        00:00:07 /usr/sbin/NetworkManager --no-daemon
+root         788       1  0 Jun30 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root         789       1  0 Jun30 ?        00:00:00 /usr/sbin/gssproxy -D
+named        816       1  0 Jun30 ?        00:00:02 /usr/sbin/named -u named -c /etc/named.conf
+polkitd      876       1  0 Jun30 ?        00:00:03 /usr/lib/polkit-1/polkitd --no-debug
+root         893       1  0 Jun30 ?        00:00:14 /usr/sbin/rsyslogd -n
+rpcuser      895       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.statd
+root         896       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.mountd
+root         902       1  0 Jun30 ?        00:00:07 /usr/sbin/httpd -DFOREGROUND
+root         903       1  0 Jun30 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+root         918       1  0 Jun30 ?        00:00:00 /usr/sbin/atd -f
+root         921       1  0 Jun30 ?        00:00:01 /usr/sbin/crond -n
+root         939       1  0 Jun30 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         954       2  0 Jun30 ?        00:00:00 [kworker/R-ib-co]
+root         957       2  0 Jun30 ?        00:00:00 [kworker/R-ib-co]
+root         959       2  0 Jun30 ?        00:00:00 [kworker/R-ib_mc]
+root         960       2  0 Jun30 ?        00:00:00 [kworker/R-ib_nl]
+root         971       2  0 Jun30 ?        00:00:00 [kworker/R-iw_cm]
+root         976       2  0 Jun30 ?        00:00:00 [kworker/R-rdma_]
+root         993       2  0 Jun30 ?        00:00:00 [lockd]
+root        1059       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1060       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1061       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1062       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1063       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1064       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1065       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1066       2  0 Jun30 ?        00:00:00 [nfsd]
+apache      1168     902  0 Jun30 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache      1169     902  0 Jun30 ?        00:00:27 /usr/sbin/httpd -DFOREGROUND
+apache      1170     902  0 Jun30 ?        00:00:25 /usr/sbin/httpd -DFOREGROUND
+apache      1190     902  0 Jun30 ?        00:00:24 /usr/sbin/httpd -DFOREGROUND
+root        2207       2  0 Jun30 ?        00:00:00 [kworker/R-tls-s]
+root       55759       2  0 10:01 ?        00:00:00 [kworker/u512:2-gid-cache-wq]
+root       55791       1  0 10:01 ?        00:00:01 sendmail: accepting connections
+smmsp      55798       1  0 10:01 ?        00:00:00 sendmail: Queue runner@01:00:00 for /var/spool/clientmqueue
+root       55858     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55864       1  0 10:01 ?        00:00:00 /usr/lib/systemd/systemd --user
+jian       55866   55864  0 10:01 ?        00:00:00 (sd-pam)
+jian       55879   55858  0 10:01 ?        00:00:00 sshd: jian@notty
+jian       55880   55879  0 10:01 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       55903     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55908   55903  0 10:02 ?        00:00:01 sshd: jian@pts/0
+jian       55909   55908  0 10:02 pts/0    00:00:00 -bash
+root       55961   55909  0 10:02 pts/0    00:00:00 sudo su
+root       55965   55961  0 10:02 pts/0    00:00:00 su
+root       55966   55965  0 10:02 pts/0    00:00:00 bash
+root       84531       2  0 14:46 ?        00:00:06 [kworker/1:3-cgroup_destroy]
+root       87903       2  0 15:37 ?        00:00:00 [kworker/u514:3-events_unbound]
+root       87913       2  0 15:38 ?        00:00:00 [kworker/0:4-events]
+root       87930       2  0 15:38 ?        00:00:00 [kworker/u513:1-events_unbound]
+root       88043       2  0 15:40 ?        00:00:01 [kworker/1:0-events]
+root       88106       2  0 15:42 ?        00:00:00 [kworker/u514:2-events_unbound]
+root       88130       2  0 15:43 ?        00:00:00 [kworker/0:2-mm_percpu_wq]
+root       89003       2  0 15:44 ?        00:00:00 [kworker/0:3-events]
+root       89004       2  0 15:44 ?        00:00:00 [kworker/u513:4-xfs-cil/nvme0n1p5]
+root       89046       2  0 15:45 ?        00:00:01 [kworker/1:2-cgroup_destroy]
+root       89127       2  0 15:48 ?        00:00:00 [kworker/u514:0-events_unbound]
+root       90049       2  0 15:51 ?        00:00:00 [kworker/1:1-events]
+root       90065       2  0 15:51 ?        00:00:00 [kworker/u513:0-events_unbound]
+root       90088       2  0 15:52 ?        00:00:00 [kworker/0:0-events]
+root       90098       2  0 15:53 ?        00:00:00 [kworker/1:4-cgroup_destroy]
+root       90138       2  0 15:54 ?        00:00:00 [kworker/0:1]
+root       90139       2  0 15:54 ?        00:00:00 [kworker/u514:1]
+root       91056   55966  0 15:56 pts/0    00:00:00 bash ./2025_Unix_1.6_??????.sh
+root       91095   91056  0 15:56 pts/0    00:00:00 ps -ef
 
-------------------   User Env   ---------------------------
+[User Environment]
 SHELL=/bin/bash
 SUDO_GID=1000
-HISTSIZE=1000
 HOSTNAME=mail.jian.local
+HISTSIZE=1000
 SUDO_COMMAND=/bin/su
 SUDO_USER=jian
 PWD=/home/jian
@@ -318,30 +324,31 @@ LOGNAME=root
 HOME=/root
 LANG=C
 LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+SHELL_SWITCHED=1
 TERM=xterm
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 USER=root
-SHLVL=1
+SHLVL=2
 DEBUGINFOD_URLS=https://debuginfod.centos.org/ 
 DEBUGINFOD_IMA_CERT_PATH=/etc/keys/ima:
 which_declare=declare -f
 PATH=/root/.local/bin:/root/bin:/sbin:/bin:/usr/sbin:/usr/bin
 SUDO_UID=1000
 MAIL=/var/spool/mail/jian
+OLDPWD=/home/jian/test
 BASH_FUNC_which%%=() {  ( alias;
  eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
 }
 _=/bin/env
 
-===========================================================
-============   System Information Query End   =============
-===========================================================
-****************************************************
-******************   INFO_CHK END  *****************
-****************************************************
-===========================================================
-================   Security Check START   =================
-===========================================================
+======================================================================
+                     System Information Query End
+======================================================================
+
+======================================================================
+                         Security Check START
+======================================================================
+
 [U-01] root 계정 원격 접속 제한
 [U-01_START]
 =============================================
@@ -355,9 +362,9 @@ _=/bin/env
 [+] pam_securetty 모듈이 주석처리 되어있거나 설정 값이 존재하지 않습니다.
 
 [+] SSH 프로세스 확인
-root         788       1  0 01:49 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
-root       41790     788  0 11:59 ?        00:00:00 sshd: jian [priv]
-jian       41810   41790  0 11:59 ?        00:00:00 sshd: jian@notty
+root         788       1  0 Jun30 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root       55858     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55879   55858  0 10:01 ?        00:00:00 sshd: jian@notty
 
 [+] /etc/ssh/sshd 설정 현황(PermitRootLogin)
 해당 설정이 존재하지 않습니다.
@@ -473,7 +480,7 @@ session     required                                     pam_unix.so
 session     optional                                     pam_sss.so
 
 [+] 2. 현황 : /etc/pam.d/common-auth
-/etc/pam.d/common-auth 파일이 존재하지 않습니다.
+파일이 존재하지 않습니다.
 
 [+] 3. 현황 : /etc/pam.d/system-auth
 # Generated by authselect on Tue Jun 17 14:31:50 2025
@@ -511,69 +518,13 @@ session     [success=1 default=ignore]                   pam_succeed_if.so servi
 session     required                                     pam_unix.so
 session     optional                                     pam_sss.so
 
+
 [+] 4. 8/9 버전 인경우 : /etc/security/faillock.conf 
-# Configuration for locking the user after multiple failed
-# authentication attempts.
-#
-# The directory where the user files with the failure records are kept.
-# The default is /var/run/faillock.
-# dir = /var/run/faillock
-#
-# Will log the user name into the system log if the user is not found.
-# Enabled if option is present.
-#  audit
-#
-# Don't print informative messages.
-# Enabled if option is present.
-# silent
-#
-# Don't log informative messages via syslog.
-# Enabled if option is present.
-# no_log_info
-#
-# Only track failed user authentications attempts for local users
-# in /etc/passwd and ignore centralized (AD, IdM, LDAP, etc.) users.
-# The `faillock` command will also no longer track user failed
-# authentication attempts. Enabling this option will prevent a
-# double-lockout scenario where a user is locked out locally and
-# in the centralized mechanism.
-# Enabled if option is present.
-# local_users_only
-#
 # Deny access if the number of consecutive authentication failures
-# for this user during the recent interval exceeds n tries.
-# The default is 3.
 # deny = 3
-#
-# The length of the interval during which the consecutive
-# authentication failures must happen for the user account
-# lock out is <replaceable>n</replaceable> seconds.
-# The default is 900 (15 minutes).
-# fail_interval = 900
-#
-# The access will be re-enabled after n seconds after the lock out.
-# The value 0 has the same meaning as value `never` - the access
-# will not be re-enabled without resetting the faillock
-# entries by the `faillock` command.
-# The default is 600 (10 minutes).
-# unlock_time = 600
-#
-# Root account can become locked as well as regular accounts.
-# Enabled if option is present.
 # even_deny_root
-#
 # This option implies the `even_deny_root` option.
-# Allow access after n seconds to root account after the
-# account is locked. In case the option is not specified
-# the value is the same as of the `unlock_time` option.
-# root_unlock_time = 900
-#
-# If a group name is specified with this option, members
-# of the group will be handled by this module the same as
 # the root account (the options `even_deny_root>` and
-# `root_unlock_time` will apply to them.
-# By default, the option is not set.
-# admin_group = <admin_group_name>
 
 
 =============================================
@@ -2123,18 +2074,15 @@ PASS_MIN_DAYS	1
 [U-49_START]
 =============================================
 [+] 1. 현황 : /etc/passwd 내 활성화 계정만 출력함
-root	/bin/bash
-sync	/bin/sync
-shutdown	/sbin/shutdown
-halt	/sbin/halt
-jian	/bin/bash
-lynsecure	/bin/bash
+root:x:0:0:root:/root:/bin/bash
+jian:x:1000:1000::/home/jian:/bin/bash
+lynsecure:x:1001:1001::/home/lynsecure:/bin/bash
 
 [+] 2. 현황 : 전체 계정의 접속 기록 중 활성화 계정만 출력함
-root
-
+[+] root 접속 기록
 root     tty1                          Thu Jun 12 14:29 - crash  (00:32)
 root     tty1                          Thu Jun 12 23:21 - down   (-8:52)
+root     tty1                          Thu Jun 12 23:14 - down   (00:06)
 
 Last password change					: Jun 23, 2025
 Password expires					: never
@@ -2144,48 +2092,9 @@ Minimum number of days between password change		: 0
 Maximum number of days between password change		: 99999
 Number of days of warning before password expires	: 7
 
-sync
-
-
-wtmp begins Wed Jan 19 10:11:14 2022
-
-Last password change					: Aug 10, 2021
-Password expires					: never
-Password inactive					: never
-Account expires						: never
-Minimum number of days between password change		: 0
-Maximum number of days between password change		: 99999
-Number of days of warning before password expires	: 7
-
-shutdown
-
-
-wtmp begins Wed Jan 19 10:11:14 2022
-
-Last password change					: Aug 10, 2021
-Password expires					: never
-Password inactive					: never
-Account expires						: never
-Minimum number of days between password change		: 0
-Maximum number of days between password change		: 99999
-Number of days of warning before password expires	: 7
-
-halt
-
-
-wtmp begins Wed Jan 19 10:11:14 2022
-
-Last password change					: Aug 10, 2021
-Password expires					: never
-Password inactive					: never
-Account expires						: never
-Minimum number of days between password change		: 0
-Maximum number of days between password change		: 99999
-Number of days of warning before password expires	: 7
-
-jian
-
-jian     pts/0        192.168.10.1     Mon Jun 30 16:40   still logged in
+[+] jian 접속 기록
+jian     pts/0        192.168.10.1     Tue Jul  1 10:02   still logged in
+jian     pts/0        192.168.10.1     Mon Jun 30 16:40 - 17:14  (00:34)
 jian     pts/0        192.168.10.1     Mon Jun 30 11:59 - 16:40  (04:40)
 
 Last password change					: Jun 12, 2025
@@ -2196,10 +2105,10 @@ Minimum number of days between password change		: 0
 Maximum number of days between password change		: 99999
 Number of days of warning before password expires	: 7
 
-lynsecure
-
+[+] lynsecure 접속 기록
 lynsecur pts/1        192.168.10.1     Tue Jun 24 11:12 - crash  (03:16)
 lynsecur tty1                          Mon Jun 23 17:43 - 17:43  (00:00)
+lynsecur pts/0        192.168.10.1     Mon Jun 23 17:41 - 17:42  (00:00)
 
 Last password change					: Jun 24, 2025
 Password expires					: never
@@ -2530,12 +2439,9 @@ rpcuser = 29
 [U-53_START]
 =============================================
 [+] 활성화 계정 중 불필요한 계정 확인.
-root	/bin/bash
-sync	/bin/sync
-shutdown	/sbin/shutdown
-halt	/sbin/halt
-jian	/bin/bash
-lynsecure	/bin/bash
+root:x:0:0:root:/root:/bin/bash
+jian:x:1000:1000::/home/jian:/bin/bash
+lynsecure:x:1001:1001::/home/lynsecure:/bin/bash
 
 =============================================
 [U-53_END]
@@ -2570,7 +2476,7 @@ lynsecure	/bin/bash
 
 
 
-[U-05] root 홈, 패스 디렉터리 권한 및 패스 설정
+[U-05] root 홈, 패스 디렉토리 권한 및 패스 설정
 [U-05_START]
 =============================================
 [+] 현황 : PATH 환경변수 확인
@@ -2586,7 +2492,7 @@ lynsecure	/bin/bash
 
 
 
-[U-06] 파일 및 디렉터리 소유자 설정
+[U-06] 파일 및 디렉토리 소유자 설정
 [U-06_START]
 =============================================
 [+] 소유자가 존재하지 않는 파일 출력
@@ -2609,7 +2515,7 @@ lynsecure	/bin/bash
 =============================================
 [U-06_END]
 [참고 - 진단기준, 결과 값 출력]
- * 양호 조건 : 존재하지 않는 소유자 및 그룹 권한을 가진 파일 또는 디렉터리 존재
+ * 양호 조건 : 존재하지 않는 소유자 및 그룹 권한을 가진 파일 또는 디렉토리 존재
  * 취약 조건 : 소유자가 존재하지 않는 파일 디렉토리 중 중요한 파일인지 확인
 =============================================
 
@@ -2628,7 +2534,7 @@ lynsecure	/bin/bash
 [참고 - 진단기준, 결과 값 출력]
 1. /etc/passwd 권한: 644, 소유자 root
 1-2. /etc/security/passwd 권한: 644, 소유자 root
-*** 존재하고있는 파일 및 디렉터리만 출력 ***
+*** 존재하고있는 파일 및 디렉토리만 출력 ***
 =============================================
 
 
@@ -2645,7 +2551,7 @@ lynsecure	/bin/bash
 =============================================
 [참고 - 진단기준, 결과 값 출력]
 1. /etc/shadow 권한: 400, 소유자 root 
-*** 존재하고있는 파일 및 디렉터리만 출력 ***
+*** 존재하고있는 파일 및 디렉토리만 출력 ***
 =============================================
 
 
@@ -2670,6 +2576,8 @@ lynsecure	/bin/bash
 [U-10] /etc/(x)inetd.conf 파일 소유자 및 권한 설정
 [U-10_START]
 =============================================
+파일이 존재하지 않습니다. /etc/inetd.conf
+파일이 존재하지 않습니다. /etc/xinetd.conf
 
 [U-10_END]
 =============================================
@@ -2683,6 +2591,7 @@ lynsecure	/bin/bash
 [U-11] /etc/syslog.conf 파일 소유자 및 권한 설정
 [U-11_START]
 =============================================
+파일이 존재하지 않습니다. /etc/syslog.conf
 
 [+] /etc/rsyslog.conf
 -rw-r--r--. 1 root root 3380 May  7 22:14 /etc/rsyslog.conf
@@ -2736,43 +2645,58 @@ lynsecure	/bin/bash
 [U-14_START]
 =============================================
 [+] 1. 현황 : 환경변수 파일 확인
-
-
-
+[*] /bin
+파일이 존재하지 않습니다.
+[*] /etc/unbound
+파일이 존재하지 않습니다.
+[*] /home/jian
 -rw-r--r--. 1 jian jian 141 Aug 10  2021 /home/jian/.bash_profile
 -rw-r--r--. 1 jian jian 492 Aug 10  2021 /home/jian/.bashrc
-
+-rw-r--r--. 1 root root 11 Jul  1 13:12 /home/jian/.test_profile
+[*] /home/lynsecure
 -rw-r--r--. 1 lynsecure lynsecure 141 Feb 16  2024 /home/lynsecure/.bash_profile
 -rw-r--r--. 1 lynsecure lynsecure 492 Feb 16  2024 /home/lynsecure/.bashrc
-
-
+[*] /root
 -rw-r--r--. 1 root root 141 Aug 10  2021 /root/.bash_profile
--rw-r--r--. 1 root root 429 Jun 25 15:22 /root/.bashrc
 -rw-r--r--. 1 root root 100 Aug 10  2021 /root/.cshrc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-rw-r--r--. 1 root root 129 Aug 10  2021 /root/.tcshrc
+-rw-r--r--. 1 root root 429 Jun 25 15:22 /root/.bashrc
+[*] /sbin
+파일이 존재하지 않습니다.
+[*] /usr/games
+파일이 존재하지 않습니다.
+[*] /usr/share/empty.sshd
+파일이 존재하지 않습니다.
+[*] /usr/share/httpd
+파일이 존재하지 않습니다.
+[*] /var/adm
+파일이 존재하지 않습니다.
+[*] /var/ftp
+파일이 존재하지 않습니다.
+[*] /var/lib/chrony
+파일이 존재하지 않습니다.
+[*] /var/lib/nfs
+파일이 존재하지 않습니다.
+[*] /var/lib/rpcbind
+파일이 존재하지 않습니다.
+[*] /var/lib/setroubleshoot
+파일이 존재하지 않습니다.
+[*] /var/named
+파일이 존재하지 않습니다.
+[*] /var/run/lsm
+파일이 존재하지 않습니다.
+[*] /var/spool/lpd
+파일이 존재하지 않습니다.
+[*] /var/spool/mail
+파일이 존재하지 않습니다.
+[*] /var/spool/mqueue
+파일이 존재하지 않습니다.
 =============================================
 [U-14_END]
 [참고 - 진단기준, 결과 값 출력]
- * 양호 조건 : 홈 디렉터리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되어 있고, 홈 디렉터리 환경변수 파일에 root와 소유자만 쓰기 권한이 부여
+ * 양호 조건 : 홈디렉토리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되어 있고, 홈디렉토리 환경변수 파일에 root와 소유자만 쓰기 권한이 부여
 된 경우
- * 취약 조건 : 홈 디렉터리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되지 않고, 홈 디렉터리 환경변수 파일에 root와 소유자 외에 쓰기 권한이 
+ * 취약 조건 : 홈디렉토리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되지 않고, 홈디렉토리 환경변수 파일에 root와 소유자 외에 쓰기 권한이 
 부여된 경우
 =============================================
 
@@ -2783,7 +2707,7 @@ lynsecure	/bin/bash
 [U-15_START]
 =============================================
 [+] world writable 파일 확인
-파일이 존재하지 않습니다.
+-rwxrwxrwx. 1 lynsecure root 0 Jul  1 11:51 /home/jian/test/perm_test.txt
 
 =============================================
 [U-15_END]
@@ -2799,7 +2723,7 @@ lynsecure	/bin/bash
 [U-16_START]
 =============================================
 [+] 현황 : find /dev -type f -exec ls -l {} \;
--rw-r--r--. 1 root root 596 Jun 30 12:58 /dev/nul
+-rw-r--r--. 1 root root 596 Jul  1 15:54 /dev/nul
 
 
 =============================================
@@ -2821,7 +2745,7 @@ lynsecure	/bin/bash
 =============================================
 [참고 - 진단기준, 결과 값 출력]
 [*] 미출력 시 파일이 미존재
- * 양호 조건 : ogin, shell, exec 서비스를 사용하지 않거나, 사용 시 아래와 같은 설정이 적용된 경우
+ * 양호 조건 : login, shell, exec 서비스를 사용하지 않거나, 사용 시 아래와 같은 설정이 적용된 경우
  * 양호 조건 1 : 1. /etc/hosts.equiv 및 /root/.rhosts 파일 소유자가 root 또는, 해당 계정인 경우 
  * 양호 조건 2 : 2. /etc/hosts.equiv 및 /root/.rhosts 파일 권한이 600 이하인 경우 
  * 양호 조건 3 : 3. /etc/hosts.equiv 및 /root/.rhosts 파일 설정에 ‘+’ 설정이 없는 경우
@@ -2872,7 +2796,25 @@ lynsecure	/bin/bash
 
 [+] 2. 현황 : /etc/profile
 
-[+] 3. 현황 : 모든 계정의 홈 디렉토리 내 .profile .*shrc 확인
+[+] 3. 현황 : 모든 계정의 홈디렉토리 내 .*profile .*shrc 확인
+ [*] /home/jian/.bash_profile
+ UMASK 설정 없음
+ [*] /home/jian/.bashrc
+ UMASK 설정 없음
+ [*] /home/jian/.test_profile
+ UMASK 0000
+ [*] /home/lynsecure/.bash_profile
+ UMASK 설정 없음
+ [*] /home/lynsecure/.bashrc
+ UMASK 설정 없음
+ [*] /root/.bash_profile
+ UMASK 설정 없음
+ [*] /root/.cshrc
+ UMASK 설정 없음
+ [*] /root/.tcshrc
+ UMASK 설정 없음
+ [*] /root/.bashrc
+ UMASK 설정 없음
 
 [+] 4. 현황 : 현재 접속 계정 UMASK 설정
 0022
@@ -2890,7 +2832,7 @@ lynsecure	/bin/bash
 [U-57] 홈디렉토리 소유자 및 권한 설정
 [U-57_START]
 =============================================
-[+] 소유자 별 홈 디렉터리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈 디렉터리와 소유자별 디렉터리 일치하는지 확인)
+[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)
 adm @ /var/adm
 apache @ /usr/share/httpd
 bin @ /bin
@@ -2929,11 +2871,13 @@ tcpdump @ /
 tss @ /dev/null
 unbound @ /etc/unbound
 
-[+] 홈 디렉토리의 권한 확인 (불필요한 others 쓰기권한)
+[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)
+lrwxrwxrwx. 1 root root 7 Jun 25  2024 /bin -> usr/bin
 drwxr-xr-x. 2 root root 45 Jun 17 14:30 /etc/unbound
-drwx------. 4 jian jian 4096 Jun 30 16:57 /home/jian
+drwx------. 5 jian jian 4096 Jul  1 15:56 /home/jian
 drwx------. 2 lynsecure lynsecure 115 Jun 18 14:05 /home/lynsecure
-dr-xr-x---. 3 root root 4096 Jun 25 15:26 /root
+dr-xr-x---. 3 root root 4096 Jul  1 12:14 /root
+lrwxrwxrwx. 1 root root 8 Jun 25  2024 /sbin -> usr/sbin
 drwxr-xr-x. 2 root root 6 Jun 25  2024 /usr/games
 drwx--x--x. 2 root root 6 Feb 18 20:01 /usr/share/empty.sshd
 drwxr-xr-x. 6 root root 68 Jun 12 15:23 /usr/share/httpd
@@ -2952,8 +2896,8 @@ drwx------. 2 root mail 6 Jun 23 17:43 /var/spool/mqueue
 =============================================
 [U-57_END]
 [참고 - 진단기준, 결과 값 출력]
- * 양호 조건 : 홈 디렉터리의 소유자와 실 사용자가 일치하고, 계정간 중복 홈 디렉터리가 존재하지 않고, 불필요한 others 쓰기 권한이 없는 경우
- * 취약 조건 : 홈 디렉터리의 소유자와 실 사용자가 일치하지 않거나, 계정간 중복 홈 디렉터리가 존재하거나, 불필요한 others 쓰기 권한이 있는 경우
+ * 양호 조건 : 홈디렉토리의 소유자와 실 사용자가 일치하고, 계정간 중복 홈디렉토리가 존재하지 않고, 불필요한 others 쓰기 권한이 없는 경우
+ * 취약 조건 : 홈디렉토리의 소유자와 실 사용자가 일치하지 않거나, 계정간 중복 홈디렉토리가 존재하거나, 불필요한 others 쓰기 권한이 있는 경우
 =============================================
 
 
@@ -2962,7 +2906,7 @@ drwx------. 2 root mail 6 Jun 23 17:43 /var/spool/mqueue
 [U-58] 홈디렉토리로 지정한 디렉토리의 존재 관리
 [U-58_START]
 =============================================
-[+] 소유자 별 홈 디렉터리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈 디렉터리와 소유자별 디렉터리 일치하는지 확인)
+[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)
 adm @ /var/adm
 apache @ /usr/share/httpd
 bin @ /bin
@@ -3001,11 +2945,13 @@ tcpdump @ /
 tss @ /dev/null
 unbound @ /etc/unbound
 
-[+] 홈 디렉토리의 권한 확인 (불필요한 others 쓰기권한)
+[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)
+lrwxrwxrwx. 1 root root 7 Jun 25  2024 /bin -> usr/bin
 drwxr-xr-x. 2 root root 45 Jun 17 14:30 /etc/unbound
-drwx------. 4 jian jian 4096 Jun 30 16:57 /home/jian
+drwx------. 5 jian jian 4096 Jul  1 15:56 /home/jian
 drwx------. 2 lynsecure lynsecure 115 Jun 18 14:05 /home/lynsecure
-dr-xr-x---. 3 root root 4096 Jun 25 15:26 /root
+dr-xr-x---. 3 root root 4096 Jul  1 12:14 /root
+lrwxrwxrwx. 1 root root 8 Jun 25  2024 /sbin -> usr/sbin
 drwxr-xr-x. 2 root root 6 Jun 25  2024 /usr/games
 drwx--x--x. 2 root root 6 Feb 18 20:01 /usr/share/empty.sshd
 drwxr-xr-x. 6 root root 68 Jun 12 15:23 /usr/share/httpd
@@ -3023,8 +2969,8 @@ drwx------. 2 root mail 6 Jun 23 17:43 /var/spool/mqueue
 =============================================
 [U-58_END]
 [참고 - 진단기준, 결과 값 출력]
- * 양호 조건 : 홈 디렉터리가 존재하지 않는 계정이 발견되지 않는 경우
- * 취약 조건 : 홈 디렉터리가 존재하지 않는 계정이 발견된 경우
+ * 양호 조건 : 홈디렉토리가 존재하지 않는 계정이 발견되지 않는 경우
+ * 취약 조건 : 홈디렉토리가 존재하지 않는 계정이 발견된 경우
 =============================================
 
 
@@ -3033,14 +2979,14 @@ drwx------. 2 root mail 6 Jun 23 17:43 /var/spool/mqueue
 [U-59] 숨겨진 파일 및 디렉토리 검색 및 제거
 [U-59_START]
 =============================================
-[+] 1. 현황 : 불필요한 숨김 파일 확인
+[+] 1. 현황 : 불필요한 숨김 파일 확인(최대 5개)
 -rw-r--r--. 1 root root 165 Dec 24  2021 /boot/.vmlinuz-5.14.0-39.el9.x86_64.hmac
 -rw-r--r--. 1 root root 160 May 31 06:24 /boot/.vmlinuz-5.14.0-590.el9.x86_64.hmac
 -rw-r--r--. 1 jian jian 18 Aug 10  2021 /home/jian/.bash_logout
 -rw-r--r--. 1 jian jian 141 Aug 10  2021 /home/jian/.bash_profile
 -rw-r--r--. 1 jian jian 492 Aug 10  2021 /home/jian/.bashrc
 
-[+] 2. 현황 : 불필요한 숨김 디렉토리 확인
+[+] 2. 현황 : 불필요한 숨김 디렉토리 확인(최대 5개)
 /home/jian/.vim
 /tmp/.X11-unix
 /tmp/.ICE-unix
@@ -3063,7 +3009,7 @@ drwx------. 2 root mail 6 Jun 23 17:43 /var/spool/mqueue
 
 
 [+] xinetd 활성화 서비스 목록
-[+] xinetd 디렉터리가 존재하지 않습니다.
+[+] xinetd 디렉토리가 존재하지 않습니다.
 
 
 [U-19_END]
@@ -3089,8 +3035,8 @@ drwx------. 2 root mail 6 Jun 23 17:43 /var/spool/mqueue
  [*] 활성화(1), 비활성화(0)
 
  [*] 이외 ftp 확인
-root         903       1  0 01:49 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
-jian       41811   41810  0 11:59 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root         903       1  0 Jun30 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+jian       55880   55879  0 10:01 ?        00:00:00 /usr/libexec/openssh/sftp-server
 
 [+] 1. FTP 기본계정 로그인 쉘
 ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
@@ -3123,7 +3069,7 @@ tcp6       0      0 :::21                   :::*                    LISTEN
 
 
 [+] xinetd 활성화 서비스 목록
-[+] xinetd 디렉터리가 존재하지 않습니다.
+[+] xinetd 디렉토리가 존재하지 않습니다.
 
 
 [U-21_END]
@@ -3206,17 +3152,17 @@ drwxr-xr-x. 2 root root 6 Aug 10  2021 /etc/cron.weekly
 [U-24_START]
 =============================================
 [+] 1. 현황 : nfs|mountd|statd 서비스 확인
-root         647       1  0 01:49 ?        00:00:00 /usr/sbin/nfsdcld
-rpcuser      895       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.statd
-root         896       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.mountd
-root        1059       2  0 01:49 ?        00:00:00 [nfsd]
-root        1060       2  0 01:49 ?        00:00:00 [nfsd]
-root        1061       2  0 01:49 ?        00:00:00 [nfsd]
-root        1062       2  0 01:49 ?        00:00:00 [nfsd]
-root        1063       2  0 01:49 ?        00:00:00 [nfsd]
-root        1064       2  0 01:49 ?        00:00:00 [nfsd]
-root        1065       2  0 01:49 ?        00:00:00 [nfsd]
-root        1066       2  0 01:49 ?        00:00:00 [nfsd]
+root         647       1  0 Jun30 ?        00:00:00 /usr/sbin/nfsdcld
+rpcuser      895       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.statd
+root         896       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.mountd
+root        1059       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1060       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1061       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1062       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1063       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1064       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1065       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1066       2  0 Jun30 ?        00:00:00 [nfsd]
 
 [+] 2. 참고 : service nfs status 실행(NFS 프로세스의 Status 필드 inactive면 양호) 
 Redirecting to /bin/systemctl status nfs.service
@@ -3333,7 +3279,7 @@ Export list for mail.jian.local:
 
 
 [+] xinetd 활성화 서비스 목록
-[+] xinetd 디렉터리가 존재하지 않습니다.
+[+] xinetd 디렉토리가 존재하지 않습니다.
 
 
 [U-29_END]
@@ -3456,7 +3402,7 @@ tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN
 *** 기본적으로 비활성화되어있는 서비스로 DNS 서비스 활성화 시 필요성 여부 확인필요 요망 
 
 [+] DNS 프로세스 실행 확인
-named        816       1  0 01:49 ?        00:00:01 /usr/sbin/named -u named -c /etc/named.conf
+named        816       1  0 Jun30 ?        00:00:02 /usr/sbin/named -u named -c /etc/named.conf
 
 [+] DNS 버전 확인
 BIND 9.16.23-RH (Extended Support Version) <id:fde3b1f>
@@ -3492,7 +3438,7 @@ tcp6       0      0 ::1:53                  :::*                    LISTEN
 *** 기본적으로 비활성화되어있는 서비스로 DNS 서비스 활성화 시 필요성 여부 확인필요 요망 
 
 [+] DNS 프로세스 실행 확인
-named        816       1  0 01:49 ?        00:00:01 /usr/sbin/named -u named -c /etc/named.conf
+named        816       1  0 Jun30 ?        00:00:02 /usr/sbin/named -u named -c /etc/named.conf
 
 [+] DNS zone Transfer 설정 확인(파일명 하단에 출력값 없으면 양호)
  [*] /etc/named.conf
@@ -3527,7 +3473,7 @@ tcp6       0      0 ::1:53                  :::*                    LISTEN
 [U-35_END]
 =============================================
 [참고 - 진단기준, 결과 값 출력]
- * 양호 조건 : 디렉터리 리스팅이 불가능할 경우
+ * 양호 조건 : 디렉토리 리스팅이 불가능할 경우
  * 취약 조건 : httpd.conf 파일 내의 Options에서 Indexes 옵션이 있을 경우
 =============================================
 
@@ -3593,11 +3539,11 @@ Server built:   Jan 29 2025 00:00:00
 =============================================
 [+] apache 서비스가 구동중 입니다.
 
-[+] 1. 현황 : manual 디렉터리 없음
+[+] 1. 현황 : manual 디렉토리 없음
 
-[+] 2. 현황 : cgi-bin 디렉터리 없음
+[+] 2. 현황 : cgi-bin 디렉토리 없음
 
-[+] 3. 현황 : sample 디렉터리 없음
+[+] 3. 현황 : sample 디렉토리 없음
 
 [U-38_END]
 =============================================
@@ -3634,8 +3580,8 @@ Server built:   Jan 29 2025 00:00:00
 [참고 - 진단기준, 결과 값 출력]
  * 양호 조건 : 취약 요건에 해당사항이 없는 경우
  * 취약 조건 : 1. Apache Options에 불필요하게 FollowSymLinks 설정이 되어 있는 경우
- * 취약 조건 : 2. Apache Options에 FollowSymLinks 설정이 되어 있고 업무적으로 사용하는 경우라도 중요 디렉터리 혹은 파일에 링크가 설정 되어 있는 경우
- ** 참고 : FollowSymLinks 존재하지 않을 경우 상위 디렉터리에서 상속 받거나, OS 버전에 따라 FollowSymLinks가 없어도 기본 값으로 활성화되어 있을 수 있어 명확하게 비활성화 할 수 있도록 아래와 같이 설정 필요
+ * 취약 조건 : 2. Apache Options에 FollowSymLinks 설정이 되어 있고 업무적으로 사용하는 경우라도 중요 디렉토리 혹은 파일에 링크가 설정 되어 있는 경우
+ ** 참고 : FollowSymLinks 존재하지 않을 경우 상위 디렉토리에서 상속 받거나, OS 버전에 따라 FollowSymLinks가 없어도 기본 값으로 활성화되어 있을 수 있어 명확하게 비활성화 할 수 있도록 아래와 같이 설정 필요
  ** -FollowSymLinks (Apache 2도 마찬가지) 
 =============================================
 
@@ -3662,8 +3608,8 @@ LimitRequestBody 50000
 [U-40_END]
 =============================================
 [참고 - 진단기준, 결과 값 출력]
- * 양호 조건 : httpd.conf 파일 내 디렉터리 설정에 LimitRequestBody 값 설정이 되어 있을 경우
- * 취약 조건 : httpd.conf 파일 내 디렉터리 설정에 LimitRequestBody 값 설정이 안되어 있을 경우
+ * 양호 조건 : httpd.conf 파일 내 디렉토리 설정에 LimitRequestBody 값 설정이 되어 있을 경우
+ * 취약 조건 : httpd.conf 파일 내 디렉토리 설정에 LimitRequestBody 값 설정이 안되어 있을 경우
 =============================================
 
 
@@ -3694,36 +3640,36 @@ DocumentRoot "/var/www/new"
 [U-60_START]
 =============================================
 [+] 1. 현황 : ssh 서비스 확인(PS)
-root         788       1  0 01:49 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
-root       41790     788  0 11:59 ?        00:00:00 sshd: jian [priv]
-jian       41810   41790  0 11:59 ?        00:00:00 sshd: jian@notty
-root       52604     788  0 16:40 ?        00:00:00 sshd: jian [priv]
-jian       52609   52604  0 16:40 ?        00:00:00 sshd: jian@pts/0
+root         788       1  0 Jun30 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root       55858     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55879   55858  0 10:01 ?        00:00:00 sshd: jian@notty
+root       55903     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55908   55903  0 10:02 ?        00:00:01 sshd: jian@pts/0
 
 [+] 1-1. 현황 : ssh 서비스 확인
 Redirecting to /bin/systemctl status sshd.service
 * sshd.service - OpenSSH server daemon
      Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: enabled)
-     Active: active (running) since Wed 2025-06-25 14:52:48 KST; 5 days ago
+     Active: active (running) since Wed 2025-06-25 14:52:48 KST; 6 days ago
        Docs: man:sshd(8)
              man:sshd_config(5)
    Main PID: 788 (sshd)
       Tasks: 1 (limit: 10455)
      Memory: 8.7M
-        CPU: 463ms
+        CPU: 571ms
      CGroup: /system.slice/sshd.service
              `-788 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
 
-Jun 26 11:04:10 mail.jian.local sshd[13520]: Accepted password for jian from 192.168.10.1 port 55553 ssh2
-Jun 26 11:04:10 mail.jian.local sshd[13520]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
-Jun 26 17:44:11 mail.jian.local sshd[40969]: Accepted password for jian from 192.168.10.1 port 57040 ssh2
-Jun 26 17:44:11 mail.jian.local sshd[40969]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
 Jun 30 11:59:22 mail.jian.local sshd[41790]: Accepted password for jian from 192.168.10.1 port 53997 ssh2
 Jun 30 11:59:22 mail.jian.local sshd[41790]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
 Jun 30 11:59:48 mail.jian.local sshd[41858]: Accepted password for jian from 192.168.10.1 port 53999 ssh2
 Jun 30 11:59:48 mail.jian.local sshd[41858]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
 Jun 30 16:40:34 mail.jian.local sshd[52604]: Accepted password for jian from 192.168.10.1 port 55485 ssh2
 Jun 30 16:40:34 mail.jian.local sshd[52604]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
+Jul 01 10:01:56 mail.jian.local sshd[55858]: Accepted password for jian from 192.168.10.1 port 56757 ssh2
+Jul 01 10:01:56 mail.jian.local sshd[55858]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
+Jul 01 10:02:01 mail.jian.local sshd[55903]: Accepted password for jian from 192.168.10.1 port 56803 ssh2
+Jul 01 10:02:01 mail.jian.local sshd[55903]: pam_unix(sshd:session): session opened for user jian(uid=1000) by jian(uid=0)
  
 [+] 1-2. 현황 : ssh 서비스 확인(CentOS7)
 Unit ssh.service could not be found.
@@ -3748,8 +3694,8 @@ Unit ssh.service could not be found.
  [*] 활성화(1), 비활성화(0)
 
  [*] 이외 ftp 확인
-root         903       1  0 01:49 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
-jian       41811   41810  0 11:59 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root         903       1  0 Jun30 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+jian       55880   55879  0 10:01 ?        00:00:00 /usr/libexec/openssh/sftp-server
 
 [+] SFTP 설정 현황
 Subsystem	sftp	/usr/libexec/openssh/sftp-server
@@ -3806,8 +3752,8 @@ tcp6       0      0 :::21                   :::*                    LISTEN
  [*] 활성화(1), 비활성화(0)
 
  [*] 이외 ftp 확인
-root         903       1  0 01:49 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
-jian       41811   41810  0 11:59 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root         903       1  0 Jun30 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+jian       55880   55879  0 10:01 ?        00:00:00 /usr/libexec/openssh/sftp-server
 
 [+] /etc/ftpusers
 
@@ -3854,8 +3800,8 @@ tcp6       0      0 :::21                   :::*                    LISTEN
  [*] 활성화(1), 비활성화(0)
 
  [*] 이외 ftp 확인
-root         903       1  0 01:49 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
-jian       41811   41810  0 11:59 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root         903       1  0 Jun30 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+jian       55880   55879  0 10:01 ?        00:00:00 /usr/libexec/openssh/sftp-server
 
 [+] /etc/ftpusers
 [+] 파일이 존재하지 않습니다.
@@ -4119,7 +4065,7 @@ Operating System: CentOS Stream 9
 [U-72_START]
 =============================================
 [+] 1. 현황 : syslog (rsyslog)
-root         893       1  0 01:49 ?        00:00:10 /usr/sbin/rsyslogd -n
+root         893       1  0 Jun30 ?        00:00:14 /usr/sbin/rsyslogd -n
 [+] 1-2. 현황 : /etc/syslog.conf (/etc/rsyslog.conf)여부
 [+] 파일이 존재하지 않습니다.
 
@@ -4222,56 +4168,49 @@ local7.*                                                /var/log/boot.log
 
 
 
+☞ UNIX 스크립트 작업이 완료되었습니다.
 
-
+☞ 스크립트 결과 파일을 보안담당자에게 전달 바랍니다.
 ☞ 스크립트 관련 오류 및 문의사항은 린시큐어 직원에게 부탁드립니다.
-
 ☞ 감사합니다.
-===============================================================
+======================================================================
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+----------------------------------------------------------------------
 Reference info.
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+----------------------------------------------------------------------
 
-****************************************************************
-********************   INFO_CHKSTART   *************************
-****************************************************************
+======================================================================
+                            INFO_CHKSTART
+======================================================================
 
-==============================
-System Information Query Start
-==============================
+======================================================================
+                    System Information Query Start
+======================================================================
 
-------------------   Kernel Information   ---------------------
-
+[Kernel Information]
 Linux mail.jian.local 5.14.0-590.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Fri May 30 21:16:05 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 
----------------------------------------------------------------
-
--------------------   IP Information   ------------------------
-
+[IP Information]
 ens160: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.10.100  netmask 255.255.255.0  broadcast 192.168.10.255
         inet6 fe80::20c:29ff:febe:3422  prefixlen 64  scopeid 0x20<link>
         ether 00:0c:29:be:34:22  txqueuelen 1000  (Ethernet)
-        RX packets 33829  bytes 8546384 (8.1 MiB)
+        RX packets 24147  bytes 7978420 (7.6 MiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 57274  bytes 23755159 (22.6 MiB)
+        TX packets 44144  bytes 28851688 (27.5 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 832  bytes 59706 (58.3 KiB)
+        RX packets 1434  bytes 102562 (100.1 KiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 832  bytes 59706 (58.3 KiB)
+        TX packets 1434  bytes 102562 (100.1 KiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 
----------------------------------------------------------------
-
--------------------   Network Status   ------------------------
-
+[Network Status]
 Active Internet connections (servers and established)
 tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN     
@@ -4283,8 +4222,8 @@ tcp        0      0 192.168.10.100:53       0.0.0.0:*               LISTEN
 tcp        0      0 0.0.0.0:39767           0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:44869           0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:20048           0.0.0.0:*               LISTEN     
-tcp        0      0 192.168.10.100:22       192.168.10.1:53997      ESTABLISHED
-tcp        0      0 192.168.10.100:22       192.168.10.1:55485      ESTABLISHED
+tcp        0      0 192.168.10.100:22       192.168.10.1:56757      ESTABLISHED
+tcp        0      0 192.168.10.100:22       192.168.10.1:56803      ESTABLISHED
 tcp6       0      0 ::1:53                  :::*                    LISTEN     
 tcp6       0      0 :::80                   :::*                    LISTEN     
 tcp6       0      0 :::111                  :::*                    LISTEN     
@@ -4298,10 +4237,8 @@ tcp6       0      0 :::33293                :::*                    LISTEN
 udp        0      0 192.168.10.100:68       192.168.10.254:67       ESTABLISHED
 Active UNIX domain sockets (servers and established)
 unix  2      [ ACC ]     STREAM     LISTENING     28283    /run/gssproxy.sock
-unix  2      [ ACC ]     STREAM     LISTENING     7061237  /run/user/1001/systemd/private
-unix  2      [ ACC ]     STREAM     LISTENING     6145288  /run/user/1000/systemd/private
-unix  2      [ ACC ]     STREAM     LISTENING     7061590  /run/user/1001/bus
-unix  2      [ ACC ]     STREAM     LISTENING     6145298  /run/user/1000/bus
+unix  2      [ ACC ]     STREAM     LISTENING     7121144  /run/user/1000/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     7121156  /run/user/1000/bus
 unix  2      [ ACC ]     STREAM     LISTENING     23671    /run/systemd/private
 unix  2      [ ACC ]     STREAM     LISTENING     23684    /run/lvm/lvmpolld.socket
 unix  2      [ ACC ]     STREAM     LISTENING     23686    /run/rpcbind.sock
@@ -4323,244 +4260,234 @@ unix  2      [ ACC ]     STREAM     LISTENING     27674    @ISCSIADM_ABSTRACT_NA
 unix  2      [ ACC ]     STREAM     LISTENING     28702    /var/run/vmware/guestServicePipe
 Active Bluetooth connections (servers and established)
 
----------------------------------------------------------------
-
--------------------   Routing Information   -------------------
-
+[Routing Information]
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 0.0.0.0         192.168.10.2    0.0.0.0         UG        0 0          0 ens160
 192.168.10.0    0.0.0.0         255.255.255.0   U         0 0          0 ens160
 
----------------------------------------------------------------
-
--------------------   Process Status   ------------------------
-
+[Process Status]
 UID          PID    PPID  C STIME TTY          TIME CMD
-root           1       0  0 01:49 ?        00:00:42 /usr/lib/systemd/systemd rhgb --switched-root --system --deserialize 31
-root           2       0  0 01:49 ?        00:00:00 [kthreadd]
-root           3       2  0 01:49 ?        00:00:00 [pool_workqueue_]
-root           4       2  0 01:49 ?        00:00:00 [kworker/R-rcu_g]
-root           5       2  0 01:49 ?        00:00:00 [kworker/R-sync_]
-root           6       2  0 01:49 ?        00:00:00 [kworker/R-slub_]
-root           7       2  0 01:49 ?        00:00:00 [kworker/R-netns]
-root           9       2  0 01:49 ?        00:00:00 [kworker/0:0H-events_highpri]
-root          10       2  0 01:49 ?        00:00:00 [kworker/u512:0-events_unbound]
-root          11       2  0 01:49 ?        00:00:00 [kworker/R-mm_pe]
-root          12       2  0 01:49 ?        00:00:00 [kworker/u512:1-netns]
-root          13       2  0 01:49 ?        00:00:00 [rcu_tasks_kthre]
-root          14       2  0 01:49 ?        00:00:00 [rcu_tasks_rude_]
-root          15       2  0 01:49 ?        00:00:00 [rcu_tasks_trace]
-root          16       2  0 01:49 ?        00:00:04 [ksoftirqd/0]
-root          17       2  0 01:49 ?        00:00:02 [rcu_preempt]
-root          18       2  0 01:49 ?        00:00:00 [rcu_exp_par_gp_]
-root          19       2  0 01:49 ?        00:00:00 [rcu_exp_gp_kthr]
-root          20       2  0 01:49 ?        00:00:00 [migration/0]
-root          21       2  0 01:49 ?        00:00:00 [idle_inject/0]
-root          23       2  0 01:49 ?        00:00:00 [cpuhp/0]
-root          24       2  0 01:49 ?        00:00:00 [cpuhp/1]
-root          25       2  0 01:49 ?        00:00:00 [idle_inject/1]
-root          26       2  0 01:49 ?        00:00:00 [migration/1]
-root          27       2  0 01:49 ?        00:00:03 [ksoftirqd/1]
-root          34       2  0 01:49 ?        00:00:00 [kdevtmpfs]
-root          35       2  0 01:49 ?        00:00:00 [kworker/R-inet_]
-root          36       2  0 01:49 ?        00:00:00 [kauditd]
-root          37       2  0 01:49 ?        00:00:00 [khungtaskd]
-root          39       2  0 01:49 ?        00:00:00 [oom_reaper]
-root          40       2  0 01:49 ?        00:00:00 [kworker/R-write]
-root          41       2  0 01:49 ?        00:00:01 [kcompactd0]
-root          42       2  0 01:49 ?        00:00:00 [ksmd]
-root          43       2  0 01:49 ?        00:00:01 [khugepaged]
-root          44       2  0 01:49 ?        00:00:00 [kworker/R-crypt]
-root          45       2  0 01:49 ?        00:00:00 [kworker/R-kinte]
-root          46       2  0 01:49 ?        00:00:00 [kworker/R-kbloc]
-root          47       2  0 01:49 ?        00:00:00 [irq/9-acpi]
-root          49       2  0 01:49 ?        00:00:00 [kworker/R-tpm_d]
-root          50       2  0 01:49 ?        00:00:00 [kworker/R-md]
-root          51       2  0 01:49 ?        00:00:00 [kworker/R-md_bi]
-root          52       2  0 01:49 ?        00:00:00 [kworker/R-edac-]
-root          53       2  0 01:49 ?        00:00:00 [watchdogd]
-root          54       2  0 01:49 ?        00:00:00 [kworker/1:1H-kblockd]
-root          55       2  0 01:49 ?        00:00:00 [kswapd0]
-root          72       2  0 01:49 ?        00:00:00 [kworker/R-kthro]
-root          76       2  0 01:49 ?        00:00:00 [irq/24-pciehp]
-root          77       2  0 01:49 ?        00:00:00 [irq/25-pciehp]
-root          78       2  0 01:49 ?        00:00:00 [irq/26-pciehp]
-root          79       2  0 01:49 ?        00:00:00 [irq/27-pciehp]
-root          80       2  0 01:49 ?        00:00:00 [irq/28-pciehp]
-root          81       2  0 01:49 ?        00:00:00 [irq/29-pciehp]
-root          82       2  0 01:49 ?        00:00:00 [irq/30-pciehp]
-root          83       2  0 01:49 ?        00:00:00 [irq/31-pciehp]
-root          84       2  0 01:49 ?        00:00:00 [irq/32-pciehp]
-root          85       2  0 01:49 ?        00:00:00 [irq/33-pciehp]
-root          86       2  0 01:49 ?        00:00:00 [irq/34-pciehp]
-root          87       2  0 01:49 ?        00:00:00 [irq/35-pciehp]
-root          88       2  0 01:49 ?        00:00:00 [irq/36-pciehp]
-root          89       2  0 01:49 ?        00:00:00 [irq/37-pciehp]
-root          90       2  0 01:49 ?        00:00:00 [irq/38-pciehp]
-root          91       2  0 01:49 ?        00:00:00 [irq/39-pciehp]
-root          92       2  0 01:49 ?        00:00:00 [irq/40-pciehp]
-root          93       2  0 01:49 ?        00:00:00 [irq/41-pciehp]
-root          94       2  0 01:49 ?        00:00:00 [irq/42-pciehp]
-root          95       2  0 01:49 ?        00:00:00 [irq/43-pciehp]
-root          96       2  0 01:49 ?        00:00:00 [irq/44-pciehp]
-root          97       2  0 01:49 ?        00:00:00 [irq/45-pciehp]
-root          98       2  0 01:49 ?        00:00:00 [irq/46-pciehp]
-root          99       2  0 01:49 ?        00:00:00 [irq/47-pciehp]
-root         100       2  0 01:49 ?        00:00:00 [irq/48-pciehp]
-root         101       2  0 01:49 ?        00:00:00 [irq/49-pciehp]
-root         102       2  0 01:49 ?        00:00:00 [irq/50-pciehp]
-root         103       2  0 01:49 ?        00:00:00 [irq/51-pciehp]
-root         104       2  0 01:49 ?        00:00:00 [irq/52-pciehp]
-root         105       2  0 01:49 ?        00:00:00 [irq/53-pciehp]
-root         106       2  0 01:49 ?        00:00:00 [irq/54-pciehp]
-root         107       2  0 01:49 ?        00:00:00 [irq/55-pciehp]
-root         108       2  0 01:49 ?        00:00:00 [kworker/R-acpi_]
-root         109       2  0 01:49 ?        00:00:00 [kworker/R-kmpat]
-root         110       2  0 01:49 ?        00:00:00 [kworker/R-kalua]
-root         112       2  0 01:49 ?        00:00:00 [kworker/R-mld]
-root         113       2  0 01:49 ?        00:00:00 [kworker/R-ipv6_]
-root         118       2  0 01:49 ?        00:00:00 [kworker/R-kstrp]
-root         124       2  0 01:49 ?        00:00:00 [kworker/u515:0]
-root         125       2  0 01:49 ?        00:00:00 [kworker/u516:0]
-root         126       2  0 01:49 ?        00:00:00 [kworker/u517:0]
-root         271       2  0 01:49 ?        00:00:00 [kworker/0:1H-kblockd]
-root         413       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         415       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         417       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         418       2  0 01:49 ?        00:00:00 [kworker/R-nvme-]
-root         420       2  0 01:49 ?        00:00:00 [kworker/R-ata_s]
-root         421       2  0 01:49 ?        00:00:00 [scsi_eh_0]
-root         422       2  0 01:49 ?        00:00:00 [kworker/R-scsi_]
-root         423       2  0 01:49 ?        00:00:00 [scsi_eh_1]
-root         424       2  0 01:49 ?        00:00:00 [kworker/R-scsi_]
-root         427       2  0 01:49 ?        00:00:00 [irq/16-vmwgfx]
-root         428       2  0 01:49 ?        00:00:00 [kworker/R-ttm]
-root         443       2  0 01:49 ?        00:00:00 [kworker/1:2H-xfs-log/nvme0n1p2]
-root         455       2  0 01:49 ?        00:00:00 [kworker/R-xfsal]
-root         456       2  0 01:49 ?        00:00:00 [kworker/R-xfs_m]
-root         457       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         458       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         459       2  0 01:49 ?        00:00:00 [kworker/R-xfs-r]
-root         460       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         461       2  0 01:49 ?        00:00:00 [kworker/R-xfs-i]
-root         462       2  0 01:49 ?        00:00:00 [kworker/R-xfs-l]
-root         463       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         464       2  0 01:49 ?        00:00:11 [xfsaild/nvme0n1]
-root         556       1  0 01:49 ?        00:00:05 /usr/lib/systemd/systemd-journald
-root         564       2  0 01:49 ?        00:00:00 [kworker/R-rpcio]
-root         565       2  0 01:49 ?        00:00:00 [kworker/R-xprti]
-root         572       1  0 01:49 ?        00:00:00 /usr/lib/systemd/systemd-udevd
-root         599       2  0 01:49 ?        00:00:00 [irq/75-vmw_vmci]
-root         600       2  0 01:49 ?        00:00:00 [irq/76-vmw_vmci]
-root         601       2  0 01:49 ?        00:00:00 [irq/77-vmw_vmci]
-root         623       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         624       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         625       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         626       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         627       2  0 01:49 ?        00:00:00 [kworker/R-xfs-r]
-root         628       2  0 01:49 ?        00:00:00 [kworker/R-xfs-r]
-root         629       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         630       2  0 01:49 ?        00:00:00 [kworker/R-xfs-b]
-root         631       2  0 01:49 ?        00:00:00 [kworker/R-xfs-i]
-root         632       2  0 01:49 ?        00:00:00 [kworker/R-xfs-i]
-root         633       2  0 01:49 ?        00:00:00 [kworker/R-xfs-l]
-root         634       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         635       2  0 01:49 ?        00:00:00 [xfsaild/nvme0n1]
-root         636       2  0 01:49 ?        00:00:00 [kworker/R-xfs-l]
-root         637       2  0 01:49 ?        00:00:00 [kworker/R-xfs-c]
-root         638       2  0 01:49 ?        00:00:08 [xfsaild/nvme0n1]
-rpc          644       1  0 01:49 ?        00:00:00 /usr/bin/rpcbind -w -f
-root         647       1  0 01:49 ?        00:00:00 /usr/sbin/nfsdcld
-root         648       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.idmapd
-root         649       1  0 01:49 ?        00:00:01 /sbin/auditd
-root         651     649  0 01:49 ?        00:00:00 /usr/sbin/sedispatch
-dbus         677       1  0 01:49 ?        00:00:00 /usr/bin/dbus-broker-launch --scope system --audit
-dbus         678     677  0 01:49 ?        00:00:09 dbus-broker --log 4 --controller 9 --machine-id c41ad224b687452ba82cf3d1fb24d946 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
-root         681       1  0 01:49 ?        00:00:00 /usr/bin/python3 -s /usr/sbin/firewalld --nofork --nopid
-root         682       1  0 01:49 ?        00:00:03 /usr/sbin/irqbalance
-libstor+     683       1  0 01:49 ?        00:00:00 /usr/bin/lsmd -d
-root         684       1  0 01:49 ?        00:00:00 /usr/sbin/mcelog --daemon --foreground
-root         686       1  0 01:49 ?        00:00:08 /usr/lib/systemd/systemd-logind
-root         688       1  0 01:49 ?        00:00:00 /usr/bin/VGAuthService -s
-root         689       1  0 01:49 ?        00:02:19 /usr/bin/vmtoolsd
-chrony       698       1  0 01:49 ?        00:00:00 /usr/sbin/chronyd -F 2
-root         753       1  0 01:49 ?        00:00:05 /usr/sbin/NetworkManager --no-daemon
-root         788       1  0 01:49 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
-root         789       1  0 01:49 ?        00:00:00 /usr/sbin/gssproxy -D
-named        816       1  0 01:49 ?        00:00:01 /usr/sbin/named -u named -c /etc/named.conf
-polkitd      876       1  0 01:49 ?        00:00:02 /usr/lib/polkit-1/polkitd --no-debug
-root         893       1  0 01:49 ?        00:00:10 /usr/sbin/rsyslogd -n
-rpcuser      895       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.statd
-root         896       1  0 01:49 ?        00:00:00 /usr/sbin/rpc.mountd
-root         902       1  0 01:49 ?        00:00:04 /usr/sbin/httpd -DFOREGROUND
-root         903       1  0 01:49 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
-root         918       1  0 01:49 ?        00:00:00 /usr/sbin/atd -f
-root         921       1  0 01:49 ?        00:00:01 /usr/sbin/crond -n
-root         939       1  0 01:49 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear - linux
-root         954       2  0 01:49 ?        00:00:00 [kworker/R-ib-co]
-root         957       2  0 01:49 ?        00:00:00 [kworker/R-ib-co]
-root         959       2  0 01:49 ?        00:00:00 [kworker/R-ib_mc]
-root         960       2  0 01:49 ?        00:00:00 [kworker/R-ib_nl]
-root         971       2  0 01:49 ?        00:00:00 [kworker/R-iw_cm]
-root         976       2  0 01:49 ?        00:00:00 [kworker/R-rdma_]
-root         993       2  0 01:49 ?        00:00:00 [lockd]
-root        1059       2  0 01:49 ?        00:00:00 [nfsd]
-root        1060       2  0 01:49 ?        00:00:00 [nfsd]
-root        1061       2  0 01:49 ?        00:00:00 [nfsd]
-root        1062       2  0 01:49 ?        00:00:00 [nfsd]
-root        1063       2  0 01:49 ?        00:00:00 [nfsd]
-root        1064       2  0 01:49 ?        00:00:00 [nfsd]
-root        1065       2  0 01:49 ?        00:00:00 [nfsd]
-root        1066       2  0 01:49 ?        00:00:00 [nfsd]
-apache      1168     902  0 01:49 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
-apache      1169     902  0 01:49 ?        00:00:18 /usr/sbin/httpd -DFOREGROUND
-apache      1170     902  0 01:49 ?        00:00:16 /usr/sbin/httpd -DFOREGROUND
-apache      1190     902  0 01:49 ?        00:00:16 /usr/sbin/httpd -DFOREGROUND
-root        2207       2  0 02:02 ?        00:00:00 [kworker/R-tls-s]
-root       41780       1  0 11:59 ?        00:00:00 sendmail: accepting connections
-smmsp      41787       1  0 11:59 ?        00:00:00 sendmail: Queue runner@01:00:00 for /var/spool/clientmqueue
-root       41790     788  0 11:59 ?        00:00:00 sshd: jian [priv]
-jian       41796       1  0 11:59 ?        00:00:00 /usr/lib/systemd/systemd --user
-jian       41798   41796  0 11:59 ?        00:00:00 (sd-pam)
-jian       41810   41790  0 11:59 ?        00:00:00 sshd: jian@notty
-jian       41811   41810  0 11:59 ?        00:00:00 /usr/libexec/openssh/sftp-server
-root       49080       2  0 14:31 ?        00:00:00 [kworker/u513:4-events_unbound]
-root       51831       2  0 16:09 ?        00:00:00 [kworker/u514:3-events_unbound]
-root       52186       2  0 16:24 ?        00:00:00 [kworker/u513:0-events_unbound]
-root       52188       2  0 16:24 ?        00:00:00 [kworker/0:1-events]
-root       52358       2  0 16:30 ?        00:00:00 [kworker/0:0-cgroup_destroy]
-root       52477       2  0 16:35 ?        00:00:00 [kworker/u514:2-events_unbound]
-root       52533       2  0 16:38 ?        00:00:00 [kworker/0:3-events]
-root       52604     788  0 16:40 ?        00:00:00 sshd: jian [priv]
-jian       52609   52604  0 16:40 ?        00:00:00 sshd: jian@pts/0
-jian       52610   52609  0 16:40 pts/0    00:00:00 -bash
-root       52639   52610  0 16:40 pts/0    00:00:00 sudo su
-root       52643   52639  0 16:40 pts/0    00:00:00 su
-root       52644   52643  0 16:40 pts/0    00:00:00 bash
-root       52679       2  0 16:41 ?        00:00:03 [kworker/1:4-cgroup_destroy]
-root       52836       2  0 16:47 ?        00:00:00 [kworker/1:1-events]
-root       52882       2  0 16:48 ?        00:00:00 [kworker/0:4-cgroup_destroy]
-root       52889       2  0 16:49 ?        00:00:00 [kworker/u513:1-events_unbound]
-root       52916       2  0 16:50 ?        00:00:00 [kworker/u514:1-events_unbound]
-root       52979       2  0 16:52 ?        00:00:01 [kworker/1:2-events]
-root       53010       2  0 16:54 ?        00:00:00 [kworker/0:2-events]
-root       53027       2  0 16:54 ?        00:00:00 [kworker/u513:2-events_unbound]
-root       53051       2  0 16:55 ?        00:00:00 [kworker/u514:0-writeback]
-root       53298   52644  4 16:57 pts/0    00:00:00 /bin/bash ./2025_Unix_1.5.1_??????.sh
-lynsecu+   53816       1  2 16:58 ?        00:00:00 /usr/lib/systemd/systemd --user
-lynsecu+   53822   53816  0 16:58 ?        00:00:00 (sd-pam)
-root       54211       1  0 16:58 ?        00:00:00 /usr/lib/systemd/systemd-hostnamed
-root       54221   53298  0 16:58 pts/0    00:00:00 ps -ef
+root           1       0  0 Jun30 ?        00:00:56 /usr/lib/systemd/systemd rhgb --switched-root --system --deserialize 31
+root           2       0  0 Jun30 ?        00:00:00 [kthreadd]
+root           3       2  0 Jun30 ?        00:00:00 [pool_workqueue_]
+root           4       2  0 Jun30 ?        00:00:00 [kworker/R-rcu_g]
+root           5       2  0 Jun30 ?        00:00:00 [kworker/R-sync_]
+root           6       2  0 Jun30 ?        00:00:00 [kworker/R-slub_]
+root           7       2  0 Jun30 ?        00:00:00 [kworker/R-netns]
+root           9       2  0 Jun30 ?        00:00:00 [kworker/0:0H-events_highpri]
+root          11       2  0 Jun30 ?        00:00:00 [kworker/R-mm_pe]
+root          12       2  0 Jun30 ?        00:00:00 [kworker/u512:1-netns]
+root          13       2  0 Jun30 ?        00:00:00 [rcu_tasks_kthre]
+root          14       2  0 Jun30 ?        00:00:00 [rcu_tasks_rude_]
+root          15       2  0 Jun30 ?        00:00:00 [rcu_tasks_trace]
+root          16       2  0 Jun30 ?        00:00:05 [ksoftirqd/0]
+root          17       2  0 Jun30 ?        00:00:03 [rcu_preempt]
+root          18       2  0 Jun30 ?        00:00:00 [rcu_exp_par_gp_]
+root          19       2  0 Jun30 ?        00:00:00 [rcu_exp_gp_kthr]
+root          20       2  0 Jun30 ?        00:00:00 [migration/0]
+root          21       2  0 Jun30 ?        00:00:00 [idle_inject/0]
+root          23       2  0 Jun30 ?        00:00:00 [cpuhp/0]
+root          24       2  0 Jun30 ?        00:00:00 [cpuhp/1]
+root          25       2  0 Jun30 ?        00:00:00 [idle_inject/1]
+root          26       2  0 Jun30 ?        00:00:00 [migration/1]
+root          27       2  0 Jun30 ?        00:00:03 [ksoftirqd/1]
+root          34       2  0 Jun30 ?        00:00:00 [kdevtmpfs]
+root          35       2  0 Jun30 ?        00:00:00 [kworker/R-inet_]
+root          36       2  0 Jun30 ?        00:00:00 [kauditd]
+root          37       2  0 Jun30 ?        00:00:00 [khungtaskd]
+root          39       2  0 Jun30 ?        00:00:00 [oom_reaper]
+root          40       2  0 Jun30 ?        00:00:00 [kworker/R-write]
+root          41       2  0 Jun30 ?        00:00:01 [kcompactd0]
+root          42       2  0 Jun30 ?        00:00:00 [ksmd]
+root          43       2  0 Jun30 ?        00:00:02 [khugepaged]
+root          44       2  0 Jun30 ?        00:00:00 [kworker/R-crypt]
+root          45       2  0 Jun30 ?        00:00:00 [kworker/R-kinte]
+root          46       2  0 Jun30 ?        00:00:00 [kworker/R-kbloc]
+root          47       2  0 Jun30 ?        00:00:00 [irq/9-acpi]
+root          49       2  0 Jun30 ?        00:00:00 [kworker/R-tpm_d]
+root          50       2  0 Jun30 ?        00:00:00 [kworker/R-md]
+root          51       2  0 Jun30 ?        00:00:00 [kworker/R-md_bi]
+root          52       2  0 Jun30 ?        00:00:00 [kworker/R-edac-]
+root          53       2  0 Jun30 ?        00:00:00 [watchdogd]
+root          54       2  0 Jun30 ?        00:00:00 [kworker/1:1H-kblockd]
+root          55       2  0 Jun30 ?        00:00:00 [kswapd0]
+root          72       2  0 Jun30 ?        00:00:00 [kworker/R-kthro]
+root          76       2  0 Jun30 ?        00:00:00 [irq/24-pciehp]
+root          77       2  0 Jun30 ?        00:00:00 [irq/25-pciehp]
+root          78       2  0 Jun30 ?        00:00:00 [irq/26-pciehp]
+root          79       2  0 Jun30 ?        00:00:00 [irq/27-pciehp]
+root          80       2  0 Jun30 ?        00:00:00 [irq/28-pciehp]
+root          81       2  0 Jun30 ?        00:00:00 [irq/29-pciehp]
+root          82       2  0 Jun30 ?        00:00:00 [irq/30-pciehp]
+root          83       2  0 Jun30 ?        00:00:00 [irq/31-pciehp]
+root          84       2  0 Jun30 ?        00:00:00 [irq/32-pciehp]
+root          85       2  0 Jun30 ?        00:00:00 [irq/33-pciehp]
+root          86       2  0 Jun30 ?        00:00:00 [irq/34-pciehp]
+root          87       2  0 Jun30 ?        00:00:00 [irq/35-pciehp]
+root          88       2  0 Jun30 ?        00:00:00 [irq/36-pciehp]
+root          89       2  0 Jun30 ?        00:00:00 [irq/37-pciehp]
+root          90       2  0 Jun30 ?        00:00:00 [irq/38-pciehp]
+root          91       2  0 Jun30 ?        00:00:00 [irq/39-pciehp]
+root          92       2  0 Jun30 ?        00:00:00 [irq/40-pciehp]
+root          93       2  0 Jun30 ?        00:00:00 [irq/41-pciehp]
+root          94       2  0 Jun30 ?        00:00:00 [irq/42-pciehp]
+root          95       2  0 Jun30 ?        00:00:00 [irq/43-pciehp]
+root          96       2  0 Jun30 ?        00:00:00 [irq/44-pciehp]
+root          97       2  0 Jun30 ?        00:00:00 [irq/45-pciehp]
+root          98       2  0 Jun30 ?        00:00:00 [irq/46-pciehp]
+root          99       2  0 Jun30 ?        00:00:00 [irq/47-pciehp]
+root         100       2  0 Jun30 ?        00:00:00 [irq/48-pciehp]
+root         101       2  0 Jun30 ?        00:00:00 [irq/49-pciehp]
+root         102       2  0 Jun30 ?        00:00:00 [irq/50-pciehp]
+root         103       2  0 Jun30 ?        00:00:00 [irq/51-pciehp]
+root         104       2  0 Jun30 ?        00:00:00 [irq/52-pciehp]
+root         105       2  0 Jun30 ?        00:00:00 [irq/53-pciehp]
+root         106       2  0 Jun30 ?        00:00:00 [irq/54-pciehp]
+root         107       2  0 Jun30 ?        00:00:00 [irq/55-pciehp]
+root         108       2  0 Jun30 ?        00:00:00 [kworker/R-acpi_]
+root         109       2  0 Jun30 ?        00:00:00 [kworker/R-kmpat]
+root         110       2  0 Jun30 ?        00:00:00 [kworker/R-kalua]
+root         112       2  0 Jun30 ?        00:00:00 [kworker/R-mld]
+root         113       2  0 Jun30 ?        00:00:00 [kworker/R-ipv6_]
+root         118       2  0 Jun30 ?        00:00:00 [kworker/R-kstrp]
+root         124       2  0 Jun30 ?        00:00:00 [kworker/u515:0]
+root         125       2  0 Jun30 ?        00:00:00 [kworker/u516:0]
+root         126       2  0 Jun30 ?        00:00:00 [kworker/u517:0]
+root         271       2  0 Jun30 ?        00:00:00 [kworker/0:1H-kblockd]
+root         413       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         415       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         417       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         418       2  0 Jun30 ?        00:00:00 [kworker/R-nvme-]
+root         420       2  0 Jun30 ?        00:00:00 [kworker/R-ata_s]
+root         421       2  0 Jun30 ?        00:00:00 [scsi_eh_0]
+root         422       2  0 Jun30 ?        00:00:00 [kworker/R-scsi_]
+root         423       2  0 Jun30 ?        00:00:00 [scsi_eh_1]
+root         424       2  0 Jun30 ?        00:00:00 [kworker/R-scsi_]
+root         427       2  0 Jun30 ?        00:00:00 [irq/16-vmwgfx]
+root         428       2  0 Jun30 ?        00:00:00 [kworker/R-ttm]
+root         443       2  0 Jun30 ?        00:00:00 [kworker/1:2H-kblockd]
+root         455       2  0 Jun30 ?        00:00:00 [kworker/R-xfsal]
+root         456       2  0 Jun30 ?        00:00:00 [kworker/R-xfs_m]
+root         457       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         458       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         459       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-r]
+root         460       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         461       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-i]
+root         462       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-l]
+root         463       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         464       2  0 Jun30 ?        00:00:16 [xfsaild/nvme0n1]
+root         556       1  0 Jun30 ?        00:00:07 /usr/lib/systemd/systemd-journald
+root         564       2  0 Jun30 ?        00:00:00 [kworker/R-rpcio]
+root         565       2  0 Jun30 ?        00:00:00 [kworker/R-xprti]
+root         572       1  0 Jun30 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root         599       2  0 Jun30 ?        00:00:01 [irq/75-vmw_vmci]
+root         600       2  0 Jun30 ?        00:00:00 [irq/76-vmw_vmci]
+root         601       2  0 Jun30 ?        00:00:00 [irq/77-vmw_vmci]
+root         623       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         624       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         625       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         626       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         627       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-r]
+root         628       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-r]
+root         629       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         630       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-b]
+root         631       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-i]
+root         632       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-i]
+root         633       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-l]
+root         634       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         635       2  0 Jun30 ?        00:00:00 [xfsaild/nvme0n1]
+root         636       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-l]
+root         637       2  0 Jun30 ?        00:00:00 [kworker/R-xfs-c]
+root         638       2  0 Jun30 ?        00:00:15 [xfsaild/nvme0n1]
+rpc          644       1  0 Jun30 ?        00:00:00 /usr/bin/rpcbind -w -f
+root         647       1  0 Jun30 ?        00:00:00 /usr/sbin/nfsdcld
+root         648       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.idmapd
+root         649       1  0 Jun30 ?        00:00:02 /sbin/auditd
+root         651     649  0 Jun30 ?        00:00:00 /usr/sbin/sedispatch
+dbus         677       1  0 Jun30 ?        00:00:00 /usr/bin/dbus-broker-launch --scope system --audit
+dbus         678     677  0 Jun30 ?        00:00:13 dbus-broker --log 4 --controller 9 --machine-id c41ad224b687452ba82cf3d1fb24d946 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
+root         681       1  0 Jun30 ?        00:00:00 /usr/bin/python3 -s /usr/sbin/firewalld --nofork --nopid
+root         682       1  0 Jun30 ?        00:00:05 /usr/sbin/irqbalance
+libstor+     683       1  0 Jun30 ?        00:00:00 /usr/bin/lsmd -d
+root         684       1  0 Jun30 ?        00:00:00 /usr/sbin/mcelog --daemon --foreground
+root         686       1  0 Jun30 ?        00:00:12 /usr/lib/systemd/systemd-logind
+root         688       1  0 Jun30 ?        00:00:00 /usr/bin/VGAuthService -s
+root         689       1  0 Jun30 ?        00:03:27 /usr/bin/vmtoolsd
+chrony       698       1  0 Jun30 ?        00:00:00 /usr/sbin/chronyd -F 2
+root         753       1  0 Jun30 ?        00:00:07 /usr/sbin/NetworkManager --no-daemon
+root         788       1  0 Jun30 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root         789       1  0 Jun30 ?        00:00:00 /usr/sbin/gssproxy -D
+named        816       1  0 Jun30 ?        00:00:02 /usr/sbin/named -u named -c /etc/named.conf
+polkitd      876       1  0 Jun30 ?        00:00:03 /usr/lib/polkit-1/polkitd --no-debug
+root         893       1  0 Jun30 ?        00:00:14 /usr/sbin/rsyslogd -n
+rpcuser      895       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.statd
+root         896       1  0 Jun30 ?        00:00:00 /usr/sbin/rpc.mountd
+root         902       1  0 Jun30 ?        00:00:07 /usr/sbin/httpd -DFOREGROUND
+root         903       1  0 Jun30 ?        00:00:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+root         918       1  0 Jun30 ?        00:00:00 /usr/sbin/atd -f
+root         921       1  0 Jun30 ?        00:00:01 /usr/sbin/crond -n
+root         939       1  0 Jun30 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         954       2  0 Jun30 ?        00:00:00 [kworker/R-ib-co]
+root         957       2  0 Jun30 ?        00:00:00 [kworker/R-ib-co]
+root         959       2  0 Jun30 ?        00:00:00 [kworker/R-ib_mc]
+root         960       2  0 Jun30 ?        00:00:00 [kworker/R-ib_nl]
+root         971       2  0 Jun30 ?        00:00:00 [kworker/R-iw_cm]
+root         976       2  0 Jun30 ?        00:00:00 [kworker/R-rdma_]
+root         993       2  0 Jun30 ?        00:00:00 [lockd]
+root        1059       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1060       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1061       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1062       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1063       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1064       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1065       2  0 Jun30 ?        00:00:00 [nfsd]
+root        1066       2  0 Jun30 ?        00:00:00 [nfsd]
+apache      1168     902  0 Jun30 ?        00:00:00 /usr/sbin/httpd -DFOREGROUND
+apache      1169     902  0 Jun30 ?        00:00:27 /usr/sbin/httpd -DFOREGROUND
+apache      1170     902  0 Jun30 ?        00:00:25 /usr/sbin/httpd -DFOREGROUND
+apache      1190     902  0 Jun30 ?        00:00:24 /usr/sbin/httpd -DFOREGROUND
+root        2207       2  0 Jun30 ?        00:00:00 [kworker/R-tls-s]
+root       55759       2  0 10:01 ?        00:00:00 [kworker/u512:2-gid-cache-wq]
+root       55791       1  0 10:01 ?        00:00:01 sendmail: accepting connections
+smmsp      55798       1  0 10:01 ?        00:00:00 sendmail: Queue runner@01:00:00 for /var/spool/clientmqueue
+root       55858     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55864       1  0 10:01 ?        00:00:00 /usr/lib/systemd/systemd --user
+jian       55866   55864  0 10:01 ?        00:00:00 (sd-pam)
+jian       55879   55858  0 10:01 ?        00:00:00 sshd: jian@notty
+jian       55880   55879  0 10:01 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       55903     788  0 10:01 ?        00:00:00 sshd: jian [priv]
+jian       55908   55903  0 10:02 ?        00:00:01 sshd: jian@pts/0
+jian       55909   55908  0 10:02 pts/0    00:00:00 -bash
+root       55961   55909  0 10:02 pts/0    00:00:00 sudo su
+root       55965   55961  0 10:02 pts/0    00:00:00 su
+root       55966   55965  0 10:02 pts/0    00:00:00 bash
+root       84531       2  0 14:46 ?        00:00:06 [kworker/1:3-cgroup_destroy]
+root       87903       2  0 15:37 ?        00:00:00 [kworker/u514:3-events_unbound]
+root       87913       2  0 15:38 ?        00:00:00 [kworker/0:4-events]
+root       87930       2  0 15:38 ?        00:00:00 [kworker/u513:1-events_unbound]
+root       88043       2  0 15:40 ?        00:00:01 [kworker/1:0-events]
+root       88106       2  0 15:42 ?        00:00:00 [kworker/u514:2-events_unbound]
+root       88130       2  0 15:43 ?        00:00:00 [kworker/0:2-ata_sff]
+root       89003       2  0 15:44 ?        00:00:00 [kworker/0:3-ipv6_addrconf]
+root       89004       2  0 15:44 ?        00:00:00 [kworker/u513:4-xfs-cil/nvme0n1p5]
+root       89046       2  0 15:45 ?        00:00:01 [kworker/1:2-cgroup_destroy]
+root       89127       2  0 15:48 ?        00:00:00 [kworker/u514:0-events_unbound]
+root       90049       2  0 15:51 ?        00:00:00 [kworker/1:1-events]
+root       90065       2  0 15:51 ?        00:00:00 [kworker/u513:0-events_unbound]
+root       90088       2  0 15:52 ?        00:00:00 [kworker/0:0-events]
+root       90098       2  0 15:53 ?        00:00:00 [kworker/1:4-cgroup_destroy]
+root       90138       2  0 15:54 ?        00:00:00 [kworker/0:1]
+root       90139       2  0 15:54 ?        00:00:00 [kworker/u514:1]
+root       91056   55966  1 15:56 pts/0    00:00:00 bash ./2025_Unix_1.6_??????.sh
+root       91906       1  0 15:56 ?        00:00:00 /usr/lib/systemd/systemd-hostnamed
+root       91916   91056  0 15:56 pts/0    00:00:00 ps -ef
 
---------------------------------------------------------------
-
--------------------   User Env   -----------------------------
-
+[User Environment]
 SHELL=/bin/bash
 SUDO_GID=1000
-HISTSIZE=1000
 HOSTNAME=mail.jian.local
+HISTSIZE=1000
 SUDO_COMMAND=/bin/su
 SUDO_USER=jian
 PWD=/home/jian
@@ -4568,6 +4495,7 @@ LOGNAME=root
 HOME=/root
 LANG=C
 LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+SHELL_SWITCHED=1
 TERM=xterm
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 USER=root
@@ -4578,17 +4506,17 @@ which_declare=declare -f
 PATH=/root/.local/bin:/root/bin:/sbin:/bin:/usr/sbin:/usr/bin
 SUDO_UID=1000
 MAIL=/var/spool/mail/jian
+OLDPWD=/home/jian/test
 BASH_FUNC_which%%=() {  ( alias;
  eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
 }
 _=/bin/env
 
---------------------------------------------------------------
+======================================================================
+                     System Information Query End
+======================================================================
 
-============================
-System Information Query End
-============================
+======================================================================
+                             INFO_CHKEND
+======================================================================
 
-*************************************************************
-***************************   INFO_CHKEND   *****************
-*************************************************************
