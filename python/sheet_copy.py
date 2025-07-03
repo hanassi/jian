@@ -2,10 +2,10 @@ import openpyxl
 from glob import glob
 
 # 원본 파일(.xlsm) 경로
-path = "./"
+path = "./sample/"
 
 # 새로 저장할 파일(.xlsx) 경로
-target_file = "보안 가이드.xlsx"
+target_file = "./sample/보안 가이드.xlsx"
 
 # 최종 워크북 생성
 wb_target = openpyxl.Workbook()

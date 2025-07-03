@@ -1,0 +1,119 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: VPC with Ubuntu Server
+
+Parameters:
+  keypairName:
+    Description: test-2025-1
+    Type: String
+    Default: test-2025-1
+  vpcCidr:
+    Description: VPC CIDR
+    Type: String
+    Default: "10.1.0.0/16"
+
+Resources:
+
+  # 1. VPC를 생성한다.
+  scriptTestVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: TestVPC
+
+  # 2. VPC내 Public Subnet을 생성한다.
+  publicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-2a
+      VpcId: !Ref scriptTestVPC
+      CidrBlock: 10.1.1.0/24
+      Tags:
+        - Key: Name
+          Value: pubSUB
+          
+  # 3. Internet Gateway를 생성하고 VPC에 Attach한다.
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: TestIGW
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref scriptTestVPC
+      InternetGatewayId: !Ref InternetGateway
+
+  # 4. Public Subnet의 Outbound 를 수정한다: 0.0.0.0/0 -> internet gateway
+  PublicRoutTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref scriptTestVPC
+      Tags:
+        - Key: Name
+          Value: pubRT
+
+  PublicToIGW:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRoutTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  
+  PublicSubnetRTAssociate1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRoutTable
+      SubnetId: !Ref publicSubnet
+  
+  # 5. Security Group을 생성하고, 22번 port를 open 한다 (ssh 접속을 위해)
+  TestSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: pub-sg
+      GroupDescription: ubuntu security group
+      VpcId: !Ref scriptTestVPC
+      SecurityGroupIngress:
+      - CidrIp: 175.197.150.12/32
+        FromPort: "22"
+        ToPort: "22"
+        IpProtocol: tcp
+      - CidrIp: 175.197.150.12/32
+        FromPort: "80"
+        ToPort: "80"
+        IpProtocol: tcp
+      - CidrIp: 175.197.150.12/32
+        FromPort: "3306"
+        ToPort: "3306"
+        IpProtocol: tcp
+      Tags:
+        - Key: Name
+          Value: pub-ubuntu-sg
+  
+  # 6. 이미 생성한 VPC, Public Subnet, Security Group과 연결된 EC2를 생성한다.
+  TestInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref keypairName
+      InstanceType: t2.micro
+      ImageId: ami-0d5bb3742db8fc264
+      NetworkInterfaces: 
+      - AssociatePublicIpAddress: "true"
+        DeviceIndex: "0"
+        GroupSet: 
+          - Ref: "TestSecurityGroup"
+        SubnetId: !Ref publicSubnet
+      UserData:
+        Fn::Base64:
+            !Sub |
+            #!/bin/bash
+            apt update
+            apt install mysql-server
+            ufw allow mysql
+            systemctl start mysql
+            systemctl enable mysql
+            
+    

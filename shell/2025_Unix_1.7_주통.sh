@@ -91,8 +91,9 @@ fi
 
 HOMEDIRS=`awk -F":" 'length($6) > 0 {print $6}' /etc/passwd | grep -wv "/" | sort -u`
 USERLIST=`egrep -vi "nologin|false|shutdown|halt|sync" /etc/passwd`
-CREATE_FILE="[Lyn_secure]`hostname`_${OS}_${IP}_`date +%m%d`.txt"
-CHECK_FILE=`[ -f $CREATE_FILE ] && echo 1 || echo 0`
+CREATE_FILE="[Lyn_secure]Unix_`hostname`_${OS}_${IP}_`date +%m%d`.txt"
+NGINX_SCRIPT="2025_WEB_NGINX_Lynsecure_Unix"
+
 
 #######################
 # (화면출력) 헤더
@@ -100,7 +101,7 @@ CHECK_FILE=`[ -f $CREATE_FILE ] && echo 1 || echo 0`
 echo "$LINE"
 center ""
 center "Security Inspection of Server (Unix ver.)"
-center "Version : 1.6"
+center "Version : 1.7"
 center "Copyright 2025, Lyn Secure. All Rights Reserved."
 center "ALL RIGHTS RESERVED."
 center ""
@@ -161,13 +162,15 @@ for File_load_list in $File_load; do
             echo "==========================================="
             cat "$File_load_list"
             echo "\n\n"
-        } >> ./Lyn_tmp/`hostname`_file_data.txt
+        } >> ./Lyn_tmp/file_data.txt
     fi
 done
 unset File_load
 unset File_load_list
 
-
+#######################
+# 점검
+#######################
 U_01(){
 echo "[U-01] root 계정 원격 접속 제한"
 echo "[U-01] root 계정 원격 접속 제한" >> $CREATE_FILE 2>&1
@@ -1774,7 +1777,7 @@ echo "[U-57] 홈디렉토리 소유자 및 권한 설정" >> $CREATE_FILE 2>&1
 echo "[U-57_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 echo "[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)" >> $CREATE_FILE 2>&1
-cat /etc/passwd | awk -F":" '{print $1 " @ " $6}' | grep -v "\/\>" | sort -u >> $CREATE_FILE 2>&1
+cat /etc/passwd | awk -F":" '{print $1 " @ " $6}' | sort -u >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 
 echo "[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)" >> $CREATE_FILE 2>&1
@@ -1804,7 +1807,7 @@ echo "[U-58_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 
 echo "[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)" >> $CREATE_FILE 2>&1
-cat /etc/passwd | awk -F":" '{print $1 " @ " $6}' | grep -v "\/\>" | sort -u >> $CREATE_FILE 2>&1
+cat /etc/passwd | awk -F":" '{print $1 " @ " $6}' | sort -u >> $CREATE_FILE 2>&1
 echo "" >> $CREATE_FILE 2>&1
 echo "[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)" >> $CREATE_FILE 2>&1
 echo "$HOMEDIRS" | while read -r dir; do
@@ -2250,90 +2253,38 @@ echo "[U-25] NFS 접근 통제" >> $CREATE_FILE 2>&1
 echo "[U-25_START]" >> $CREATE_FILE 2>&1
 echo "=============================================" >> $CREATE_FILE 2>&1
 unix_nfs_check="/etc/dfs/dfstab /etc/dfs/sharetab /etc/exports /etc/vfstab"
-echo "showmount -e" >> $CREATE_FILE 2>&1
-showmount -e >> $CREATE_FILE 2>&1
+
+mount | grep -q ' type nfs'
+if [ $? -eq 0 ]; then
+    echo "[+] NFS 마운트가 존재함. showmount 실행 중..." >> $CREATE_FILE 2>&1
+    showmount -e >> $CREATE_FILE 2>&1
+else
+    echo "[-] NFS 마운트 없음. showmount 생략" >> $CREATE_FILE 2>&1
+fi
+
 echo "=============================================" >> $CREATE_FILE 2>&1
 
-if [ $NFS_Check_01 -ne 0 ]
-then
-	echo "[+] NFS 서비스가 활성화되어 있습니다." >> $CREATE_FILE 2>&1
-	echo "" >> $CREATE_FILE 2>&1
-		if [ -f /etc/dfs/dfstab ]
-		then
-			echo "1.cat /etc/dfs/dfstab" 			>> $CREATE_FILE 2>&1
-			cat /etc/dfs/dfstab 		 			>> $CREATE_FILE 2>&1
-			echo " " 				  	 			>> $CREATE_FILE 2>&1
-			echo "2.ls -laL /etc/dfs/dfstab"	 	>> $CREATE_FILE 2>&1
-			ls -laL /etc/dfs/dfstab 	 			>> $CREATE_FILE 2>&1
-			
-			echo "1.cat /etc/dfs/dfstab"  			>> unix_nfs_check
-			cat /etc/dfs/dfstab 		 			>> unix_nfs_check
-			echo " " 				  	 			>> unix_nfs_check
-			echo "2.ls -laL /etc/dfs/dfstab"		>> unix_nfs_check
-			ls -laL /etc/dfs/dfstab 	 			>> unix_nfs_check
-		fi	
-	
-		if [ -f /etc/exports ]	
-		then
-			echo "" >> $CREATE_FILE 2>&1		
-			echo "1.cat /etc/exports" 	 			>> $CREATE_FILE 2>&1
-			cat /etc/exports 			 			>> $CREATE_FILE 2>&1
-			echo " " 				  	 			>> $CREATE_FILE 2>&1
-			echo "2.ls -laL /etc/exports" 			>> $CREATE_FILE 2>&1
-			ls -laL /etc/exports 		 			>> $CREATE_FILE 2>&1
-			
-			echo "1.cat /etc/exports" 	 			>> unix_nfs_check
-			cat /etc/exports 			 			>> unix_nfs_check
-			echo " " 				  	 			>> unix_nfs_check
-			echo "2.ls -laL /etc/exports" 			>> unix_nfs_check
-			ls -laL /etc/exports		 			>> unix_nfs_check
-		fi	
-	
-		if [ -f /etc/dfs/sharetab ]	
-		then	
-			echo "" >> $CREATE_FILE 2>&1
-			echo "1.cat /etc/dfs/sharetab"	 		>> $CREATE_FILE 2>&1
-			cat /etc/dfs/sharetab 		 	 		>> $CREATE_FILE 2>&1
-			echo " "					 	 		>> $CREATE_FILE 2>&1
-			echo "2.ls -laL /etc/dfs/sharetab"		>> $CREATE_FILE 2>&1
-			ls -laL /etc/dfs/sharetab  		 		>> $CREATE_FILE 2>&1
-			echo " "					 	 		>> $CREATE_FILE 2>&1
-			echo "1.cat /etc/dfs/sharetab"	 		>> unix_nfs_check
-			cat /etc/dfs/sharetab 		 	 		>> unix_nfs_check
-			echo " " 					 	 		>> unix_nfs_check
-			echo "2.ls -laL /etc/dfs/sharetab" 		>> unix_nfs_check
-			ls -laL /etc/dfs/sharetab 	 	 		>> unix_nfs_check
-			echo " " 					 	 		>> unix_nfs_check
-		fi
-
-		if [ -f /etc/vfstab ]
-		then
-			echo "" >> $CREATE_FILE 2>&1
-			echo "1.cat /etc/vfstab" 				>> $CREATE_FILE 2>&1
-			cat /etc/vfstab 						>> $CREATE_FILE 2>&1
-			echo " " 								>> $CREATE_FILE 2>&1
-			echo "2.ls -laL /etc/vfstab"			>> $CREATE_FILE 2>&1
-			ls -laL /etc/vfstab 					>> $CREATE_FILE 2>&1
-			echo " " 								>> $CREATE_FILE 2>&1
-			echo "1.cat /etc/vfstab" 				>> unix_nfs_check
-			echo "#cat /etc/vfstab" 				>> unix_nfs_check
-			cat /etc/vfstab 						>> unix_nfs_check
-			echo " " 								>> unix_nfs_check
-			echo "2.ls -laL /etc/vfstab"			>> unix_nfs_check
-			ls -laL /etc/vfstab 					>> unix_nfs_check
-			echo " " 								>> unix_nfs_check
-		fi
-
-		if [ -f unix_nfs_check ]
-		then
-			echo "[+]NFS 파일(/etc/export 및 /etc/dfs/dfstab)존재함(수동점검)" >> $CREATE_FILE 2>&1	
-			rm -f ./unix_nfs_check
+if [ "$NFS_Check_01" -ne 0 ]; then
+    echo "[+] NFS 서비스가 활성화되어 있습니다." >> $CREATE_FILE 2>&1
+    for file in $unix_nfs_check ; do
+        if [ -f "$file" ]; then
+            {
+                echo "[+]NFS 관련 파일 존재함" >> $CREATE_FILE 2>&1
+				echo "1. cat $file"
+                cat "$file"
+                echo ""
+                echo "2. ls -laL $file"
+                ls -laL "$file"
+                echo ""
+            } >> $CREATE_FILE 2>&1
 		else
-			echo "[+]NFS 파일(/etc/export 및 /etc/dfs/dfstab)존재하지 않음" >> $CREATE_FILE 2>&1	
-		fi
+			echo "[+] "$file" 파일이 존재하지 않음" >> $CREATE_FILE 2>&1
+        fi
+    done
 else
-	echo "[+] NFS 서비스가 비활성화되어 있습니다." >> $CREATE_FILE 2>&1
+    echo "[+] NFS 서비스가 비활성화되어 있습니다." >> $CREATE_FILE 2>&1
 fi
+
 
 echo "" >> $CREATE_FILE 2>&1
 echo "[U-25_END]" >> $CREATE_FILE 2>&1
@@ -2828,10 +2779,10 @@ case $OS in
 		
 		if file_check $httpd_daemon ; then
 			# httpd root Directory
-			$httpd_daemon -V | grep -E "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/httpd_root.txt
+			$httpd_daemon -V | grep -E "(HTTPD_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/httpd_root.txt
 			
 			# httpd conf Directory
-			$httpd_daemon -V | grep -E "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/httpd_conf.txt
+			$httpd_daemon -V | grep -E "(HTTPD_ROOT|SERVER_CONFIG_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/httpd_conf.txt
 			
 			# save httpd Directory path
 			httpd_root=`cat ./Lyn_tmp/httpd_root.txt`
@@ -2847,10 +2798,10 @@ case $OS in
 
 		if file_check $apache2_daemon ; then
 			# httpd root Directory
-			$apache2_daemon -V | grep -E "(HTTPD\_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/apache2_conf.txt
+			$apache2_daemon -V | grep -E "(HTTPD_ROOT)" | tr '"' '\n' | sed -n 2p >> ./Lyn_tmp/apache2_conf.txt
 			
 			# httpd conf Directory
-			$apache2_daemon -V | grep -E "(HTTPD\_ROOT|SERVER\_CONFIG\_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/apache2_conf.txt
+			$apache2_daemon -V | grep -E "(HTTPD_ROOT|SERVER_CONFIG_FILE)" | tr '"' '\n' | sed -n 5p >> ./Lyn_tmp/apache2_conf.txt
 			
 			# save httpd Directory path
 			apache2_root=`cat ./Lyn_tmp/apache2_root.txt`
@@ -2921,13 +2872,13 @@ if [ $web_ps_check -ne 0 ]
 then
 	echo "[+] apache 서비스가 구동중 입니다." >> $CREATE_FILE 2>&1
 	echo "[+] 현황 확인" >> $CREATE_FILE 2>&1
-	cat ./Lyn_tmp/httpd_conf.txt | grep -i "user" | grep -v "\#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
+	cat ./Lyn_tmp/httpd_conf.txt | grep -i "user" | grep -v "#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
-	cat ./Lyn_tmp/httpd_conf.txt | grep -i "group" | grep -v "\#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
+	cat ./Lyn_tmp/httpd_conf.txt | grep -i "group" | grep -v "#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
-	cat ./Lyn_tmp/apache2_conf.txt | grep -i "user" | grep -v "\#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
+	cat ./Lyn_tmp/apache2_conf.txt | grep -i "user" | grep -v "#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
-	cat ./Lyn_tmp/apache2_conf.txt | grep -i "group" | grep -v "\#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
+	cat ./Lyn_tmp/apache2_conf.txt | grep -i "group" | grep -v "#" | egrep -v "^LoadModule|LogFormat|IfModule|UserDir"	>> $CREATE_FILE 2>&1
 	echo "" >> $CREATE_FILE 2>&1
 	echo "[+] 미출력 시 미설정" >> $CREATE_FILE 2>&1
 
@@ -3979,6 +3930,16 @@ unset log_check_list
 unset log_check
 }
 
+Nginx_check() {
+    if pgrep -x nginx > /dev/null 2>&1; then
+        echo "Nginx 서비스가 실행 중이므로 점검 스크립트를 실행합니다." >> $CREATE_FILE 2>&1
+		bash "./$NGINX_SCRIPT"*
+    else
+        echo "Nginx 서비스가 실행 중이 아닙니다." >> $CREATE_FILE 2>&1
+    fi
+}
+
+
 U_01
 U_02
 U_03
@@ -4065,8 +4026,7 @@ unset web_ps_check
 U_42
 U_43
 U_72
-
-
+Nginx_check
 
 
 

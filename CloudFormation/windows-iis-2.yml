@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Windows Server
+
+Parameters:
+  keypairName:
+    Description: test-2025-1
+    Type: String
+    Default: test-2025-1
+  vpcCidr:
+    Description: VPC CIDR
+    Type: String
+    Default: "10.1.0.0/16"
+  vpcName:
+    Description: VPC
+    Type: String
+    Default: vpc-09b8e93abfcfc055f
+  publicSubnet:
+    Description: Subnet
+    Type: String
+    Default: subnet-02a09515d46298125
+  sgName :
+    Description : SecurityGroup name
+    Type : String
+    Default : windows-sg
+  instanceName :
+    Description : Instance name
+    Type : String
+    Default : testWindows
+
+Resources:
+  
+  # 1. Security Group 별도 지정 필요
+  TestSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Ref sgName
+      GroupDescription: Windows Security Group
+      VpcId: !Ref vpcName
+      SecurityGroupIngress:
+      - CidrIp: 175.197.150.12/32
+        FromPort: "22"
+        ToPort: "22"
+        IpProtocol: tcp
+      - CidrIp: 175.197.150.12/32
+        FromPort: "3389"
+        ToPort: "3389"
+        IpProtocol: tcp
+      Tags:
+        - Key: Name
+          Value: !Ref sgName
+  
+  # 2. EC2
+  TestInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref keypairName
+      InstanceType: t3.medium
+      ImageId: ami-054cc00c87e9394e5
+      Tags:
+      - Key: Name
+        Value: !Ref instanceName
+      NetworkInterfaces: 
+      - AssociatePublicIpAddress: "true"
+        DeviceIndex: "0"
+        GroupSet: 
+          - Ref: "TestSecurityGroup"
+        SubnetId: !Ref publicSubnet
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: 30
+            VolumeType: gp3
+      UserData:
+        Fn::Base64: !Sub |
+          <powershell>
+          # OpenSSH 설치
+          Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
+          # SSH 서비스 시작 및 자동 실행 설정
+          Start-Service sshd
+          Set-Service -Name sshd -StartupType 'Automatic'
+
+          # 방화벽 열기 (혹시라도 인바운드 규칙이 막힐 경우 대비)
+          New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+
+          # Administrator 계정의 authorized_keys 생성
+          mkdir C:\ProgramData\ssh
+          mkdir C:\Users\Administrator\.ssh
+          Copy-Item -Path C:\ProgramData\ssh\administrators_authorized_keys -Destination C:\Users\Administrator\.ssh\authorized_keys
+          icacls C:\Users\Administrator\.ssh\authorized_keys /inheritance:r
+          icacls C:\Users\Administrator\.ssh\authorized_keys /grant "Administrator:F"
+          </powershell>
+          
+          # 한글 언어팩 설치
+          Add-LanguagePack -LanguagePackName ko-KR

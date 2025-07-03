@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Test VPC and Subnet
+
+Parameters:
+  keypairName:
+    Description: test-2025-1
+    Type: String
+    Default: test-2025-1
+  vpcCidr:
+    Description: VPC CIDR
+    Type: String
+    Default: "10.1.0.0/16"
+
+Resources:
+
+  # 1. VPC를 생성한다.
+  scriptTestVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: TestVPC
+
+  # 2. VPC내 Public Subnet을 생성한다.
+  publicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-2a
+      VpcId: !Ref scriptTestVPC
+      CidrBlock: 10.1.1.0/24
+      Tags:
+        - Key: Name
+          Value: pubSUB
+          
+  # 3. Internet Gateway를 생성하고 VPC에 Attach한다.
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: TestIGW
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref scriptTestVPC
+      InternetGatewayId: !Ref InternetGateway
+
+  # 4. Public Subnet의 Outbound 를 수정한다: 0.0.0.0/0 -> internet gateway
+  PublicRoutTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref scriptTestVPC
+      Tags:
+        - Key: Name
+          Value: pubRT
+
+  PublicToIGW:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRoutTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  
+  PublicSubnetRTAssociate1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRoutTable
+      SubnetId: !Ref publicSubnet

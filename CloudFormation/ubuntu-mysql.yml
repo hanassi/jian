@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Ubuntu instance with MySQL
+
+Parameters:
+  keypairName:
+    Description: test-2025-1
+    Type: String
+    Default: test-2025-1
+  vpcCidr:
+    Description: VPC CIDR
+    Type: String
+    Default: "10.1.0.0/16"
+  vpcName:
+    Description: VPC
+    Type: String
+    Default: vpc-09b8e93abfcfc055f
+  publicSubnet:
+    Description: Subnet
+    Type: String
+    Default: subnet-02a09515d46298125
+
+Resources:
+  
+  # 1. Security Group 별도 지정 필요
+  TestSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: Ubuntu-sg
+      GroupDescription: Ubuntu Security Group
+      VpcId: !Ref vpcName
+      SecurityGroupIngress:
+      - CidrIp: 175.197.150.12/32
+        FromPort: "22"
+        ToPort: "22"
+        IpProtocol: tcp
+      - CidrIp: 175.197.150.12/32
+        FromPort: "3306"
+        ToPort: "3306"
+        IpProtocol: tcp
+      Tags:
+        - Key: Name
+          Value: pub-Ubuntu-sg
+  
+  # 2. EC2
+  TestInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref keypairName
+      InstanceType: t2.micro
+      ImageId: ami-05377cf8cfef186c2
+      NetworkInterfaces: 
+      - AssociatePublicIpAddress: "true"
+        DeviceIndex: "0"
+        GroupSet: 
+          - Ref: "TestSecurityGroup"
+        SubnetId: !Ref publicSubnet
+      UserData:
+        Fn::Base64:
+            !Sub |
+            #!/bin/bash
+            apt update
+            apt install mysql-server
+            ufw allow mysql
+            systemctl start mysql
+            systemctl enable mysql

@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Linux instance
+
+Parameters:
+  keypairName:
+    Description: test-2025-1
+    Type: String
+    Default: test-2025-1
+  vpcCidr:
+    Description: VPC CIDR
+    Type: String
+    Default: "10.1.0.0/16"
+  vpcName:
+    Description: VPC
+    Type: String
+    Default: vpc-09b8e93abfcfc055f
+  publicSubnet:
+    Description: Subnet
+    Type: String
+    Default: subnet-02a09515d46298125
+  sgName :
+    Description : SecurityGroup name
+    Type : String
+    Default : linux-sg
+  instanceName :
+    Description : Instance name
+    Type : String
+    Default : testLinux
+
+Resources:
+  
+  # 1. Security Group 별도 지정 필요
+  TestSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Ref sgName
+      GroupDescription : Linux Security Group
+      VpcId: !Ref vpcName
+      SecurityGroupIngress:
+      - CidrIp: 175.197.150.12/32
+        FromPort: "22"
+        ToPort: "22"
+        IpProtocol: tcp
+      - CidrIp: 10.1.0.0/16
+        FromPort: "22"
+        ToPort: "22"
+        IpProtocol: tcp
+      - CidrIp: 175.197.150.12/32
+        FromPort: "80"
+        ToPort: "80"
+        IpProtocol: tcp
+      Tags:
+        - Key: Name
+          Value: !Ref sgName
+  
+  # 2. EC2
+  TestInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref keypairName
+      InstanceType: t2.micro
+      ImageId: ami-05377cf8cfef186c2 #Amazon Linux2 ami-0daee08993156ca1a #Amazon Linux 2023 ami-05377cf8cfef186c2
+      Tags:
+        - Key: Name
+          Value: !Ref instanceName
+      NetworkInterfaces: 
+      - AssociatePublicIpAddress: "true"
+        DeviceIndex: "0"
+        GroupSet: 
+          - Ref: "TestSecurityGroup"
+        SubnetId: !Ref publicSubnet
+      UserData:
+        Fn::Base64:
+            !Sub |
+            #!/bin/bash
+            #yum install -y httpd
+            #systemctl start httpd
+            #amazon-linux-extras list | grep nginx
+            #systemctl enable nginx
+            #systemctl start nginx
+            #sudo amazon-linux-extras install -y nginx1
+            #firewall-cmd --permanent --zone=public --add-port=80/tcp
+            #firewall-cmd --reload
+            #firewall-cmd --zone=public --list-all > firewall-cmd.txt
+            useradd lynsecure
+            useradd test
+            usermod -aG wheel lynsecure
+            usermod -aG wheel test

@@ -1,0 +1,3281 @@
+======================================================================
+                      UNIX/Linux Security Check
+======================================================================
+
+======================================================================
+                            INFO_CHK START
+======================================================================
+
+[Start Time]
+2025. 07. 03. (목) 07:46:38 UTC
+======================================================================
+                             INFO_CHK END
+======================================================================
+
+
+======================================================================
+                    System Information Query Start
+======================================================================
+
+[Kernel Information]
+Linux ip-10-1-1-197.ap-northeast-2.compute.internal 5.10.238-231.953.amzn2.x86_64 #1 SMP Tue Jun 17 10:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+[IP Information]
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
+        inet 10.1.1.197  netmask 255.255.255.0  broadcast 10.1.1.255
+        inet6 fe80::95:69ff:fe2a:61fd  prefixlen 64  scopeid 0x20<link>
+        ether 02:95:69:2a:61:fd  txqueuelen 1000  (Ethernet)
+        RX packets 87823  bytes 265949641 (253.6 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 7544  bytes 1451344 (1.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 54  bytes 4396 (4.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 54  bytes 4396 (4.2 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+[Network Status]
+Active Internet connections (servers and established)
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 10.1.1.197:22           175.197.150.12:52070    ESTABLISHED
+tcp        0      0 10.1.1.197:22           175.197.150.12:9796     ESTABLISHED
+tcp6       0      0 :::111                  :::*                    LISTEN     
+tcp6       0      0 :::80                   :::*                    LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN     
+Active UNIX domain sockets (servers and established)
+unix  2      [ ACC ]     STREAM     LISTENING     11595    /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     16450    /var/lib/gssproxy/default.sock
+unix  2      [ ACC ]     STREAM     LISTENING     15663    /run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     15664    /var/run/rpcbind.sock
+unix  2      [ ACC ]     STREAM     LISTENING     15921    /var/run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16310    /var/run/lsm/ipc/sim
+unix  2      [ ACC ]     STREAM     LISTENING     19336    /var/lib/amazon/ssm/ipc/health
+unix  2      [ ACC ]     STREAM     LISTENING     16314    /var/run/lsm/ipc/simc
+unix  2      [ ACC ]     STREAM     LISTENING     19337    /var/lib/amazon/ssm/ipc/termination
+unix  2      [ ACC ]     STREAM     LISTENING     17974    private/proxymap
+unix  2      [ ACC ]     STREAM     LISTENING     17962    private/defer
+unix  2      [ ACC ]     STREAM     LISTENING     17965    private/trace
+unix  2      [ ACC ]     STREAM     LISTENING     17968    private/verify
+unix  2      [ ACC ]     STREAM     LISTENING     17953    private/tlsmgr
+unix  2      [ ACC ]     STREAM     LISTENING     17956    private/rewrite
+unix  2      [ ACC ]     STREAM     LISTENING     16451    /run/gssproxy.sock
+unix  2      [ ACC ]     STREAM     LISTENING     17980    private/proxywrite
+unix  2      [ ACC ]     STREAM     LISTENING     17983    private/smtp
+unix  2      [ ACC ]     STREAM     LISTENING     17986    private/relay
+unix  2      [ ACC ]     STREAM     LISTENING     17992    private/error
+unix  2      [ ACC ]     STREAM     LISTENING     17995    private/retry
+unix  2      [ ACC ]     STREAM     LISTENING     17998    private/discard
+unix  2      [ ACC ]     STREAM     LISTENING     18001    private/local
+unix  2      [ ACC ]     STREAM     LISTENING     18004    private/virtual
+unix  2      [ ACC ]     STREAM     LISTENING     18007    private/lmtp
+unix  2      [ ACC ]     STREAM     LISTENING     18010    private/anvil
+unix  2      [ ACC ]     STREAM     LISTENING     18013    private/scache
+unix  2      [ ACC ]     STREAM     LISTENING     17959    private/bounce
+unix  2      [ ACC ]     STREAM     LISTENING     17942    public/pickup
+unix  2      [ ACC ]     STREAM     LISTENING     17946    public/cleanup
+unix  2      [ ACC ]     STREAM     LISTENING     17949    public/qmgr
+unix  2      [ ACC ]     STREAM     LISTENING     17971    public/flush
+unix  2      [ ACC ]     STREAM     LISTENING     17989    public/showq
+unix  2      [ ACC ]     STREAM     LISTENING     12851    /run/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     13055    /run/lvm/lvmetad.socket
+unix  2      [ ACC ]     STREAM     LISTENING     13217    /run/lvm/lvmpolld.socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     13223    /run/udev/control
+
+[Routing Information]
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.1.1.1        0.0.0.0         UG        0 0          0 eth0
+10.1.1.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+169.254.169.254 0.0.0.0         255.255.255.255 UH        0 0          0 eth0
+
+[Process Status]
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 06:52 ?        00:00:02 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+root         2     0  0 06:52 ?        00:00:00 [kthreadd]
+root         3     2  0 06:52 ?        00:00:00 [rcu_gp]
+root         4     2  0 06:52 ?        00:00:00 [rcu_par_gp]
+root         6     2  0 06:52 ?        00:00:00 [kworker/0:0H-ev]
+root         8     2  0 06:52 ?        00:00:00 [mm_percpu_wq]
+root         9     2  0 06:52 ?        00:00:00 [rcu_tasks_rude_]
+root        10     2  0 06:52 ?        00:00:00 [rcu_tasks_trace]
+root        11     2  0 06:52 ?        00:00:00 [ksoftirqd/0]
+root        12     2  0 06:52 ?        00:00:00 [rcu_sched]
+root        13     2  0 06:52 ?        00:00:00 [migration/0]
+root        15     2  0 06:52 ?        00:00:00 [cpuhp/0]
+root        17     2  0 06:52 ?        00:00:00 [kdevtmpfs]
+root        18     2  0 06:52 ?        00:00:00 [netns]
+root        19     2  0 06:52 ?        00:00:00 [kworker/u30:1-e]
+root        21     2  0 06:52 ?        00:00:00 [kauditd]
+root       300     2  0 06:52 ?        00:00:00 [khungtaskd]
+root       301     2  0 06:52 ?        00:00:00 [oom_reaper]
+root       302     2  0 06:52 ?        00:00:00 [writeback]
+root       304     2  0 06:52 ?        00:00:00 [kcompactd0]
+root       305     2  0 06:52 ?        00:00:00 [ksmd]
+root       306     2  0 06:52 ?        00:00:00 [khugepaged]
+root       362     2  0 06:52 ?        00:00:00 [kintegrityd]
+root       364     2  0 06:52 ?        00:00:00 [kblockd]
+root       365     2  0 06:52 ?        00:00:00 [blkcg_punt_bio]
+root       672     2  0 06:52 ?        00:00:00 [xen-balloon]
+root       724     2  0 06:52 ?        00:00:00 [tpm_dev_wq]
+root       730     2  0 06:52 ?        00:00:00 [md]
+root       733     2  0 06:52 ?        00:00:00 [edac-poller]
+root       738     2  0 06:52 ?        00:00:00 [watchdogd]
+root       836     2  0 06:52 ?        00:00:00 [kworker/0:1H-kb]
+root       888     2  0 06:52 ?        00:00:00 [kswapd0]
+root       890     2  0 06:52 ?        00:00:00 [xfsalloc]
+root       891     2  0 06:52 ?        00:00:00 [xfs_mru_cache]
+root       894     2  0 06:52 ?        00:00:00 [kthrotld]
+root       905     2  0 06:52 ?        00:00:00 [xenbus]
+root       906     2  0 06:52 ?        00:00:00 [xenwatch]
+root       943     2  0 06:52 ?        00:00:00 [nvme-wq]
+root       945     2  0 06:52 ?        00:00:00 [nvme-reset-wq]
+root       947     2  0 06:52 ?        00:00:00 [nvme-delete-wq]
+root       980     2  0 06:52 ?        00:00:00 [ipv6_addrconf]
+root       989     2  0 06:52 ?        00:00:00 [kstrp]
+root       998     2  0 06:52 ?        00:00:00 [zswap-shrink]
+root       999     2  0 06:52 ?        00:00:00 [kworker/u31:0]
+root      1687     2  0 06:52 ?        00:00:00 [ata_sff]
+root      1693     2  0 06:52 ?        00:00:00 [scsi_eh_0]
+root      1702     2  0 06:52 ?        00:00:00 [scsi_tmf_0]
+root      1706     2  0 06:52 ?        00:00:00 [scsi_eh_1]
+root      1707     2  0 06:52 ?        00:00:00 [scsi_tmf_1]
+root      1711     2  0 06:52 ?        00:00:00 [kworker/u30:3-e]
+root      1718     2  0 06:52 ?        00:00:00 [xfs-buf/xvda1]
+root      1719     2  0 06:52 ?        00:00:00 [xfs-conv/xvda1]
+root      1720     2  0 06:52 ?        00:00:00 [xfs-cil/xvda1]
+root      1721     2  0 06:52 ?        00:00:00 [xfs-reclaim/xvd]
+root      1722     2  0 06:52 ?        00:00:00 [xfs-eofblocks/x]
+root      1723     2  0 06:52 ?        00:00:00 [xfs-log/xvda1]
+root      1724     2  0 06:52 ?        00:00:00 [xfsaild/xvda1]
+root      1783     1  0 06:52 ?        00:00:01 /usr/lib/systemd/systemd-journald
+root      1800     1  0 06:52 ?        00:00:00 /usr/sbin/lvmetad -f
+root      1819     1  0 06:52 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root      1820     2  0 06:52 ?        00:00:00 [ena]
+root      2505     2  0 06:52 ?        00:00:00 [cryptd]
+root      2598     1  0 06:52 ?        00:00:00 /sbin/auditd
+root      2603     2  0 06:52 ?        00:00:00 [rpciod]
+root      2605     2  0 06:52 ?        00:00:00 [xprtiod]
+root      2630     1  0 06:52 ?        00:00:00 /usr/lib/systemd/systemd-logind
+libstor+  2631     1  0 06:52 ?        00:00:00 /usr/bin/lsmd -d
+dbus      2632     1  0 06:52 ?        00:00:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+root      2633     1  0 06:52 ?        00:00:00 /usr/sbin/acpid
+root      2666     1  0 06:52 ?        00:00:00 /usr/sbin/gssproxy -D
+rpc       2667     1  0 06:52 ?        00:00:00 /sbin/rpcbind -w
+chrony    2669     1  0 06:52 ?        00:00:00 /usr/sbin/chronyd -F 2
+rngd      2670     1  0 06:52 ?        00:00:00 /sbin/rngd -f --fill-watermark=0 --exclude=jitter
+root      2892     1  0 06:52 ?        00:00:00 /sbin/dhclient -q -lf /var/lib/dhclient/dhclient--eth0.lease -pf /var/run/dhclient-eth0.pid eth0
+root      2941     1  0 06:52 ?        00:00:00 /sbin/dhclient -6 -nw -lf /var/lib/dhclient/dhclient6--eth0.lease -pf /var/run/dhclient6-eth0.pid eth0
+root      3086     1  0 06:52 ?        00:00:00 /usr/libexec/postfix/master -w
+postfix   3087  3086  0 06:52 ?        00:00:00 pickup -l -t unix -u
+postfix   3088  3086  0 06:52 ?        00:00:00 qmgr -l -t unix -u
+root      3140     1  0 06:52 ?        00:00:00 /usr/bin/amazon-ssm-agent
+root      3143     1  0 06:52 ?        00:00:00 /usr/sbin/rsyslogd -n
+root      3163     1  0 06:52 ?        00:00:00 /usr/sbin/crond -n
+root      3167     1  0 06:52 ?        00:00:00 /usr/sbin/atd -f
+root      3208     1  0 06:52 ttyS0    00:00:00 /sbin/agetty --keep-baud 115200,38400,9600 ttyS0 vt220
+root      3209     1  0 06:52 tty1     00:00:00 /sbin/agetty --noclear tty1 linux
+root      3229     1  0 06:52 ?        00:00:00 /usr/sbin/sshd -D
+root      3419  3229  0 06:53 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3453  3419  0 06:53 ?        00:00:00 sshd: ec2-user@pts/0
+ec2-user  3454  3453  0 06:53 pts/0    00:00:00 -bash
+root      3477  3454  0 06:53 pts/0    00:00:00 sudo su
+root      3478  3477  0 06:53 pts/0    00:00:00 su
+root      3479  3478  0 06:53 pts/0    00:00:00 bash
+root      3494  3229  0 06:54 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3528  3494  0 06:54 ?        00:00:00 sshd: ec2-user@notty
+ec2-user  3529  3528  0 06:54 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root      4258     1  0 07:01 ?        00:00:00 /usr/sbin/anacron -s
+root      4261     2  0 07:01 ?        00:00:00 [kworker/0:0-cgr]
+root      4340     2  0 07:35 ?        00:00:00 [kworker/0:1-cgr]
+root      4358     1  0 07:40 ?        00:00:00 nginx: master process /usr/sbin/nginx
+nginx     4359  4358  0 07:40 ?        00:00:00 nginx: worker process
+root      4368     2  0 07:43 ?        00:00:00 [kworker/0:2-cgr]
+root      5053     2  0 07:43 ?        00:00:00 [kworker/0:3-eve]
+root      5054  3479  0 07:46 pts/0    00:00:00 bash ./2025_Unix_1.7_주통.sh
+root      5087  5054  0 07:46 pts/0    00:00:00 ps -ef
+
+[User Environment]
+XDG_SESSION_ID=1
+HOSTNAME=ip-10-1-1-197.ap-northeast-2.compute.internal
+SHELL=/bin/bash
+TERM=xterm
+HISTSIZE=1000
+USER=root
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SHELL_SWITCHED=1
+SUDO_USER=ec2-user
+SUDO_UID=1000
+USERNAME=root
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAIL=/var/spool/mail/ec2-user
+PWD=/home/ec2-user
+LANG=ko_KR.utf8
+SHLVL=2
+SUDO_COMMAND=/bin/su
+HOME=/root
+LOGNAME=root
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+SUDO_GID=1000
+_=/bin/env
+
+======================================================================
+                     System Information Query End
+======================================================================
+
+======================================================================
+                         Security Check START
+======================================================================
+
+[U-01] root 계정 원격 접속 제한
+[U-01_START]
+=============================================
+[+] Telnet 프로세스 확인
+[+] Telnet 프로세스가 비실행 중 입니다.
+
+[+] pts/x 확인
+
+[+] pam_securetty.so 확인
+[+] pam_securetty 모듈이 주석처리 되어있거나 설정 값이 존재하지 않습니다.
+
+[+] SSH 프로세스 확인
+root      3229     1  0 06:52 ?        00:00:00 /usr/sbin/sshd -D
+root      3419  3229  0 06:53 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3453  3419  0 06:53 ?        00:00:00 sshd: ec2-user@pts/0
+
+[+] /etc/ssh/sshd 설정 현황(PermitRootLogin)
+해당 설정이 존재하지 않습니다.
+
+
+[U-01_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ 양호 : 원격 터미널 서비스를 사용하지 않거나, 사용 시 root 직접 접속을 차단한 경우 
+ 취약 : 원격 터미널 서비스 사용 시 root 직접 접속을 허용한 경우 
+ 취약 1. : Telnet 사용 시, /etc/default/login 파일에 CONSOLE=/dev/console이 없거나 주석처리 되어있을 경우 
+ 취약 2. : SSH 사용 시, /etc/ssh/sshd_config 파일에 PermitRootLogin yes로 설정되어 있을 경우 
+******* 참고 사항 *******
+ 1. 'auth [user_unknown=ignore success=ok ignore=ignore default=bad] pam_securetty.so' 해당 설정 양호로 진단 (주석처리 주의)
+=============================================
+
+
+
+
+[U-02] 패스워드 복잡성 설정
+[U-02_START]
+=============================================
+[+] 1. /etc/pam.d/system-auth 현황
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+[+] 2. /etc/pam.d/common-password 현황
+파일이 존재하지 않습니다.
+
+[+] 3. 현황 : /etc/security/pwquality.conf 상세 내용
+# minlen = 9
+# dcredit = 1
+# ucredit = 1
+# lcredit = 1
+# ocredit = 1
+# minclass = 0
+
+[+] 4. 현황 : /etc/login.defs 상세 내용
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+#	PASS_MIN_LEN	Minimum acceptable password length.
+#	PASS_WARN_AGE	Number of days warning given before a password expires.
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_MIN_LEN	5
+PASS_WARN_AGE	7
+
+
+
+[U-02_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+[*] 주석처리 주의 
+[*] ※ 정책 기준: 영문 숫자 특수문자 2개 조합 시 10자리 이상, 3개 조합 시 8자리 이상, 패스워드 변경 기간 90일 이하
+
+[*] 1-1.참고 : /etc/pam.d/system-auth 진단
+[*] 1-2.예시: password requisite pam_cracklib.so try_first_pass retry=3 type= minlen=8 dcredit=-1 ucredit=-1 lcredit=-1 ocredit=-1
+[*] 2-1.참고 : /etc/pam.d/common-password 진단
+[*] 2-2.패스워드 길이 확인 : password [success=2 default=ignore] pam_unix.so obscure sha512 minlen=8
+2-3.패스워드 복잡도 확인 : password requisite pam_pwquality.so retry=3 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1
+[*] 3-1.참고 : /etc/security/pwquality.conf 진단
+[*] 3-2.예시 : lcredit, ucredit, dcredit, ocredit 값 확인
+ * 양호 기준 : 패스워드 최소길이 8자리 이상, 영문·숫자·특수문자 최소 입력 기능이 설정된 경우 또는 내부 정책에 맞게 설정된 경우
+ * 취약 기준 : 패스워드 최소길이 8자리 이상, 영문·숫자·특수문자 최소 입력 기능이 설정된 경우
+=============================================
+
+
+
+
+[U-03] 계정 잠금 임계값 설정
+[U-03_START]
+=============================================
+[+] 1. 현황 : /etc/pam.d/password-auth
+#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so try_first_pass nullok
+auth        required      pam_deny.so
+
+account     required      pam_unix.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+
+[+] 2. 현황 : /etc/pam.d/common-auth
+파일이 존재하지 않습니다.
+
+[+] 3. 현황 : /etc/pam.d/system-auth
+#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so try_first_pass nullok
+auth        required      pam_deny.so
+
+account     required      pam_unix.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+
+
+[+] 4. 8/9 버전 인경우 : /etc/security/faillock.conf 
+파일이 존재하지 않습니다.
+
+
+=============================================
+[U-03_END]
+[참고 - 진단기준, 결과 값 출력]
+[*] 판단기준(양호) : /etc/pam.d/password-auth 파일과 /etc/pam.d/system-auth 파일에 계정 잠금 임계값 설정이 존재하는 경우
+[*] 판단기준(취약) : /etc/pam.d/password-auth 파일과 /etc/pam.d/system-auth 파일에 계정 잠금 임계값 설정이 존재하지 않는 경우
+
+=== 판단 기준 참고 ===
+(1) pam_faillock.so 활용 시
+auth     required       pam_faillock.so preauth silent audit deny=3 unlock_time=600
+auth     [success=1 default=ignore]     pam_unix.so nullok_secure
+auth     [default=die]  pam_faillock.so authfail audit deny=3 unlock_time=600
+account  required       pam_faillock.so
+
+(2) pam_tally2.so 활용 시
+auth        required      pam_tally2.so deny=5 onerr=fail unlock_time=600
+account     required      pam_tally2.so
+
+(3) pam_tally.so 활용 시
+auth        required      pam_tally.so deny=5 onerr=fail unlock_time=600
+account     required      pam_tally.so
+
+(4) RHEL 8 경우
+/etc/security/faillock.conf 우선 적용
+deny = 5
+unlock_time = 600
+
+=================
+=============================================
+
+
+
+
+[U-04] 패스워드 파일 보호
+[U-04_START]
+=============================================
+[+] 현황
+[+] 1. 현황 : ls -al /etc/passwd /etc/shadow
+-rw-r--r-- 1 root root 1462  7월  3 06:53 /etc/passwd
+---------- 1 root root  754  7월  3 06:53 /etc/shadow
+
+[+] 2. 현황 : /etc/passwd 상세 내용
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:999:997:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+rngd:x:998:996:Random Number Generator Daemon:/var/lib/rngd:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:997:995::/home/ec2-instance-connect:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:996:994::/var/lib/chrony:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+nginx:x:995:993:Nginx web server:/var/lib/nginx:/sbin/nologin
+lynsecure:x:1001:1001::/home/lynsecure:/bin/bash
+test:x:1002:1002::/home/test:/bin/bash
+
+[+] 3. 현황 : /etc/shadow 상세 내용
+root:*LOCK*:14600::::::
+bin:*:18313:0:99999:7:::
+daemon:*:18313:0:99999:7:::
+adm:*:18313:0:99999:7:::
+lp:*:18313:0:99999:7:::
+sync:*:18313:0:99999:7:::
+shutdown:*:18313:0:99999:7:::
+halt:*:18313:0:99999:7:::
+mail:*:18313:0:99999:7:::
+operator:*:18313:0:99999:7:::
+games:*:18313:0:99999:7:::
+ftp:*:18313:0:99999:7:::
+nobody:*:18313:0:99999:7:::
+systemd-network:!!:20259::::::
+dbus:!!:20259::::::
+rpc:!!:20259:0:99999:7:::
+libstoragemgmt:!!:20259::::::
+sshd:!!:20259::::::
+rngd:!!:20259::::::
+rpcuser:!!:20259::::::
+nfsnobody:!!:20259::::::
+ec2-instance-connect:!!:20259::::::
+postfix:!!:20259::::::
+chrony:!!:20259::::::
+tcpdump:!!:20259::::::
+ec2-user:!!:20272:0:99999:7:::
+nginx:!!:20272::::::
+lynsecure:!!:20272:0:99999:7:::
+test:!!:20272:0:99999:7:::
+
+[U-04_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+[*] 두번째 필드가 x 표시되어 있는지 확인
+ * 양호 - shadow 패스워드를 사용하거나, 패스워드를 암호화하여 저장하는 경우
+ * 취약 - shadow 패스워드를 사용하지 않고, 패스워드를 암호화하여 저장하지 앟는 경우
+=============================================
+
+
+
+
+[U-44] root 이외의 UID가 ‘0’금지
+[U-44_START]
+=============================================
+[+] 1. 현황 : /etc/passwd에서 UID 추출
+root = 0
+bin = 1
+daemon = 2
+adm = 3
+lp = 4
+sync = 5
+shutdown = 6
+halt = 7
+mail = 8
+operator = 11
+games = 12
+ftp = 14
+nobody = 99
+systemd-network = 192
+dbus = 81
+rpc = 32
+libstoragemgmt = 999
+sshd = 74
+rngd = 998
+rpcuser = 29
+nfsnobody = 65534
+ec2-instance-connect = 997
+postfix = 89
+chrony = 996
+tcpdump = 72
+ec2-user = 1000
+nginx = 995
+lynsecure = 1001
+test = 1002
+
+[+] 2. 국정원 점검용 GID 최소한의 사용자만 등록되어 있는지 확인 (GID가 0인 계정 추출)
+root -> GID=0
+sync -> GID=0
+shutdown -> GID=0
+halt -> GID=0
+operator -> GID=0
+
+
+=============================================
+[U-44_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : root 계정과 동일한 UID를 갖는 계정이 존재하지 않는 경우
+ * 취약 조건 : root 계정과 동일한 UID를 갖는 계정이 존재하는 경우
+=============================================
+
+
+
+
+[U-45] root 계정 su 제한
+[U-45_START]
+=============================================
+[+] 1. 현황 : /etc/pam.d/su 설정 확인
+#%PAM-1.0
+auth		sufficient	pam_rootok.so
+# Uncomment the following line to implicitly trust users in the "wheel" group.
+#auth		sufficient	pam_wheel.so trust use_uid
+# Uncomment the following line to require a user to be in the "wheel" group.
+#auth		required	pam_wheel.so use_uid
+auth		substack	system-auth
+auth		include		postlogin
+account		sufficient	pam_succeed_if.so uid = 0 use_uid quiet
+account		include		system-auth
+password	include		system-auth
+session		include		system-auth
+session		include		postlogin
+session		optional	pam_xauth.so
+
+[+] 2. 현황 : /bin/su의 others 여부
+[+] /bin/su의 others 확인
+-rwsr-xr-x 1 root root 32032  1월 23  2023 /bin/su
+
+[+] 3. 현황 : group 확인
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user,lynsecure,test
+cdrom:x:11:
+mail:x:12:postfix
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+nobody:x:99:
+users:x:100:
+utmp:x:22:
+utempter:x:35:
+input:x:999:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+dbus:x:81:
+ssh_keys:x:998:
+rpc:x:32:
+libstoragemgmt:x:997:
+sshd:x:74:
+rngd:x:996:
+rpcuser:x:29:
+nfsnobody:x:65534:
+ec2-instance-connect:x:995:
+slocate:x:21:
+postdrop:x:90:
+postfix:x:89:
+chrony:x:994:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+screen:x:84:
+tcpdump:x:72:
+ec2-user:x:1000:
+nginx:x:993:
+lynsecure:x:1001:
+test:x:1002:
+=============================================
+[U-45_END]
+[참고 - 진단기준, 결과 값 출력]
+[*] 판단기준(양호) : /etc/pam.d/su 파일에 auth required pam_wheel.so use_uid 라인이 존재하는 경우
+[*] 판단기준(취약) : /etc/pam.d/su 파일에 auth required pam_wheel.so use_uid 라인이 존재하지 않거나 주석 처리 되어 있는 경우
+
+=============================================
+
+
+
+
+[U-46] 패스워드 최소 길이 설정
+[U-46_START]
+=============================================
+[+] 1. /etc/pam.d/system-auth 현황
+#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so try_first_pass nullok
+auth        required      pam_deny.so
+
+account     required      pam_unix.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+
+[+] 2. /etc/pam.d/common-password 현황
+cat: /etc/pam.d/common-password: No such file or directory
+
+[+] 3. 현황 : /etc/security/pwquality.conf 상세 내용
+# Configuration for systemwide password quality limits
+# Defaults:
+#
+# Number of characters in the new password that must not be present in the
+# old password.
+# difok = 5
+#
+# Minimum acceptable size for the new password (plus one if
+# credits are not disabled which is the default). (See pam_cracklib manual.)
+# Cannot be set to lower value than 6.
+# minlen = 9
+#
+# The maximum credit for having digits in the new password. If less than 0
+# it is the minimum number of digits in the new password.
+# dcredit = 1
+#
+# The maximum credit for having uppercase characters in the new password.
+# If less than 0 it is the minimum number of uppercase characters in the new
+# password.
+# ucredit = 1
+#
+# The maximum credit for having lowercase characters in the new password.
+# If less than 0 it is the minimum number of lowercase characters in the new
+# password.
+# lcredit = 1
+#
+# The maximum credit for having other characters in the new password.
+# If less than 0 it is the minimum number of other characters in the new
+# password.
+# ocredit = 1
+#
+# The minimum number of required classes of characters for the new
+# password (digits, uppercase, lowercase, others).
+# minclass = 0
+#
+# The maximum number of allowed consecutive same characters in the new password.
+# The check is disabled if the value is 0.
+# maxrepeat = 0
+#
+# The maximum number of allowed consecutive characters of the same class in the
+# new password.
+# The check is disabled if the value is 0.
+# maxclassrepeat = 0
+#
+# Whether to check for the words from the passwd entry GECOS string of the user.
+# The check is enabled if the value is not 0.
+# gecoscheck = 0
+#
+# Path to the cracklib dictionaries. Default is to use the cracklib default.
+# dictpath =
+
+[+] 4. 현황 : /etc/login.defs 상세 내용
+#
+# Please note that the parameters in this configuration file control the
+# behavior of the tools from the shadow-utils component. None of these
+# tools uses the PAM mechanism, and the utilities that use PAM (such as the
+# passwd command) should therefore be configured elsewhere. Refer to
+# /etc/pam.d/system-auth for more information.
+#
+
+# *REQUIRED*
+#   Directory where mailboxes reside, _or_ name of file, relative to the
+#   home directory.  If you _do_ define both, MAIL_DIR takes precedence.
+#   QMAIL_DIR is for Qmail
+#
+#QMAIL_DIR	Maildir
+MAIL_DIR	/var/spool/mail
+#MAIL_FILE	.mail
+
+# Password aging controls:
+#
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+#	PASS_MIN_LEN	Minimum acceptable password length.
+#	PASS_WARN_AGE	Number of days warning given before a password expires.
+#
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_MIN_LEN	5
+PASS_WARN_AGE	7
+
+#
+# Min/max values for automatic uid selection in useradd
+#
+UID_MIN                  1000
+UID_MAX                 60000
+# System accounts
+SYS_UID_MIN               201
+SYS_UID_MAX               999
+
+#
+# Min/max values for automatic gid selection in groupadd
+#
+GID_MIN                  1000
+GID_MAX                 60000
+# System accounts
+SYS_GID_MIN               201
+SYS_GID_MAX               999
+
+#
+# If defined, this command is run when removing a user.
+# It should remove any at/cron/print jobs etc. owned by
+# the user to be removed (passed as the first argument).
+#
+#USERDEL_CMD	/usr/sbin/userdel_local
+
+#
+# If useradd should create home directories for users by default
+# On RH systems, we do. This option is overridden with the -m flag on
+# useradd command line.
+#
+CREATE_HOME	yes
+
+# The permission mask is initialized to this value. If not specified, 
+# the permission mask will be initialized to 022.
+UMASK           077
+
+# This enables userdel to remove user groups if no members exist.
+#
+USERGROUPS_ENAB yes
+
+# Use SHA512 to encrypt password.
+ENCRYPT_METHOD SHA512 
+
+
+[+] 4-1. 현황 : PASS_MIN_LEN 내용
+#	PASS_MIN_LEN	Minimum acceptable password length.
+PASS_MIN_LEN	5
+
+
+
+[U-46_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : 패스워드 최소 길이가 8자 이상으로 설정되어 있는 경우
+ * 취약 기준 : 패스워드 최소 길이가 8자 미만으로 설정되어 있는 경우 
+=============================================
+
+
+
+
+[U-47] 패스워드 최대 사용기간 설정
+[U-47_START]
+=============================================
+[+] 1. /etc/pam.d/system-auth 현황
+#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so try_first_pass nullok
+auth        required      pam_deny.so
+
+account     required      pam_unix.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+
+[+] 2. /etc/pam.d/common-password 현황
+파일이 존재하지 않습니다.
+
+[+] 3. 현황 : /etc/security/pwquality.conf 상세 내용
+# Configuration for systemwide password quality limits
+# Defaults:
+#
+# Number of characters in the new password that must not be present in the
+# old password.
+# difok = 5
+#
+# Minimum acceptable size for the new password (plus one if
+# credits are not disabled which is the default). (See pam_cracklib manual.)
+# Cannot be set to lower value than 6.
+# minlen = 9
+#
+# The maximum credit for having digits in the new password. If less than 0
+# it is the minimum number of digits in the new password.
+# dcredit = 1
+#
+# The maximum credit for having uppercase characters in the new password.
+# If less than 0 it is the minimum number of uppercase characters in the new
+# password.
+# ucredit = 1
+#
+# The maximum credit for having lowercase characters in the new password.
+# If less than 0 it is the minimum number of lowercase characters in the new
+# password.
+# lcredit = 1
+#
+# The maximum credit for having other characters in the new password.
+# If less than 0 it is the minimum number of other characters in the new
+# password.
+# ocredit = 1
+#
+# The minimum number of required classes of characters for the new
+# password (digits, uppercase, lowercase, others).
+# minclass = 0
+#
+# The maximum number of allowed consecutive same characters in the new password.
+# The check is disabled if the value is 0.
+# maxrepeat = 0
+#
+# The maximum number of allowed consecutive characters of the same class in the
+# new password.
+# The check is disabled if the value is 0.
+# maxclassrepeat = 0
+#
+# Whether to check for the words from the passwd entry GECOS string of the user.
+# The check is enabled if the value is not 0.
+# gecoscheck = 0
+#
+# Path to the cracklib dictionaries. Default is to use the cracklib default.
+# dictpath =
+
+[+] 4. 현황 : /etc/login.defs 상세 내용
+#
+# Please note that the parameters in this configuration file control the
+# behavior of the tools from the shadow-utils component. None of these
+# tools uses the PAM mechanism, and the utilities that use PAM (such as the
+# passwd command) should therefore be configured elsewhere. Refer to
+# /etc/pam.d/system-auth for more information.
+#
+
+# *REQUIRED*
+#   Directory where mailboxes reside, _or_ name of file, relative to the
+#   home directory.  If you _do_ define both, MAIL_DIR takes precedence.
+#   QMAIL_DIR is for Qmail
+#
+#QMAIL_DIR	Maildir
+MAIL_DIR	/var/spool/mail
+#MAIL_FILE	.mail
+
+# Password aging controls:
+#
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+#	PASS_MIN_LEN	Minimum acceptable password length.
+#	PASS_WARN_AGE	Number of days warning given before a password expires.
+#
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_MIN_LEN	5
+PASS_WARN_AGE	7
+
+#
+# Min/max values for automatic uid selection in useradd
+#
+UID_MIN                  1000
+UID_MAX                 60000
+# System accounts
+SYS_UID_MIN               201
+SYS_UID_MAX               999
+
+#
+# Min/max values for automatic gid selection in groupadd
+#
+GID_MIN                  1000
+GID_MAX                 60000
+# System accounts
+SYS_GID_MIN               201
+SYS_GID_MAX               999
+
+#
+# If defined, this command is run when removing a user.
+# It should remove any at/cron/print jobs etc. owned by
+# the user to be removed (passed as the first argument).
+#
+#USERDEL_CMD	/usr/sbin/userdel_local
+
+#
+# If useradd should create home directories for users by default
+# On RH systems, we do. This option is overridden with the -m flag on
+# useradd command line.
+#
+CREATE_HOME	yes
+
+# The permission mask is initialized to this value. If not specified, 
+# the permission mask will be initialized to 022.
+UMASK           077
+
+# This enables userdel to remove user groups if no members exist.
+#
+USERGROUPS_ENAB yes
+
+# Use SHA512 to encrypt password.
+ENCRYPT_METHOD SHA512 
+
+
+[+] 4-1. 현황 : PASS_MAX_DAYS 내용
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+PASS_MAX_DAYS	99999
+
+
+
+[U-47_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : 패스워드 최대 사용기간이 90일(12주) 이하로 설정되어 있는 경우
+ * 취약 기준 : 패스워드 최대 사용기간이 90일(12주) 이하로 설정되어 있지 않는 경우
+=============================================
+
+
+
+
+[U-48] 패스워드 최소 사용기간 설정
+[U-48_START]
+=============================================
+[+] 1. /etc/pam.d/system-auth 현황
+#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_unix.so try_first_pass nullok
+auth        required      pam_deny.so
+
+account     required      pam_unix.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+
+[+] 2. /etc/pam.d/common-password 현황
+파일이 존재하지 않습니다.
+
+[+] 3. 현황 : /etc/security/pwquality.conf 상세 내용
+# Configuration for systemwide password quality limits
+# Defaults:
+#
+# Number of characters in the new password that must not be present in the
+# old password.
+# difok = 5
+#
+# Minimum acceptable size for the new password (plus one if
+# credits are not disabled which is the default). (See pam_cracklib manual.)
+# Cannot be set to lower value than 6.
+# minlen = 9
+#
+# The maximum credit for having digits in the new password. If less than 0
+# it is the minimum number of digits in the new password.
+# dcredit = 1
+#
+# The maximum credit for having uppercase characters in the new password.
+# If less than 0 it is the minimum number of uppercase characters in the new
+# password.
+# ucredit = 1
+#
+# The maximum credit for having lowercase characters in the new password.
+# If less than 0 it is the minimum number of lowercase characters in the new
+# password.
+# lcredit = 1
+#
+# The maximum credit for having other characters in the new password.
+# If less than 0 it is the minimum number of other characters in the new
+# password.
+# ocredit = 1
+#
+# The minimum number of required classes of characters for the new
+# password (digits, uppercase, lowercase, others).
+# minclass = 0
+#
+# The maximum number of allowed consecutive same characters in the new password.
+# The check is disabled if the value is 0.
+# maxrepeat = 0
+#
+# The maximum number of allowed consecutive characters of the same class in the
+# new password.
+# The check is disabled if the value is 0.
+# maxclassrepeat = 0
+#
+# Whether to check for the words from the passwd entry GECOS string of the user.
+# The check is enabled if the value is not 0.
+# gecoscheck = 0
+#
+# Path to the cracklib dictionaries. Default is to use the cracklib default.
+# dictpath =
+
+[+] 4. 현황 : /etc/login.defs 상세 내용
+#
+# Please note that the parameters in this configuration file control the
+# behavior of the tools from the shadow-utils component. None of these
+# tools uses the PAM mechanism, and the utilities that use PAM (such as the
+# passwd command) should therefore be configured elsewhere. Refer to
+# /etc/pam.d/system-auth for more information.
+#
+
+# *REQUIRED*
+#   Directory where mailboxes reside, _or_ name of file, relative to the
+#   home directory.  If you _do_ define both, MAIL_DIR takes precedence.
+#   QMAIL_DIR is for Qmail
+#
+#QMAIL_DIR	Maildir
+MAIL_DIR	/var/spool/mail
+#MAIL_FILE	.mail
+
+# Password aging controls:
+#
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+#	PASS_MIN_LEN	Minimum acceptable password length.
+#	PASS_WARN_AGE	Number of days warning given before a password expires.
+#
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_MIN_LEN	5
+PASS_WARN_AGE	7
+
+#
+# Min/max values for automatic uid selection in useradd
+#
+UID_MIN                  1000
+UID_MAX                 60000
+# System accounts
+SYS_UID_MIN               201
+SYS_UID_MAX               999
+
+#
+# Min/max values for automatic gid selection in groupadd
+#
+GID_MIN                  1000
+GID_MAX                 60000
+# System accounts
+SYS_GID_MIN               201
+SYS_GID_MAX               999
+
+#
+# If defined, this command is run when removing a user.
+# It should remove any at/cron/print jobs etc. owned by
+# the user to be removed (passed as the first argument).
+#
+#USERDEL_CMD	/usr/sbin/userdel_local
+
+#
+# If useradd should create home directories for users by default
+# On RH systems, we do. This option is overridden with the -m flag on
+# useradd command line.
+#
+CREATE_HOME	yes
+
+# The permission mask is initialized to this value. If not specified, 
+# the permission mask will be initialized to 022.
+UMASK           077
+
+# This enables userdel to remove user groups if no members exist.
+#
+USERGROUPS_ENAB yes
+
+# Use SHA512 to encrypt password.
+ENCRYPT_METHOD SHA512 
+
+
+[+] 4-1. 현황 : PASS_MIN_DAYS 내용
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+PASS_MIN_DAYS	0
+
+
+
+[U-48_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : 영문 숫자 특수문자 2개 조합 시 10자리 이상, 3개 조합 시 8자리 이상, 패스워드 변경 기간 90일 이하 또는 내부 정책에 맞게 설정된 경우
+ * 취약 기준 : 비밀번호 조합규칙 및 길이 미흡, 패스워드 변경 기간 90 이상인 경우
+=============================================
+
+
+
+
+[U-49] 불필요한 계정 제거
+[U-49_START]
+=============================================
+[+] 1. 현황 : /etc/passwd 내 활성화 계정만 출력함
+root:x:0:0:root:/root:/bin/bash
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+lynsecure:x:1001:1001::/home/lynsecure:/bin/bash
+test:x:1002:1002::/home/test:/bin/bash
+
+[+] 2. 현황 : 전체 계정의 접속 기록 중 활성화 계정만 출력함
+[+] root 접속 기록
+
+wtmp begins Thu Jul  3 06:52:53 2025
+
+마지막으로 암호를 바꾼 날					:12월 22, 2009
+암호 만료					:안함
+암호가 비활성화 기간					:안함
+계정 만료						:안함
+암호를 바꿀 수 있는 최소 날 수		: -1
+암호를 바꿔야 하는 최대 날 수		: -1
+암호 만료 예고를 하는 날 수		: -1
+
+[+] ec2-user 접속 기록
+ec2-user pts/0        175.197.150.12   Thu Jul  3 06:53   still logged in   
+
+wtmp begins Thu Jul  3 06:52:53 2025
+
+마지막으로 암호를 바꾼 날					: 7월 03, 2025
+암호 만료					:안함
+암호가 비활성화 기간					:안함
+계정 만료						:안함
+암호를 바꿀 수 있는 최소 날 수		: 0
+암호를 바꿔야 하는 최대 날 수		: 99999
+암호 만료 예고를 하는 날 수		: 7
+
+[+] lynsecure 접속 기록
+
+wtmp begins Thu Jul  3 06:52:53 2025
+
+마지막으로 암호를 바꾼 날					: 7월 03, 2025
+암호 만료					:안함
+암호가 비활성화 기간					:안함
+계정 만료						:안함
+암호를 바꿀 수 있는 최소 날 수		: 0
+암호를 바꿔야 하는 최대 날 수		: 99999
+암호 만료 예고를 하는 날 수		: 7
+
+[+] test 접속 기록
+
+wtmp begins Thu Jul  3 06:52:53 2025
+
+마지막으로 암호를 바꾼 날					: 7월 03, 2025
+암호 만료					:안함
+암호가 비활성화 기간					:안함
+계정 만료						:안함
+암호를 바꿀 수 있는 최소 날 수		: 0
+암호를 바꿔야 하는 최대 날 수		: 99999
+암호 만료 예고를 하는 날 수		: 7
+
+=============================================
+[U-49_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 분기별 1회 이상 로그인 한 기록이 있고, 비밀번호를 변경하고 있는 경우
+ * 취약 조건 : 분기별 1회 이상 로그인 한 기록이 없거나, 비밀번호를 변경하지 않은 경우
+[*] 기준에 부합하지 않는 계정 존재 확인 (분기별 1회 이상 로그인 또는 패스워드 변경)
+[*] 마지막 로그인 시간 확인
+[*] 마지막 패스워드 변경 시간 확인
+=============================================
+
+
+
+
+[U-50] 관리자 그룹에 최소한의 계정 포함
+[U-50_START]
+=============================================
+[+] 1. 현황 : root가 포함된 group 확인
+root:x:0:
+
+[+] 2. 현황 : /etc/group 파일 확인
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user,lynsecure,test
+cdrom:x:11:
+mail:x:12:postfix
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+nobody:x:99:
+users:x:100:
+utmp:x:22:
+utempter:x:35:
+input:x:999:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+dbus:x:81:
+ssh_keys:x:998:
+rpc:x:32:
+libstoragemgmt:x:997:
+sshd:x:74:
+rngd:x:996:
+rpcuser:x:29:
+nfsnobody:x:65534:
+ec2-instance-connect:x:995:
+slocate:x:21:
+postdrop:x:90:
+postfix:x:89:
+chrony:x:994:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+screen:x:84:
+tcpdump:x:72:
+ec2-user:x:1000:
+nginx:x:993:
+lynsecure:x:1001:
+test:x:1002:
+
+=============================================
+[U-50_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 관리자 그룹에 불필요한 관리자 계정이 없을 경우
+ * 취약 조건 : 관리자 그룹에 불필요한 관리자 계정이 있을 경우
+=============================================
+
+
+
+
+[U-51] 계정이 존재하지 않는 GID 금지
+[U-51_START]
+=============================================
+[+] 1. 현황 : /etc/group 그룹 확인
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:ec2-user
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:ec2-user,lynsecure,test
+cdrom:x:11:
+mail:x:12:postfix
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+nobody:x:99:
+users:x:100:
+utmp:x:22:
+utempter:x:35:
+input:x:999:
+systemd-journal:x:190:ec2-user
+systemd-network:x:192:
+dbus:x:81:
+ssh_keys:x:998:
+rpc:x:32:
+libstoragemgmt:x:997:
+sshd:x:74:
+rngd:x:996:
+rpcuser:x:29:
+nfsnobody:x:65534:
+ec2-instance-connect:x:995:
+slocate:x:21:
+postdrop:x:90:
+postfix:x:89:
+chrony:x:994:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+screen:x:84:
+tcpdump:x:72:
+ec2-user:x:1000:
+nginx:x:993:
+lynsecure:x:1001:
+test:x:1002:
+
+[+] 2. 현황 : /etc/passwd 확인
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+libstoragemgmt:x:999:997:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+rngd:x:998:996:Random Number Generator Daemon:/var/lib/rngd:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+ec2-instance-connect:x:997:995::/home/ec2-instance-connect:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:996:994::/var/lib/chrony:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+nginx:x:995:993:Nginx web server:/var/lib/nginx:/sbin/nologin
+lynsecure:x:1001:1001::/home/lynsecure:/bin/bash
+test:x:1002:1002::/home/test:/bin/bash
+
+[+] 3. 현황 : /etc/gshadow 확인
+root:::
+bin:::
+daemon:::
+sys:::
+adm:::ec2-user
+tty:::
+disk:::
+lp:::
+mem:::
+kmem:::
+wheel:::ec2-user,lynsecure,test
+cdrom:::
+mail:::postfix
+man:::
+dialout:::
+floppy:::
+games:::
+tape:::
+video:::
+ftp:::
+lock:::
+audio:::
+nobody:::
+users:::
+utmp:!::
+utempter:!::
+input:!::
+systemd-journal:!::ec2-user
+systemd-network:!::
+dbus:!::
+ssh_keys:!::
+rpc:!::
+libstoragemgmt:!::
+sshd:!::
+rngd:!::
+rpcuser:!::
+nfsnobody:!::
+ec2-instance-connect:!::
+slocate:!::
+postdrop:!::
+postfix:!::
+chrony:!::
+stapusr:!::
+stapsys:!::
+stapdev:!::
+screen:!::
+tcpdump:!::
+ec2-user:!::
+nginx:!::
+lynsecure:!::
+test:!::
+
+=============================================
+[U-51_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 구성원이 존재하지 않는 GID가 존재하지 않는 경우
+ * 취약 조건 : 구성원이 존재하지 않는 GID가 존재하는 경우
+=============================================
+
+
+
+
+[U-52] 동일한 UID 금지
+[U-52_START]
+=============================================
+[+] 1. 현황 : /etc/passwd에서 UID 추출
+root = 0
+bin = 1
+daemon = 2
+adm = 3
+lp = 4
+sync = 5
+shutdown = 6
+halt = 7
+mail = 8
+operator = 11
+games = 12
+ftp = 14
+nobody = 99
+systemd-network = 192
+dbus = 81
+rpc = 32
+libstoragemgmt = 999
+sshd = 74
+rngd = 998
+rpcuser = 29
+nfsnobody = 65534
+ec2-instance-connect = 997
+postfix = 89
+chrony = 996
+tcpdump = 72
+ec2-user = 1000
+nginx = 995
+lynsecure = 1001
+test = 1002
+
+[+] 2. 중복된 UID 확인
+
+[+] 중복된 UID가 존재하지 않습니다.
+
+=============================================
+[U-52_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 동일한 UID로 설정된 사용자 계정이 존재하지 않는 경우
+ * 취약 조건 : 동일한 UID로 설정된 사용자 계정이 존재하는 경우
+=============================================
+
+
+
+
+[U-53] 사용자 shell 점검
+[U-53_START]
+=============================================
+[+] 활성화 계정 중 불필요한 계정 확인.
+root:x:0:0:root:/root:/bin/bash
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+lynsecure:x:1001:1001::/home/lynsecure:/bin/bash
+test:x:1002:1002::/home/test:/bin/bash
+
+=============================================
+[U-53_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 로그인이 필요하지 않은 계정에 /bin/false(nologin) 등이 부여된 경우
+ * 취약 조건 : 로그인이 필요하지 않은 계정에 shell이 부여된 경우
+=============================================
+
+
+
+
+[U-54] Session Timeout 설정
+[U-54_START]
+=============================================
+[+] /etc/profile 설정 확인
+
+[+] 관련 설정이 존재하지 않습니다.
+
+
+[U-54_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 세션 타임아웃 값이 600초 이하(10분)로 설정 되어 있을 경우
+ * 취약 조건 :  세션 타임아웃 값이 600초 이하(10분)로 설정 되어 있지 않을 경우 (아래 내용 중 해당사항이 있는 경우)
+************************************************
+1) 내부 규정에 세션 종료 시간이 명시되어있는 경우
+    - 세션 타임아웃이 내부 규정에 명시된 세션 종료 시간보다 초과 설정 시 취약으로 진단
+2) 내부 규정에 세션 종료시간이 명시되어 있지 않을 경우
+    - 세션타임아웃이 10분 초과 설정 시 취약으로 진단
+=============================================
+
+
+
+
+[U-05] root 홈, 패스 디렉토리 권한 및 패스 설정
+[U-05_START]
+=============================================
+[+] 현황 : PATH 환경변수 확인
+/sbin:/bin:/usr/sbin:/usr/bin
+
+=============================================
+[U-05_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : PATH 환경변수에 “.” 이 맨 앞이나 중간에 포함되지 않은 경우
+ * 취약 조건 : PATH 환경변수에 “.” 이 맨 앞이나 중간에 포함되어 있는 경우
+=============================================
+
+
+
+
+[U-06] 파일 및 디렉토리 소유자 설정
+[U-06_START]
+=============================================
+[+] 소유자가 존재하지 않는 파일 출력
+소유자가 존재하지 않는 파일이 존재하지 않습니다.
+
+[+] 소유자 그룹이 존재하지 않는 파일 출력
+소유자가 존재하지 않는 파일이 존재하지 않습니다.
+
+=============================================
+[U-06_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 존재하지 않는 소유자 및 그룹 권한을 가진 파일 또는 디렉토리 존재
+ * 취약 조건 : 소유자가 존재하지 않는 파일 디렉토리 중 중요한 파일인지 확인
+=============================================
+
+
+
+
+[U-07] /etc/passwd 파일 소유자 및 권한 설정
+[U-07_START]
+=============================================
+
+[+] /etc/passwd
+-rw-r--r-- 1 root root 1462  7월  3 06:53 /etc/passwd
+
+[U-07_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/passwd 권한: 644, 소유자 root
+1-2. /etc/security/passwd 권한: 644, 소유자 root
+*** 존재하고있는 파일 및 디렉토리만 출력 ***
+=============================================
+
+
+
+
+[U-08] /etc/shadow 파일 소유자 및 권한 설정
+[U-08_START]
+=============================================
+
+[+] /etc/shadow
+---------- 1 root root 754  7월  3 06:53 /etc/shadow
+
+[U-08_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/shadow 권한: 400, 소유자 root 
+*** 존재하고있는 파일 및 디렉토리만 출력 ***
+=============================================
+
+
+
+
+[U-09] /etc/hosts 파일 소유자 및 권한 설정
+[U-09_START]
+=============================================
+
+[+] /etc/hosts
+-rw-r--r-- 1 root root 126  6월 20 06:57 /etc/hosts
+
+[U-09_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/hosts 권한: 600, 소유자 root
+=============================================
+
+
+
+
+[U-10] /etc/(x)inetd.conf 파일 소유자 및 권한 설정
+[U-10_START]
+=============================================
+파일이 존재하지 않습니다. /etc/inetd.conf
+파일이 존재하지 않습니다. /etc/xinetd.conf
+
+[U-10_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/(x)inetd.conf 권한: 600, 소유자 root
+=============================================
+
+
+
+
+[U-11] /etc/syslog.conf 파일 소유자 및 권한 설정
+[U-11_START]
+=============================================
+파일이 존재하지 않습니다. /etc/syslog.conf
+
+[+] /etc/rsyslog.conf
+-rw-r--r-- 1 root root 3232  2월  7  2023 /etc/rsyslog.conf
+
+[U-11_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/(r)syslog.conf 권한: 640, 소유자 root
+=============================================
+
+
+
+
+[U-12] /etc/services 파일 소유자 및 권한 설정
+[U-12_START]
+=============================================
+
+[+] /etc/services
+-rw-r--r-- 1 root root 670293  6월  7  2013 /etc/services
+
+[U-12_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/services 권한:  644, 소유자 root
+=============================================
+
+
+
+
+[U-13] SUID, SGID, Sticky bit 설정 파일 점검
+[U-13_START]
+=============================================
+[+] SUID, SGID, Sticky bit가 설정된 파일 출력(최대 5개)
+-r-xr-sr-x 1 root tty 15264  8월  1  2018 /usr/bin/wall
+---s--x--x 1 root root 151344  2월 22  2024 /usr/bin/sudo
+-rwsr-xr-x 1 root root 64152  9월 12  2023 /usr/bin/chage
+-rwsr-xr-x 1 root root 78120  9월 12  2023 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 37616  9월 12  2023 /usr/bin/newgrp
+
+=============================================
+[U-13_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 불필요하게 SUID ,SGID가 설정된 파일이 없을 경우 판단 불가 시 4750(업무상 용도 포함)
+ * 취약 조건 : 불필요하게 SUID ,SGID가 설정된 파일이 있을 경우
+=============================================
+
+
+
+
+[U-14] 사용자, 시스템 시작파일 및 환경파일 소유자 및 권한 설정
+[U-14_START]
+=============================================
+[+] 1. 현황 : 환경변수 파일 확인
+[*] /bin
+파일이 존재하지 않습니다.
+[*] /home/ec2-user
+-rw-r--r-- 1 ec2-user ec2-user 193  7월 15  2020 /home/ec2-user/.bash_profile
+-rw-r--r-- 1 ec2-user ec2-user 231  7월 15  2020 /home/ec2-user/.bashrc
+[*] /home/lynsecure
+-rw-r--r-- 1 lynsecure lynsecure 193  7월 15  2020 /home/lynsecure/.bash_profile
+-rw-r--r-- 1 lynsecure lynsecure 231  7월 15  2020 /home/lynsecure/.bashrc
+[*] /home/test
+-rw-r--r-- 1 test test 193  7월 15  2020 /home/test/.bash_profile
+-rw-r--r-- 1 test test 231  7월 15  2020 /home/test/.bashrc
+[*] /root
+-rw-r--r-- 1 root root 176 10월 18  2017 /root/.bash_profile
+-rw-r--r-- 1 root root 176 10월 18  2017 /root/.bashrc
+-rw-r--r-- 1 root root 100 10월 18  2017 /root/.cshrc
+-rw-r--r-- 1 root root 129 10월 18  2017 /root/.tcshrc
+[*] /sbin
+파일이 존재하지 않습니다.
+[*] /usr/games
+파일이 존재하지 않습니다.
+[*] /var/adm
+파일이 존재하지 않습니다.
+[*] /var/empty/sshd
+파일이 존재하지 않습니다.
+[*] /var/lib/chrony
+파일이 존재하지 않습니다.
+[*] /var/lib/nfs
+파일이 존재하지 않습니다.
+[*] /var/lib/nginx
+파일이 존재하지 않습니다.
+[*] /var/lib/rpcbind
+파일이 존재하지 않습니다.
+[*] /var/run/lsm
+파일이 존재하지 않습니다.
+[*] /var/spool/lpd
+파일이 존재하지 않습니다.
+[*] /var/spool/mail
+파일이 존재하지 않습니다.
+[*] /var/spool/postfix
+파일이 존재하지 않습니다.
+=============================================
+[U-14_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 홈디렉토리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되어 있고, 홈디렉토리 환경변수 파일에 root와 소유자만 쓰기 권한이 부여
+된 경우
+ * 취약 조건 : 홈디렉토리 환경변수 파일 소유자가 root 또는, 해당 계정으로 지정되지 않고, 홈디렉토리 환경변수 파일에 root와 소유자 외에 쓰기 권한이 
+부여된 경우
+=============================================
+
+
+
+
+[U-15] world writable 파일 점검
+[U-15_START]
+=============================================
+[+] world writable 파일 확인
+파일이 존재하지 않습니다.
+
+=============================================
+[U-15_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 불필요한 world writable 파일이 존재하지 않는 경우 & others에 쓰기권한 없으면 양호
+ * 취약 조건 : 불필요한 world writable 파일이 존재하는 경우
+=============================================
+
+
+
+
+[U-16] /dev에 존재하지 않는 device 파일 점검
+[U-16_START]
+=============================================
+[+] 현황 : find /dev -type f -exec ls -l {} \;
+-rw-r--r-- 1 root root 596  7월  3 07:43 /dev/nul
+
+
+=============================================
+[U-16_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : /dev 경로에 존재하지 않는 device 파일이 없는 경우
+ * 취약 조건 : /dev 경로에 존재하지 않는 불필요한 device 파일이 있는 경우  
+=============================================
+
+
+
+
+[U-17] /root/.rhosts, hosts.equiv 사용 금지
+[U-17_START]
+=============================================
+[+] 관련 설정이 존재하지 않습니다.
+[+] 관련 설정이 존재하지 않습니다.
+[U-17_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+[*] 미출력 시 파일이 미존재
+ * 양호 조건 : login, shell, exec 서비스를 사용하지 않거나, 사용 시 아래와 같은 설정이 적용된 경우
+ * 양호 조건 1 : 1. /etc/hosts.equiv 및 /root/.rhosts 파일 소유자가 root 또는, 해당 계정인 경우 
+ * 양호 조건 2 : 2. /etc/hosts.equiv 및 /root/.rhosts 파일 권한이 600 이하인 경우 
+ * 양호 조건 3 : 3. /etc/hosts.equiv 및 /root/.rhosts 파일 설정에 ‘+’ 설정이 없는 경우
+ * 취약 조건 : login, shell, exec 서비스를 사용하고, 위와 같은 설정이 적용되지 않은 경우
+=============================================
+
+
+
+
+[U-18] 접속 IP 및 포트 제한
+[U-18_START]
+=============================================
+[+] /etc/hosts.allow
+[*] 파일 존재여부 체크
+-rw-r--r-- 1 root root 370  6월  7  2013 /etc/hosts.allow
+[*] 파일 내 적절한 설정 체크
+#
+# hosts.allow	This file contains access rules which are used to
+#		allow or deny connections to network services that
+#		either use the tcp_wrappers library or that have been
+#		started through a tcp_wrappers-enabled xinetd.
+#
+#		See 'man 5 hosts_options' and 'man 5 hosts_access'
+#		for information on rule syntax.
+#		See 'man tcpd' for information on tcp_wrappers
+#
+
+[+] /etc/hosts.deny
+[*] 파일 존재여부 체크
+-rw-r--r-- 1 root root 460  6월  7  2013 /etc/hosts.deny
+[*] 파일 내 적절한 설정 체크
+#
+# hosts.deny	This file contains access rules which are used to
+#		deny connections to network services that either use
+#		the tcp_wrappers library or that have been
+#		started through a tcp_wrappers-enabled xinetd.
+#
+#		The rules in this file can also be set up in
+#		/etc/hosts.allow with a 'deny' option instead.
+#
+#		See 'man 5 hosts_options' and 'man 5 hosts_access'
+#		for information on rule syntax.
+#		See 'man tcpd' for information on tcp_wrappers
+#
+
+
+[U-18_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 시스템 서비스로의 접근통제가 적절하게 수행되고 있을 경우 (방화벽, tcp-wrapper, 3rd-party 제품 등을 활용) 또는 예시( /etc/hosts.allow - sshd : IP주소 (접근을 허용할 호스트) && /etc/hosts.deny - ALL:ALL (ALL Deny 설정))
+ * 취약 조건 : 시스템 서비스로의 접근통제가 적절하게 수행되고 있지 않을 경우 또는 관련설정 없을 시 
+=============================================
+
+
+
+
+[U-55] hosts.lpd 파일 소유자 및 권한 설정
+[U-55_START]
+=============================================
+
+[U-55_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+1. /etc/hosts.lpd 권한: 600, 소유자 root
+=============================================
+
+
+
+
+[U-56] UMASK 설정 관리
+[U-56_START]
+=============================================
+[+] 1. 현황 : /etc/security/user 설정 
+파일이 존재하지 않습니다.
+
+[+] 2. 현황 : /etc/profile
+# By default, we want umask to get set. This sets it for login shell
+    umask 002
+    umask 022
+
+[+] 3. 현황 : 모든 계정의 홈디렉토리 내 .*profile .*shrc 확인
+ [*] /home/ec2-user/.bash_profile
+ UMASK 설정 없음
+ [*] /home/ec2-user/.bashrc
+ UMASK 설정 없음
+ [*] /home/lynsecure/.bash_profile
+ UMASK 설정 없음
+ [*] /home/lynsecure/.bashrc
+ UMASK 설정 없음
+ [*] /home/test/.bash_profile
+ UMASK 설정 없음
+ [*] /home/test/.bashrc
+ UMASK 설정 없음
+ [*] /root/.bash_profile
+ UMASK 설정 없음
+ [*] /root/.bashrc
+ UMASK 설정 없음
+ [*] /root/.cshrc
+ UMASK 설정 없음
+ [*] /root/.tcshrc
+ UMASK 설정 없음
+
+[+] 4. 현황 : 현재 접속 계정 UMASK 설정
+0022
+
+=============================================
+[U-56_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 모든 계정의 umask 값과 설정 파일 등에 적용된 umask값이 022 이상인 경우
+ * 취약 조건 : umask값이나 설정 파일 등에 적용된 umask값이 022미만인 계정이 존재하는 경우
+=============================================
+
+
+
+
+[U-57] 홈디렉토리 소유자 및 권한 설정
+[U-57_START]
+=============================================
+[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)
+adm @ /var/adm
+bin @ /bin
+chrony @ /var/lib/chrony
+daemon @ /sbin
+dbus @ /
+ec2-instance-connect @ /home/ec2-instance-connect
+ec2-user @ /home/ec2-user
+ftp @ /var/ftp
+games @ /usr/games
+halt @ /sbin
+libstoragemgmt @ /var/run/lsm
+lp @ /var/spool/lpd
+lynsecure @ /home/lynsecure
+mail @ /var/spool/mail
+nfsnobody @ /var/lib/nfs
+nginx @ /var/lib/nginx
+nobody @ /
+operator @ /root
+postfix @ /var/spool/postfix
+rngd @ /var/lib/rngd
+root @ /root
+rpc @ /var/lib/rpcbind
+rpcuser @ /var/lib/nfs
+shutdown @ /sbin
+sshd @ /var/empty/sshd
+sync @ /sbin
+systemd-network @ /
+tcpdump @ /
+test @ /home/test
+
+[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)
+lrwxrwxrwx 1 root root 7  6월 20 06:55 /bin -> usr/bin
+drwx------ 4 ec2-user ec2-user 261  7월  3 07:46 /home/ec2-user
+drwx------ 2 lynsecure lynsecure 62  7월  3 06:53 /home/lynsecure
+drwx------ 2 test test 62  7월  3 06:53 /home/test
+dr-xr-x--- 3 root root 103  7월  3 06:52 /root
+lrwxrwxrwx 1 root root 8  6월 20 06:55 /sbin -> usr/sbin
+drwxr-xr-x 2 root root 6  4월  9  2019 /usr/games
+drwxr-xr-x 2 root root 6  4월  9  2019 /var/adm
+drwx--x--x 2 root root 6  6월  3 11:33 /var/empty/sshd
+drwxr-x--- 2 chrony chrony 6  8월 24  2022 /var/lib/chrony
+drwxr-xr-x 5 root root 105  6월 20 06:56 /var/lib/nfs
+drwxrwx--- 3 nginx root 17  7월  3 06:53 /var/lib/nginx
+drwx------ 2 rpc rpc 6  7월 27  2018 /var/lib/rpcbind
+drwxrwxr-x 3 root libstoragemgmt 60  7월  3 06:52 /var/run/lsm
+drwxr-xr-x 2 root root 6  4월  9  2019 /var/spool/lpd
+drwxrwxr-x 2 root mail 62  7월  3 06:53 /var/spool/mail
+drwxr-xr-x 16 root root 201  6월 20 06:56 /var/spool/postfix
+
+=============================================
+[U-57_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 홈디렉토리의 소유자와 실 사용자가 일치하고, 계정간 중복 홈디렉토리가 존재하지 않고, 불필요한 others 쓰기 권한이 없는 경우
+ * 취약 조건 : 홈디렉토리의 소유자와 실 사용자가 일치하지 않거나, 계정간 중복 홈디렉토리가 존재하거나, 불필요한 others 쓰기 권한이 있는 경우
+=============================================
+
+
+
+
+[U-58] 홈디렉토리로 지정한 디렉토리의 존재 관리
+[U-58_START]
+=============================================
+[+] 소유자 별 홈디렉토리 확인 (소유자 @ 홈디렉토리 < 형태이며, 중복 홈디렉토리와 소유자별 디렉토리 일치하는지 확인)
+adm @ /var/adm
+bin @ /bin
+chrony @ /var/lib/chrony
+daemon @ /sbin
+dbus @ /
+ec2-instance-connect @ /home/ec2-instance-connect
+ec2-user @ /home/ec2-user
+ftp @ /var/ftp
+games @ /usr/games
+halt @ /sbin
+libstoragemgmt @ /var/run/lsm
+lp @ /var/spool/lpd
+lynsecure @ /home/lynsecure
+mail @ /var/spool/mail
+nfsnobody @ /var/lib/nfs
+nginx @ /var/lib/nginx
+nobody @ /
+operator @ /root
+postfix @ /var/spool/postfix
+rngd @ /var/lib/rngd
+root @ /root
+rpc @ /var/lib/rpcbind
+rpcuser @ /var/lib/nfs
+shutdown @ /sbin
+sshd @ /var/empty/sshd
+sync @ /sbin
+systemd-network @ /
+tcpdump @ /
+test @ /home/test
+
+[+] 홈디렉토리의 권한 확인 (불필요한 others 쓰기권한)
+lrwxrwxrwx 1 root root 7  6월 20 06:55 /bin -> usr/bin
+drwx------ 4 ec2-user ec2-user 261  7월  3 07:46 /home/ec2-user
+drwx------ 2 lynsecure lynsecure 62  7월  3 06:53 /home/lynsecure
+drwx------ 2 test test 62  7월  3 06:53 /home/test
+dr-xr-x--- 3 root root 103  7월  3 06:52 /root
+lrwxrwxrwx 1 root root 8  6월 20 06:55 /sbin -> usr/sbin
+drwxr-xr-x 2 root root 6  4월  9  2019 /usr/games
+drwxr-xr-x 2 root root 6  4월  9  2019 /var/adm
+drwx--x--x 2 root root 6  6월  3 11:33 /var/empty/sshd
+drwxr-x--- 2 chrony chrony 6  8월 24  2022 /var/lib/chrony
+drwxr-xr-x 5 root root 105  6월 20 06:56 /var/lib/nfs
+drwxrwx--- 3 nginx root 17  7월  3 06:53 /var/lib/nginx
+drwx------ 2 rpc rpc 6  7월 27  2018 /var/lib/rpcbind
+drwxrwxr-x 3 root libstoragemgmt 60  7월  3 06:52 /var/run/lsm
+drwxr-xr-x 2 root root 6  4월  9  2019 /var/spool/lpd
+drwxrwxr-x 2 root mail 62  7월  3 06:53 /var/spool/mail
+drwxr-xr-x 16 root root 201  6월 20 06:56 /var/spool/postfix
+=============================================
+[U-58_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 홈디렉토리가 존재하지 않는 계정이 발견되지 않는 경우
+ * 취약 조건 : 홈디렉토리가 존재하지 않는 계정이 발견된 경우
+=============================================
+
+
+
+
+[U-59] 숨겨진 파일 및 디렉토리 검색 및 제거
+[U-59_START]
+=============================================
+[+] 1. 현황 : 불필요한 숨김 파일 확인(최대 5개)
+-rw-r--r-- 1 root root 163  6월 20 06:55 /etc/.updated
+-rw------- 1 root root 0  7월  3 06:52 /etc/.pwd.lock
+-rw-r--r-- 1 root root 18  7월 15  2020 /etc/skel/.bash_logout
+-rw-r--r-- 1 root root 193  7월 15  2020 /etc/skel/.bash_profile
+-rw-r--r-- 1 root root 231  7월 15  2020 /etc/skel/.bashrc
+
+[+] 2. 현황 : 불필요한 숨김 디렉토리 확인(최대 5개)
+/tmp/.XIM-unix
+/tmp/.ICE-unix
+/tmp/.Test-unix
+/tmp/.font-unix
+/tmp/.X11-unix
+=============================================
+[U-59_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 불필요한 숨김 파일이 존재하지 않을 경우
+ * 취약 조건 : 불필요한 숨김 파일이 존재하는 경우
+=============================================
+
+
+
+
+[U-19] finger 서비스 비활성화
+[U-19_START]
+=============================================
+[+] 해당 서비스가 비활성화되어 있습니다.
+
+
+[+] xinetd 활성화 서비스 목록
+[+] xinetd 디렉토리가 존재하지 않습니다.
+
+
+[U-19_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 아래의 항목 중 해당사항이 없는경우
+ * 취약 조건 : 아래의 항목 중 해당하는 조건이 있는 경우
+*********************************************
+1. finger 서비스 활성화
+*********************************************
+=============================================
+
+
+
+
+[U-20] Anonymous FTP 비활성화
+[U-20_START]
+=============================================
+[+] FTP 서비스 활성화 확인 
+ [+] FTP 서비스가 활성화 중입니다.
+ [+]  vsftpd :  0
+ [+]  proftpd :  0
+ [*] 활성화(1), 비활성화(0)
+
+ [*] 이외 ftp 확인
+ec2-user  3529  3528  0 06:54 ?        00:00:00 /usr/libexec/openssh/sftp-server
+
+[+] 1. FTP 기본계정 로그인 쉘
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+
+[+] 2. FTP 설정 현황
+
+[U-20_END]
+=============================================
+[*] FTP 포트 활성화 확인 
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : 익명 FTP 사용 설정이 비활성화되어 있거나(AND), FTP 기본 계정 로그인 쉘이 비활성화(false/nologin)되어 있는 경우
+ * 취약 기준 : 익명 FTP 사용 설정이 활성화되어 있거나(AND), FTP 기본 계정 로그인 쉘이 활성화(shell)되어 있는 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+ *** default Settings value : #anonymous_enable=YES 
+ 결과 값이 출력되지 않을 경우 주석처리된 것일 수도 있어 취약으로 진단 
+=============================================
+
+
+
+
+[U-21] r 계열 서비스 비활성화
+[U-21_START]
+=============================================
+[+] 해당 서비스가 비활성화되어 있습니다.
+
+
+[+] xinetd 활성화 서비스 목록
+[+] xinetd 디렉토리가 존재하지 않습니다.
+
+
+[U-21_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 아래의 항목 중 해당사항이 없는경우
+ * 취약 조건 : 아래의 항목 중 해당하는 조건이 있는 경우
+*********************************************
+1. rexec, rlogin, rsh 서비스 활성화
+[*] 프로세스 구동여부 더블체크
+*********************************************
+=============================================
+
+
+
+
+[U-22] cron 파일 소유자 및 권한설정
+[U-22_START]
+=============================================
+[+] /etc/cron.d
+drwxr-xr-x 2 root root 73  6월 20 06:56 /etc/cron.d
+
+[+] /etc/cron.daily
+drwxr-xr-x 2 root root 57  6월 20 06:56 /etc/cron.daily
+
+[+] /etc/cron.deny
+-rw------- 1 root root 0  1월 16  2020 /etc/cron.deny
+
+[+] /etc/cron.hourly
+drwxr-xr-x 2 root root 22  6월 20 06:56 /etc/cron.hourly
+
+[+] /etc/cron.monthly
+drwxr-xr-x 2 root root 6 10월 18  2017 /etc/cron.monthly
+
+[+] /etc/cron.weekly
+drwxr-xr-x 2 root root 6 10월 18  2017 /etc/cron.weekly
+
+[+] /etc/crontab
+-rw-r--r-- 1 root root 451 10월 18  2017 /etc/crontab
+
+[+] /etc/at.deny
+-rw-r--r-- 1 root root 1  1월 16  2020 /etc/at.deny
+
+
+[U-22_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 1. : crontab 파일의 other 권한에 읽기, 쓰기 권한이 존재하지 않는 경우
+ * 양호 기준 2. : 접근제어파일(*.allow, *.deny) 소유자가 root이고, 권한이 640이하로 설정된 경우
+ * 취약 기준 : 양호 기준 1,2 중 하나라도 부합하는 경우
+*** cron.deny, cron.allow 둘 다 없는 경우 수정권한은 슈퍼유저(root)만 가능(양호로 진단) ***
+=============================================
+
+
+
+
+[U-23] Dos 공격에 취약한 서비스 비활성화
+[U-23_START]
+=============================================
+[+] 1. 현황 : ls -al /etc/xinetd.d
+합계 12
+drwxr-xr-x  2 root root    6  4월  9  2019 .
+drwxr-xr-x 82 root root 8192  7월  3 06:53 ..
+
+[+] 2. 설정파일 확인 (Disable=yes 설정시 양호)
+[+] 2-1. 현황 : chargen 확인 
+cat: /etc/xinetd.d/chargen: No such file or directory
+
+cat: /etc/xinetd.d/chargen-dgram: No such file or directory
+
+[+] 2-2. 현황 : daytime 확인 
+cat: /etc/xinetd.d/daytime: No such file or directory
+
+cat: /etc/xinetd.d/daytime-dgram: No such file or directory
+
+[+] 2-3. 현황 : discard 확인 
+cat: /etc/xinetd.d/discard: No such file or directory
+
+cat: /etc/xinetd.d/discard-dgram: No such file or directory
+
+[+] 2-4. 현황 : echo 확인 
+cat: /etc/xinetd.d/echo: No such file or directory
+
+cat: /etc/xinetd.d/echo-dgram: No such file or directory
+
+
+[U-23_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : echo, discard, daytime, chargen 서비스가 비활성화 되어있거나 결과값이 없을경우에 양호
+ * 취약 기준 : 미사용 중인 서비스로 구동 중이거나, 불필요하게 서비스가 구동 중인 경우
+[*] Sendmail 구동 시 프로세스 출력 값(예시)
+  root      29202      1  0 Dec12 ?        00:00:00 sendmail: accepting connections
+  smmsp     29213      1  0 Dec12 ?        00:00:00 sendmail: Queue runner@01:00:00 for /var/spool/clientmqueue
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-24] NFS 서비스 비활성화
+[U-24_START]
+=============================================
+[+] 1. 현황 : nfs|mountd|statd 서비스 확인
+
+[+] 2. 참고 : service nfs status 실행(NFS 프로세스의 Status 필드 inactive면 양호) 
+Redirecting to /bin/systemctl status nfs.service
+● nfs-server.service - NFS server and services
+   Loaded: loaded (/usr/lib/systemd/system/nfs-server.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+ 
+
+[U-24_END]
+=============================================
+[+] 2. 참고 : service nfs status 실행(NFS 프로세스의 Status 필드 inactive면 양호) 
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : 불필요한 NFS 서비스 관련 데몬이 비활성화 되어 있는 경우
+ * 취약 기준 : 불필요한 NFS 서비스 관련 데몬이 활성화 되어 있는 경우
+=============================================
+
+
+
+
+[U-25] NFS 접근 통제
+[U-25_START]
+=============================================
+[-] NFS 마운트 없음. showmount 생략
+=============================================
+[+] NFS 서비스가 비활성화되어 있습니다.
+
+[U-25_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : NFS 미사용 또는 설정 파일 조회 시 everyone에 대해 제한한 경우
+ * 취약 기준 : 1. NFS 사용하며, everyone에 대해 제한하지 않은 경우 / 2. NFS 설정 파일 내에 읽기/쓰기 권한 정의 등의 적절한 접근 통제 설정이 없을 경우 / 3. NFS 설정 파일의 접근권한이 소유자가 root가 아니고, 권한이 644보다 높게 부여된 경우
+=============================================
+
+
+
+
+[U-26] automountd 제거
+[U-26_START]
+=============================================
+[+] automountd 와 autofs 가 비활성화 되어있습니다.
+[U-26_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 불필요한 autmountd 서비스가 비활성화된 경우
+ * 취약 조건 : 취약한 버전의 automountd 서비스가 불필요하게 활성화된 경우 / HP-UX 같은 경우 automount가 활성화된 경우 AUTOFS 값이 1인 경우 취약 
+ *** 결과 값이 출력되지 않을 경우 미구동 중인 것으로 판단
+=============================================
+
+
+
+
+[U-27] RPC 서비스 확인
+[U-27_START]
+=============================================
+[+] 1. rpc 프로세스 현황
+[*] 출력값 존재 시 취약
+
+[+] 2. rpc 서비스 현황
+[*] 출력값 존재 시 취약
+
+[+] 3. inetd.conf 확인
+파일이 존재하지 않습니다. /etc/inetd.conf
+[*] 출력값 존재 시 취약
+
+[U-27_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ 양호 : 불필요한 RPC 관련 서비스가 존재하지 않으면 양호 (업무상 사용시 예외)
+ 취약 : 불필요한 RPC 관련 서비스가 존재하면 취약
+ 참고 목록 : rpc.cmsd rpc.ttdbserverd sadmind rusersd walld sprayd rstatd rpc.nisd rexd rpc.pcnfsd rpc.statd rpc.ypupdated rpc.rquotad kcms_server cachefsd
+=============================================
+
+
+
+
+[U-28] NIS, NIS+ 점검
+[U-28_START]
+=============================================
+[+] NIS 서비스, NIS+ 서비스 활성화 확인
+[+] 해당 서비스가 비활성화되어 있습니다.
+
+
+[U-28_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 아래의 항목 중 해당사항이 없는경우
+ * 취약 조건 : 아래의 항목 중 해당하는 조건이 있는 경우
+*********************************************
+1. NIS, NIS+ 서비스 활성화
+[*] 프로세스 구동여부 더블체크
+*********************************************
+=============================================
+
+
+
+
+[U-29] tftp, talk 서비스 비활성화
+[U-29_START]
+=============================================
+[+] inetd 활성화 서비스 목록
+[+] 해당 서비스가 비활성화되어 있습니다.
+
+
+[+] xinetd 활성화 서비스 목록
+[+] xinetd 디렉토리가 존재하지 않습니다.
+
+
+[U-29_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 아래의 항목 중 해당사항이 없는경우
+ * 취약 조건 : 아래의 항목 중 해당하는 조건이 있는 경우
+*********************************************
+1. tftp, talk, ntalk 서비스가 불필요하게 활성화된 경우
+2. finger 서비스 활성화
+3. rexec, rlogin, rsh 서비스 활성화
+4. DoS 공격에 취약한 echo, discard, daytime, chargen 서비스 활성화
+5. NIS, NIS+ 서비스 활성화
+[*] 프로세스 구동여부 더블체크
+*********************************************
+=============================================
+
+
+
+
+[U-30] Sendmail 버전 점검
+[U-30_START]
+=============================================
+[+] Sendmail 서비스가 비활성화되어 있습니다. 
+
+
+[U-30_END]
+=============================================
+[*] SMTP 포트 확인(참고) 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : SMTP 서비스 버전이 최신 버전일 경우 또는 금융회사 내부 규정에 따라 패치 검토 및 패치를 수행하고 있는 경우
+ * 취약 기준 : SMTP 서비스 버전이 최신이 아닐 경우 또는 금융회사 내부 규정의 패치 관리 절차를 준수하지 않은 경우
+ ****** Sendmail Release List ******
+  - 8.17.1/8.17.1  2021/08/17
+  - 8.16.2/8.16.2 202X/XX/XX
+  - 8.16.1/8.16.1 2020/07/05
+  - 8.15.2/8.15.2 2015/07/03
+  - 8.15.1/8.15.1 2014/12/06
+  - 8.14.7/8.14.7 2013/04/21
+  - 8.14.6/8.14.6 2012/12/23
+ ***********************************
+ 참고 출처 : https://ftp.sendmail.org/RELEASE_NOTES
+ 버전정보는 상시로 업데이트 될 수 있으니 진단 진행할 때 마다 체크필요
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-31] 스팸 메일 릴레이 제한
+[U-31_START]
+=============================================
+[+] Sendmail 서비스가 비활성화되어 있습니다. 
+
+
+[U-31_END]
+=============================================
+[*] SMTP 포트 확인(참고) 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 1. : sendmail 버전 8.9 이상인 경우 양호(디폴트로 스팸 메일 릴레이 방지 설정이 되어 있음) 
+ * 양호 기준 2. : 스팸 메일 릴레이 방지 설정을 했을 경우
+ ** 양호 기준 설정 예시 ** 
+ R$*                     0error  5.7.1 $: 550 Relaying denied
+
+ * 취약 기준 : 스팸 메일 릴레이 방지 설정이 적용되지 않은 경우(해당 설정이 주석처리 된 경우)
+
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-32] 일반사용자의 Sendmail 실행 방지
+[U-32_START]
+=============================================
+[+] Sendmail 서비스가 비활성화되어 있습니다. 
+
+
+[U-32_END]
+=============================================
+[*] SMTP 포트 확인(참고) 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : PrivacyOptions 에 restrictqrun 설정 존재하는 경우
+ * 취약 기준 : PrivacyOptions 에 restrictqrun 설정 존재하지 않는 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-33] DNS 보안 버전 패치
+[U-33_START]
+=============================================
+[+] DNS 서비스가 비활성화되어 있습니다. 
+
+
+[U-33_END]
+=============================================
+[*] DNS 포트 확인(참고) 
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : 알려진 취약점이 없는 DNS 버전을 사용하는 경우(쿼리 결과 값이 없는 경우 포함)
+ * 양호 기준 : dig @localhost +short porttest.dns-oarc.net TXT 명령 결과가 다음과 같은 경우
+     z.y.x.w.v.u.t.s.r.q.p.o.n.m.l.k.j.i.h.g.f.e.d.c.b.a.pt.dns-oarc.net.
+     IP-of-GOOD is GOOD: 26 queries in 2.0 seconds from 26 ports with std dev 17685.51
+ * 취약 기준 :  dig @localhost +short porttest.dns-oarc.net TXT 명령 결과가 다음과 같은 경우
+     porttest.y.x.w.v.u.t.s.r.q.p.o.n.m.l.k.j.i.h.g.f.e.d.c.b.a.pt.dns-oarc.net.
+     해당서버IP is POOR: 26 queries in 3.6 seconds from 1 ports with std dev 0
+=============================================
+
+
+
+
+[U-34] DNS Zone Transfer 설정
+[U-34_START]
+=============================================
+[+] DNS 서비스가 비활성화되어 있습니다. 
+
+
+[U-34_END]
+=============================================
+[*] DNS 포트 확인(참고) 
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : DNS 서비스 미사용 또는, Zone Transfer를 허가된 사용자에게만 허용한 경우
+ * 취약 기준 : DNS 서비스를 사용하며 Zone Transfer를 모든 사용자에게 허용한 경우
+=============================================
+
+
+
+
+[U-35] 웹서비스 디렉토리 리스팅 제거
+[U-35_START]
+=============================================
+[+] apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+[U-35_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 디렉토리 리스팅이 불가능할 경우
+ * 취약 조건 : httpd.conf 파일 내의 Options에서 Indexes 옵션이 있을 경우
+=============================================
+
+
+
+
+[U-36] 웹서비스 웹 프로세스 권한 제한
+[U-36_START]
+=============================================
+apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+
+[U-36_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : Apache 프로세스의 계정이 적절하게 설정되어 있을 경우
+ * 취약 조건 : Apache 설정 파일인 httpd.conf 파일 내 user, group 설정이 root인 경우
+=============================================
+
+
+
+
+[U-37] 웹서비스 상위 디렉토리 접근 금지
+[U-37_START]
+=============================================
+[+] apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+
+[U-37_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : Directory Traversal 취약점이 발견되지 않은 Apache 버전을 사용하고 있을 경우
+ * 취약 조건 : Directory Traversal 취약점이 발견된 Apache 버전을 사용하고 있을 경우
+=============================================
+
+
+
+
+[U-38] 웹서비스 불필요한 파일 제거
+[U-38_START]
+=============================================
+apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+
+[U-38_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 불필요한 파일이 존재하지 않을 경우
+ * 1. 취약 조건 : 디폴트 cgi-bin이 존재할 경우
+ * 2. 취약 조건 : 임시 파일, 백업 파일 등이 존재할 경우
+=============================================
+
+
+
+
+[U-39] 웹서비스 링크 사용 금지
+[U-39_START]
+=============================================
+apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+
+
+[U-39_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 취약 요건에 해당사항이 없는 경우
+ * 취약 조건 : 1. Apache Options에 불필요하게 FollowSymLinks 설정이 되어 있는 경우
+ * 취약 조건 : 2. Apache Options에 FollowSymLinks 설정이 되어 있고 업무적으로 사용하는 경우라도 중요 디렉토리 혹은 파일에 링크가 설정 되어 있는 경우
+ ** 참고 : FollowSymLinks 존재하지 않을 경우 상위 디렉토리에서 상속 받거나, OS 버전에 따라 FollowSymLinks가 없어도 기본 값으로 활성화되어 있을 수 있어 명확하게 비활성화 할 수 있도록 아래와 같이 설정 필요
+ ** -FollowSymLinks (Apache 2도 마찬가지) 
+=============================================
+
+
+
+
+[U-40] 웹서비스 파일 업로드 및 다운로드 제한
+[U-40_START]
+=============================================
+apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+
+[U-40_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : httpd.conf 파일 내 디렉토리 설정에 LimitRequestBody 값 설정이 되어 있을 경우
+ * 취약 조건 : httpd.conf 파일 내 디렉토리 설정에 LimitRequestBody 값 설정이 안되어 있을 경우
+=============================================
+
+
+
+
+[U-41] 웹서비스 영역의 분리
+[U-41_START]
+=============================================
+apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+[U-41_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 웹 서비스 경로 중 / 등 기타 업무와 영역이 분리되지 않은 경로 또는 불필요한 경로가 존재하지 않을 경우
+ * 취약 조건 : 웹 서비스 경로 중 / 등 기타 업무와 영역이 분리되지 않은 경로 또는 불필요한 경로가 존재하는 경우
+=============================================
+
+
+
+
+[U-60] ssh 원격접속 허용
+[U-60_START]
+=============================================
+[+] 1. 현황 : ssh 서비스 확인(PS)
+root      3229     1  0 06:52 ?        00:00:00 /usr/sbin/sshd -D
+root      3419  3229  0 06:53 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3453  3419  0 06:53 ?        00:00:00 sshd: ec2-user@pts/0
+root      3494  3229  0 06:54 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3528  3494  0 06:54 ?        00:00:00 sshd: ec2-user@notty
+
+[+] 1-1. 현황 : ssh 서비스 확인
+Redirecting to /bin/systemctl status sshd.service
+● sshd.service - OpenSSH server daemon
+   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+   Active: active (running) since 목 2025-07-03 06:52:59 UTC; 53min ago
+     Docs: man:sshd(8)
+           man:sshd_config(5)
+ Main PID: 3229 (sshd)
+   CGroup: /system.slice/sshd.service
+           └─3229 /usr/sbin/sshd -D
+
+ 7월 03 06:52:59 ip-10-1-1-197.ap-northeast-2.compute.internal systemd[1]: Starting OpenSSH server daemon...
+ 7월 03 06:52:59 ip-10-1-1-197.ap-northeast-2.compute.internal sshd[3229]: Server listening on 0.0.0.0 port 22.
+ 7월 03 06:52:59 ip-10-1-1-197.ap-northeast-2.compute.internal sshd[3229]: Server listening on :: port 22.
+ 7월 03 06:52:59 ip-10-1-1-197.ap-northeast-2.compute.internal systemd[1]: Started OpenSSH server daemon.
+ 7월 03 06:53:52 ip-10-1-1-197.ap-northeast-2.compute.internal sshd[3419]: Accepted publickey for ec2-user from 175.197.150.12 port 9796 ssh2: RSA SHA256:cB8SZV3rxtXzVsQko5Ds2X+/hXZGCeY0Sll4oJj12rI
+ 7월 03 06:54:23 ip-10-1-1-197.ap-northeast-2.compute.internal sshd[3494]: Accepted publickey for ec2-user from 175.197.150.12 port 52070 ssh2: RSA SHA256:cB8SZV3rxtXzVsQko5Ds2X+/hXZGCeY0Sll4oJj12rI
+ 
+[+] 1-2. 현황 : ssh 서비스 확인(CentOS7)
+Unit ssh.service could not be found.
+
+[U-60_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 :  원격 접속 시 SSH 프로토콜을 사용하는 경우 (※ ssh, telnet이 동시에 설치되어 있는 경우 취약한 것으로 평가됨)
+ * 취약 조건 : 원격 접속 시 Telnet, FTP 등 안전하지 않은 프로토콜을 사용하는 경우
+=============================================
+
+
+
+
+[U-61] ftp 서비스 확인
+[U-61_START]
+=============================================
+[+] FTP 서비스 활성화 확인 
+ [+] FTP 서비스가 활성화 중입니다.
+ [+]  vsftpd :  0
+ [+]  proftpd :  0
+ [*] 활성화(1), 비활성화(0)
+
+ [*] 이외 ftp 확인
+ec2-user  3529  3528  0 06:54 ?        00:00:00 /usr/libexec/openssh/sftp-server
+
+[+] SFTP 설정 현황
+Subsystem sftp	/usr/libexec/openssh/sftp-server
+
+[U-61_END]
+=============================================
+[*] FTP 포트 활성화 확인 
+
+[참고 - 진단기준, 결과 값 출력]
+
+** 양호 기준(1),(2) 중 하나라도 부합할 경우 취약으로 진단
+ * 양호 기준(1) : FTP 서비스가 비활성화되어 있는 경우
+ * 양호 기준(2) : SFTP 서비스가 활성화되어 있는 경우, 사용자 접속 설정이 별도로 들어가있는 경우
+** 취약 기준(1),(2),(3) 중 하나라도 해당되는 경우 취약으로 진단
+ * 취약 기준(1) : 불필요하게 FTP 서비스가 활성화되어 있는 경우, FTP 서비스가 활성화되어 있는 경우, SFTP 서비스 접속 설정이 별도로 적용되어있지 않는 경우
+ * 취약 기준(2) : FTP 서비스가 활성화되어 있는 경우
+ * 취약 기준(3) : SFTP 서비스 접속 설정이 별도로 적용되어있지 않는 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+ '[+] SFTP 설정 현황'에서 출력되는 설정 값이 주석처리되어있지 않다면 별도 설정적용이 존재하지 않는 것으로 진단(취약) 
+
+=============================================
+
+
+
+
+[U-62] ftp 계정 shell 제한
+[U-62_START]
+=============================================
+[+] FTP 계정 확인 
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+
+[U-62_END]
+=============================================
+[*] FTP 포트 활성화 확인 
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : ftp 계정의 shell 이 /bin/false로 부여되어 있는 경우
+
+=============================================
+
+
+
+
+[U-63] Ftpusers 파일 소유자 및 권한 설정
+[U-63_START]
+=============================================
+[+] FTP 서비스 활성화 확인 
+ [+] FTP 서비스가 활성화 중입니다.
+ [+]  vsftpd :  0
+ [+]  proftpd :  0
+ [*] 활성화(1), 비활성화(0)
+
+ [*] 이외 ftp 확인
+ec2-user  3529  3528  0 06:54 ?        00:00:00 /usr/libexec/openssh/sftp-server
+
+[+] /etc/ftpusers
+
+[+] 파일이 존재하지 않습니다.
+[+] /etc/ftpd/ftpusers
+
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd/ftpusers
+
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd/user_list
+
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd.ftpusers
+
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd.user_list
+
+[+] 파일이 존재하지 않습니다.
+
+[U-63_END]
+=============================================
+[*] FTP 포트 활성화 확인 
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : ftpusers 파일의 소유자가 root이고, 권한이 640 이하인 경우
+ * 취약 기준 : ftpusers 파일의 소유자가 root가 아니거나, 권한이 640 이하가 아닌 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+
+=============================================
+
+
+
+
+[U-64] Ftpusers 파일 설정
+[U-64_START]
+=============================================
+[+] FTP 서비스 활성화 확인 
+ [+] FTP 서비스가 활성화 중입니다.
+ [+]  vsftpd :  0
+ [+]  proftpd :  0
+ [*] 활성화(1), 비활성화(0)
+
+ [*] 이외 ftp 확인
+ec2-user  3529  3528  0 06:54 ?        00:00:00 /usr/libexec/openssh/sftp-server
+
+[+] /etc/ftpusers
+[+] 파일이 존재하지 않습니다.
+[+] /etc/ftpd/ftpusers
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd/ftpusers
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd/user_list
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd.ftpusers
+[+] 파일이 존재하지 않습니다.
+[+] /etc/vsftpd.user_list
+[+] 파일이 존재하지 않습니다.
+
+[U-64_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : ftpusers 파일이 존재하고, ftpusers 파일 안에 시스템 계정(root)이 존재할 경우
+ * 취약 기준 : ftpusers 파일이 없거나, ftpusers 파일 안에 시스템 계정 미존재 혹은 주석처리 되어 있을 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-65] at 파일 소유자 및 권한 설정
+[U-65_START]
+=============================================
+
+[+] /etc/at.deny
+-rw-r--r-- 1 root root 1  1월 16  2020 /etc/at.deny
+[+] at 접근제어 파일이 존재하지 않음
+[+] at 접근제어 파일이 존재하지 않음
+
+[U-65_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 1. : at 명령어 권한 750 이하 
+ * 양호 기준 2. : 접근제어파일(*.allow, *.deny) 소유자가 root이고, 권한이 640이하로 설정된 경우
+ * 취약 기준 : 양호 기준 1,2 중 하나라도 부합하는 경우
+*** cron.deny, cron.allow 둘 다 없는 경우 수정권한은 슈퍼유저(root)만 가능(양호로 진단) ***
+=============================================
+
+
+
+
+[U-66] SNMP 서비스 구동 점검
+[U-66_START]
+=============================================
+[+] SNMP 서비스가 비활성화되어 있습니다.
+
+[U-66_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 : SNMP 서비스를 사용하지 않거나, 사용 목적에 맞게 서비스를 사용하고 있는 경우
+ * 취약 : SNMP 서비스를 불필요하게 활성화되어 있는 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+
+[U-67] SNMP 서비스 커뮤니티스트링의 복잡성 설정
+[U-67_START]
+=============================================
+[+] SNMP 서비스가 비활성화되어 있습니다.
+
+[U-67_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+양호 조건 1과 2 모두 충족하거나(or) 조건 3만 충족하는 경우 양호로 진단
+ * 양호 조건 1 : Commnity String 값이 Public이나 Private로 설정되어있지 않는 경우
+ * 양호 조건 2 : Commnity String 값의 복잡도 설정이 적용되어있는 경우(2가지 조합 10자리 이상, 3가지 조합 8자리 이상)
+ * 양호 조건 3 : SNMP v3 사용하고 있으며, 비밀번호 복잡도 설정 충족되는 경우
+ * 취약      : Community String 값이 Public이나 Private로 설정되어 있거나, 복잡도 충족이 안되는 경우 
+ ** SNMPv3 보안설정은 noAuthNoPriv(인증 X, 암호화 X), authNoPriv(인증 O, 암호화 X), authPriv(인증 O, 암호화 O)으로 구분
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-68] 로그온 시 경고 메시지 제공
+[U-68_START]
+=============================================
+[+] 1. 현황 : issue 확인
+-rw-r--r-- 1 root root 23  1월 13 23:22 /etc/issue
+
+\S
+Kernel \r on an \m
+
+
+[+] 2. 현황 : issue.net 확인 
+-rw-r--r-- 1 root root 22  1월 13 23:22 /etc/issue.net
+
+\S
+Kernel \r on an \m
+
+[+] 3. 현황 : /etc/motd 확인
+lrwxrwxrwx 1 root root 25  6월 20 06:56 /etc/motd -> /var/lib/update-motd/motd
+
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+
+[U-68_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 시스템 사용 주의사항을 출력하는 경우
+ * 취약 조건 : 시스템 사용 주의사항 미출력 또는 표시 문구 내에 시스템 버전 정보가 노출되는 경우
+=============================================
+
+
+
+
+[U-69] NFS 설정파일 접근 제한
+[U-69_START]
+=============================================
+[+] NFS 서비스가 비활성화되어 있습니다.
+
+[U-69_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : /etc/dfs/dfstab 가 없거나 퍼미션이 644이하인 경우
+=============================================
+
+
+
+
+[U-70] expn, vrfy 명령어 제한
+[U-70_START]
+=============================================
+[+] Sendmail 서비스가 비활성화되어 있습니다. 
+
+[U-70_END]
+=============================================
+[*] SMTP 포트 확인(참고) 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+
+[참고 - 진단기준, 결과 값 출력]
+
+ * 양호 기준 : noexpn과 novrfy 또는 goaway가 설정되어있는 경우
+ * 취약 기준 : noexpn과 novrfy 또는 goaway가 설정되어있지 않는 경우
+ *** 결과 파일이 출력된다는 것은 해당 서비스가 활성화(Active-Running) 상태이기 때문에 출력되는 것으로 알고 계시면 됩니다.
+=============================================
+
+
+
+
+[U-71] Apache 웹 서비스 정보 숨김
+[U-71_START]
+=============================================
+apache 서비스가 존재하지 않거나 구동중이지 않습니다.
+[U-71_END]
+=============================================
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : ServerTokens Prod, ServerSignature Off로 설정되어있는 경우
+ * 취약 조건 : ServerTokens Prod, ServerSignature Off로 설정되어있지 않은 경우
+ * 참고 : 서비스명 + 버전 정보가 노출되는 경우 취약
+=============================================
+
+
+
+
+[U-42] 최신 보안패치 및 벤더 권고사항 적용
+[U-42_START]
+=============================================
+[+] 1. 현황 : 패치 확인
+kernel-5.10.238-231.953.amzn2.x86_64
+kernel-tools-5.10.238-231.953.amzn2.x86_64
+
+[+] 2. 현황 : uname -r
+5.10.238-231.953.amzn2.x86_64
+
+[+] 3. OS버전 확인
+  Operating System: Amazon Linux 2
+
+=============================================
+[U-42_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 패치 적용 정책을 수립하여 주기적으로 패치관리를 하고 있으며, 패치 관련 내용을 확인하고 적용했을 경우
+ * 취약 조건 : 패치 적용 정책을 수립하지 않고 주기적으로 패치관리를 하지 않거나 패치 관련 내용을 확인하지 않고 적용하지 않았을 경우
+=============================================
+
+
+
+
+[U-43] 로그의 정기적 검토 및 보고
+[U-43_START]
+=============================================
+[*] 인터뷰 필요
+=============================================
+[U-43_END]
+[참고 - 진단기준, 결과 값 출력]
+ * 양호 조건 : 로그 기록에 대해 정기적 검토, 분석, 보고서 작성 및 보고 등의 절차를 수행하고 있을 경우
+ * 취약 조건 : 로그 기록에 대해 정기적 검토가 이루어지지 않을 경우
+=============================================
+
+
+
+
+[U-72] 정책에 따른 시스템 로깅 설정
+[U-72_START]
+=============================================
+[+] 1. 현황 : syslog (rsyslog)
+root      3143     1  0 06:52 ?        00:00:00 /usr/sbin/rsyslogd -n
+[+] 1-2. 현황 : /etc/syslog.conf (/etc/rsyslog.conf)여부
+[+] 파일이 존재하지 않습니다.
+
+[+] 1-2. 현황 : /etc/syslog.conf (/etc/rsyslog.conf)여부
+[+] /etc/rsyslog.conf
+# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####
+
+# The imjournal module bellow is now used as a message source instead of imuxsock.
+$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+$ModLoad imjournal # provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files
+$WorkDirectory /var/lib/rsyslog
+
+# Use default timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# File syncing capability is disabled by default. This feature is usually not required,
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.
+$OmitLocalLogging on
+
+# File to store the position in the journal
+$IMJournalStateFile imjournal.state
+
+
+#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages!
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+# The authpriv file has restricted access.
+authpriv.*                                              /var/log/secure
+
+# Log all the mail messages in one place.
+mail.*                                                  -/var/log/maillog
+
+
+# Log cron stuff
+cron.*                                                  /var/log/cron
+
+# Everybody gets emergency messages
+*.emerg                                                 :omusrmsg:*
+
+# Save news errors of level crit and higher in a special file.
+uucp,news.crit                                          /var/log/spooler
+
+# Save boot messages also to boot.log
+local7.*                                                /var/log/boot.log
+
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.* @@remote-host:514
+# ### end of the forwarding rule ###
+[+] 1-3. [Ubuntu]현황 : /etc/rsyslog.d/50-default.conf 여부
+[+] /etc/rsyslog.conf 파일 없음
+
+=============================================
+[U-72_END]
+[참고 - 진단기준, 결과 값 출력]
+[*] 판단기준(양호) : 1. syslog 로그 기록 정책이 내부 정책에 부합하게 설정되어 있는 경우
+[*] 판단기준(양호) : 2. syslog 설정에서 auth 또는 authpriv 가 활성화된 경우 (su 명령 로그)
+[*] 판단기준(취약) : 1. syslog 로그 기록 정책이 내부 정책에 부합하게 설정되지 않은 경우
+[*] 판단기준(취약) : 2. syslog 설정에서 auth 또는 authpriv 가 활성화되지 않은 경우(su 명령 로그)
+
+=============================================
+
+
+
+
+☞ UNIX 스크립트 작업이 완료되었습니다.
+
+☞ 스크립트 결과 파일을 보안담당자에게 전달 바랍니다.
+☞ 스크립트 관련 오류 및 문의사항은 린시큐어 직원에게 부탁드립니다.
+☞ 감사합니다.
+======================================================================
+
+----------------------------------------------------------------------
+Reference info.
+----------------------------------------------------------------------
+
+======================================================================
+                            INFO_CHKSTART
+======================================================================
+
+======================================================================
+                    System Information Query Start
+======================================================================
+
+[Kernel Information]
+Linux ip-10-1-1-197.ap-northeast-2.compute.internal 5.10.238-231.953.amzn2.x86_64 #1 SMP Tue Jun 17 10:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+[IP Information]
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
+        inet 10.1.1.197  netmask 255.255.255.0  broadcast 10.1.1.255
+        inet6 fe80::95:69ff:fe2a:61fd  prefixlen 64  scopeid 0x20<link>
+        ether 02:95:69:2a:61:fd  txqueuelen 1000  (Ethernet)
+        RX packets 87854  bytes 265951077 (253.6 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 7607  bytes 1461662 (1.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 54  bytes 4396 (4.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 54  bytes 4396 (4.2 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+[Network Status]
+Active Internet connections (servers and established)
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 10.1.1.197:22           175.197.150.12:52070    ESTABLISHED
+tcp        0      0 10.1.1.197:22           175.197.150.12:9796     ESTABLISHED
+tcp6       0      0 :::111                  :::*                    LISTEN     
+tcp6       0      0 :::80                   :::*                    LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN     
+Active UNIX domain sockets (servers and established)
+unix  2      [ ACC ]     STREAM     LISTENING     11595    /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     16450    /var/lib/gssproxy/default.sock
+unix  2      [ ACC ]     STREAM     LISTENING     15663    /run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     15664    /var/run/rpcbind.sock
+unix  2      [ ACC ]     STREAM     LISTENING     15921    /var/run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     16310    /var/run/lsm/ipc/sim
+unix  2      [ ACC ]     STREAM     LISTENING     19336    /var/lib/amazon/ssm/ipc/health
+unix  2      [ ACC ]     STREAM     LISTENING     16314    /var/run/lsm/ipc/simc
+unix  2      [ ACC ]     STREAM     LISTENING     19337    /var/lib/amazon/ssm/ipc/termination
+unix  2      [ ACC ]     STREAM     LISTENING     17974    private/proxymap
+unix  2      [ ACC ]     STREAM     LISTENING     17962    private/defer
+unix  2      [ ACC ]     STREAM     LISTENING     17965    private/trace
+unix  2      [ ACC ]     STREAM     LISTENING     17968    private/verify
+unix  2      [ ACC ]     STREAM     LISTENING     17953    private/tlsmgr
+unix  2      [ ACC ]     STREAM     LISTENING     17956    private/rewrite
+unix  2      [ ACC ]     STREAM     LISTENING     16451    /run/gssproxy.sock
+unix  2      [ ACC ]     STREAM     LISTENING     17980    private/proxywrite
+unix  2      [ ACC ]     STREAM     LISTENING     17983    private/smtp
+unix  2      [ ACC ]     STREAM     LISTENING     17986    private/relay
+unix  2      [ ACC ]     STREAM     LISTENING     17992    private/error
+unix  2      [ ACC ]     STREAM     LISTENING     17995    private/retry
+unix  2      [ ACC ]     STREAM     LISTENING     17998    private/discard
+unix  2      [ ACC ]     STREAM     LISTENING     18001    private/local
+unix  2      [ ACC ]     STREAM     LISTENING     18004    private/virtual
+unix  2      [ ACC ]     STREAM     LISTENING     18007    private/lmtp
+unix  2      [ ACC ]     STREAM     LISTENING     18010    private/anvil
+unix  2      [ ACC ]     STREAM     LISTENING     18013    private/scache
+unix  2      [ ACC ]     STREAM     LISTENING     17959    private/bounce
+unix  2      [ ACC ]     STREAM     LISTENING     17942    public/pickup
+unix  2      [ ACC ]     STREAM     LISTENING     17946    public/cleanup
+unix  2      [ ACC ]     STREAM     LISTENING     17949    public/qmgr
+unix  2      [ ACC ]     STREAM     LISTENING     17971    public/flush
+unix  2      [ ACC ]     STREAM     LISTENING     17989    public/showq
+unix  2      [ ACC ]     STREAM     LISTENING     12851    /run/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     13055    /run/lvm/lvmetad.socket
+unix  2      [ ACC ]     STREAM     LISTENING     13217    /run/lvm/lvmpolld.socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     13223    /run/udev/control
+
+[Routing Information]
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.1.1.1        0.0.0.0         UG        0 0          0 eth0
+10.1.1.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+169.254.169.254 0.0.0.0         255.255.255.255 UH        0 0          0 eth0
+
+[Process Status]
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 06:52 ?        00:00:02 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+root         2     0  0 06:52 ?        00:00:00 [kthreadd]
+root         3     2  0 06:52 ?        00:00:00 [rcu_gp]
+root         4     2  0 06:52 ?        00:00:00 [rcu_par_gp]
+root         6     2  0 06:52 ?        00:00:00 [kworker/0:0H-ev]
+root         8     2  0 06:52 ?        00:00:00 [mm_percpu_wq]
+root         9     2  0 06:52 ?        00:00:00 [rcu_tasks_rude_]
+root        10     2  0 06:52 ?        00:00:00 [rcu_tasks_trace]
+root        11     2  0 06:52 ?        00:00:00 [ksoftirqd/0]
+root        12     2  0 06:52 ?        00:00:00 [rcu_sched]
+root        13     2  0 06:52 ?        00:00:00 [migration/0]
+root        15     2  0 06:52 ?        00:00:00 [cpuhp/0]
+root        17     2  0 06:52 ?        00:00:00 [kdevtmpfs]
+root        18     2  0 06:52 ?        00:00:00 [netns]
+root        19     2  0 06:52 ?        00:00:00 [kworker/u30:1-e]
+root        21     2  0 06:52 ?        00:00:00 [kauditd]
+root       300     2  0 06:52 ?        00:00:00 [khungtaskd]
+root       301     2  0 06:52 ?        00:00:00 [oom_reaper]
+root       302     2  0 06:52 ?        00:00:00 [writeback]
+root       304     2  0 06:52 ?        00:00:00 [kcompactd0]
+root       305     2  0 06:52 ?        00:00:00 [ksmd]
+root       306     2  0 06:52 ?        00:00:00 [khugepaged]
+root       362     2  0 06:52 ?        00:00:00 [kintegrityd]
+root       364     2  0 06:52 ?        00:00:00 [kblockd]
+root       365     2  0 06:52 ?        00:00:00 [blkcg_punt_bio]
+root       672     2  0 06:52 ?        00:00:00 [xen-balloon]
+root       724     2  0 06:52 ?        00:00:00 [tpm_dev_wq]
+root       730     2  0 06:52 ?        00:00:00 [md]
+root       733     2  0 06:52 ?        00:00:00 [edac-poller]
+root       738     2  0 06:52 ?        00:00:00 [watchdogd]
+root       836     2  0 06:52 ?        00:00:00 [kworker/0:1H-xf]
+root       888     2  0 06:52 ?        00:00:00 [kswapd0]
+root       890     2  0 06:52 ?        00:00:00 [xfsalloc]
+root       891     2  0 06:52 ?        00:00:00 [xfs_mru_cache]
+root       894     2  0 06:52 ?        00:00:00 [kthrotld]
+root       905     2  0 06:52 ?        00:00:00 [xenbus]
+root       906     2  0 06:52 ?        00:00:00 [xenwatch]
+root       943     2  0 06:52 ?        00:00:00 [nvme-wq]
+root       945     2  0 06:52 ?        00:00:00 [nvme-reset-wq]
+root       947     2  0 06:52 ?        00:00:00 [nvme-delete-wq]
+root       980     2  0 06:52 ?        00:00:00 [ipv6_addrconf]
+root       989     2  0 06:52 ?        00:00:00 [kstrp]
+root       998     2  0 06:52 ?        00:00:00 [zswap-shrink]
+root       999     2  0 06:52 ?        00:00:00 [kworker/u31:0]
+root      1687     2  0 06:52 ?        00:00:00 [ata_sff]
+root      1693     2  0 06:52 ?        00:00:00 [scsi_eh_0]
+root      1702     2  0 06:52 ?        00:00:00 [scsi_tmf_0]
+root      1706     2  0 06:52 ?        00:00:00 [scsi_eh_1]
+root      1707     2  0 06:52 ?        00:00:00 [scsi_tmf_1]
+root      1711     2  0 06:52 ?        00:00:00 [kworker/u30:3-e]
+root      1718     2  0 06:52 ?        00:00:00 [xfs-buf/xvda1]
+root      1719     2  0 06:52 ?        00:00:00 [xfs-conv/xvda1]
+root      1720     2  0 06:52 ?        00:00:00 [xfs-cil/xvda1]
+root      1721     2  0 06:52 ?        00:00:00 [xfs-reclaim/xvd]
+root      1722     2  0 06:52 ?        00:00:00 [xfs-eofblocks/x]
+root      1723     2  0 06:52 ?        00:00:00 [xfs-log/xvda1]
+root      1724     2  0 06:52 ?        00:00:00 [xfsaild/xvda1]
+root      1783     1  0 06:52 ?        00:00:01 /usr/lib/systemd/systemd-journald
+root      1800     1  0 06:52 ?        00:00:00 /usr/sbin/lvmetad -f
+root      1819     1  0 06:52 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root      1820     2  0 06:52 ?        00:00:00 [ena]
+root      2505     2  0 06:52 ?        00:00:00 [cryptd]
+root      2598     1  0 06:52 ?        00:00:00 /sbin/auditd
+root      2603     2  0 06:52 ?        00:00:00 [rpciod]
+root      2605     2  0 06:52 ?        00:00:00 [xprtiod]
+root      2630     1  0 06:52 ?        00:00:00 /usr/lib/systemd/systemd-logind
+libstor+  2631     1  0 06:52 ?        00:00:00 /usr/bin/lsmd -d
+dbus      2632     1  0 06:52 ?        00:00:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+root      2633     1  0 06:52 ?        00:00:00 /usr/sbin/acpid
+root      2666     1  0 06:52 ?        00:00:00 /usr/sbin/gssproxy -D
+rpc       2667     1  0 06:52 ?        00:00:00 /sbin/rpcbind -w
+chrony    2669     1  0 06:52 ?        00:00:00 /usr/sbin/chronyd -F 2
+rngd      2670     1  0 06:52 ?        00:00:00 /sbin/rngd -f --fill-watermark=0 --exclude=jitter
+root      2892     1  0 06:52 ?        00:00:00 /sbin/dhclient -q -lf /var/lib/dhclient/dhclient--eth0.lease -pf /var/run/dhclient-eth0.pid eth0
+root      2941     1  0 06:52 ?        00:00:00 /sbin/dhclient -6 -nw -lf /var/lib/dhclient/dhclient6--eth0.lease -pf /var/run/dhclient6-eth0.pid eth0
+root      3086     1  0 06:52 ?        00:00:00 /usr/libexec/postfix/master -w
+postfix   3087  3086  0 06:52 ?        00:00:00 pickup -l -t unix -u
+postfix   3088  3086  0 06:52 ?        00:00:00 qmgr -l -t unix -u
+root      3140     1  0 06:52 ?        00:00:00 /usr/bin/amazon-ssm-agent
+root      3143     1  0 06:52 ?        00:00:00 /usr/sbin/rsyslogd -n
+root      3163     1  0 06:52 ?        00:00:00 /usr/sbin/crond -n
+root      3167     1  0 06:52 ?        00:00:00 /usr/sbin/atd -f
+root      3208     1  0 06:52 ttyS0    00:00:00 /sbin/agetty --keep-baud 115200,38400,9600 ttyS0 vt220
+root      3209     1  0 06:52 tty1     00:00:00 /sbin/agetty --noclear tty1 linux
+root      3229     1  0 06:52 ?        00:00:00 /usr/sbin/sshd -D
+root      3419  3229  0 06:53 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3453  3419  0 06:53 ?        00:00:00 sshd: ec2-user@pts/0
+ec2-user  3454  3453  0 06:53 pts/0    00:00:00 -bash
+root      3477  3454  0 06:53 pts/0    00:00:00 sudo su
+root      3478  3477  0 06:53 pts/0    00:00:00 su
+root      3479  3478  0 06:53 pts/0    00:00:00 bash
+root      3494  3229  0 06:54 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user  3528  3494  0 06:54 ?        00:00:00 sshd: ec2-user@notty
+ec2-user  3529  3528  0 06:54 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root      4258     1  0 07:01 ?        00:00:00 /usr/sbin/anacron -s
+root      4261     2  0 07:01 ?        00:00:00 [kworker/0:0-cgr]
+root      4340     2  0 07:35 ?        00:00:00 [kworker/0:1-cgr]
+root      4358     1  0 07:40 ?        00:00:00 nginx: master process /usr/sbin/nginx
+nginx     4359  4358  0 07:40 ?        00:00:00 nginx: worker process
+root      4368     2  0 07:43 ?        00:00:00 [kworker/0:2-cgr]
+root      5053     2  0 07:43 ?        00:00:00 [kworker/0:3-eve]
+root      5054  3479  4 07:46 pts/0    00:00:00 bash ./2025_Unix_1.7_주통.sh
+root      5714     1  0 07:46 ?        00:00:00 /usr/lib/systemd/systemd-hostnamed
+root      5726  5054  0 07:46 pts/0    00:00:00 ps -ef
+
+[User Environment]
+XDG_SESSION_ID=1
+HOSTNAME=ip-10-1-1-197.ap-northeast-2.compute.internal
+SHELL=/bin/bash
+TERM=xterm
+HISTSIZE=1000
+USER=root
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SHELL_SWITCHED=1
+SUDO_USER=ec2-user
+SUDO_UID=1000
+USERNAME=root
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAIL=/var/spool/mail/ec2-user
+PWD=/home/ec2-user
+LANG=ko_KR.utf8
+SHLVL=2
+SUDO_COMMAND=/bin/su
+HOME=/root
+LOGNAME=root
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+SUDO_GID=1000
+_=/bin/env
+
+======================================================================
+                     System Information Query End
+======================================================================
+
+======================================================================
+                             INFO_CHKEND
+======================================================================
+
