@@ -95,7 +95,6 @@ CREATE_FILE="[Lyn_secure]Nginx_`hostname`_${OS}_${IP}_`date +%m%d`.txt"
 WEB_NAME="Nginx"
 
 
-
 #######################
 # (화면출력) 헤더
 #######################
@@ -129,130 +128,97 @@ echo "$LINE2"
 # Nginx 변수 설정
 #================================================================================
 
-
 # nginx 경로 정보 추출
+echo "Nginx 주요 설정파일 정보를 추출합니다."  >> $CREATE_FILE 2>&1
 nginx_info=$(nginx -V 2>&1)
 
 # prefix, conf-path, access log 추출
-prefix=$(echo "$nginx_info" | grep -oP -- '--prefix=\K\S+')
+NGINX_HOME=$(echo "$nginx_info" | grep -oP -- '--prefix=\K\S+')
 NGINX_CONF=$(echo "$nginx_info" | grep -oP -- '--conf-path=\K\S+')
 NGINX_LOG=$(echo "$nginx_info" | grep -oP -- '--http-log-path=\K\S+')
+NGINX_LOG_DIR=$(dirname $NGINX_LOG)
+NGINX_D_CONF=""
 
-# default.conf 경로 유추 (nginx.conf 안에서 include 되는 경우가 많음)
-NGINX_D_CONF=$(grep -Po 'include\s+\K.*default\.conf' "$NGINX_CONF" 2>/dev/null | head -n 1)
-files=$(grep include /etc/nginx/nginx.conf | grep '\.conf' | awk '{print $2}' | tr -d ';')
+# include 구문 전체 추출 (세미콜론 제외)
+INCLUDE_LINES=$(grep -Po 'include\s+\K[^;]*\.conf[^;]*' "$NGINX_CONF")
 
-###### 여기 수정해야함 *.conf
-echo "$file" | while read -r "$file" ; do
-	if [ -f "$file" ] ; then
-		NGINX_D_CONF="$file"
-	else
-		echo "Nginx Default 파일이 없습니다." >> $CREATE_FILE 2>&1
-	fi
-done
+if [ -z "$INCLUDE_LINES" ]; then
+    echo "[-] nginx.conf에 Default 파일에 대한 include 구문이 없습니다." >> $CREATE_FILE 2>&1
+fi
 
-# 출력
-echo "nginx.conf 경로:        $NGINX_CONF"
-echo "default.conf 경로:      $NGINX_D_CONF"
-echo "access log 경로:        $NGINX_LOG"
+FOUND=0
 
-
-
-#if [ `find / -xdev -type d -name "nginx" | wc -l` -gt 2 ]
-#	then
-#		NGINX_HOME=`find / -xdev -name "nginx.conf" | grep /etc |rev |cut -d '/' -f2- |rev`
-#		NGINX_CONF=$NGINX_HOME/nginx.conf
-#		NGINX_D_CONF=$NGINX_HOME/conf.d/default.conf
-#		NGINX_LOG=`find / -xdev -name "access.log" | grep /nginx |rev |cut -d '/' -f2- |rev`
-#		if [ `cat $NGINX_D_CONF | grep -i root | grep -v "#" | head -1 | wc -l` -eq 0 ]
-#		then
-#				Nginx_ROOT=`cat $NGINX_CONF | grep -i root | grep -v "#" | head -1 |rev |cut -d' ' -f1 |rev |cut -d';' -f1`
-#		else
-#				Nginx_ROOT=`cat $NGINX_D_CONF | grep -i root | grep -v "#" | head -1 |rev |cut -d' ' -f1 |rev |cut -d';' -f1`
-#		fi
-#		#nginx -v 입력 시 스크립트 루핑 현상이 생김으로 nginx 실행 경로를 통해 확인해야함으로 변수 선언
-#		Nginx_nginx=`find / -name "nginx" | grep /sbin`
-#fi		
-#			
-#
-#if [ "$NGINX_HOME" == "" ]
-#	then 
-#		echo $WEB_NAME "경로를 찾지 못하였음으로 수동으로 입력하십시오."
-#		while true
-#		do
-#			ps -ef | grep nginx
-#			echo "아래 예제와 같이" $WEB_NAME "설치 디렉터리를 입력하십시오."
-#			echo -n " (ex. /etc/nginx) : "
-#			read nginx
-#			if [ $nginx ]
-#				then
-#					if [ -d $nginx ]
-#						then
-#							NGINX_HOME=$nginx
-#							NGINX_CONF=$NGINX_HOME/nginx.conf
-#							NGINX_D_CONF=$NGINX_HOME/conf.d/default.conf
-#							# NGINX_LOG=`find / -xdev -name "access.log" | grep /nginx |rev |cut -d '/' -f2- |rev`
-#							if [ `cat $NGINX_D_CONF | grep -i root | grep -v "#" | head -1 | wc -l` -eq 0 ]
-#								then
-#									Nginx_ROOT=`cat $NGINX_CONF | grep -i root | grep -v "#" | head -1 |rev |cut -d' ' -f1 |rev |cut -d';' -f1`
-#								else
-#									Nginx_ROOT=`cat $NGINX_D_CONF | grep -i root | grep -v "#" | head -1 |rev |cut -d' ' -f1 |rev |cut -d';' -f1`
-#							fi
-#									# nginx -v 입력 시 스크립트 루핑 현상이 생김으로 nginx 실행 경로를 통해 확인해야함으로 변수 선언
-#									Nginx_nginx=`find / -name "nginx" | grep /sbin`
-#							break
-#						else
-#							echo "	입력하신 디렉터리가 존재하지 않습니다. 다시 입력하여 주십시오."
-#							echo "	"
-#					fi
-#				else
-#					echo "	잘못 입력하셨습니다. 다시 입력하여 주십시오.	"
-#					echo " "
-#			fi
-#		done
-#				
-#		while true
-#		do
-#			echo "아래 예제와 같이" $WAS_NAME " 로그 디렉터리를 입력하십시오."
-#			echo -n " (ex. /var/log/nginx) : "
-#			read NGINX_LOG
-#			if [ $NGINX_LOG ]
-#				then
-#					if [ -d $NGINX_LOG ]
-#						then
-#							break
-#					else
-#						echo "	입력하신 디렉터리가 존재하지 않습니다. 다시 입력하여 주십시오."
-#						echo "	"
-#					fi
-#				else
-#					echo "	잘못 입력하셨습니다. 다시 입력하여 주십시오.	"
-#					echo " "
-#			fi
-#		done
-#fi
-
-
+while read -r LINE; do
+	NGINX_CONF_DIR=$(dirname "$NGINX_CONF")
+    DIR=$(dirname "$LINE")
+    FILE=$(basename "$LINE")
 	
+    # 상대경로인 경우 nginx.conf 기준으로 해석
+    if [[ "$DIR" = /* ]]; then
+        DIR_ABS="$DIR"
+    else
+        DIR_ABS="$NGINX_CONF_DIR/$DIR"
+    fi
+
+    TARGET_PATH="$DIR_ABS/$FILE"
+
+    echo "[+] 경로: $TARGET_PATH" >> $CREATE_FILE 2>&1
+
+    # 와일드카드가 포함된 경우 (예: *.conf)
+    if [[ "$FILE" == *"*"* ]]; then
+        if compgen -G "$TARGET_PATH" > /dev/null; then
+            for f in $TARGET_PATH; do
+                echo "  Default 파일이 존재합니다." >> $CREATE_FILE 2>&1
+				echo "  $f" >> $CREATE_FILE 2>&1
+				NGINX_D_CONF="$NGINX_D_CONF $f"
+				FOUND=1
+            done
+		else
+			echo "  파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+        fi
+    else
+        # 단일 파일 검사
+        if [ -f "$TARGET_PATH" ]; then
+            echo "$TARGET_PATH"
+			NGINX_D_CONF="$NGINX_D_CONF $f"
+			FOUND=1
+		else
+			echo "  파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+        fi
+    fi
+done <<< "$INCLUDE_LINES"
+
+if [ $FOUND -eq 0 ]; then
+    echo "[-] Default 파일이 존재하지 않습니다." >> $CREATE_FILE 2>&1
+fi
+
+echo "[Nginx 주요 설정 파일 정보]"
+echo " - Nginx 홈디렉토리:        $NGINX_HOME"
+echo " - Nginx.conf 경로:        $NGINX_CONF"
+echo " - Default.conf 경로:      $NGINX_D_CONF"
+echo " - Access log 경로:        $NGINX_LOG_DIR"
+echo "$LINE2"
+
+echo "[Nginx 주요 설정 파일 정보]" >> $CREATE_FILE 2>&1
+echo " - Nginx 홈디렉토리:        $NGINX_HOME" >> $CREATE_FILE 2>&1
+echo " - Nginx.conf 경로:        $NGINX_CONF" >> $CREATE_FILE 2>&1
+echo " - Default.conf 경로:      $NGINX_D_CONF" >> $CREATE_FILE 2>&1
+echo " - Access log 경로:        $NGINX_LOG_DIR" >> $CREATE_FILE 2>&1
+echo "$LINE2" >> $CREATE_FILE 2>&1
+echo " " >> $CREATE_FILE 2>&1
+echo " " >> $CREATE_FILE 2>&1
+
+
 #================================================================================
 # Nginx 진단 시작
 #================================================================================
 
 echo "설치 경로가 정확하지 않을 경우 스크립트가 정상 작동되지 않습니다."
 echo "결과가 비정상적인 경우 컨설턴트에게 문의주세요."
-echo ""
-echo ""
+echo "$LINE2"
 echo ""
 echo $WEB_NAME"스크립트가 시작 됩니다. 잠시만 기다려주세요. (1~3분 소요 예정)."
-echo ""
-echo ""
-echo START TIME : $START_TIME
-echo START TIME : $START_TIME																>> $CREATE_FILE 2>&1
-echo ""
-echo ""
 echo "※※※※스크립트 결과 맨 아래에 설정파일 전체를 출력한 결과가 있습니다. 참고하셔서 진단하세요.※※※※"					>> $CREATE_FILE 2>&1
-echo ""
-echo ""
 echo ""
 echo "[WEB-01] 데몬관리"
 echo "[WEB-01] 데몬관리"																		>> $CREATE_FILE 2>&1
@@ -337,10 +303,12 @@ if [ `cat $NGINX_CONF |grep "autoindex" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "autoindex 설정값이없습니다" 									>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='autoindex' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='autoindex' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='autoindex' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='autoindex' B=4 A=4 |grep -v "#"					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='autoindex' B=4 A=4 |grep -v "#"					>> $CREATE_FILE 2>&1
+				PAT='autoindex' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -368,19 +336,19 @@ echo "[START]"																				>> $CREATE_FILE 2>&1
 echo "============================================"											>> $CREATE_FILE 2>&1
 echo "[+] Nginx 점검현황"  																	>> $CREATE_FILE 2>&1
 echo "(Log Directory)"																		>> $CREATE_FILE 2>&1
-if [ `ls -dl $NGINX_LOG | wc -l` -eq 0 ]
+if [ `ls -dl $NGINX_LOG_DIR | wc -l` -eq 0 ]
         then
                 echo "로그 디렉터리가 존재하지 않음" 													>> $CREATE_FILE 2>&1
         else
-                ls -dl $NGINX_LOG 															>> $CREATE_FILE 2>&1
+                ls -dl $NGINX_LOG_DIR 															>> $CREATE_FILE 2>&1
 fi
 echo ""																						>> $CREATE_FILE 2>&1
 echo "(Access Log 및 Error Log)"																>> $CREATE_FILE 2>&1
-if [ `ls -dl $NGINX_LOG/*.log | wc -l` -eq 0 ]
+if [ `ls -dl $NGINX_LOG_DIR/*.log | wc -l` -eq 0 ]
         then
                 echo "로그 파일이 존재하지 않음" 													>> $CREATE_FILE 2>&1
         else
-                ls -dl $NGINX_LOG/*.log														>> $CREATE_FILE 2>&1
+                ls -dl $NGINX_LOG_DIR/*.log														>> $CREATE_FILE 2>&1
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
 echo "[END]"																				>> $CREATE_FILE 2>&1
@@ -411,10 +379,13 @@ if [ `cat $NGINX_CONF |grep "access_log" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "access_log 설정값이없습니다" 								>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='access_log' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
+
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+				PAT='access_log' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo ""																						>> $CREATE_FILE 2>&1
@@ -425,10 +396,12 @@ if [ `cat $NGINX_CONF |grep "error_log" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "error_log 설정값이없습니다" 									>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='error_log' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+				PAT='error_log' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -449,7 +422,7 @@ echo ""																						>> $CREATE_FILE 2>&1
 echo ""																						>> $CREATE_FILE 2>&1
 echo ""																						>> $CREATE_FILE 2>&1
 
-
+### 여기 수정해야 함
 echo "[WEB-07] 로그 포맷/레벨 설정"
 echo "[WEB-07] 로그 포맷/레벨 설정"																>> $CREATE_FILE 2>&1
 echo "[START]"																				>> $CREATE_FILE 2>&1
@@ -462,10 +435,12 @@ if [ `cat $NGINX_CONF |grep "access_log" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "access_log 설정값이없습니다" 								>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='access_log' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='access_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+				PAT='access_log' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo ""																						>> $CREATE_FILE 2>&1
@@ -476,10 +451,12 @@ if [ `cat $NGINX_CONF |grep "error_log" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "error_log 설정값이없습니다" 									>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='error_log' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='error_log' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+				PAT='error_log' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -546,10 +523,12 @@ if [ `cat $NGINX_CONF |grep "server_tokens" | grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "server_tokens 설정 값이 없습니다" 							>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='server_tokens' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='server_tokens' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='server_tokens' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='server_tokens' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='server_tokens' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+				PAT='server_tokens' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -584,10 +563,12 @@ if [ `cat $NGINX_CONF |grep "limit" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "limit_except 설정 값이 없습니다" 							>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='limit_except' B=4 A=4 |grep -v "#"		>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='limit_except' B=4 A=4 |grep -v "#"		>> $CREATE_FILE 2>&1
+								PAT='limit_except' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='limit_except' B=4 A=4 |grep -v "#" 						>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='limit_except' B=4 A=4 |grep -v "#" 						>> $CREATE_FILE 2>&1
+				PAT='limit_except' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo ""																						>> $CREATE_FILE 2>&1
@@ -598,10 +579,12 @@ if [ `cat $NGINX_CONF |grep "dav_methods" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "dav_methods 설정 값이 없습니다" 								>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='dav_methods' B=4 A=4 |grep -v "#"		>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='dav_methods' B=4 A=4 |grep -v "#"		>> $CREATE_FILE 2>&1
+								PAT='dav_methods' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='dav_methods' B=4 A=4 |grep -v "#"							>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='dav_methods' B=4 A=4 |grep -v "#"							>> $CREATE_FILE 2>&1
+				PAT='dav_methods' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -664,10 +647,12 @@ if [ `cat $NGINX_CONF |grep "ssl_protocols" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "ssl_protocols 설정 값이 없습니다" 							>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='ssl_protocols' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='ssl_protocols' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='ssl_protocols' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='ssl_protocols' B=4 A=4 |grep -v "#" 				>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='ssl_protocols' B=4 A=4 |grep -v "#" 				>> $CREATE_FILE 2>&1
+				PAT='ssl_protocols' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -699,10 +684,12 @@ if [ `cat $NGINX_CONF |grep "error_page" |grep -v "#" | wc -l` -eq 0 ]
                         then
                                 echo "error_page 설정 값이 없습니다" 								>> $CREATE_FILE 2>&1
                         else
-                                cat $NGINX_D_CONF | awk -f ctx.awk PAT='error_page' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+                                #cat $NGINX_D_CONF | awk -f ctx.awk PAT='error_page' B=4 A=4 |grep -v "#"	>> $CREATE_FILE 2>&1
+								PAT='error_page' B=4 A=4 awk -f ctx.awk "$NGINX_D_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
                 fi
         else
-                cat $NGINX_CONF | awk -f ctx.awk PAT='error_page' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+                #cat $NGINX_CONF | awk -f ctx.awk PAT='error_page' B=4 A=4 |grep -v "#" 					>> $CREATE_FILE 2>&1
+				PAT='error_page' B=4 A=4 awk -f ctx.awk "$NGINX_CONF" | grep -v "#"	>> $CREATE_FILE 2>&1
 
 fi
 echo "============================================="										>> $CREATE_FILE 2>&1
@@ -804,18 +791,19 @@ echo ""																						>> $CREATE_FILE 2>&1
 cat $NGINX_CONF																				>> $CREATE_FILE 2>&1
 echo "============================================="										>> $CREATE_FILE 2>&1
 echo ""																						>> $CREATE_FILE 2>&1
-echo "================  ============================="										>> $CREATE_FILE 2>&1
-echo "[default.conf] 출력 (결과 없을 경우 파일 존재하지 않음)"												>> $CREATE_FILE 2>&1
+echo "============================================="										>> $CREATE_FILE 2>&1
+echo "[default.conf] 출력 (결과 없을 경우 파일 존재하지 않음)"									>> $CREATE_FILE 2>&1
 echo ""																						>> $CREATE_FILE 2>&1
 cat $NGINX_D_CONF																			>> $CREATE_FILE 2>&1
 echo "============================================="										>> $CREATE_FILE 2>&1
-
-echo $WEB_NAME"스크립트가 종료 되었습니다. 잠시만 기다려주세요."
+mkdir -p Lyn_tmp
+cat $NGINX_CONF > "./Lyn_tmp/NGINX_CONF.txt"
+cat $NGINX_D_CONF > "./Lyn_tmp/NGINX_D_CONF.txt"
  
 unset NGINX_HOME
 unset NGINX_CONF
 unset NGINX_D_CONF
-unset NGINX_LOG
+unset NGINX_LOG_DIR
 unset Nginx_ROOT
 unset WEB_NAME
 unset Nginx_nginx
@@ -827,17 +815,14 @@ unset Nginx_nginx
 
 
 
-
-
-
-
-
 #================================================================================
 # 결과 파일 정리
 #================================================================================
 
 
-tar -cvf $CREATE_FILE.tar $CREATE_FILE
+tar -cvf $CREATE_FILE.tar $CREATE_FILE ./Lyn_tmp/
+rm -rf ./Lyn_tmp/
+rm -rf $CREATE_FILE
 
 
 unset RESULT_FILE
@@ -852,4 +837,4 @@ unset locale_utf_8
 unset locale_euckr
 unset locale_KR
 
-echo "스크립트가 종료되었습니다. 결과파일을 전달해주세요."
+echo $WEB_NAME" 스크립트가 종료 되었습니다."
