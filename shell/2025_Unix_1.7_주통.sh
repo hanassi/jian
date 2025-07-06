@@ -4030,48 +4030,23 @@ Nginx_check
 
 
 
-
 #######################
 # 마무리 출력
 #######################
 echo "UNIX/Linux Security Check END"
 echo "$LINE1"
-echo "☞ UNIX 스크립트 작업이 완료되었습니다." >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "☞ 스크립트 결과 파일을 보안담당자에게 전달 바랍니다." >> $CREATE_FILE
-echo "☞ 스크립트 관련 오류 및 문의사항은 린시큐어 직원에게 부탁드립니다." >> $CREATE_FILE
-echo "☞ 감사합니다." >> $CREATE_FILE
-echo "$LINE1" >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "$LINE2" >> $CREATE_FILE
-echo "Reference info." >> $CREATE_FILE
-echo "$LINE2" >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-print_title "INFO_CHKSTART"
-print_title "System Information Query Start"
-echo "[Kernel Information]" >> $CREATE_FILE
-uname -a >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "[IP Information]" >> $CREATE_FILE
-ifconfig -a >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "[Network Status]" >> $CREATE_FILE
-netstat -an | egrep -i "LISTEN|ESTABLISHED" >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "[Routing Information]" >> $CREATE_FILE
-netstat -rn >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "[Process Status]" >> $CREATE_FILE
-ps -ef >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-echo "[User Environment]" >> $CREATE_FILE
-env >> $CREATE_FILE
-echo "" >> $CREATE_FILE
-print_title "System Information Query End"
-print_title "INFO_CHKEND"
+echo "☞스크립트 작업이 완료되었습니다."
+echo ""
+echo "☞ 스크립트 결과 파일을 보안담당자에게 전달 바랍니다."
+echo "☞ 스크립트 관련 오류 및 문의사항은 린시큐어 직원에게 부탁드립니다."
+echo "☞ 감사합니다."
+echo "$LINE1"
+echo ""
+echo "$LINE2"
 
 
-tar -cvf $CREATE_FILE.tar $CREATE_FILE ./Lyn_tmp/ 
+
+tar -cvf $CREATE_FILE.tar $CREATE_FILE ./Lyn_tmp/ > /dev/null 2>&1
 rm -rf ./Lyn_tmp/
 rm -rf $CREATE_FILE
 
