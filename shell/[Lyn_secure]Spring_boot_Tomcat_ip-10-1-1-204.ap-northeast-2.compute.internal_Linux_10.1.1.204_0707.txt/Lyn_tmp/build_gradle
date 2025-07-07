@@ -1,3 +1,4 @@
+[+] build.gradle(1)
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.3'
@@ -8,10 +9,16 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+        // vendor, implementation 등 절대 지정하지 않음
+    }
 }
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+}
+
 
 repositories {
 	mavenCentral()
