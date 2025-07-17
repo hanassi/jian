@@ -1,0 +1,752 @@
+======================================================================
+                         Nginx Security Check
+======================================================================
+
+======================================================================
+                            INFO_CHK START
+======================================================================
+
+[Start Time]
+Tue Jul  8 16:41:32 KST 2025
+======================================================================
+                             INFO_CHK END
+======================================================================
+
+
+======================================================================
+                    System Information Query Start
+======================================================================
+
+[Kernel Information]
+Linux ip-10-1-1-204.ap-northeast-2.compute.internal 6.1.134-152.225.amzn2023.x86_64 #1 SMP PREEMPT_DYNAMIC Wed May  7 09:10:59 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+[IP Information]
+enX0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
+        inet 10.1.1.204  netmask 255.255.255.0  broadcast 10.1.1.255
+        inet6 fe80::f0:86ff:fe15:1ee1  prefixlen 64  scopeid 0x20<link>
+        ether 02:f0:86:15:1e:e1  txqueuelen 1000  (Ethernet)
+        RX packets 100452  bytes 12175792 (11.6 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 99281  bytes 14947087 (14.2 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 24695  bytes 4743463 (4.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 24695  bytes 4743463 (4.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+[Network Status]
+Active Internet connections (servers and established)
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 10.1.1.204:22           175.197.150.12:56475    ESTABLISHED
+tcp        0      0 10.1.1.204:22           175.197.150.12:50405    ESTABLISHED
+tcp        0      0 10.1.1.204:22           175.197.150.12:63099    ESTABLISHED
+tcp        0      0 10.1.1.204:22           175.197.150.12:63243    ESTABLISHED
+tcp        0      0 10.1.1.204:22           175.197.150.12:50402    ESTABLISHED
+tcp        0    528 10.1.1.204:22           175.197.150.12:57672    ESTABLISHED
+tcp6       0      0 :::22                   :::*                    LISTEN     
+tcp6       0      0 :::8080                 :::*                    LISTEN     
+Active UNIX domain sockets (servers and established)
+unix  2      [ ACC ]     STREAM     LISTENING     15991    /run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     15992    /run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     15994    /run/.heim_org.h5l.kcm-socket
+unix  2      [ ACC ]     STREAM     LISTENING     178489   /run/user/1000/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     178501   /run/user/1000/bus
+unix  2      [ ACC ]     STREAM     LISTENING     17804    /var/lib/amazon/ssm/ipc/health
+unix  2      [ ACC ]     STREAM     LISTENING     17805    /var/lib/amazon/ssm/ipc/termination
+unix  2      [ ACC ]     STREAM     LISTENING     16120    /var/run/lsm/ipc/simc
+unix  2      [ ACC ]     STREAM     LISTENING     16121    /var/run/lsm/ipc/sim
+unix  2      [ ACC ]     STREAM     LISTENING     12558    /run/systemd/userdb/io.systemd.DynamicUser
+unix  2      [ ACC ]     STREAM     LISTENING     12559    /run/systemd/io.system.ManagedOOM
+unix  2      [ ACC ]     STREAM     LISTENING     16134    /run/systemd/userdb/io.systemd.Home
+unix  2      [ ACC ]     STREAM     LISTENING     12573    /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     13189    /run/systemd/private
+unix  2      [ ACC ]     SEQPACKET  LISTENING     13203    /run/systemd/coredump
+unix  2      [ ACC ]     SEQPACKET  LISTENING     13205    /run/udev/control
+unix  2      [ ACC ]     STREAM     LISTENING     13208    /run/systemd/userdb/io.systemd.Multiplexer
+unix  2      [ ACC ]     STREAM     LISTENING     13384    /run/systemd/journal/io.systemd.journal
+unix  2      [ ACC ]     STREAM     LISTENING     16559    /run/gssproxy.default.sock
+unix  2      [ ACC ]     STREAM     LISTENING     16560    /run/gssproxy.sock
+unix  2      [ ACC ]     STREAM     LISTENING     14739    /run/systemd/resolve/io.systemd.Resolve
+unix  2      [ ACC ]     STREAM     LISTENING     14744    /run/systemd/resolve/io.systemd.Resolve.Monitor
+Active Bluetooth connections (servers and established)
+
+[Routing Information]
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         10.1.1.1        0.0.0.0         UG        0 0          0 enX0
+10.1.0.2        10.1.1.1        255.255.255.255 UGH       0 0          0 enX0
+10.1.1.0        0.0.0.0         255.255.255.0   U         0 0          0 enX0
+10.1.1.1        0.0.0.0         255.255.255.255 UH        0 0          0 enX0
+
+[Process Status]
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 Jul07 ?        00:00:05 /usr/lib/systemd/systemd --switched-root --system --deserialize=32
+root           2       0  0 Jul07 ?        00:00:00 [kthreadd]
+root           3       2  0 Jul07 ?        00:00:00 [rcu_gp]
+root           4       2  0 Jul07 ?        00:00:00 [rcu_par_gp]
+root           5       2  0 Jul07 ?        00:00:00 [slub_flushwq]
+root           6       2  0 Jul07 ?        00:00:00 [netns]
+root           8       2  0 Jul07 ?        00:00:00 [kworker/0:0H-events_highpri]
+root          10       2  0 Jul07 ?        00:00:00 [mm_percpu_wq]
+root          11       2  0 Jul07 ?        00:00:00 [rcu_tasks_kthread]
+root          12       2  0 Jul07 ?        00:00:00 [rcu_tasks_rude_kthread]
+root          13       2  0 Jul07 ?        00:00:00 [rcu_tasks_trace_kthread]
+root          14       2  0 Jul07 ?        00:00:01 [ksoftirqd/0]
+root          15       2  0 Jul07 ?        00:00:00 [rcu_preempt]
+root          16       2  0 Jul07 ?        00:00:00 [migration/0]
+root          18       2  0 Jul07 ?        00:00:00 [cpuhp/0]
+root          20       2  0 Jul07 ?        00:00:00 [kdevtmpfs]
+root          21       2  0 Jul07 ?        00:00:00 [inet_frag_wq]
+root          22       2  0 Jul07 ?        00:00:00 [kauditd]
+root          23       2  0 Jul07 ?        00:00:00 [khungtaskd]
+root          24       2  0 Jul07 ?        00:00:00 [oom_reaper]
+root          27       2  0 Jul07 ?        00:00:00 [writeback]
+root          28       2  0 Jul07 ?        00:00:02 [kcompactd0]
+root          29       2  0 Jul07 ?        00:00:00 [khugepaged]
+root          30       2  0 Jul07 ?        00:00:00 [cryptd]
+root          31       2  0 Jul07 ?        00:00:00 [kintegrityd]
+root          32       2  0 Jul07 ?        00:00:00 [kblockd]
+root          33       2  0 Jul07 ?        00:00:00 [blkcg_punt_bio]
+root          34       2  0 Jul07 ?        00:00:00 [xen-balloon]
+root          35       2  0 Jul07 ?        00:00:00 [tpm_dev_wq]
+root          36       2  0 Jul07 ?        00:00:00 [md]
+root          37       2  0 Jul07 ?        00:00:00 [edac-poller]
+root          38       2  0 Jul07 ?        00:00:00 [watchdogd]
+root          39       2  0 Jul07 ?        00:00:01 [kworker/0:1H-kblockd]
+root          74       2  0 Jul07 ?        00:00:48 [kswapd0]
+root          77       2  0 Jul07 ?        00:00:00 [xfsalloc]
+root          78       2  0 Jul07 ?        00:00:00 [xfs_mru_cache]
+root          81       2  0 Jul07 ?        00:00:00 [kthrotld]
+root          96       2  0 Jul07 ?        00:00:00 [xenbus]
+root          97       2  0 Jul07 ?        00:00:00 [xenwatch]
+root         135       2  0 Jul07 ?        00:00:00 [nvme-wq]
+root         137       2  0 Jul07 ?        00:00:00 [nvme-reset-wq]
+root         139       2  0 Jul07 ?        00:00:00 [nvme-delete-wq]
+root         164       2  0 Jul07 ?        00:00:00 [mld]
+root         165       2  0 Jul07 ?        00:00:00 [ipv6_addrconf]
+root         179       2  0 Jul07 ?        00:00:00 [kstrp]
+root         191       2  0 Jul07 ?        00:00:00 [zswap-shrink]
+root         192       2  0 Jul07 ?        00:00:00 [kworker/u31:0]
+root        1037       2  0 Jul07 ?        00:00:00 [xfs-buf/xvda1]
+root        1038       2  0 Jul07 ?        00:00:00 [xfs-conv/xvda1]
+root        1039       2  0 Jul07 ?        00:00:00 [xfs-reclaim/xvd]
+root        1040       2  0 Jul07 ?        00:00:00 [xfs-blockgc/xvd]
+root        1041       2  0 Jul07 ?        00:00:00 [xfs-inodegc/xvd]
+root        1042       2  0 Jul07 ?        00:00:00 [xfs-log/xvda1]
+root        1043       2  0 Jul07 ?        00:00:00 [xfs-cil/xvda1]
+root        1044       2  0 Jul07 ?        00:00:10 [xfsaild/xvda1]
+root        1091       1  0 Jul07 ?        00:00:03 /usr/lib/systemd/systemd-journald
+root        1754       1  0 Jul07 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+systemd+    1784       1  0 Jul07 ?        00:00:00 /usr/lib/systemd/systemd-resolved
+root        1786       1  0 Jul07 ?        00:00:00 /sbin/auditd
+root        1895       2  0 Jul07 ?        00:00:00 [ata_sff]
+root        1910       2  0 Jul07 ?        00:00:00 [scsi_eh_0]
+root        1914       2  0 Jul07 ?        00:00:00 [scsi_tmf_0]
+root        1917       2  0 Jul07 ?        00:00:00 [scsi_eh_1]
+root        1921       2  0 Jul07 ?        00:00:00 [scsi_tmf_1]
+root        1942       2  0 Jul07 ?        00:00:00 [rpciod]
+root        1943       2  0 Jul07 ?        00:00:00 [xprtiod]
+root        1946       1  0 Jul07 ?        00:00:00 /usr/bin/systemd-inhibit --what=handle-suspend-key:handle-hibernate-key --who=noah --why=acpid instead --mode=block /usr/sbin/acpid -f
+root        1949       1  0 Jul07 ?        00:00:00 /usr/bin/python3 -s /usr/sbin/firewalld --nofork --nopid
+libstor+    1950       1  0 Jul07 ?        00:00:00 /usr/bin/lsmd -d
+root        1952       1  0 Jul07 ?        00:00:12 /usr/sbin/rngd -f -x pkcs11 -x nist
+root        1954       1  0 Jul07 ?        00:00:00 /usr/lib/systemd/systemd-homed
+root        1955       1  0 Jul07 ?        00:00:00 /usr/lib/systemd/systemd-logind
+dbus        1956       1  0 Jul07 ?        00:00:00 /usr/bin/dbus-broker-launch --scope system --audit
+dbus        1963    1956  0 Jul07 ?        00:00:00 dbus-broker --log 4 --controller 9 --machine-id ec2e9b6132c2951b740a9be1024fcb76 --max-bytes 536870912 --max-fds 4096 --max-matches 16384 --audit
+root        1988    1946  0 Jul07 ?        00:00:00 /usr/sbin/acpid -f
+systemd+    1989       1  0 Jul07 ?        00:00:00 /usr/lib/systemd/systemd-networkd
+root        2009       1  0 Jul07 ?        00:00:01 /usr/sbin/gssproxy -D
+root        2210       1  0 Jul07 ?        00:00:02 /usr/bin/amazon-ssm-agent
+root        2214       1  0 Jul07 ?        00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root        2222       1  0 Jul07 ?        00:00:00 /usr/sbin/atd -f
+root        2225       1  0 Jul07 tty1     00:00:00 /sbin/agetty -o -p -- \u --noclear - linux
+root        2226       1  0 Jul07 ttyS0    00:00:00 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 - vt220
+chrony      2244       1  0 Jul07 ?        00:00:02 /usr/sbin/chronyd -F 2
+root        2646       1  0 Jul07 ?        00:00:00 /usr/lib/systemd/systemd-userdbd
+root       52954    2214  0 10:04 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   52971       1  0 10:04 ?        00:00:00 /usr/lib/systemd/systemd --user
+ec2-user   52992   52971  0 10:04 ?        00:00:00 (sd-pam)
+ec2-user   53026   52954  0 10:04 ?        00:00:00 sshd: ec2-user@pts/0
+ec2-user   53028   53026  0 10:04 pts/0    00:00:00 -bash
+root       53582   53028  0 10:18 pts/0    00:00:00 sudo su
+root       53585   53582  0 10:18 pts/1    00:00:00 sudo su
+root       53586   53585  0 10:18 pts/1    00:00:00 su
+root       53588   53586  0 10:18 pts/1    00:00:00 bash
+root       54033    2214  0 10:22 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   54037   54033  0 10:22 ?        00:00:00 sshd: ec2-user@pts/2
+ec2-user   54058   54037  0 10:22 pts/2    00:00:00 -bash
+root       54119   54058  0 10:22 pts/2    00:00:00 sudo su
+root       54121   54119  0 10:22 pts/3    00:00:00 sudo su
+root       54122   54121  0 10:22 pts/3    00:00:00 su
+root       54123   54122  0 10:22 pts/3    00:00:00 bash
+root       54776    2214  0 10:35 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   54780   54776  0 10:35 ?        00:00:00 sshd: ec2-user@notty
+ec2-user   54810   54780  0 10:35 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       56116   53588  0 11:01 pts/1    00:00:23 java -jar jian-0.0.1-SNAPSHOT.jar
+root       62063       2  0 14:10 ?        00:00:00 [kworker/u30:2-events_unbound]
+root       63582    2214  0 14:57 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   63585   63582  0 14:57 ?        00:00:00 sshd: ec2-user@pts/4
+ec2-user   63586   63585  0 14:57 pts/4    00:00:00 -bash
+root       63714   63586  0 14:59 pts/4    00:00:00 sudo su
+root       63716   63714  0 14:59 pts/5    00:00:00 sudo su
+root       63717   63716  0 14:59 pts/5    00:00:00 su
+root       63718   63717  0 14:59 pts/5    00:00:00 bash
+root       65788       2  0 15:50 ?        00:00:00 [kworker/u30:0-events_unbound]
+root       66484       2  0 16:06 ?        00:00:00 [kworker/0:0-cgroup_destroy]
+root       67028    2214  0 16:15 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   67032   67028  0 16:16 ?        00:00:00 sshd: ec2-user@notty
+ec2-user   67033   67032  0 16:16 ?        00:00:00 /usr/libexec/openssh/sftp-server
+root       67110    2214  0 16:16 ?        00:00:00 sshd: ec2-user [priv]
+ec2-user   67113   67110  0 16:16 ?        00:00:00 sshd: ec2-user@pts/6
+ec2-user   67114   67113  0 16:16 pts/6    00:00:00 -bash
+root       67137   67114  0 16:16 pts/6    00:00:00 sudo su
+root       67139   67137  0 16:16 pts/7    00:00:00 sudo su
+root       67140   67139  0 16:16 pts/7    00:00:00 su
+root       67141   67140  0 16:16 pts/7    00:00:00 bash
+root       67413   63718  0 16:20 pts/5    00:00:00 grep --color=auto -help
+root       67869       2  0 16:31 ?        00:00:00 [kworker/0:2-cgroup_destroy]
+root       68233       2  0 16:37 ?        00:00:00 [kworker/0:1-events]
+root       68235    2646  0 16:38 ?        00:00:00 systemd-userwork: waiting...
+root       68236    2646  0 16:39 ?        00:00:00 systemd-userwork: waiting...
+root       68296    2646  0 16:39 ?        00:00:00 systemd-userwork: waiting...
+root       68412       2  0 16:40 ?        00:00:00 [kworker/u30:1-events_unbound]
+root       68413       2  0 16:40 ?        00:00:00 [kworker/u30:3]
+root       68479   63718  0 16:41 pts/5    00:00:00 bash ./2025_WEB_NGINX_Lynsecure_Unix_v2.3.sh
+root       68504   68479  0 16:41 pts/5    00:00:00 ps -ef
+
+[User Environment]
+SHELL=/bin/bash
+SUDO_GID=1000
+SYSTEMD_COLORS=false
+HOSTNAME=ip-10-1-1-204.ap-northeast-2.compute.internal
+HISTSIZE=1000
+SUDO_COMMAND=/usr/bin/su
+SUDO_USER=ec2-user
+PWD=/home/ec2-user/test
+LOGNAME=root
+HOME=/root
+LANG=C.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+SHELL_SWITCHED=1
+TERM=xterm
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+USER=root
+SHLVL=2
+S_COLORS=auto
+which_declare=declare -f
+PATH=/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/snapd/snap/bin
+SUDO_UID=1000
+MAIL=/var/spool/mail/ec2-user
+OLDPWD=/home/ec2-user
+BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot "$@"
+}
+_=/usr/bin/env
+
+======================================================================
+                     System Information Query End
+======================================================================
+
+======================================================================
+                         Security Check START
+======================================================================
+
+Nginx 주요 설정파일 정보를 추출합니다.
+[+] 경로: /usr/share/nginx/modules/*.conf
+  파일이 존재하지 않습니다.
+[+] 경로: /etc/nginx/conf.d/*.conf
+  파일이 존재하지 않습니다.
+[+] 경로: /etc/nginx/default.d/*.conf
+  파일이 존재하지 않습니다.
+[-] Default 파일이 존재하지 않습니다.
+[Nginx 주요 설정 파일 정보]
+ - Nginx 홈디렉토리:        /usr/share/nginx
+ - Nginx.conf 경로:        /etc/nginx/nginx.conf
+ - Default.conf 경로:      
+ - Access log 경로:        /var/log/nginx
+----------------------------------------------------------------------
+ 
+ 
+[WEB-01] 데몬관리
+[START]
+=============================================
+[+] Nginx 점검현황
+root       68534   68479  0 16:41 pts/5    00:00:00 grep nginx
+=============================================
+[END]
+
+
+[진단기준]
+양호: Nginx의 프로세스가 root 계정 외의 전용 계정으로 구동
+취약: Nginx의 프로세스가 root 계정으로 사용되는 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 내 User [user] [group]; 설정 값 확인
+=============================================
+=============================================
+
+
+
+[WEB-02] 관리서버 디렉터리 권한 설정
+[START]
+=============================================
+[+] Nginx 점검현황
+drwxr-xr-x. 4 root root 33 Jul  3 10:48 /usr/share/nginx
+=============================================
+[END]
+
+
+[진단기준]
+양호: 관리 서버 디렉토리 권한이 750 이하의 권한일 경우
+취약: 관리 서버 디렉토리 권한이 750 초과의 권한일 경우
+
+[참고사항]
+※ 권한 750(rwxr-x---)
+=============================================
+=============================================
+
+
+
+[WEB-03] 설정파일 권한 설정
+[START]
+============================================
+[+] Nginx 점검현황
+-rw-r--r--. 1 root root 2317 Feb 11 11:00 /etc/nginx/nginx.conf
+=============================================
+[END]
+
+
+[진단기준]
+양호: 전용 Web Server 계정 소유, 600 또는 700 이하 권한일 경우
+취약: 전용 Web Server 계정 소유가 아니거나, 600 또는 700 초과 권한일 경우
+
+[참고사항]
+※ 권한 600(rw-------) , 700(rwx------)
+=============================================
+=============================================
+
+
+
+[WEB-04] 디렉터리 검색 기능 제거
+[START]
+============================================
+[+] Nginx 점검현황
+autoindex 설정값이 없습니다
+=============================================
+[END]
+
+
+[진단기준]
+양호 : autoindex off 옵션이 설정되어 있거나 autoindex 옵션이 없는 경우
+취약 : autoindex on 옵션이 설정되어 있는 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 또는 default.conf 내 location /[디렉터리명]에서 autoindex 확인
+=============================================
+=============================================
+
+
+
+[WEB-05] 로그 디렉터리/파일 권한 설정
+[START]
+============================================
+[+] Nginx 점검현황
+(Log Directory)
+drwx--x--x. 2 root root 94 Jul  6 16:11 /var/log/nginx
+
+(Access Log 및 Error Log)
+-rw-r-----. 1 nginx root 0 Jul  6 16:11 /var/log/nginx/access.log
+-rw-r-----. 1 nginx root 0 Jul  6 16:11 /var/log/nginx/error.log
+=============================================
+[END]
+
+
+[진단기준]
+양호 : 로그 디렉터리/파일이 전용계정 소유이고 각각 750/640 이하의 권한일 경우
+취약 : 로그 디렉터리/파일이 전용계정 소유가 아니거나 각각 750/640 초과의 권한일 경우
+
+[참고사항]
+※ 권한 750(drwxr-x---) , 640(rw-r-----)
+=============================================
+=============================================
+
+
+
+[WEB-06] 로그 설정
+[START]
+============================================
+[+] Nginx 점검현황
+(Access_log 확인)
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+(error_log 확인)
+
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log notice;
+=============================================
+[END]
+
+
+[진단기준]
+양호 : access_log, error_log 로그 기록 설정이 되어있는 경우
+취약 : access_log, error_log 로그 기록 설정이 되어있지 않는 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 내에서 access_log 및 error_log 확인
+=============================================
+=============================================
+
+
+
+[WEB-07] 로그 포맷/레벨 설정
+[START]
+============================================
+[+] Nginx 점검현황
+(로그 포맷 확인)
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+(로그 레벨 확인)
+
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log notice;
+=============================================
+[END]
+
+
+[로그 포맷 진단기준]
+양호 : access log의 로그 포맷이 Combined 설정인 경우
+취약 : access log의 로그 포맷이 Combined 설정이 아닌 경우
+
+[로그 레벨 진단기준]
+양호 : 로그 수집 레벨 관리가 warn,notice,info,debug 단계로 설정된 경우
+취약 : 로그 수집 레벨 관리가 Emerg,alert,crit,error 단계로 설정된 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 내에서 access_log 및 error_log 확인
+
+
+Emerg - 불안정한 시스템 상황
+alert - 즉각적인 조치 필요
+crit - 중대한 에러
+error - 비교적 중대하지 않은 에러
+warn - 경고
+notice - 중대한 것은 아닌 일반적인 메시지
+info - 정보
+debug - 디버그 레벨
+=============================================
+=============================================
+
+
+
+[WEB-08] 로그 저장 주기
+[START]
+============================================
+[+] Nginx 점검현황
+담당자 인터뷰 진행
+=============================================
+[END]
+
+
+[진단기준]
+로그 6개월 이상 보관인 경우 양호
+로그 6개월 이상 보관이 아닌 경우 취약
+
+=============================================
+=============================================
+
+
+
+[WEB-09] 헤더 정보 노출 방지
+[START]
+============================================
+[+] Nginx 점검현황
+server_tokens 설정값이 없습니다
+=============================================
+[END]
+
+
+[진단기준]
+양호 : server_tokens 설정이 Off 설정인 경우
+취약 : server_tokens 설정이 적용되어 있지 않거나 On 설정인 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 또는 default.conf 내에서 server_tokens 확인
+※ ServerTokens 옵션은 Nginx 1.3 이상에서 사용 가능
+※ ServerTokens 옵션은 http, server, location 절에 모두 설정 가능
+=============================================
+=============================================
+
+
+
+[WEB-10] HTTP Method 제한
+[START]
+============================================
+[+] Nginx 점검현황
+(limit_except 확인)
+limit_except 설정값이 없습니다
+
+(Dav 모듈 사용 확인)
+dav_methods 설정값이 없습니다
+=============================================
+[END]
+
+
+[진단기준]
+양호 : limit_except 옵션을 이용하여 HTTP Method를 제한하는 경우
+취약 : limit_except 옵션을 이용하여 HTTP Method를 제한하지 않는 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 또는 default.conf 내에서 location 설정 마다 limit_except 확인
+※ GET, POST만 허용 권고, HEAD는 상황에 따라서 허용
+※ Dav 모듈 사용 할 경우 취약으로 판단
+=============================================
+=============================================
+
+
+
+[WEB-11] 불필요한 페이지 존재
+[START]
+============================================
+[+] Nginx 점검현황
+drwxr-xr-x. 4 root root 33 Jul  3 10:48 /usr/share/nginx
+total 16
+drwxr-xr-x.  4 root root    33 Jul  3 10:48 .
+drwxr-xr-x. 90 root root 16384 Jul  6 17:55 ..
+drwxr-xr-x.  3 root root   112 Jul  3 10:48 html
+drwxr-xr-x.  2 root root     6 Feb 11 11:00 modules
+=============================================
+[END]
+
+
+[진단기준]
+sample, manual, test, cgi-bin 등 불필요한 파일이 존재하지 않는 경우 양호
+sample, manual, test, cgi-bin 등 불필요한 파일이 존재하는 경우 취약
+
+=============================================
+=============================================
+
+
+
+[WEB-12] SSL v3.0 POODLE 취약점
+[START]
+============================================
+[+] Nginx 점검현황
+ssl_protocols 설정값이 없습니다
+=============================================
+[END]
+
+
+[진단기준]
+양호 : TLSv1.2 이상 버전을 사용하는 경우
+취약 : TLSv1.2 이하 버전을 사용하는 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 또는 default.conf 내에서 ssl_protocols 확인
+=============================================
+=============================================
+
+
+
+[WEB-13] 에러 페이지 설정
+[START]
+============================================
+[+] Nginx 점검현황
+
+        include /etc/nginx/default.d/*.conf;
+
+        error_page 404 /404.html;
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+=============================================
+[END]
+
+
+[진단기준]
+양호 : error_page 설정을 이용하여 에러 메시지 출력 파일 설정이 적절한 경우
+취약 : error_page 설정을 이용하여 에러 메시지 출력 파일 설정이 되어있지 않은 경우
+부분취약 : error_page 설정을 이용하여 에러 메시지 출력 파일 설정이 일부만 되어있는 경우
+
+[참고사항]
+※ 설정 값이 없거나 추가적인 내용 확인이 필요한 경우 설정 파일에서 다시한번 확인 필요!!
+※ nginx.conf 또는 default.conf 내에서 error_page 확인
+※ 에러 메시지 출력 파일은 동일하게 설정
+※ Error 400, 401, 402, 403, 404, 500에 대한 설정
+=============================================
+=============================================
+
+
+
+[WEB-14] 보안 패치 적용
+[START]
+============================================
+[+] Nginx 점검현황
+nginx version: nginx/1.26.3
+=============================================
+[END]
+
+
+[진단기준]
+양호 : 안정된 최신 버전을 사용하는 경우
+취약 : 안정된 최신 버전을 사용하지 않는 경우
+
+[참고사항]
+※ Nginx의 보안패치 참고 사이트:http://nginx.org/en/security_advisories.html
+=============================================
+=============================================
+
+
+
+[WEB-15] FollowSymLinks 옵션 비활성화
+[START]
+============================================
+[+] Nginx 점검현황
+N/A
+=============================================
+[END]
+
+=============================================
+=============================================
+
+
+
+[WEB-16] MultiViews 옵션 비활성화
+[START]
+============================================
+[+] Nginx 점검현황
+N/A
+=============================================
+[END]
+
+=============================================
+=============================================
+
+
+
+[WEB-17] SSI(Server Side Includes) 사용 제한
+[START]
+============================================
+[+] Nginx 점검현황
+N/A
+=============================================
+[END]
+
+=============================================
+=============================================
+
+
+
+=============================================
+[nginx.conf] 출력
+
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log notice;
+pid /run/nginx.pid;
+
+# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile            on;
+    tcp_nopush          on;
+    keepalive_timeout   65;
+    types_hash_max_size 4096;
+
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+    }
+
+# Settings for a TLS enabled server.
+#
+#    server {
+#        listen       443 ssl;
+#        listen       [::]:443 ssl;
+#        http2        on;
+#        server_name  _;
+#        root         /usr/share/nginx/html;
+#
+#        ssl_certificate "/etc/pki/nginx/server.crt";
+#        ssl_certificate_key "/etc/pki/nginx/private/server.key";
+#        ssl_session_cache shared:SSL:1m;
+#        ssl_session_timeout  10m;
+#        ssl_ciphers PROFILE=SYSTEM;
+#        ssl_prefer_server_ciphers on;
+#
+#        # Load configuration files for the default server block.
+#        include /etc/nginx/default.d/*.conf;
+#
+#        error_page 404 /404.html;
+#        location = /404.html {
+#        }
+#
+#        error_page 500 502 503 504 /50x.html;
+#        location = /50x.html {
+#        }
+#    }
+}
+=============================================
+
+=============================================

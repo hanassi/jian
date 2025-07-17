@@ -96,22 +96,23 @@ print_title() {
 #######################
 # 초기 전역 변수 설정
 #######################
-set_locale
+#set_locale
 
-OS=`uname -s`
-if [ "$OS" = Linux ]; then
-    IP=`hostname -I | sed 's/ //g'`
-elif [ "$OS" = SunOS ]; then
-    IP=`ifconfig -a | grep broadcast | cut -f 2 -d ' '`
-elif [ "$OS" = AIX ]; then
-    IP=`ifconfig en0 | grep 'inet' | awk '{print $2}'`
-elif [ "$OS" = HP-UX ]; then
-    IP=`ifconfig lan0 | grep 'inet' | awk '{print $2}'`
-fi
+OS=$(uname -s)
+IP=$(ip -o -4 addr show | awk '$2 != "lo" {print $4}' | cut -d/ -f1)
 
-HOMEDIRS=`awk -F":" 'length($6) > 0 {print $6}' /etc/passwd | grep -wv "/" | sort -u`
-USERLIST=`egrep -vi "nologin|false|shutdown|halt|sync" /etc/passwd`
-CREATE_FILE="[Lyn_secure]Nginx_`hostname`_${OS}_${IP}_`date +%m%d`.txt"
+# 경량 OS 이슈
+#if [ "$OS" = Linux ]; then
+#    IP=`hostname -I | sed 's/ //g'`
+#elif [ "$OS" = SunOS ]; then
+#    IP=`ifconfig -a | grep broadcast | cut -f 2 -d ' '`
+#elif [ "$OS" = AIX ]; then
+#    IP=`ifconfig en0 | grep 'inet' | awk '{print $2}'`
+#elif [ "$OS" = HP-UX ]; then
+#    IP=`ifconfig lan0 | grep 'inet' | awk '{print $2}'`
+#fi
+
+CREATE_FILE="[Lyn_secure]Nginx_`hostname`_$OS_$IP.txt"
 WEB_NAME="Nginx"
 
 
@@ -121,7 +122,7 @@ WEB_NAME="Nginx"
 echo "$LINE"
 center ""
 center "Security Inspection of Web Server (Unix ver.)"
-center "Version : 2.2"
+center "Version : 2.3"
 center "Copyright 2025, Lyn Secure. All Rights Reserved."
 center "ALL RIGHTS RESERVED."
 center ""
@@ -194,7 +195,9 @@ NGINX_D_CONF=""
 Nginx_nginx=`which nginx`
 
 # include 구문 전체 추출 (세미콜론 제외)
-INCLUDE_LINES=$(grep -Po 'include\s+\K[^;]*\.conf[^;]*' "$NGINX_CONF")
+# 경량 OS 이슈 P 옵션 불가
+#INCLUDE_LINES=$(grep -Po 'include\s+\K[^;]*\.conf[^;]*' "$NGINX_CONF")
+INCLUDE_LINES=$(grep '^\s*include\s' "$NGINX_CONF" | sed -n 's/^\s*include\s\+\([^;]*\.conf[^;]*\);.*$/\1/p')
 
 if [ -z "$INCLUDE_LINES" ]; then
     echo "[-] nginx.conf에 Default 파일에 대한 include 구문이 없습니다." >> $CREATE_FILE 2>&1

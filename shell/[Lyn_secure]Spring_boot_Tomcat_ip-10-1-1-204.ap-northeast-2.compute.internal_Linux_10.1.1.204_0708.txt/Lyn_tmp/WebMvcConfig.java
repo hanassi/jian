@@ -1,4 +1,4 @@
-[+] .java(1)
+[+] /home/ec2-user/app/jian/src/main/java/com/example/jian/WebMvcConfig.java
 package com.example.jian;
 
 import org.springframework.context.annotation.Configuration;

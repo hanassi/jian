@@ -107,7 +107,7 @@ elif [ "$OS" = HP-UX ]; then
 		IP=`ifconfig lan0 | grep 'inet' | awk '{print $2}'`
 fi
 
-CREATE_FILE="[Lyn_secure]Spring_boot_Tomcat_`hostname`_${OS}_${IP}_`date +%m%d`.txt"
+CREATE_FILE="[Lyn_secure]Spring_boot_Tomcat_`hostname`_${OS}_${IP}.txt"
 
 
 #######################
@@ -116,7 +116,7 @@ CREATE_FILE="[Lyn_secure]Spring_boot_Tomcat_`hostname`_${OS}_${IP}_`date +%m%d`.
 echo "$LINE"
 center ""
 center "Security Inspection of Spring Boot Tomcat (Unix ver.)"
-center "Version : 1.0"
+center "Version : 1.3"
 center "Copyright 2025, Lyn Secure. All Rights Reserved."
 center "ALL RIGHTS RESERVED."
 center ""
@@ -172,9 +172,10 @@ center_line "Spring Boot 프로젝트 탐색 시작" >> $CREATE_FILE 2>&1
 
 FOUND_PATH=$(find / \
   \( -path /proc -o -path /sys -o -path /dev -o -path /run -o -path /var/run \) -prune -o \
-  -type f \( -name "application.yml" -o -name "application.properties" \) \
-  -path "*/src/main/resources/*" -print)
-
+  -type f \( -name "application.yml" -o -name "application.yaml" -o -name "application.properties" \
+           -o -name "pom.xml" -o -name "build.gradle" \
+           -o -name "SecurityConfig.java" -o -name "WebMvcConfig.java" -o -name "CustomErrorController.java" \) \
+  -print)
 
 if [ -z "$FOUND_PATH" ]; then
 	echo "[!] application.yml 또는 application.properties 파일을 찾을 수 없습니다."
@@ -182,115 +183,32 @@ if [ -z "$FOUND_PATH" ]; then
 	exit 1
 fi
 
-num=0
-echo "$FOUND_PATH" | while read -r path ; do
-	num=$((num + 1))
-	# 프로젝트 루트 경로 계산
-	PROJECT_PATH=$(dirname "$path" | sed 's|/src/main/resources||')
-	
-	echo "[+] 프로젝트 경로($num): $PROJECT_PATH"
-	echo "[+] 프로젝트 경로($num): $PROJECT_PATH" >> $CREATE_FILE 2>&1
-	
-	echo "$LINE1" >> $CREATE_FILE 2>&1
-	
-	# application.yml 출력
-	if [ -f "$PROJECT_PATH/src/main/resources/application.yml" ]; then
-		echo "[+] application.yml : $PROJECT_PATH/src/main/resources/application.yml"
-		echo -e "\n[+] application.yml"	>> $CREATE_FILE 2>&1
-		cat "$PROJECT_PATH/src/main/resources/application.yml" >> $CREATE_FILE 2>&1
-	else
-		echo "[!] application.yml 파일 없음"
-		echo "[!] application.yml 파일 없음"	>> $CREATE_FILE 2>&1
-	fi
-	
-	echo "$LINE1" >> $CREATE_FILE 2>&1
-	
-	# application.properties 출력
-	if [ -f "$PROJECT_PATH/src/main/resources/application.properties" ]; then
-		echo "[+] application.properties : $PROJECT_PATH/src/main/resources/application.properties"
-		echo -e "\n[+] application.properties" >> $CREATE_FILE 2>&1
-		cat "$PROJECT_PATH/src/main/resources/application.properties" >> $CREATE_FILE 2>&1
-		
-		echo " " >> $CREATE_FILE 2>&1
-		echo "[application.properties 참고 사항]" >> $CREATE_FILE 2>&1
-		grep 'management.server.port' "$PROJECT_PATH/src/main/resources/application.properties" >> $CREATE_FILE 2>&1
-		grep 'server.error.path' "$PROJECT_PATH/src/main/resources/application.properties" >> $CREATE_FILE 2>&1
-		grep 'server.tomcat.server-header' "$PROJECT_PATH/src/main/resources/application.properties" >> $CREATE_FILE 2>&1
-		grep 'server.servlet.session.timeout' "$PROJECT_PATH/src/main/resources/application.properties" >> $CREATE_FILE 2>&1
-		
-	else
-		echo "[!] application.properties 파일 없음"
-		echo "[!] application.properties 파일 없음"	>> $CREATE_FILE 2>&1
-	fi
-	
-	echo "$LINE1" >> $CREATE_FILE 2>&1
-	
-	# build.gradle 출력
-	if [ -f "$PROJECT_PATH/build.gradle" ]; then
-		echo "[+] build.gradle : $PROJECT_PATH/build.gradle"
-		echo "[+] build.gradle : $PROJECT_PATH/build.gradle" >> $CREATE_FILE 2>&1
-		cat "$PROJECT_PATH/build.gradle" >> $CREATE_FILE 2>&1
-	else
-		echo "[!] build.gradle 파일 없음"
-		echo "[!] build.gradle 파일 없음"	>> $CREATE_FILE 2>&1
-	fi
-	
-	echo "$LINE1" >> $CREATE_FILE 2>&1
-	
-	# SecurityConfig.java 출력
-	securityconfig_java=$(find "$PROJECT_PATH/src/main/java" -type f -name "SecurityConfig.java")
-	if [ -f "$securityconfig_java" ]; then
-		echo "[+] SecurityConfig.java : $securityconfig_java"
-		echo "[+] SecurityConfig.java : $securityconfig_java" >> $CREATE_FILE 2>&1
-		cat "$securityconfig_java" >> $CREATE_FILE 2>&1
-		
-		echo " " >> $CREATE_FILE 2>&1
-		echo "[SecurityConfig.java 참고 사항]" >> $CREATE_FILE 2>&1
-		grep 'WebSecurityConfigurerAdapter' "$securityconfig_java" >> $CREATE_FILE 2>&1
-	else
-		echo "[!] SecurityConfig.java 파일 없음"
-		echo "[!] SecurityConfig.java 파일 없음" >> $CREATE_FILE 2>&1
-	fi
-	
-	echo "$LINE1" >> $CREATE_FILE 2>&1
+# 빌드 파일 경로만 추출
+BUILD_FILE_PATHS=$(echo "$FOUND_PATH" | grep -E '/(pom\.xml|build\.gradle)$')
 
-	# WebMvcConfig.java 출력
-	webmvcconfig_java=$(find "$PROJECT_PATH/src/main/java" -type f -name "WebMvcConfig.java")
-	if [ -f "$webmvcconfig_java" ]; then
-		echo "[+] WebMvcConfig.java : $webmvcconfig_java"
-		echo "[+] WebMvcConfig.java : $webmvcconfig_java" >> $CREATE_FILE 2>&1
-		cat "$webmvcconfig_java" >> $CREATE_FILE 2>&1
-		
-		echo " " >> $CREATE_FILE 2>&1
-		echo "[WebMvcConfig.java 참고 사항]" >> $CREATE_FILE 2>&1
-		grep 'addResourceHandler' "$webmvcconfig_java" >> $CREATE_FILE 2>&1
-		grep 'addResourceLocations' "$webmvcconfig_java" >> $CREATE_FILE 2>&1
+# 디버깅용 출력 (원하면 주석 처리)
+echo "[+] 빌드 파일 목록:"
+echo "$BUILD_FILE_PATHS"
+
+# 임시 디렉토리 생성
+mkdir -p Lyn_tmp
+
+# 프로젝트별 파일 출력
+echo "[+] 프로젝트 설정 파일 목록 :"
+while read -r file; do
+	file_name=$(basename $file)
+	if [ -f "$file" ]; then
+		echo "$file"
+		echo "[+] $file" >> $CREATE_FILE 2>&1
+		echo "[+] $file" >> "./Lyn_tmp/$file_name" 2>&1
+		cat "$file" >> "./Lyn_tmp/$file_name" 2>&1
 	else
-		echo "[!] WebMvcConfig.java 파일 없음"
-		echo "[!] WebMvcConfig.java 파일 없음" >> $CREATE_FILE 2>&1
+		echo "[!] $file 파일 없음"
+		echo "[!] $file 파일 없음" >> $CREATE_FILE 2>&1
 	fi
-	
-	echo "$LINE1" >> $CREATE_FILE 2>&1
+	echo " " >> $CREATE_FILE 2>&1
+done <<< "$FOUND_PATH"
 
-
-	# CustomErrorController.java 출력
-	customerrorcontroller_java=$(find "$PROJECT_PATH/src/main/java" -type f -name "CustomErrorController.java")
-	if [ -f "$customerrorcontroller_java" ]; then
-		echo "[+] CustomErrorController.java : $customerrorcontroller_java"
-		echo "[+] CustomErrorController.java : $customerrorcontroller_java" >> $CREATE_FILE 2>&1
-		cat "$customerrorcontroller_java" >> $CREATE_FILE 2>&1
-		
-		echo " " >> $CREATE_FILE 2>&1
-		echo "[CustomErrorController.java 참고 사항]" >> $CREATE_FILE 2>&1
-		grep 'handleError' "$customerrorcontroller_java" >> $CREATE_FILE 2>&1
-	else
-		echo "[!] CustomErrorController.java 파일 없음"
-		echo "[!] CustomErrorController.java 파일 없음" >> $CREATE_FILE 2>&1
-	fi
-	echo "$LINE1" >> $CREATE_FILE 2>&1
-
-
-done
 
 center_line "설정 파일 출력 완료"
 echo "$LINE1"
@@ -299,15 +217,43 @@ echo "$LINE1" >> $CREATE_FILE 2>&1
 
 
 
+
 #######################
 # 점검
 #######################
 
 WAS_01 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-01] 관리자 콘솔 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/SecurityConfig.java" ]; then
+	echo "[+] SecurityConfig.java 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "antMatchers" 4 4 "./Lyn_tmp/SecurityConfig.java" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] SecurityConfig.java 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "management.server.port" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+if [ -f "./Lyn_tmp/application_yml" ]; then
+	echo "[+] application_yml 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "management" 4 4 "./Lyn_tmp/application_yml" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application_yml 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 (관리자 페이지 접근 제어 확인)
@@ -330,10 +276,20 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_02 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-02] 관리자 default 계정명 변경" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/SecurityConfig.java" ]; then
+	echo "[+] SecurityConfig.java 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "inMemoryAuthentication" 4 4 "./Lyn_tmp/SecurityConfig.java" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] SecurityConfig.java 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 Spring Security 구성 클래스에서 계정명 확인
@@ -350,10 +306,20 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_03 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-03] 관리자 패스워드 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/SecurityConfig.java" ]; then
+	echo "[+] SecurityConfig.java 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "inMemoryAuthentication" 4 4 "./Lyn_tmp/SecurityConfig.java" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] SecurityConfig.java 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 Spring Security 구성 클래스에서 패스워드 확인
@@ -369,10 +335,20 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_04 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-04] 패스워드 파일 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "spring.security.user" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 Spring Security 구성 클래스를 사용하는경우 N/A
@@ -401,10 +377,28 @@ echo " " >> $CREATE_FILE 2>&1
 }
 
 WAS_05 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-05] 패스워드 파일 암호화" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/SecurityConfig.java" ]; then
+	echo "[+] SecurityConfig.java 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "inMemoryAuthentication" 4 4 "./Lyn_tmp/SecurityConfig.java" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] SecurityConfig.java 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "spring.security.user" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 Spring Security 구성 클래스를 사용하는 경우 패스워드 확인
@@ -427,19 +421,23 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_06 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-06] 디렉터리 쓰기 권한 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 
-echo "$FOUND_PATH" | while read -r path ; do
-	# 프로젝트 루트 경로 계산
-	PROJECT_PATH=$(dirname "$path" | sed 's|/src/main/resources||')
-	
-	if [ -d "$PROJECT_PATH" ] ; then
+while read -r path; do
+	PROJECT_PATH=$(dirname "$path")
+	if [ -d "$PROJECT_PATH" ]; then
+		echo "[+] 프로젝트 경로: $PROJECT_PATH" >> $CREATE_FILE 2>&1
 		ls -alR "$PROJECT_PATH" >> $CREATE_FILE 2>&1
+	else
+		echo "[!] 프로젝트 경로 없음: $PROJECT_PATH" >> $CREATE_FILE 2>&1
 	fi
-done
-echo " " >> $CREATE_FILE 2>&1
 
+	echo "" >> $CREATE_FILE 2>&1
+done <<< "$BUILD_FILE_PATHS"
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 의 경우
 권한 750(drwxr-x---) , 640(rw-r-----)
@@ -459,20 +457,24 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_07 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-07] 설정 파일 권한 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 
-echo "$FOUND_PATH" | while read -r path ; do
-	# 프로젝트 루트 경로 계산
-	PROJECT_PATH=$(dirname "$path" | sed 's|/src/main/resources||')
-	
-	if [ -d "$PROJECT_PATH" ] ; then
+while read -r path; do
+	PROJECT_PATH=$(dirname "$path")
+	if [ -d "$PROJECT_PATH" ]; then
+		echo "[+] 프로젝트 경로: $PROJECT_PATH" >> $CREATE_FILE 2>&1
 		ls -al "$PROJECT_PATH/src/main/resources" >> $CREATE_FILE 2>&1
+	else
+		echo "[!] 프로젝트 경로 없음: $PROJECT_PATH" >> $CREATE_FILE 2>&1
 	fi
-done
 
-echo " " >> $CREATE_FILE 2>&1
+	echo "" >> $CREATE_FILE 2>&1
+done <<< "$BUILD_FILE_PATHS"
 
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 의 경우
 권한 750(drwxr-x---) , 640(rw-r-----)
@@ -494,10 +496,28 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_08 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-08] 로그 디렉터리/파일 권한 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "logging.config" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+if [ -f "./Lyn_tmp/application_yml" ]; then
+	echo "[+] application_yml 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "logging.config" 4 4 "./Lyn_tmp/application_yml" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application_yml 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 의 경우
 권한 750(drwxr-x---) , 640(rw-r-----)
@@ -522,10 +542,20 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_09 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-09] 디렉터리 검색 기능 제거" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/WebMvcConfig.java" ]; then
+	echo "[+] WebMvcConfig.java 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "addResourceLocations" 4 4 "./Lyn_tmp/WebMvcConfig.java" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] WebMvcConfig.java 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 addResourceLocations() 메서드를 사용하여 위치를 등록하고 
@@ -543,10 +573,28 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_10 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-10] 에러 메시지 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "server.error.path" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+if [ -f "./Lyn_tmp/CustomErrorController.java" ]; then
+	echo "[+] CustomErrorController.java 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "handleError" 4 4 "./Lyn_tmp/CustomErrorController.java" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] CustomErrorController.java 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 ErrorController 클래스에서 handleError() 메서드로 에러페이지를 지정하고
@@ -565,10 +613,20 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_11 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-11] 응답 메시지 관리" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "server.tomcat.server-header" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 application.properties 파일에서 server.tomcat.server-header 확인
@@ -585,10 +643,20 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_12 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-12] 세션 타임아웃 설정" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/application.properties" ]; then
+	echo "[+] application.properties 설정 확인" >> $CREATE_FILE 2>&1
+	run_ctx_awk "server.servlet.session.timeout" 4 4 "./Lyn_tmp/application.properties" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] application.properties 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 application.properties 파일에서 server.servlet.session.timeout 확인
@@ -604,21 +672,37 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_13 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-13] sample 디렉터리 삭제" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
-
-echo "$FOUND_PATH" | while read -r path ; do
-	# 프로젝트 루트 경로 계산
-	PROJECT_PATH=$(dirname "$path" | sed 's|/src/main/resources||')
-	
-	if [ -d "$PROJECT_PATH" ] ; then
-		find "$PROJECT_PATH" -type d \( -name "examples" -o -name "sample" -o -name "webdav" -o -name "docs" \) -exec ls -ld {} \; >> $CREATE_FILE 2>&1
-	fi
-done
-
-
 echo " " >> $CREATE_FILE 2>&1
 
+while read -r path; do
+	PROJECT_PATH=$(dirname "$path")
+	if [ -d "$PROJECT_PATH" ]; then
+		echo "[+] 프로젝트 경로: $PROJECT_PATH" >> $CREATE_FILE 2>&1
+
+		# 찾고자 하는 디렉토리 이름 배열
+		for sample_dir in examples sample webdav docs; do
+			match_dirs=$(find "$PROJECT_PATH" -type d -name "$sample_dir" 2>/dev/null)
+
+			if [ -n "$match_dirs" ]; then
+				while read -r dir; do
+					ls -ld "$dir" >> $CREATE_FILE 2>&1
+				done <<< "$match_dirs"
+			else
+				echo "[!] $sample_dir 디렉토리 없음" >> $CREATE_FILE 2>&1
+			fi
+		done
+	else
+		echo "[!] 프로젝트 경로 없음: $PROJECT_PATH" >> $CREATE_FILE 2>&1
+	fi
+
+	echo "" >> $CREATE_FILE 2>&1
+done <<< "$BUILD_FILE_PATHS"
+
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 불필요한 디렉터리 : examples , sample , webdav , docs 등 
@@ -635,6 +719,7 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_14 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-14] 프로세스 관리 기능 삭제" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 
@@ -644,10 +729,28 @@ echo " " >> $CREATE_FILE 2>&1
 
 
 WAS_15 (){
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[WAS-15] 보안 패치" >> $CREATE_FILE 2>&1
 echo "$LINE2" >> $CREATE_FILE 2>&1
 echo " " >> $CREATE_FILE 2>&1
 
+if [ -f "./Lyn_tmp/build.gradle" ]; then
+	echo "[+] build.gradle 설정 확인" >> $CREATE_FILE 2>&1
+	cat "./Lyn_tmp/build.gradle" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] build.gradle 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+if [ -f "./Lyn_tmp/pom.xml" ]; then
+	echo "[+] pom.xml 설정 확인" >> $CREATE_FILE 2>&1
+	cat "./Lyn_tmp/pom.xml" | grep -v "#" >> $CREATE_FILE 2>&1
+else
+	echo "[!] pom.xml 파일 없음" >> $CREATE_FILE 2>&1
+fi
+echo "" >> $CREATE_FILE 2>&1
+
+echo "$LINE2" >> $CREATE_FILE 2>&1
 echo "[참고 사항]
 ※ Unix 및 Windows 공통
 pom.xml 또는 build.gradle 파일에서 버전 확인
@@ -682,6 +785,7 @@ WAS_14
 WAS_15
 
 
+
 #######################
 # 마무리 출력
 #######################
@@ -696,5 +800,6 @@ echo "$LINE1"
 echo ""
 echo "$LINE2"
 
-tar -cvf $CREATE_FILE.tar $CREATE_FILE > /dev/null 2>&1
+tar -cvf $CREATE_FILE.tar $CREATE_FILE ./Lyn_tmp/ > /dev/null 2>&1
 rm -rf $CREATE_FILE
+rm -rf ./Lyn_tmp/
