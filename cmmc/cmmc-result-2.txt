@@ -1,0 +1,170 @@
+Welcome to module two of the CMM Cavs Registered Practitioner Foundation's Training.
+I'm Mike Snyder, the curriculum manager here at the C-M-M-C-A-B.
+This module will provide an introduction to the CMMC and the CMMC model.
+Again, the information contained within the registered practitioner Foundation's RPF course towards exclusive use of the C-M-M-C-A-B ecosystem members.
+This information shall be considered C-M-M-C-A-B proprietary and shall not be disseminated, disclosed, or discussed outside the CMMC assessment consulting community.
+That includes registered practitioners and RPO staff without the expressed written consent of the C-M-M-C-A-B.
+Remember that CMMC was created and revised by Carnegie Mellon University Software Engineering Institute and the John Hopkins Applied Physics Lab with direction from the office of the Undersecretary of Defense for acquisition and sustainment, which is O-U-S-D-A-S.
+Cmmc.
+Information is available at www dot acq.
+DO OSD dot mill slash cmmc.
+Remember, the views, opinions, and or findings contained within this material are those of the author or authors and should not be construed as official government position, policy, or decision unless designated by the the documents, and we're gonna talk about those as we go throughout the content.
+This module will consist of five topics.
+By the end of the module, you will be able to discuss the defense supply chain and its role in keeping the DOD safe, the importance of safeguarding information, understanding the difference between the defense and industrial base, the DIB and the defense supply chain DSC.
+Also explain the origins of the CMMC and the CMMC model.
+I'll explain the DODs CMMC implementation timeline.
+First topic is the defense supply chain.
+Many people talk about the DEF Department of Defense and its supply chain.
+They focus on the defense industrial base, or as we call it the dib.
+The DIB is defined as an industrial complex that enables research and development and design, production, delivery and maintenance of military weapon system and software systems.
+The DIB involves companies from around the world.
+The DIB is a worldwide industrial complex that enables research and development as well as design, production, delivery and maintenance of military weapon systems, software systems, subsystems and components or parts, as well as purchase services to meet US military requirements.
+This also includes global industrial complex.
+These can be domestic and foreign entities and worldwide production assets.
+They also have partnerships with 200 plus DIB companies and subcontractors.
+You'll notice that as we talk throughout the rest of the training.
+We also have contracted products and services.
+These could include military weapons and systems to include their subsystems.
+We also have underneath this systems and components and their parts.
+The supply chain within the DIB is highly complex.
+A single airplane consists of multiple components such as those that go into a helmet or a cockpit.
+Here we can see both of those within the airplane.
+With this breakdown, you can see each of those have their own components and so on down the line.
+This means that a single airplane can include parts made by hundreds and even thousands of different companies.
+Each tier of the supply chain must have at least the appropriate best practices in place to safeguard the information that they have been entrusted with.
+While the DIB supply chain is large and complex, the DOD isn't focused on just military weapon systems and software systems.
+There's also people, facilities, and other aspects of the DOD.
+Thus, the defense supply chain extends well beyond the dib.
+The DSE includes food suppliers, janitorial workers, construction, and excavation, trades people, and many others.
+Similarly, the DOD uses office equipment and office supplies, telecommunications equipment, and other supplies.
+Just like any other organization, this highly complex chain creates many risks for the DOD.
+From business email compromise and island hopping to supply chains to disruption and corruption, each supplier brings with it a new way that an adversary can gain access to the DOD information or create havoc within their environment.
+January, 2019, wall Street Journal article about the US electrical grid.
+Adversary adversaries didn't attack the electrical grid, but instead sent a phishing email to a lower tier subcontractor.
+Once they did, they established a foothold inside the subcontractor.
+They used their presence to target companies further up the supply chain.
+Topic two, the importance of safeguarding information.
+All DSE organizations must be responsible for handling, storing, and transmitting sensitive information.
+As a result, the DOD has been on a mission to improve the security of its supply chain, not just the dib, but the entire DSC.
+They recognize that adversaries are targeting the confidentiality, availability, and integrity of the DOD related data, and they're doing it through the defense supply chain.
+Much of this information at first glance seems a name, the value of contract and the contact person within the DOD or the prime contractor, the kinds of goods and services involved, et cetera.
+And on its own, the data may be somewhat useless, but the adversaries aren't targeting just the DSE supplier.
+They are targeting suppliers throughout the DSE and each piece of information is just like a puzzle piece that helps bring the DODs activities better into view.
+As we discussed, adversaries aren't just targeting classified information.
+DOD and DSE organizations need to exchange a wide range of information, much of which is still very valuable.
+From federal contract information to controlled unclassified information, FCI and CUI to covered defense information, CDI adversaries are looking to amass as much intelligence about DOD as possible.
+That is why as part of DOD contract performance organizations must protect FCI and C-U-I-F-C-I is defined as information provided by or granted for the government under contracts not intended for public release.
+As you can see from the definition FCI may be provided in the contract or may be developed by the contractor.
+Controlled unclassified information, CUI is defined as information that law regulation or government-wide policy requires to have safeguarding or disseminating controls, excluding information that is classified under executive order. 13 526 a contract contains document marking.
+For CUI as shown, CUI requires more advanced safeguarding controls when compared with FCI control technical information or CTI means technical information with military or space application that is subject to controls on access, use reproduction modification, performance display release disclosure or dissemination, CDI or covered defense information means unclassified CTI or other information as prescribed in the CUI registry.
+That requires safeguarding or dissemination controls pursuant to and consistent with law regulation and government-wide policies, that information must either be identified and contract and provided to the contractor in support of the contract or collected, developed or received by the contractor in support of the contract.
+Although FCI and COI are unclassified, they still need to be protected, allowing our adversaries to continually target this information erodes the ability of the United States to maintain its strategic advantage.
+The federal acquisitions regulation far requires that contractor safeguard sensitive information, but there are clear examples of this information being compromised by our adversaries.
+Even with Current Safeguarding measures that is being exfiltrated and impacting major Department of Defense programs.
+As we can see from the pictures, once the data is out, it makes that Country able to reproduce the US product without the r and d.
+The research and development theft on the intellectual property and sensitive information from all industry sectors due to malicious cyber activity threatens economic security and national security.
+The Council of Economic Advisors estimates that malicious cyber activity cost the US economy between 57 billion and 109 billion in 2016.
+The Center for Strategic and International Studies estimates that the total global cost of cybercrime was at its high of 600 billion in 2017.
+As a part of the acquisitions process, DOD program managers already must balance three acquisition pillars of cost, schedule, and performance to deliver new They are augmenting their acquisitions approach in recognition that cybersecurity provides the foundation upon which other pillars are built.
+If sensitive information is not protected and secured, contract requirements cannot truly be met.
+Our adversaries are continually looking for new ways to exfiltrate information, and we need to ensure all organizations at a minimum have a foundation of basic cybersecurity practices.
+The CMMC program will help to ensure that all DSC organizations have the appropriate cybersecurity foundation based on the information they need to protect.
+Topic three, the cybersecurity Maturity Model certification.
+CMMC.
+Instead of relying on contractor self certifications, CMMC introduces the concept of third party review for contractor cybersecurity programs at CMMC level two, it allows for impartial review of the contractor's program before award award and on a regular basis during performance.
+This helps take some of the responsibility off the contractor's shoulders and allows issues to be spotted and remediated more quickly.
+Third party review also provides much needed validation of the contractor's program with Siemens c Virgin two.
+There's still CER self certification at a station at CMMC level one.
+However, this does not mean that the OC cannot seek out third party review for their level one FCI.
+Environment.
+CMC helps ensure that contractors are not overlooking or taking for granted that key practices or policies are being followed, bringing in a third party to check everything.
+CMMC has been designed to leverage the scalability and agility of industry to help DOD meet this important goal.
+In response to the I request by DOD representatives from across a wide range of industry came together to create the C-M-M-C-A-B.
+The cmca B'S mission has two main purposes.
+One, to certify the cybersecurity of over a hundred thousand DSE organizations, and then two, to create the training approval and assessment ecosystem supporting those certifications.
+The cmmc B'S model involves the creation of independent, certified third party assessment organizations, C3 pos who facilitate assessments of DSC organizations by certified assessors Foundational to CMMC and the C-M-M-C-A-B is a concept that CMMC must be cost effective and affordable for small business to implement at all CMMC levels to achieve this goal.
+The CMMC program has multiple dimension and it establishes cybersecurity as a foundation for future DOD acquisitions.
+Most small businesses will only be required to have CMMC level one self-assessments and affirmation, which requires them to only implement the 17 foundational practices under level one.
+You may be familiar with most of the practices in CMMC because they're based upon the existing practices from the primary source of CMMC model.
+In version two, this is n Special publication 801 71, which is the set of security requirements to handle CUI as mandated by DFARS clause 2 52 0.204-70 12.
+The model that underpins CMFC has three levels to ensure that organizations can protect FCI at lower levels and CUI at higher levels.
+The model provides a progression of practices in a particular domain that allow organizations to build upon their cybersecurity foundation.
+A certification of DS C organizations increases the's assurance that A DSC contractor can adequately protect FCI and COI at a level commensurate with the risk.
+At CMMC, levels two and higher organizations will implement advanced practices to ensure that both FCI and COI are properly handled.
+CMMC requirements will gradually be introduced into solicitations after CMMC Virgin 2.0 rulemaking and will have a slow methodical rollout.
+Topic four, the CMMC model.
+The CMMC program builds upon current safeguarding measures to ensure that protection of sensitive information.
+CMMC provides a consistent cybersecurity baseline by adding practices to the base. 15 basic controls stated and far for FCI and the 110 requirements.
+NIST special publication 801 71 for CUI.
+The CMMC model consists of the cybersecurity requirements from NIST special publication 801 71 R two, and NIST SP 801 72 CMMC draws on many years of research and development.
+The office of the undersecretary of defense for acquisitions and sustainment has developed the CMMC framework in concern with the DOD stakeholders, federally funded research and development centers, FFRDCs University affiliated Research Centers, U arcs, and the DSC sector.
+The model development was an open, transparent process, which included releasing three interim versions for public review comment.
+In September of 2020, the DOD published an interim rule to which the DFAR in the federal register, dfa, R'S case 2019-D 0 41, which implemented the DODs initial vision for the CMMC program, CMC version one, and outlined the basic features of the framework.
+A tiered model required assessments and implementation through contracts.
+The interim rule became effective on November 30th, 2020, establishing a five year phased in PRO.
+In March, 2021, the department initiated an internal review of CMCs implementation informed by more than 850 public comments in response to the interim DFARS rule.
+This comprehensive programmatic assessment engaged cybersecurity and acquisition leaders within the DOD to refine policy and program implementation.
+November of 2021, the department announced C-M-M-M-C version 2.0 an updated program structured and requirements designed to achieve the primary goals of the internal review.
+First was to safeguard sensitive information to enable and protect the war fighter dynamically enhancing the DIB cybersecurity to meet evolving threats and ensure accountability while minimizing barriers to compliance with DOD requirements, contributing towards instilling a collaborative culture of cybersecurity and cyber resilience, maintaining public trust through high professional and ethical standards.
+With that as a background, let's take a more detailed look at the CMMC model.
+The CMMC model is a way for an organization to benchmark their current level of cybersecurity.
+The model measures cybersecurity across three levels and groups practices into 14 domains.
+The level show a progressive of cybersecurity best practices from foundational cybersecurity at level one We can also see that risk management has been renamed risk assessment.
+As previously discussed, CMMC has been designed with small business in mind.
+DOD re recognizes that many companies only ever create process and store FCI.
+That is why at level one, only six of CMCs 14 domains are involved.
+The 17 requirements or practices within these domains correspond to the contractor's existing requirements under far 52.204-21 and should therefore not come as a significant surprise to the contractor At CMMC level two, we include a total of 110 practices across all 14 domains.
+All the practices coming from the requirements within NIST Special publications 801 71 CMMC practices are assigned to a specific CMMC level and a particular domain.
+For example, the requirement to limit information system access to the types of transactions and functions that authorized users are permitted to execute that organization for the certification at that level.
+This means that the organization completing their self certification at level one must implement all 17 practices for level one.
+As shown in the table, the CMMC model consists of a total of 110 plus practices.
+That plus is because we are still determining, uh, the practices that will be for level three.
+The 110 came from the safeguarding requirements and security requirements specified in far clause 52.204-21, and DAS clause 2 52 0.20 4 70 12 As previously discussed, level two focuses on the protection of CUI.
+It encompasses all of the security requirements specified in this SP 801 71 Level three focuses on the enhanced expert protection of CUI.
+This level is still pending as the DOD works through the details.
+multiple CMMC certifications and that the certifications do not need to be based on a single contract.
+In addition, most organizations certifications will remain valid for three years.
+Of course, that's at level two and three.
+If the organization makes changes that will impact the CMMC level, such as doing away with a practice implementation, then the organization may need to be reassessed.
+Otherwise, once the organization's environment is certified at that specific level or an enclave within the environment is assessed at a specific CMMC level, then that enclave or environment can be used to store information from multiple contracts.
+Let's look at this in a little bit more detail.
+This is a network diagram from Bob's Machine Shop.
+We'll be discussing Bob's Machine Shop throughout this module.
+Bob's machine Shop builds custom widgets for a variety of customers, including the Department of Defense.
+Bob's Machine Shop has not received any CMMC level certifications.
+The Department of Defense issues a new RFPA request or FCI will be involved in the resulting contract.
+They also indicate that the word E must be CMMC certified.
+Bob's Machine Shop decides to submit a proposal for the widget one contract.
+Bob knows that since only FCI is involved, they only need their small network to be certified at CMMC level one.
+Sometime between the RFP release and the contract award, Bob's Machine Shop completed their self-assessment and at at a station.
+For CMMC Level one Bob's, a machine shop is awarded the widget one contract a year later.
+The DOD is issues.
+Its widget two RFP.
+This RFP also mentions that only FCI will be involved in the resulting contract and that CMMC certification will be required prior to award.
+B.
+Machine Shop will have to complete their annual self-assessment a few months later, the DOD issues, its widget three RFP.
+This RFP describes how both FCI and CUI will be created or received by the contractor.
+RFP also states that all contractors receive CUI involved in the contract will require a minimum of CMMC level two certification prior to the board.
+Although Bob's Machine Shop does not currently have a CMC level two certification, Bob's machine Shop can still submit a proposal in response to the widget.
+Three RFP while Bob's machine shop is responding to the widget.
+Three RFP Bob's Machine Shop also invites CMMC level two certification process.
+Bob's Machine Shop also initiates the CMMC level two certification process.
+Bob's machine shop successfully certifies at CMMC level two and is awarded the Widget three contract.
+We'll discuss how CMMC uh, requirements are expected By the end of 2017, defense contractors were required to provide adequate security of covered defense information by implementing the security requirements within NIST Special Publications 801 71.
+Although safeguarding sensitive information throughout the supply chain was better, there were still issues.
+Therefore, in early 2019, the Department of Defense initiated the CMMC program.
+After a year of concentrated development, the DOD released Virgin 1.0 of the CMMC model in January of 2020.
+Also, in January of 2020, the CMMC accreditation body was formed and a memorandum of understanding was signed with A DOD in March of 2020.
+The do the C-M-M-C-A-B and the DOD entered into a no-cost contract through which the CMMC is the only accreditation body whose CMMC certifications will be accepted by the DOD.
+Over the course of 2021, the C-M-M-C-A-B training partners began working on the CMMC Over the course of 2022 and into 2023, the DOD will be working to finalize the CMMC version 2.0 rulemaking.
+Once rulemaking is finalized, we can expect to see the incorporation of CMMC into contracts during the interim period.
+The DOD will be releasing volunteer incentives to promote CMMC program adoption for contractors willing to begin CMMC assessments.
+In this module, we've discussed the defense supply chain and how it's under attack.
+The DOD is moving to A-C-M-M-C version two framework.
+In this framework, we will have level one self-assessments and level two third party assessments.
+The program will focus on organization cybersecurity program.
+The organization's demonstrating that they have met all the requirements for a particular level will be awarded, uh, certification for that level to process, create, and store and receive CUI, the organization must achieve a minimum of level two.
+DOD is currently working to finalize the CMMC version two rulemaking, which has a nine to 24 month timeframe.
+Unlike CMMC version one, incentives and a more streamlined approach to the CMMC model could re reduce the time contractor see before assessments.
+We thank you for your attention.
+Module three is next, the CMMC accreditation body and the CMMC ecosystem. 

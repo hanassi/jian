@@ -1,0 +1,443 @@
+All right.
+Welcome back to the registered Practitioner Foundation's, RPF Module three, the CMMC accreditation Body, and the CMMC ecosystem.
+Again, the information contained within the registered practitioner Foundation's RPF course is for the exclusive use of the C-M-M-C-A-B ecosystem members.
+This information shall be considered C-M-M-C-A-B proprietary and shall not be disseminated, disclosed, or discussed outside the CMMC assessment consulting community.
+That includes registered practitioners and RPO staff without the express written consent of the C-M-M-C-A-B.
+Remember that CMMC was created and revised by Carnegie Mellon University Software Engineering Institute, and the John Hopkins Applied Physics Lab with direction from the office of the Undersecretary of Defense for acquisition and sustainment, which is O-U-S-D-A-N-S-C-M-M-C.
+Information is available at the link provided there, which of course we all know is, uh, www dot acq.
+DO OSD dot mill slash cmmc.
+Remember, the views, opinions, and or findings contained within this material are those of the author or authors, and should not be construed as official government position, policy, or decision unless designated by the the documents.
+And we're gonna talk about those as we go throughout the content.
+Our agenda for module three, we're gonna go over the CMMC accreditation body.
+Uh, our topic two is going to be the CMMC ecosystem, and then topic three is going to be the ecosystem stakeholders, beginning with topic one, the CMMC accreditation body.
+Of course, the CMMC AAV was, um, built by industry for industry.
+Uh, and of course, in the beginning, uh, it was designed through committees with representatives from across the industry, uh, and it was run by independent board of directors.
+We currently have, uh, eight board of directors.
+We started with 15, we're down to about eight.
+And then of course, we have an executive staff that kind of filled in some of those gaps, especially with the academic side of the house.
+We have continued feedback from industry working groups, uh, and there's different working groups from time to time.
+And then of course, we have different industry advisory councils, and we slowly stand up more and more of our advisory councils as the ecosystem evolves a little bit of history and independence.
+Uh, how, how did this all begin? Uh, we began in, uh, with A-D-O-D-R-F-I, and that began in October 3rd of, uh, 2019.
+Uh, and this was for the request for the long-term implementation.
+Uh, and then as it emerged, uh, we can see there, it didn't take long.
+Uh, we have about a month later, uh, the DOD went to industry with this request to form a new accreditation body.
+And then in January of 2020, uh, these members got together, of course, some of them are board members and different, uh, working group members came up with the, the initial layout of how the C-M-M-C-A-B would be, uh, comprised.
+And what it was allowed to do.
+It would be independent.
+Uh, it'd be an independent non-stock corporation.
+And with that, it's kind of neat the way it was all born, but it's a formal, uh, recognition as a nonprofit entity with the US Internal Revenue Service.
+And it was pending for the longest time.
+Uh, and then right at the end of last year, we did receive our nonprofit status.
+Uh, the CMMC operates just like any other private nonprofit organization.
+Uh, independence does not mean, uh, information is siloed.
+Uh, the one of the neat things over last year and even into the beginning of this year is that we do have a very good, strong working relationship with, uh, O-U-S-D-A-N-S, uh, with the undersecretary of Department of Defense.
+And that allows us to share information back and forth to help mature the, the CMMC model, uh, the guides, any documentation, as well as working with the ecosystem.
+Um, which in the beginning, uh, there was a lot of different groups, and that took a little bit of, uh, kind of finessing, trying to get everybody to kind of move along.
+Uh, we're kind of all used to working on different frameworks.
+And then A-C-M-M-C came together.
+Uh, we put all those working groups to, to kind of, into a foundational program.
+And now everybody's on either academic, between academic industry, talks to the CMMC ab, and then that gets, uh, taken to the DOD, and that's how things get implemented.
+So it, it is definitely neat to see how everything was formed, but this was the beginning foundational steps of how, how everything formed in the CMMC ab.
+Granted, there's a lot more to it than that, but that's just a overview.
+The CMMC AB Board of Directors.
+So in the beginning, and still to this day, uh, it's an all volunteer board of directors that still hasn't changed.
+Uh, the neat part about this is we have a very diverse, uh, set of people with, uh, I mean, their backgrounds, anything from cybersecurity expert.
+Um, technology is definitely the, the, the backbone of all of our board of directors.
+Uh, but then the, the neat part is that we have risk management expert.
+Uh, we have lead appraisers, uh, lawyers, uh, academics, and then even educators.
+Uh, some of our, our board members, uh, do, you know, have instructed just like our provisional instructors on different, um, frameworks other than CMMC.
+So there's a lot of, uh, knowledge and talent, uh, with our board of directors.
+Uh, all have been on one side, uh, of government contracts.
+So either on the buying or selling side of government contracts, uh, all have industry experience, whether it's, you know, large scale companies are, you know, the, the higher, uh, defense industrial base, or mid to small size, uh, organizations.
+This is the kind of, one of the, the differences to CMMC compared to the other frameworks is a lot of us are used to having contracts that have a cost tag to them.
+Uh, the DODs, uh, RFI for cmmc, obviously, some of us went out and read it.
+The C-M-M-C-A-B, uh, is expected to generate its own revenue.
+Uh, that's through dues and fees, our relationships with other partnerships, uh, conferences, which will come later on.
+You know, as we get the ecosystem up and running, you know, in full force.
+And then other sources as we, we generate revenue, you know, down, down the road, things will come up and our partners will come up with other ideas.
+Uh, it's kind of one of the neat, definite neat things about the way CMMC is built, is that, uh, a lot of people pride didn't see it in the beginning, but our partners definitely come up with ideas every day.
+Uh, and then those get, um, kind of funneled to the DOD.
+We make suggestions and recommendations to the DOD if they think is a good solution, that proposal that will go back to the partners, and then it gets developed.
+Uh, and then of course, we generate, uh, our revenue off of the top of that.
+Uh, whether it's training or parts of, uh, assessments, tools.
+There's a lot of stuff, uh, that will be coming out in, you know, years to come and, and any ideas that come up.
+Uh, the memorandum of understanding between the C-M-M-C-A-B and the DOD, uh, that, that this is, I mean, clear that the DOD will not, um, provide funds for the C-M-M-C-A-B.
+Uh, and even with the change to, um, version two, uh, that remains, uh, the, the contract was not changed.
+Um, the AB will generate its, uh, revenue, uh, as I said in the first statement, uh, through training, and then also, uh, partnerships with other industry, um, cybersecurity aspects, uh, and that those will be coming over the next year or two, uh, as we work with, uh, academic environments and trying to get, uh, the, the big strategy, right, A lot of people don't see this in the longer term, but that the idea is to build a new assessor, uh, pool.
+We have a lot of experienced assessors, but we, uh, with the old frameworks, we weren't pulling in a lot of the younger, uh, generation to get new experience.
+So from academics of universities and colleges, uh, getting crossover from either other frameworks or people that were just IT professionals to help desk, or something else that just wanted to transition from doing something very simple.
+Now, they could go to a college program that had CMMC inside of it, uh, or to a tech trade that had CMMC, uh, CMMC program.
+So there's gonna be a lot of things that are coming down in the years to come as we get the ecosystem up and running, and we start to see the CMMC program evolve the CMMC ecosystem.
+So for those of you who've been watching it over the last year and a half, two years, you're gonna notice, uh, a, a significant change, obviously, as we went into CMMC 2.0, um, the controls, uh, and requirements inside the CMMC model obviously fall underneath the DOD, uh, or, uh, there, there's, this changed a little bit as we went into 2.0.
+Obviously, uh, the DOD sets certain minimum, uh, requirements.
+And these, these fall underneath those c, the C3 PL ownership and assessor citizen requirements.
+So, when an assessor goes out onto a assessment within an organization seeking certification and OSC, uh, there are certain, uh, security factors that we have to think about.
+And those, those are on the DO D's, their assessments, and we're doing them on behalf of the DOD.
+So the DOD sets those minimal acceptable requirements, uh, when we're doing certifications for ocs, uh, the DOD also imposes, um, contract level requirements for those, the OSCs.
+Um, and of course, uh, for some of us, we know that that kind of falls on, uh, the defense Contracting Management agency, DCMA, uh, within, uh, we, we kind of already saw some of these, uh, with the DAS clause, 2 52, 2 0 4 dash 70 12, the, our, our NIST 801 71, uh, assessments that the DC made DIB CAC was doing.
+So that's things that were added to, to ensure that cybersecurity com, uh, compliance requirements were being met.
+And then requirements of implementation, uh, of CMMC by contractors through DAR.
+So we're gonna see contractor requirements as they go through rule making here, uh, throughout this year and into early next year as they build, uh, the dfars, uh, 2 52 0.204 dash 72 1 for CMMC.
+We'll, we'll get to see some of the requirements that come out of that.
+We obviously know they're changing.
+Now with the, the CMMC version 2.0.
+AV manages the ecosystem.
+Uh, and a lot of people get this, uh, kind of construed, because it sounds like the, the CMMC ab, uh, kind of runs the whole program.
+But, uh, here at the ab, we do, we're the overseers of how the ecosystem runs.
+Uh, we define the ecosystem and the different types of entities for those of you who are part of the ecosystem already.
+Um, and you're just adding the registered practitioner to your, your tool belt, uh, you kind of already understand this, but all the organizations and individuals, um, the AP manage everybody baby, also creates additional requirements.
+These could be training requirements.
+And then, uh, with rps, uh, and certified CMMC professionals, our CCPs, uh, one of the biggest things, uh, over the last year, uh, or last year, uh, was, um, coming up with the requirements or solidifying the requirement for registered practitioners, uh, to sit on assessments.
+Uh, there was, uh, the discrepancy, uh, of sitting on an assessment versus sitting on an assessment team.
+So, uh, helping the DOD come up with, uh, the language around that.
+And we'll, we'll talk about that as we go through the, the different roles and responsibilities of ecosystem members.
+But that, that's what the AB is here to, to do.
+We also provide feedback to the DOD.
+So when, uh, an RP or A CCP, uh, or even an organization, so if it's a C3 PO or, um, RPO, uh, any one of our ecosystem members to include, um, you know, um, working groups or advisory councils, uh, we take that feedback seriously and take it to the DOD so that any kind of issues or recommendations can actually be thought about and implemented if it, if the DOD thinks that it's necessary.
+We also issue additional guidance, uh, and other documentation.
+The cap, uh, is, uh, the CMMC assessment process is one of those, uh, additional documentations.
+Now, granted, uh, the cap has taken a long time, uh, to put together because it fundamentally, uh, bridges the gap between a lot of different aspects of the, the assessment process.
+Uh, and with that, uh, the, the idea is that the assessment guides give us that foundational, uh, what we're supposed to do.
+And then the AB, along with our ecosystem members, will provide additional guidance for the assessors, uh, of what needs to be done.
+Uh, ideally, the, the procedural, uh, what to do at the organizational level, and then down to the assessment Team, uh, and member level, uh, to just to help facilitate while, while each person is out on an assessment to include the lead assessor and even the OSC.
+So that, that's the good part.
+Decentralized, the AB does not perform assessments, consulting.
+I think most people understand that we are here to manage the, the ecosystem, uh, and, and provide, uh, any kind of feedback to the DOD of things that would need to be improved.
+That's kind of, uh, one thing that I, I like about it is that you're allowed to go out and do the assessments, and then we're here, ideally, uh, to oversee it.
+Uh, but we're not here to do it for you.
+Uh, each one of those, uh, RPOs has their own teams.
+Uh, they will go out and do the implementation.
+Then we have our C3 pos that have their own assessors that can go do the assessments for the OSCs.
+So it is definitely, uh, a different structure than most of us are used to.
+Uh, and then it allows for increased competition.
+Uh, that's, most of us are used to that.
+And then cost reduction.
+Uh, ideally if the had to be involved in everything, uh, there would be so much money tacked onto each assessment.
+Uh, and as we learned last year, even granted, the assessments are still gonna cost money, but we were able to go back and, uh, our financial officer was able to look at it and even reduce the assessment cost more.
+So, and I would imagine as, as we go, there will be things that change throughout the, the version two changes as we get onto assessments and, uh, prep work starts.
+Uh, I know it's happening already, but as we get more involved in the, the level two prep work on CMMC version two, and, and we talked to people doing level one, I know it's only 17 practices, but there's definitely going to be some strategic, um, talks about what we can and can, what we can and, uh, should be doing to, to help those Level one organizations design for scalability.
+I think, as most people have already figured out, uh, it is definitely scalable because we've been changing this thing since day one.
+Uh, it hasn't failed.
+Uh, I know a lot of people get skeptical and, uh, we get kind of worried about everything.
+But, uh, CMMC is definitely scalable.
+The, the level one organizations will still need assistance on implementation, uh, and reporting and disperse.
+We, I think, uh, everybody can understand that.
+Uh, will things change? Uh, only time will tell.
+For level one, um, the DOD and our federal government is always changing.
+So, uh, like I said, time will tell on Love One, uh, most of us, if you're, if you paid attention with the, the different briefings that have come out of the, the DOD, uh, we are currently at 80,000 plus level two companies that will need a, a level two assessment.
+Uh, and then while the DOD is working, uh, on rulemaking, uh, we can expect that contractors, and we're already seeing this right now, are trying to take advantage of the incentives, uh, to begin assessments during the interim period, uh, while the DODs working on rule making.
+So that's, that's a definite plus.
+Uh, and then the, the ecosystem, uh, like I said in the beginning is, is was designed for scalability, which will allow the industry to, to meet demand for consulting and assessments.
+Um, we didn't have a choice on this as it was being built for the 80,000 plus.
+We understand that those level two companies are direct contracts.
+Uh, there's subs underneath them.
+There, there will be, uh, additional contracts coming out once the rule, you know, is finally done, and they can, uh, put the clause on brand new contracts.
+So there's definitely a lot coming out in the, the months, uh, following rule making.
+But in the interim, uh, with CMC 2.0, there's definitely that, that big change of, uh, allowing incentives, uh, to begin the assessments.
+The ecosystem, for those of you who've seen the, the original, uh, version of the, the ecosystem, it, it's still that big.
+Uh, but this is, uh, shrinking it down to make it a little bit easier to understand.
+Uh, we start with the, the Office of the Undersecretary of Defense, O-U-S-D-A-N-S, the acquisitions and sustainment, uh, for, uh, and we all know they, they've moved up to the CIO's office, um, but they are still flagging underneath a NS, uh, for the time being.
+So that hasn't really changed.
+Uh, just a little bit of a move underneath the CIO.
+Uh, and they still still own the model, uh, so they still are higher.
+Uh, and then the, the biggest change for the C-M-M-C-A-B is that we will do a split in the next couple months.
+We will go from the, the C-M-M-C-A-B one one solid entity, uh, two, uh, two separate entities, which will be, uh, they, we'll still have the CMMC accreditation body.
+And then we will have, uh, the, the caco, which is the, uh, CMMC Assessor and Instructors Certification Organization.
+Uh, and with that split, we are going to have, uh, the AB will take over the assessment and implementation side of the house over here, uh, which we'll have the OSCs, uh, which we're gonna talk about a little bit later, and, uh, kind of some new things that are gonna happen with ocs.
+And then, uh, you can see over here we have C3 pos.
+Now, assessors do fall underneath the C3 pos, but as far as the, the ecosystem and how it's structured, the way we track everybody by accreditation, uh, this is how it's laid out.
+And then we have RPOs, um, uh, on our, uh, organizational level, uh, RPOs fall underneath our organizational level, underneath ab, uh, for the caco, we have our, uh, licensed partner publishers, and then our licensed training partners.
+So, and this is all training, uh, on the, the caco side of the house.
+When we get to the individual level, uh, our registered practitioners will fall underneath our RPOs.
+And then coming down here, the, the change that happened last year is that every LPP has to have, uh, a provisional instructor underneath them to create content.
+So that was one of the biggest changes.
+And then, of course, every LPP has to have instructors underneath them to train the material.
+Uh, but, uh, to vet training that we did make the requirement last year to put, uh, an instructor underneath to, to vet the material.
+The, the assessors, uh, most of us are used to provisional assessors.
+They fall underneath the caco.
+Obviously.
+That's, uh, for the certifications.
+Anybody that has a certification will fall underneath the, the CACO for iso, uh, for the exam requirements.
+And then, uh, later on this year, you, we will, uh, be slowly transitioning out the, the provisional assessor and instructors, and we will finally be, uh, moving on to our certified CMMC professional and then certified CMMC assessor with the d the DODs new, uh, lead assessor designation for CCAs, and then, which I will talk about later.
+And then CCI, which is certified CMMC instructor, replacing our provisional instructor.
+Alright, the C-M-M-C-A-B, of course, you heard me talk about it.
+We'll do a split of the ab Uh, the AB, of course, will be the assessment accreditation side when we do that.
+Uh, and I think most people are used to this already, uh, in the beginning, uh, that we all, we all kind of knew what the, the C-M-M-C-A-B was going to do.
+The CACO will then will be on the training side of the house.
+Of course, when we, the, when we do this split of, of the two entities, uh, this will allow us to focus more on the different members.
+Uh, we're kind of already doing it, uh, but, uh, it'll allow us to build different staffs, uh, on each side of the, the C-M-M-C-A-B, uh, that are more focused on individual and organizational level members.
+Uh, where right now it's, uh, you know, seven of us, and we're kind of focused on everybody.
+Uh, and we're slowly doing the break.
+Uh, but it will, it will, I tell you from my point of view, it would be nice when, when we split, because we'll just be focusing on training on one side and then, uh, accreditation on the other organization, seeking Certification.
+OSCs, uh, you can see the link right here.
+This is still on the C-M-M-C-A-B website.
+Uh, we will be going to a new website where you'll notice there's a lot more information and resources for everybody.
+Uh, we, it's currently pending, but we will be adding the OSCs to the marketplace so that they can interact with, uh, everybody else in the marketplace.
+The talk to, um, rps and then eventually assessors and, uh, C3 pos to get the assessments rolling.
+Uh, but the, the idea is collaboration, correct.
+So as, as they're prepping and they're starting to think about the doing their certification, that they can reach out to you. 'cause right now, as we know, the, the marketplace is a hard to traverse.
+You would want that initial conversation, or just trying to find somebody you kind of wanna be a member of, of the marketplace yourself.
+So there are, there are some, there are some aspects of the marketplace that the DOD and members of the AB are working on currently to, to upgrade, to bring the OSCs in.
+The, the purpose, uh, of the OSCs is to get their certifications, uh, to, to meet their contractual requirements.
+And then we all kind of know the requirements of the OSCs is to meet their contractual requirements, uh, for cybersecurity.
+And the, the benefits of an OSC being involved in the eco ecosystem are definitely endless.
+Uh, the, the more involved they are, the more resources they would be able to get.
+They would have definite instant, um, interaction with registered practitioners, assessors information at their hands.
+And I think we can all understand that the, the ecosystem members, I mean, the information we all have is thinly remarkable.
+The amount of people that, uh, are ready in the ecosystem ready to go.
+So this is definitely one, one benefit of adding the OSCs into the marketplace and getting them involved in the ecosystem.
+Uh, CMSC, third party Assessor Organization, C3 pos.
+Uh, of course, we have two different versions of, um, C3 POS in the marketplace.
+Currently.
+We have accredited and then candidate pending L two assessment with the DCMA DIB cac.
+Uh, this is no real big change.
+Uh, we haven't done anything with the C3 POS since they added 'em last year to the marketplace.
+Uh, currently, uh, we're, we're about two to three a month.
+Uh, and it's slowly progressing now that the DCM a DIP CAC is kind of back in full action, uh, since the 2.0 changes.
+So, and we would expect that that would pick up more and more as they get back in the swing of things.
+Again, if you're looking to go out and just want to check the page, these pages change, um, frequently, uh, as the 2.0 changes happen, uh, as we talk with the DOD.
+Uh, and then of course, with C3 pos, things change constantly, uh, that we've been getting better with talking with the different groups.
+So I would tell you always go out and continue to check the pages for information.
+Uh, and then of course, with the new, uh, website changes coming in the next couple months, we will be going to a new platform.
+So expect to see a, a ton of changes.
+Registered provider organization, our RPOs, uh, grant, it's already, it's already in the marketplace.
+One of the first things to hit, uh, with the rps, uh, the biggest, uh, change for us in 2.0 is that the DOD.
+And, and they B wanted to place a higher emphasis on RPOs, uh, and rps.
+Uh, so as you're taking this course, just kind of keep a, a close eye on that, is that throughout this year and, uh, kind of moving forward, uh, the DOD did understand that the implementers have to be, you know, the, the foundational, uh, step in making CMMC function and work, so that there will be a lot of emphasis on what we do, the systems that we put in place, and the programs that we do for the registered practitioners and the registered provider organizations.
+So, there's a lot of stuff coming out, uh, over the, the next couple months and throughout the rest of this year.
+So, our rps are also placed directly under RPOs, as we saw in the ecosystem slide.
+Uh, before we kind of knew that every RPO needed to have one rp, uh, and you had like, the 30 day grace period to get one.
+Uh, but now, just so everybody understood that, uh, RPS fundamentally fit underneath an RPO, uh, granted, uh, it's the, the, uh, an implementer can kind of be anywhere.
+But, uh, it was just a, so that people understood, you know, fundamentally where people belong.
+Um, if you're gonna do implementations and you're a registered practitioner, you're gonna be underneath a registered provider.
+So the, the, the DOD just wanted to emphasize that.
+Again, the links provided right here, if you wanna check it out.
+And like I said, over the next couple months, there's gonna be a big initiative, uh, to updating the pages, providing more resources.
+Uh, this is a big campaign for the, the AB as well as the DOD Alright, registered practitioners, which you're here taking the course because you can see we've revamped the, the first stage of this course.
+Um, and there's a lot more coming.
+Uh, but the spotlight is definitely on the registered practitioners, obviously, because you're the first, um, members of the ecosystem to get to the organization seeking certification R OSCs.
+Um, and then, of course, the, our focus for the C-M-M-C-A-B was on training first.
+Uh, and assessment preparation, getting you the tools that you needed.
+Uh, we went through a lot of comments, uh, and then we went to the DOD and said, well, what do you want us to do? Where should we focus first? What, what is the main goal, uh, for 2.0? Uh, so training was one of the keys.
+So we were already updating training, uh, 'cause RP training, uh, definitely lacked in the first version.
+So there's, there's definitely a big change to the RP training compared to version one.
+Uh, for rps, uh, we, we spent a lot of last year focusing on assessors.
+Uh, and then this year, the DOD is really paying close attention to our registered practitioners.
+Uh, and then, of course, as I said in the last slide, uh, really wanted to emphasize the ecosystem underneath the RPOs.
+Uh, and, and for this, the, the idea was a lot of RPOs, uh, were concerned because they had no, um, no organization to watch over them.
+Um, some people do it individually, and they're just used to it.
+And then, um, for the, the large portion, they wanted that, that oversight.
+You're working for a contractor, uh, you know, who's, who's in charge of it? Are there gonna be multiple rps working underneath an RPO? So that, that was one of the biggest things.
+They wanted to know who they fell under.
+Do you, do you work for a C3 PO? Do you work for an RPO? Who do you work for? So we, we, we drew this out and actually showed everybody who they work for and what, what the original idea was.
+So RPOs and RPS work together, C3 pos and, uh, assessors work together.
+That's the fundamental idea.
+Course.
+We are, we're updating the, the CMC version 2.0, uh, with implementation training.
+So that'll be the biggest change to the RP training, is that it will have implementation.
+And we were gonna do this with 1.0.
+Uh, we held off once November hit, and, uh, it's put in the version two implementation as well.
+So, uh, when we get, uh, to, to that module, as you've seen, we will talk about implementations again.
+Uh, if you go to cmmc.org and then register dash practitioners, uh, you can see.
+And like I said, over the next couple months, you will see a big change to the RPO and RP pages.
+Alright, the caco, the big change.
+So, uh, granted, we don't have a webpage for this.
+This'll come, uh, I would say in the next couple months.
+But it's going to be a, a, a big change.
+Uh, ideally, we we're probably looking at three to four months, uh, for us to implement all the changes.
+Uh, our certified assessors and certified instructors will fall underneath the, the caco.
+Um, ideally we kind of had this split mentally inside of our heads since the beginning.
+We kind of work independently, but altogether, 'cause there's only so much of us here on staff.
+Uh, but we also have our LPPs and ltps that work underneath, uh, the caco as well.
+So, uh, assessors and instructors, uh, and anybody that trains them or provides the training materials for them will be underneath the caco.
+And of course, you can see here, we maintain the training and certification of, um, our CMMC assessors and instructors.
+And then we oversee the licensed, uh, partner publishers and licensed training providers.
+Alright, certified CMMC professionals, CCPs, uh, this is the big change.
+Uh, they're able to assess level one practices on level two assessments.
+Uh, the DOD did sign off on allowing CCPs, uh, to sit on level two assessments, uh, with the caveat that they can only do those level one practices.
+They're not allowed to see anything with CUI in it.
+Um, they have to get an extensive background check.
+I mean, there's a lot of requirements that come with it.
+They are an assessment team member.
+Uh, they're allowed to, to view, to view that 15% of the assessment.
+Of course, it's only level one, the same thing you'd be able to do on a level one assessment.
+Uh, so it's very, very restrictive, uh, but it allows to the reduction of 15% of the assessment team workload, uh, in this first couple years, uh, hopefully only first year until we can, uh, boost the assessor pool.
+Um, so this is one of the big changes in version 2.0 is allowing the CCPs to sit on a level two assessment.
+Ideally, that would've been a level three, uh, on version one.
+But, uh, this is definitely a, a key change.
+Our certified CMMC assessors, uh, granted, uh, for this first, uh, year, as we go through, we're gonna see the provisional assessors doing this work.
+Uh, they're gonna make up most of the assessment community they currently do.
+Uh, they will provide a large percentage of the assessment workforce during these initial assessments.
+Uh, they will be our lead assessors.
+Our, our provisional assessors will be doing most of the assessments in these first, uh, couple months to, to the end of the year.
+Uh, they will comprise that 85% of the assessment team during this first year into next year.
+Uh, provisional assessments will be complete completely sunsetted upon the release of the CCA exam.
+So once the that exam comes out, we will have, uh, a period, uh, roughly around six months, uh, and then we will sunset the, the whole entire program.
+And we will be on the certified program, CCA certified CMMC assessors.
+Um, of course, they will be able to assess all practices on CMSC level two assessments.
+They, they are the, uh, predecessor to the provisional assessor.
+They are an assessment team member.
+And then we have the new CMMC lead assessor designation.
+Uh, this is currently in development.
+The DODs working with us on this.
+Uh, you must be a current CCA, uh, to hold the designation.
+And then all assessment teams must have a lead assessor.
+This is a no if and or, but, uh, this was a, a big change, uh, going into 2.0.
+Uh, and then, of course, the, the lead assessor course and designation requirements are still being developed by the DOD, the CMMC ecosystem stakeholders.
+Uh, we have four reliant organizations, organizations seeking certification, our OSCs individuals performing services, uh, our IPS, and then our service provider organizations.
+So, reliant organizations.
+They rely on, obviously, our CMMC certifications to make decisions about the members of their supply chain.
+Uh, provide feedback to the ab uh, about issues experienced with the contract cybersecurity.
+Uh, and this is just, uh, one of those things I don't think a lot of people think about, uh, the, the different people inside the ecosystem, uh, that actually rely upon TMMC certifications.
+Uh, so th this is, just keep this in the back of your mind, those people.
+So as we go into the other members, uh, just remember that there are other people that, uh, do need CMMC certifications, um, to, to make these decisions.
+Uh, it's not just, um, the OSCs.
+So moving on, the OSCs are our organization Seeking Certification.
+Uh, they obviously are going to be required, uh, underneath, you know, cybersecurity.
+Uh, and this is kind of twofold, right? We're gonna see some companies that want to do this just to have CMMC, uh, to validate their, their cybersecurity programs.
+They want to get certified.
+And then initially, uh, we're gonna have contractors, uh, that are doing this for an active DOD solicitation, right? Uh, that's, that's the purpose of this, right? And then we're gonna, we're gonna see CMC certifications that it's required at award contract.
+Okay? And just so everybody knows, not at proposal submission, it's gonna be required at the contract award.
+And we'll see that as we get done with rule making here in the next year, year and a half.
+Uh, and then, of course, uh, the big change to this one is, uh, the interim rulemaking period here in this, the next couple months throughout the year, year and a half, we will see the Volunteer Incentive Program come out.
+Uh, so we'll start kicking off assessments, uh, can't wait to see that.
+And then, of course, as we know, uh, it says it may grow, but we, we can expect to see that the, the other federal agencies will be kind of adopting CMMC with this big change.
+Going to the, just the nist, uh, 801 71 requirements, service provider organizations.
+Uh, the, in the increase in the OSC and Reliant organization's ability to trust the ecosystem is, is probably key to this one.
+Uh, not having a third party, uh, makes it a little hard.
+So using the, the DCMA DIP CAC, as an example, uh, some, some people have issues with government oversight.
+Uh, having that third party, uh, just builds trust inside the ecosystem, uh, serving, uh, as an interface between, uh, the, that one individual or the group of individuals, our assessment teams, uh, and OSC is just fundamentally, uh, a plus here.
+Uh, not only that, this is one of those things that I don't think a lot of people understand.
+Uh, having a C3 PO or an RPO in the middle of stuff helps those teams of implementers or assessors, uh, get stuff done a little bit more smoothly, number one, and then finalize stuff a little bit faster, as long as they're trained properly, uh, anywhere from scoping, uh, to helping them get their contract stuff through quicker.
+Because a trained representative at a C3 PO can allow them to scope things properly.
+And then the assessment team comes in and everything's done properly, where if they were trying to do it themselves, um, most of the time they miss part, you know, uh, an asset, uh, or a whole entire enclave stu stuff can really get missed.
+Uh, but here, when it, when it's that service provider organization, uh, and there's a representative there, or part of the team is even in there, uh, just having the whole entire organization involved, and nine out of 10 is going to help out.
+Uh, the other catch here is, uh, they oversee and vouch for the work being done.
+This is the catch.
+Um, we've seen where it's just a signed off letter.
+This is actually saying, we've seen this, and we're actually stating that the work done by our team is good to go.
+Uh, they're going to hire our individuals.
+And then, uh, direct this is, uh, right now we've had, you know, 50 50, um, some are direct employees, and then some are also contracted help.
+So, and I imagine as the ecosystem, uh, matures, we'll see more direct employment, and then we will, yeah, some are still gonna, you know, we'll still have the employees that are contracted.
+Uh, but it is definitely, uh, a vast improvement to have these mass forces that are able to get through assessments and have a great structure, uh, maintained, uh, association with at least one, uh, of our individuals.
+So, uh, this is, I was talking about this earlier.
+Uh, each one of the, our RPOs and C3 pos, uh, must maintain association with at least one individual, uh, in, in 30 days.
+So you have to have an RP or an assessor underneath you.
+Uh, and we've seen to go through the, the DAC assessments, the C3 pos have other requirements.
+Uh, and then of course, you get listed inside the CMMC AV marketplace, at which there's an evolution to the CMMC, uh, AV marketplace coming as we move on to our new platform here in the next couple months.
+Uh, so be on the lookout for that.
+Uh, a lot of filtering and different stuff that you can do inside there with your, uh, members underneath your organization.
+Service provider organization designation.
+So we have RPOs and C3 pos, which you heard me talking about.
+Um, our RPOs over here on the left hand side, um, are, we have requirements to find on the website.
+Uh, so if you, if you go out there and you look at it, uh, the, they're always subject to change.
+We haven't really changed 'em too much.
+Uh, basic business background check.
+Uh, there's an annual fee, uh, provide consulting services to OSCs.
+Uh, the biggest thing is that they help create cybersecurity programs that will either meet or exceed CMMC requirements.
+That's the catch to this one.
+Uh, we tell a lot of people, if you were still doing the CMMC version one framework, um, uh, a lot of people are having been struggling with this.
+You're just exceeding the, the CMMC 2.0 requirements that you're not hurting the OSC, you're actually helping them.
+You have now exceeded the, the 2.0 framework.
+Uh, and then you're pr you, you can help them prepare for an assessment as well.
+And then, of course, you're not, uh, authorized to, uh, facilitate A-C-M-M-C assessment.
+And then our certified, uh, third party assessment organizations, our C3 POS requirements defined on the website, just like our RPOs, uh, the requirements are subject to change.
+Uh, more rigorous background checks.
+Of course, there's, there's a lot more that goes into our, uh, C3 pos.
+Uh, this requires CMMC and iso uh, certifications.
+Uh, like I said, they get A-D-C-M-A dip, cac, uh, level two assessment.
+And then they will also get, uh, ISO certification, uh, application fee and annual fee once approved, uh, provide CMMC assessments, and they can also provide consulting services, uh, help OSCs create Cybersecurity Pro.
+So ideally, they can do the same thing as A RPO.
+Uh, granted, uh, they have to keep this separate.
+This is where, where it kind of gets a little, uh, hectic, uh, keeping, uh, assessors and implementers.
+Now, the, the assessor could be the same thing.
+Uh, a lot of people kind of get confused by this.
+If I have a CCP, that CCP could be an assessor and an implementer, they have the skillset to do both, right? They could have the skillset to do both.
+Um, they are not trained to do both unless the, the training partner that, you know, provided the training, uh, gave them implementation training as well.
+But with their, their previous skillset, they could have enough training as a, as a CCP to do implementations that they're coming to the, to as an assessor.
+They have enough knowledge, uh, hopefully to, to be able to do implementations and assessments.
+The, the biggest catch to this is they can't be prepping somebody for an assessment and then doing that exact same organization's assessment.
+So that's, that's why you see all these asterisk everywhere.
+Um, so as you're providing, uh, consulting services, you can't be providing assessment services as well with the same OOSC, that, that is the biggest catch to this one.
+A lot of people get confused by that.
+But, um, ideally, uh, an assessor is allowed to do both.
+They're allowed to, to prep and allowed to do assessments, just not on the same organization.
+That would be a conflict of interest.
+Alright, now, moving on into individuals performing services.
+Our ipss, uh, you will see it abbreviated.
+Sometimes they like down at the bottom.
+All right? Our registered practitioners, uh, consult with OSCs on, on cybersecurity program development.
+They're gonna design and implement practices.
+Uh, and that's anywhere from implementing the technical aspects to helping them develop their policies.
+Um, I mean, I've, I've been there on that side of the house, and this can get very involved.
+Uh, but that's ideally up to, um, your rps.
+Uh, they consult with OICs on assessment preparation, anything from scoping to objective evidence and collection and storage.
+Uh, they are not authorized to participate on formal assessment teams.
+And I just said that in the last slide, ideally, uh, uh, rp.
+And so I'm, I'm gonna try to stay this and not confuse anybody.
+An RP can be on the assessment.
+So if an os, so if you prepped, um, an assessment that OSC could invite you back to be there during the assessment, you just wouldn't be part of the assessment team.
+You wouldn't be conducting the assessment with, with the, the actual C3 PO assessment team.
+So you're not evaluating what you just implemented.
+Uh, but you would, you, it is possible that the RP could be in the same room, um, talking to the assessment team.
+They just wouldn't be part of that, uh, assessment team actually as assessing something.
+So, yeah, a lot of people got confused by this, uh, in version one.
+Um, but the, the idea is that, uh, an RP cannot be part of a a C3 PO's, uh, assessment team for that OSC, but we would expect that, um, there's going to be a large portion of RPS that prep a company.
+And then during that assessment, they are there in the room, uh, listening or, you know, giving feedback to the assessment teams of how something was implemented or how the, how they helped out.
+I mean, it just makes sense.
+I mean, sometimes the, the rps are on their staff or they've been contracted out.
+So it, it does make sense.
+Uh, and then we have our certified CMMC professionals, our CCPs, uh, they're required to have a degree or technical experience, uh, commercial background check or DOD accepted clearance, uh, conducted, uh, via an RRPO, our CC three PO staff, uh, submitted to the C-M-M-C-A-B.
+Uh, and these, uh, requirements are changing the, with the level two requirements.
+Uh, we will most likely see that, um, the changes to suitability, uh, for CCPs once we are done with the interim period, uh, creating CMMC based cybersecurity programs.
+And you can see the match here with the CCP to the rps.
+Um, and again, with assessors all the way to the right, uh, the only differences that our CCPs and our CCAs, um, have more vigorous background checks.
+And, uh, our CCAs have the, the suitability requirement.
+Gotta remember that if we do prep work, uh, implementation work, we cannot go and be on the assessment team that goes back and assesses the implementation we just did.
+So.
+And I think a lot of us understand that that would be a conflict of interest as we move on to the certified CMMC assessors receive their certified professional designation.
+Uh, CCP, uh, have gained favorable, uh, tier three suitability.
+This takes a little bit.
+Uh, it's anywhere from, you know, a month to a couple months.
+Uh, or you, if you already have a, a clearance, you can see they're listed there.
+Uh, that does speed up the process.
+Uh, they do lead formal assessments of OSC, but we already seen, seen the lead assessor requirements, which the, the official requirements for lead assessors will come out here in, uh, the next couple months.
+Uh, and then of course, just like the, the CCPs, they can participate on the formal OOC assessments, provide consulting services, um, create our CMMC based cybersecurity programs, maintain compliance of OC systems, consult with O ocs, and then, uh, do assessment preparation.
+The biggest thing is that you can't consult and assess on the same, uh, OSC Alright, consulting and certification process.
+So this is a little example, kind of showing you the steps of what you can and can't do.
+So we start with the contract, our OSC, and then as we're going through this, it's gonna show you kind of the steps of what we can and can't do.
+So, uh, ideally the OSC would reach out and go to the marketplace and look for a C3 PO or an RPO and look for optional consulting.
+They would find their registered practitioner, A CCP or CCA, um, from one of the C3 pos or RPO and find some kind of consulting.
+Once the consulting's all done and all the implementations are good to go, uh, that staff says, Hey, we're done.
+Uh, they would go back to the marketplace, or it's possible they would be recommended by that C3 PO or RPO staff that hey, we got, you know, uh, this C3 PO that, you know, normally is really great at assessments, however it works.
+Or they might already know somebody.
+So they got a C3 po and now we have an assessment team.
+Uh, that assessment team could be comprised of CCPs and CCAs and of course, the lead assessor.
+So the assessments begins.
+Once the assessment is over, the results will go into, uh, CMMC eMASS if everything is good.
+Uh, granted, we're still waiting on a OAM policy, uh, but even with the poem policy, as long as they meet the requirements of the, the POM policy from the DOD, they would get.
+So say they do have a couple POM items, as long as they meet the requirements of the DOD, they would get an interim certification.
+If they get all 110, uh, they meet all the requirements.
+Uh, for the CMMC certification, they would get a three year certification right out of eMASS and it would get sent to the contractor, and then the AB would get a copy of that as well.
+The DOD can see it.
+All of us can get into UMass to see the certification.
+Everybody's up to date updated for three years, as long as nothing changes that, that is how a perfect assessment should go.
+Uh, uh, like I said, perfect.
+And granted, it could go a couple different ways.
+They could reach right out to C3 po.
+They may not come to the, the marketplace.
+Uh, but the idea is that, uh, you can see here that they're the ideas that they wouldn't use the exact same team to prep, consult, and then do the, the, the assessment.
+They would use two different teams.
+Alright, in this module we went over, uh, stated that the CMMC is independent.
+It is not a government entity.
+Uh, the CMMC was created by industry for industry.
+Uh, the DOD controls the CMMC model, and the AB oversees the ecosystem.
+The ecosystem is decentralized and is designed for scalability.
+Uh, just keep in mind that when they built the ecosystem, it is built to be bigger than the DOD.
+Just keep that in mind.
+Uh, it was built by the DOD, but it's built so that we can get big enough to take over other federal, uh, agencies, uh, stakeholders.
+Just remember that we have reliant organizations that are, that would depend or need, um, that's certification or any kind of information based on, uh, organization seeking certification.
+Uh, then we have our service provider organizations, our C3 pos and our RPOs, and then we have individuals performing services, uh, our rps, our CCPs, and our CCAs.
+And then just remember, we don't wanna have any conflicts of interest.
+So if you prep an assessment prep for an assessment as an RPO or CCP or CCA, you don't want to go back to that same, uh, organization seeking certification as an assessor.
+I thank you for following me through this module, and I will see you in module four. 
