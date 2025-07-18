@@ -48,7 +48,8 @@ if __name__ == "__main__":
     #input_docx = "sample.docx"  # 원본 파일
     #output_docx = "sample_cleaned.docx"  # 메타데이터 제거 후 저장 파일
     #clean_docx_metadata(input_docx, output_docx)
-    path = "C:/Users/Jian/Documents/@DEV/cmmc/*.docx"
+    #path = "C:/Users/Jian/Documents/@DEV/cmmc/*.docx"
+    path = "C:/Users/USER/Documents/@업무/@DEV/cmmc/*.docx"
     docx_list = glob(path)
     for file in docx_list:
         print(f"[*] 파일 클리닝 시작 - {file}")

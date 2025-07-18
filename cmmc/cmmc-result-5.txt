@@ -1,0 +1,64 @@
+Welcome to module 5 of the RPF training again.
+this module consists of two topics In the module, we will go over commercial off the shelf cots products and services and then contracts involving only FCI. 
+
+topic one commercial off-the-shelf products and services from Goods such as tools food software and vehicles to services like Construction Consulting and Engineering the department offense purchases a lot of products and services while some are customized for the dod a large percentage of the dod's purchases or what we call cots.
+Products or services? Caught or commercial off-the-shelf is a term used to describe products or services that are available.
+In the commercial Marketplace and where the government just happens to be one of the purchasers.
+This means that to qualify as a cots product or service the product or service sold to the government cannot be modified from the commercial version in any way.
+The reason this is important is the dod has said that cots vendors do not need cmmc certification.
+But there's still a wrinkle in this some cost vendors receive FCI as a part of their contract which means that in some cases they will most likely need a cmmc certification.
+We'll explore that concept a little bit more in this training and we'll update you if the dod provides additional clarification on a topic. 
+
+topic two contracts involving FCI As we discuss the federal government does not generally produce Goods or provide services.
+Instead it purchases goods and services from contractors like the dod Supply Company by entering into contracts with them.
+The dod typically picks the contractor by first advertising a request for proposal or RFP.
+That includes requirements and other information.
+The dod Supply Company then responds with a proposal and if the dod supply companies proposal is selected the dod and the dod Supply Company enter into a contract.
+And the parties May exchange contract terms product specifications and other information that is likely to be considered FCI the dod expects that most of its Acquisitions will not involve cui.
+So for this scenario, we will assume that the dod Supply coming these contract with the dod includes only STI.
+We should reinforce that most.
+Organizations seeking certification OCS will only receive FCI.
+and therefore the dod expects that most OS will not need anything more than an annual cmmc level 1 self-assessment with a senior company officials affirmation.
+At the same time some contractors.
+Especially Prime contractors like the dod supply company they wish to obtain a cmfc level 2 certification.
+This illustration in this example.
+DOD supply companies cmmc level 2 certification we can see right here.
+In this scenario, even if DOD Supplies company is providing only cots products or services to DOD the dod supply company is still receiving FCI.
+And therefore we expect the dod to only require the dod Supply Company to provide the annual cmmc level one.
+Self-assessment with the senior company official affirmation, of course based on this scenario.
+They are already a cmmc level 2 certified company.
+But if they weren't they would need to meet the level CMC level 1 requirements.
+This is true regardless of whether the dod supply company is selling the government the dod supply companies own products or services or if it's reselling products or Services of another company.
+In many cases a prime contractor like the dod Supply Company does not make all of the components or parts for the goods or it needs assistance from others in providing the services under the contractor in that case.
+The dot Supply Company engages in other companies referred to as subcontractors who can help the dod Supply Company meet all of its contractual requirements.
+in this example the dod Supply Company needs help from three subcontractors Mako which has a cmmc level 2 certification small Co Which has provided their annual cmmc level 1 self-assessment with a senior company official.
+affirmation submitted in the supplier performance risk system Spurs and Costco, which does not have a cmmc certification at all.
+DOD Supply Company can exchange contract terms and specifications with Maaco because that information is FCI and Mako has ACMC level 2 certification.
+Provided that the contract between the dod supply company and Maaco specifies that Mako will keep the FCI within the cmmc certified environment.
+The dod Supply Company can exchange contract terms and specifications with small coat because the information is FCI and small Co has provided its annual cmmc level one self-assessment with its senior company official affirmation.
+Into the supplier performance wrist system Spurs provided that the contract between the dod supply company and small Coast specifies that small Co will keep the FCI within the cmmc certified environment.
+The dod supply company cannot exchange contract terms or specifications with Costco.
+Because the information is FCI, and Costco does not have a cnmc certification.
+However, that does not mean that Costco cannot participate in the contract.
+imagine for example that Costco makes commercial off the shelf bolts that DOD Supply Company needs the dod Supply Company can still order those bolts.
+Such as by issuing a purchase order from Costco.
+DOD supply company cannot however provide any FCI to Costco as part of the transaction.
+Another example of this is where Costco sells antivirus software the dod supply company and Costco would need a relationship in which the dod Supply Company managed the license and the corresponding FCI on the cutsco on Costco's behalf.
+Such that kotsko.
+Never received any FCI assuming the companies can come to such an arrangement.
+Then Costco would not need a cmmc certification.
+This is that tricky in between boundary where kotsko would not need the FC would not need.
+Okay are the level one? Self-assessment or have their company official do that affirmation? Then no FCI has to be exchanged because the requirement to hold the FCI falls back on that prime contractor, but that's an agreement between the cots company and the prime contractor.
+In many cases the dod Supply Company would know that these products are Services.
+It would need from Costco small Co and Mako as it's subcontractors prior to submitting its proposal to the government.
+And the dod Supply Company would enter into the appropriate data handling agreements with the subcontractors as a part of the teaming agreement with those companies.
+The Proposal that the dod Supply Company submits would also describe how the FCI is defined in the government's RFP and how it would handle or share between the prime and the subcontractors In some cases a prime contractor may need to bring in an additional subcontract or swap out once of contractor for another during the performance of the contractor.
+the prime contractor can expect to have to explain to the dod on how the information would be shared by those parties.
+In this module, we discuss the fact that depending on their role in the supply chain on a given contract cost vendors may not need a cmmc certification the dod currently has no mandate or requirements for cots vendors to achieve a cmmc level one or level two certification.
+If they're just providing strictly cots products.
+We also discuss how not all companies participating on the contract need to be certified at the same CMC level as we seen in the illustration.
+Some companies are going to be CMC level 2 while they're sharing FCI, obviously because they have multiple contracts and then some are just going to be seen and see level one and staying at that FCI level one criteria.
+They're just sharing the FCI and data.
+Again cmmc level they need to to be will depend on the information.
+They receive or create we discussed the fact that the prime contractors and their subcontractors will need to clearly Define the nature of the data to be exchanged and how that will be handled in their respective environments.
+Again, we thank you for your attention during this module module 6 is next cmmc tools and templates. 
